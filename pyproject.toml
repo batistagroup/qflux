@@ -1,24 +1,22 @@
 [project]
-name = "batistatemplate"
+name = "qflux"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "numpy>=2.2.3",
     "tomli>=2.2.1",
-    "tqdm>=4.67.1",
 ]
 authors = [{ name = "Anton Morgunov", email = "anton@ischemist.com" }]
 license = { text = "MIT" }
 
 [project.urls]
-Homepage = "https://github.com/batistagroup/batistatemplate"
-Issues = "https://github.com/batistagroup/batistatemplate/issues"
+Homepage = "https://github.com/batistagroup/qflux"
+Issues = "https://github.com/batistagroup/qflux/issues"
 
 
 [tool.setuptools]
-packages = ["batistatemplate"]
+packages = ["qflux"]
 package-dir = { "" = "src" }
 
 
@@ -74,7 +72,7 @@ class = "logging.StreamHandler"
 formatter = "standard"
 stream = "ext://sys.stdout"
 
-[tool.logging.loggers.batistatemplate]
+[tool.logging.loggers.qflux]
 handlers = ["console"]
 propagate = false
 level = "INFO"

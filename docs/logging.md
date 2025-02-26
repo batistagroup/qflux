@@ -4,15 +4,15 @@ This guide explains how to effectively use Python's logging module in our codeba
 
 ## Environment Variables
 
-The application's log level can be controlled using the `BATISTATEMPLATE_LOG_LEVEL` environment variable:
+The application's log level can be controlled using the `QFLUX_LOG_LEVEL` environment variable:
 
 ```bash
 # Set log level for the current session
-export BATISTATEMPLATE_LOG_LEVEL=DEBUG
+export QFLUX_LOG_LEVEL=DEBUG
 python your_script.py
 
 # Or set it for a single command
-BATISTATEMPLATE_LOG_LEVEL=DEBUG python your_script.py
+QFLUX_LOG_LEVEL=DEBUG python your_script.py
 ```
 
 Valid log levels are:

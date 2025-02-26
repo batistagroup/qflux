@@ -27,7 +27,7 @@ This will install all necessary dependencies, including development tools like p
 ├── docs/           # Documentation files (MkDocs)
 ├── scripts/        # Utility and automation scripts
 ├── src/            # Source code
-│   └── batistatemplate/
+│   └── qflux/
 ├── tests/          # Test files
 ├── .github/        # GitHub Actions workflows
 ├── mkdocs.yml      # MkDocs configuration
