@@ -13,7 +13,7 @@ def setup_logging() -> None:
     and applies it using `logging.config.dictConfig`.
 
     The log level can be overridden by setting the
-    'BATISTATEMPLATE_LOG_LEVEL' environment variable. If the environment
+    'QFLUX_LOG_LEVEL' environment variable. If the environment
     variable is not set or set to an invalid level, it defaults to 'INFO'.
 
     Raises:
@@ -33,7 +33,7 @@ def setup_logging() -> None:
         raise tomli.TOMLDecodeError(f"Failed to decode pyproject.toml: {e}") from e
 
     # Determine the log level:
-    # 1. Check for BATISTATEMPLATE_LOG_LEVEL environment variable.
+    # 1. Check for QFLUX_LOG_LEVEL environment variable.
     # 2. Default to 'INFO' if not set or invalid.
     log_level_env = os.getenv("QFLUX_LOG_LEVEL", "INFO").upper()
 
