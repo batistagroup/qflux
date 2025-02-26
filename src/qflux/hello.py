@@ -5,7 +5,7 @@ from typing import Generic, TypeVar, cast
 
 import numpy as np
 
-from batistatemplate.typing.examples import (
+from qflux.typing.examples import (
     AtomicCoordinates,
     AtomicNumbers,
     AtomicSymbol,
@@ -14,7 +14,7 @@ from batistatemplate.typing.examples import (
     FloatVector,
     Real,
 )
-from batistatemplate.utils.logging_config import logger
+from qflux.utils.logging_config import logger
 
 
 class UnitSystem(Enum):
