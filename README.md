@@ -1,63 +1,62 @@
-# Batista Template
+[![License: GNU AGPL v3](https://img.shields.io/badge/License-GNU_AGPL_v3-lightgrey.svg)](LICENCE)
+[![Static Badge](https://img.shields.io/badge/CQDMQD-00268d?style=flat&logoColor=00268d&label=NSF&labelColor=00268d&color=00268d&link=https%3A%2F%2Fcqdmqd.yale.edu%2F)](https://cqdmqd.yale.edu/)
 
-A modern Python project template that provides a solid foundation for building Python packages with best practices and development tools.
 
-## Features
+# QFlux - A Quantum Computer Dynamics Package
 
-- 🚀 Fast dependency management with `uv`
-- 📚 Documentation with MkDocs and Material theme
-- ✨ Code quality tools (Ruff for linting and formatting)
-- 🔄 GitHub Actions for CI/CD
-- 📦 Modern Python packaging with `pyproject.toml`
-- 🧪 Testing infrastructure
-- 📝 Pre-commit hooks for code quality
+This repository contains various protocols for performing quantum dynamics simulations with quantum devices. Each submodule contains object implementations for these protocols as demonstrated in a publication, as well as comprehensive tutorial notebooks designed to help users understand, implement and build upon various simulation techniques for studying quantum dynamics using quantum computer frameworks. Each tutorial is provided in Python, using Jupyter Notebooks to offer detailed explanations in both markdown and code comments.
 
-## Quick Start
 
-This project uses `uv` for fast and reliable Python package management:
+## Table of Contents
 
-```bash
-# Create and activate a virtual environment
-uv venv
-source .venv/bin/activate
+1. [Getting Started](#start)
+   - [Notebooks For Tutorial Manuscript](#notebooks)
+   - [Additional Repositories](#repos)
+2. [Citation](#citation)
+3. [License](#license)
+4. [Acknowledgements](#acknowledgement)
 
-# Install the package and all development dependencies
-uv pip install -e ".[dev]"
 
-# Install pre-commit hooks
-pre-commit install
-```
+## Getting Started <a name="start"></a>
 
-## Documentation
+Simply select a notebook and execute them locally or in google collab. Necessary dependencies will be installed using `pip`.
 
-After installing dependencies, you can run the documentation locally:
 
-```bash
-mkdocs serve
-```
+### Notebooks For Tutorial Manuscript <a name="notebooks"></a>
 
-Then open your browser at `http://127.0.0.1:8000`
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_I.ipynb) | Part I - Closed Quantum Dynamics and Simulation Protocols
 
-## Project Structure
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_I_appendixA.ipynb) | Part I - Appendix A: Variational Methods
 
-```md
-.
-├── data/           # Data files and resources
-├── docs/           # Documentation files (MkDocs)
-├── scripts/        # Utility and automation scripts
-├── src/            # Source code
-│   └── batistatemplate/
-├── tests/          # Test files
-├── .github/        # GitHub Actions workflows
-├── mkdocs.yml      # MkDocs configuration
-├── pyproject.toml  # Project dependencies and settings
-└── .pre-commit-config.yaml  # Pre-commit hooks configuration
-```
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_I_appendixB.ipynb) | Part I - Appendix B: Bosonic Simulation
 
-## Development
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_II.ipynb) | Part II - Open Quantum Dynamics
 
-For detailed development instructions, please refer to our [documentation](docs/index.md).
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_III_B.ipynb) | Part III - Variational Quantum Trajectory Dynamics for FMO
 
-## License
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_III_A.ipynb) | Part III - Variational Quantum Dynamics for Amplitude Damping
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_IV.ipynb) | Part IV - Generalized Quantum Master Equation Dynamics
+
+
+### Additional Repositories <a name="repos"></a>
+
+[![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/dcabral00/qc_spin_tutorial) | Spin Chain Tutorial Section
+
+[![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/saurabhshivpuje/Tutorials-for-Open-Quantum-Systems) | Open Quantum using Lindblad
+
+[![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/XiaohanDan97/CCI_PartIII_GQME) | GQME Tutorial Repository
+
+
+## Citation <a name="citation"></a>
+
+Please cite the preprint of our work when using this code until the journal version becomes available.
+
+
+## Licensing <a name="license"></a>
+
+Each notebook or repository might have its own licensing. Please refer to the individual README files and notebooks within each directory for specific licensing information.
+
+## Acknowledgement <a name="acknowledgement"></a>
+
+We acknowledge the financial support of the National Science Foundation under award number 2124511, CCI Phase I: NSF Center for Quantum Dynamics on Modular Quantum Devices (CQD-MQD).
