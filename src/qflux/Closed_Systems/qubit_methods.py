@@ -1,0 +1,172 @@
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister#, transpile
+from qiskit.compiler import transpile, assemble
+from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
+from qiskit.quantum_info.operators import Operator
+from qiskit.circuit.library import QFT
+from qiskit_aer import Aer
+import qiskit_aer
+import numpy as np
+import scipy.linalg as spLA
+from tqdm.auto import trange
+from .classical_methods import QFlux_CS
+# from QFlux.Closed_Systems import QFlux_CS_qubits # (current form)
+# from QFlux.Closed_Systems import Dynamics, DynamicsQ # (maybe?)
+# from QFlux.Open_Systems import
+class QFlux_CS_qubits(QFlux_CS):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.n_qubits        = int(np.log2(self.n_basis))
+        self.quantum_circuit = None
+
+
+    def _create_QSOFT_Circuit(self, psio=None):
+        tgrid = self.tlist
+        time_step = self.dt
+        n_qubits = self.n_qubits
+        # Qubit-Basis Propagators
+        self.prop_PE_qubit = np.diag(np.exp(-1j*self._PE_grid/2*time_step))
+        self.prop_KE_qubit = np.diag(np.exp(-1j*self._KE_grid*time_step))
+
+        q_reg = QuantumRegister(n_qubits)
+        c_reg = ClassicalRegister(n_qubits)
+        qc = QuantumCircuit(q_reg)
+        if type(psio) == type(None):
+            qc.initialize(self._psio_grid, q_reg[:], normalize=True)
+        else:
+            qc.initialize(psio, q_reg[:], normalize=True)
+        # Define our PE and KE propagators in Qiskit-friendly manner
+        PE_cirq_op = Operator(self.prop_PE_qubit)
+        KE_cirq_op = Operator(self.prop_KE_qubit)
+        qc.append(PE_cirq_op, q_reg)
+        qc.append(QFT(self.n_qubits, do_swaps=True, inverse=False), q_reg)
+        qc.append(KE_cirq_op, q_reg)
+        qc.append(QFT(self.n_qubits, do_swaps=True, inverse=True), q_reg)
+        qc.append(PE_cirq_op, q_reg)
+        self.quantum_circuit = qc
+        return(qc)
+
+
+    def _execute_circuit(self, QCircuit, backend=None, shots=None, real_backend=False):
+        '''
+            Function to replace the now-deprecated Qiskit
+            `QuantumCircuit.execute()` method.
+
+            Input:
+              - `QCircuit`: qiskit.QuantumCircuit object
+              - `Backend`: qiskit.Backend instance
+              - `shots`: int specifying the number of shots
+        '''
+        if shots:
+            n_shots = shots
+        else:
+            n_shots = 1024 # Use the qiskit default if not specified
+        backend_type = type(backend)
+        sv_type = qiskit_aer.backends.statevector_simulator.StatevectorSimulator
+        if backend_type == sv_type:
+            real_backend = False
+        else:
+            real_backend = True
+
+        if real_backend:
+            QCircuit.measure_all()
+            qc = transpile(QCircuit, backend=backend)
+            sampler = Sampler(backend)
+            job = sampler.run([qc], shots=n_shots)
+        else:
+            # Transpile circuit with statevector backend
+            tmp_circuit = transpile(QCircuit, backend)
+            # Run the transpiled circuit
+            job = backend.run(tmp_circuit, n_shots=shots)
+        return(job)
+
+
+    def propagate_qSOFT(self, backend=None, n_shots=1024):
+        '''
+            Function to propagate dynamics object with the qubit SOFT method.
+
+            Input:
+                - `backend`: qiskit backend object
+                - `n_shots`: int specifying the number of shots to use when
+                            executing the circuit
+
+            Example for using the Statevector Simulator backend:
+                from qiskit_aer import Aer
+                backend = Aer.get_backend('statevector_simulator')
+                self.propagate_qSOFT(backend=backend)
+        '''
+        if backend is None:
+            print('A valid backend must be provided ')
+        backend_type = type(backend)
+        sv_type = qiskit_aer.backends.statevector_simulator.StatevectorSimulator
+        if backend_type != sv_type:
+            self._propagate_qSOFT_real(backend=backend, n_shots=n_shots)
+            return
+        else:
+
+            psi_in = self.psio_grid
+            # Get initial state from qiskit routine
+            q_reg = QuantumRegister(self.n_qubits)
+            c_reg = ClassicalRegister(self.n_qubits)
+            qc = QuantumCircuit(q_reg, c_reg)
+            qc.initialize(self.psio_grid, q_reg[:], normalize=True)
+            qc_result = self._execute_circuit(qc, backend=backend, shots=n_shots)
+            psio_cirq = qc_result.result().get_statevector().data
+            # Now do propagation loop
+            qubit_dynamics_results = [psio_cirq]
+            for ii in trange(len(self.tlist)):
+                circuit = self._create_QSOFT_Circuit(psio=psi_in)
+                executed_circuit = self._execute_circuit(circuit, backend=backend, shots=n_shots)
+                psi_out = executed_circuit.result().get_statevector().data
+                qubit_dynamics_results.append(psi_out)
+                psi_in = psi_out
+
+            self.dynamics_results_qubit = np.asarray(qubit_dynamics_results)
+            return
+
+
+    def get_statevector_from_counts(self, counts, n_shots):
+        new_statevector = np.zeros_like(self.psio_grid)
+
+        for key in counts:
+            little_endian_int = int(key, 2)
+            new_statevector[little_endian_int] = counts[key]/n_shots
+        return(new_statevector)
+
+
+    def _propagate_qSOFT_real(self, backend='statevector_simulator', n_shots=1024):
+        '''
+            Function to propagate dynamics object with the qubit SOFT method.
+
+            Input:
+                - `backend`: qiskit backend object
+                - `n_shots`: int specifying the number of shots to use when
+                            executing the circuit
+
+            Example for using the Statevector Simulator backend:
+                from qiskit_aer import Aer
+                backend = Aer.get_backend('statevector_simulator')
+                self.propagate_qSOFT(backend=backend)
+        '''
+
+
+        psi_in = self.psio_grid
+        # Get initial state from qiskit routine
+        q_reg = QuantumRegister(self.n_qubits)
+        c_reg = ClassicalRegister(self.n_qubits, name='c')
+        qc = QuantumCircuit(q_reg, c_reg)
+        qc.initialize(self.psio_grid, q_reg[:], normalize=True)
+        # Now do propagation loop
+        qubit_dynamics_results = []
+        for ii in trange(len(self.tlist)):
+            circuit = self._create_QSOFT_Circuit(psio=psi_in)
+            executed_circuit = self._execute_circuit(circuit, backend=backend, shots=n_shots)
+            circuit_result = executed_circuit.result()
+            measured_psi = circuit_result[0].data['meas'].get_counts()
+            self._last_measurement = measured_psi
+            psi_out = self.get_statevector_from_counts(measured_psi, n_shots)
+            psi_in = psi_out
+            qubit_dynamics_results.append(psi_out)
+            psi_in = psi_out
+
+        self.dynamics_results_qubit = np.asarray(qubit_dynamics_results)
+        return
