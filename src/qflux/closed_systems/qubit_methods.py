@@ -93,7 +93,7 @@ class QubitDynamicsCS(DynamicsCS):
         return(job)
 
 
-        def propagate_qSOFT(self, backend=None, n_shots: int = 1024):
+    def propagate_qSOFT(self, backend=None, n_shots: int = 1024):
         """Function to propagate dynamics object with the qubit SOFT method.
 
             Args:

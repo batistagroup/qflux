@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib import axes
 from tqdm.auto import trange
 import qutip as qt
+from typing import Callable
 from utils import *
 
 
