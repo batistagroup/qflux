@@ -1,4 +1,4 @@
-from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister#, transpile
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit.compiler import transpile, assemble
 from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
 from qiskit.quantum_info.operators import Operator
@@ -8,18 +8,28 @@ import qiskit_aer
 import numpy as np
 import scipy.linalg as spLA
 from tqdm.auto import trange
-from .classical_methods import QFlux_CS
-# from QFlux.Closed_Systems import QFlux_CS_qubits # (current form)
-# from QFlux.Closed_Systems import Dynamics, DynamicsQ # (maybe?)
-# from QFlux.Open_Systems import
-class QFlux_CS_qubits(QFlux_CS):
+from .classical_methods import DynamicsCS
+import numpy.typing as npt
+
+
+class QubitDynamicsCS(DynamicsCS):
+    """
+    Class to extend `DynamicsCS` by adding qubit-based methods for dynamics.
+
+    """
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.n_qubits        = int(np.log2(self.n_basis))
         self.quantum_circuit = None
 
 
-    def _create_QSOFT_Circuit(self, psio=None):
+    def _create_QSOFT_Circuit(self, psio: npt.ArrayLike=None):
+        """
+        Function to construct the QSOFT Circuit.
+
+        Args:
+            psio (npt.ArrayLike): initial state that we wish to propagate
+        """
         tgrid = self.tlist
         time_step = self.dt
         n_qubits = self.n_qubits
@@ -46,16 +56,19 @@ class QFlux_CS_qubits(QFlux_CS):
         return(qc)
 
 
-    def _execute_circuit(self, QCircuit, backend=None, shots=None, real_backend=False):
-        '''
+    def _execute_circuit(self, QCircuit: QuantumCircuit, backend=None, shots: int = None, real_backend: bool = False):
+        """
             Function to replace the now-deprecated Qiskit
             `QuantumCircuit.execute()` method.
 
-            Input:
-              - `QCircuit`: qiskit.QuantumCircuit object
-              - `Backend`: qiskit.Backend instance
-              - `shots`: int specifying the number of shots
-        '''
+            Args:
+                QCircuit (qiskit.QuantumCircuit): qiskit.QuantumCircuit object
+                backend (qiskit.Backend): qiskit backend instance
+                shots (int): the number of shots to use for circuit sampling
+
+            Returns:
+                job: an executed quantum circuit job
+        """
         if shots:
             n_shots = shots
         else:
@@ -80,20 +93,19 @@ class QFlux_CS_qubits(QFlux_CS):
         return(job)
 
 
-    def propagate_qSOFT(self, backend=None, n_shots=1024):
-        '''
-            Function to propagate dynamics object with the qubit SOFT method.
+        def propagate_qSOFT(self, backend=None, n_shots: int = 1024):
+        """Function to propagate dynamics object with the qubit SOFT method.
 
-            Input:
-                - `backend`: qiskit backend object
-                - `n_shots`: int specifying the number of shots to use when
-                            executing the circuit
+            Args:
+                backend (qiskit.Backend): qiskit backend object
+                n_shots (int): specifies the number of shots to use when
+                    executing the circuit
 
             Example for using the Statevector Simulator backend:
-                from qiskit_aer import Aer
-                backend = Aer.get_backend('statevector_simulator')
-                self.propagate_qSOFT(backend=backend)
-        '''
+                >>> from qiskit_aer import Aer
+                >>> backend = Aer.get_backend('statevector_simulator')
+                >>> self.propagate_qSOFT(backend=backend)
+        """
         if backend is None:
             print('A valid backend must be provided ')
         backend_type = type(backend)
@@ -134,19 +146,19 @@ class QFlux_CS_qubits(QFlux_CS):
 
 
     def _propagate_qSOFT_real(self, backend='statevector_simulator', n_shots=1024):
-        '''
+        """
             Function to propagate dynamics object with the qubit SOFT method.
 
-            Input:
-                - `backend`: qiskit backend object
-                - `n_shots`: int specifying the number of shots to use when
-                            executing the circuit
+            Args:
+                backend (qiskit.Backend): qiskit backend object
+                n_shots (int): specifies the number of shots to use when
+                    executing the circuit
 
             Example for using the Statevector Simulator backend:
-                from qiskit_aer import Aer
-                backend = Aer.get_backend('statevector_simulator')
-                self.propagate_qSOFT(backend=backend)
-        '''
+                >>> from qiskit_aer import Aer
+                >>> backend = Aer.get_backend('statevector_simulator')
+                >>> self.propagate_qSOFT(backend=backend)
+        """
 
 
         psi_in = self.psio_grid
