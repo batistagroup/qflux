@@ -15,3 +15,9 @@ site/
 # Virtual environments
 .venv
 .env
+<<<<<<< HEAD
+=======
+
+# Docs
+site/
+>>>>>>> 811e05edde5798877f2abd0fc6c9290a16a7fade
