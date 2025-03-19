@@ -1,6 +1,6 @@
-# Welcome to Batista Template
+# Welcome to the QFlux Documentation
 
-This is a Python project template that provides a solid foundation for building Python packages with modern development tools and best practices.
+This is a Python package containing various protocols for performing quantum dynamics simulations with quantum devices. Each submodule contains object-oriented implementations for these protocols as demonstrated in our publication, as well as comprehensive tutorial notebooks designed to help users understand, implement and build upon various simulation techniques for studying quantum dynamics using quantum computer frameworks. Each tutorial is provided in Python, using Jupyter Notebooks to offer detailed explanations in both markdown and code comments.
 
 ## Installation
 

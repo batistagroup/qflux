@@ -7,9 +7,9 @@ theme:
 extra_css:
 - stylesheets/extra.css
 
-plugins:
-- search
-- mkdocstrings
+extra_javascript:
+- javascripts/mathjax.js
+- https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -22,3 +22,14 @@ markdown_extensions:
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.arithmatex:
+      generic: true
+  - toc: 
+      toc_depth: 3
+
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [src]  # if your package is in a src folder (src-layout)
