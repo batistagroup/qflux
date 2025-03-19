@@ -12,10 +12,10 @@
         <link rel="prev" href="../../logging/">
       
       
-        <link rel="next" href="../hello/">
+        <link rel="next" href="../open_systems/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../img/qflux_favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
     
     
@@ -84,8 +84,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="QFlux Docs" class="md-header__button md-logo" aria-label="QFlux Docs" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../../img/qflux-logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -179,8 +178,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="QFlux Docs" class="md-nav__button md-logo" aria-label="QFlux Docs" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../../img/qflux-logo.png" alt="logo">
 
     </a>
     QFlux Docs
@@ -332,20 +330,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
+  <a href="#examples-and-introductory-concepts" class="md-nav__link">
     <span class="md-ellipsis">
-      Concepts
+      Examples and Introductory Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples and Introductory Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#your-first-simulation-the-quantum-harmonic-oscillator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your first simulation: The Quantum Harmonic Oscillator
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -407,55 +411,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../hello/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Hello module
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../open_systems/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Open Systems Module
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tests/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Testing Scientific Code
     
   </span>
   
@@ -553,20 +513,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
+  <a href="#examples-and-introductory-concepts" class="md-nav__link">
     <span class="md-ellipsis">
-      Concepts
+      Examples and Introductory Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples and Introductory Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#your-first-simulation-the-quantum-harmonic-oscillator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your first simulation: The Quantum Harmonic Oscillator
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -630,12 +596,131 @@
 
 <h1 id="closed-systems-module">Closed Systems Module</h1>
 <h2 id="overview">Overview</h2>
-<p>In this section, we outline the main functionality of the <code>open_systems</code> module. </p>
+<p>In this section, we outline the main functionality of the <code>closed_systems</code> module. </p>
 <p>First, we will provide some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.</p>
-<h2 id="concepts">Concepts</h2>
-<p>In this section, we can add some theoretical background/explanation of relevant concepts.</p>
-<h2 id="examples">Examples</h2>
-<p>In this section, we can add some illustrative examples. </p>
+<h2 id="examples-and-introductory-concepts">Examples and Introductory Concepts</h2>
+<p>Before we look at doing Quantum Dynamics on a quantum computer, we'll start out by looking at some ways that we can do quantum dynamics on a classical computer! This is an important step as it will familiarize you with the general ingredients of a quantum dynamics simulation and will also provide us with a means of validating the results obtained from a quantum computer.</p>
+<h3 id="your-first-simulation-the-quantum-harmonic-oscillator"><strong>Your first simulation: The Quantum Harmonic Oscillator</strong></h3>
+<h4 id="propagation-in-the-ladder-basis">Propagation in the Ladder Basis</h4>
+<p>We begin by showing a simple example of how to compute dynamics of an initial state using QuTiP's mesolve() function. When we run dynamics, we must do the following:</p>
+<ol>
+<li>
+<p><strong>Define the initial state</strong> <span class="arithmatex">\(\left| \alpha \right\rangle\)</span>. In this example, our initial state is defined as a coherent state with amplitude <span class="arithmatex">\(\alpha = x_{0} + i p_{0}\)</span>, which can be expressed in the Fock Basis as:</p>
+<div class="arithmatex">\[ \left| \alpha \right\rangle = \frac{\alpha^{n}}{\sqrt{n!}} e^{-\frac{1}{2}\left| \alpha \right|^{2}} \left| n \right\rangle \]</div>
+</li>
+<li>
+<p><strong>Define the Hamiltonian</strong> <span class="arithmatex">\(H\)</span>. In this example, our Hamiltonian is the familiar quantum harmonic oscillator Hamiltonian, defined in terms of creation and annihilation operators as:</p>
+<div class="arithmatex">\[ H =  \hbar \omega \left( \hat{a}^{\dagger} \hat{a} + \frac{1}{2} \right) \]</div>
+</li>
+<li>
+<p><strong>Define the propagation time step <span class="arithmatex">\(t\)</span> and the number of time steps <span class="arithmatex">\(n\)</span> for which to compute the wavefunction.</strong></p>
+</li>
+<li>
+<p><strong>Compute the time-evolved wavefunction at each step as:</strong></p>
+<div class="arithmatex">\[ \left| \alpha (t_{i+1}) \right\rangle = e^{-\frac{i}{\hbar} H t} \left| \alpha(t_{i}) \right\rangle \]</div>
+</li>
+</ol>
+<p>All this can be done using QFlux as follows: </p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Import the package and relevant modules</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qflux</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.closed_systems</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynamicsCS</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Instantiate our Closed-Systems Dynamics Class</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">qho_dyn_obj</span> <span class="o">=</span> <span class="n">DynamicsCS</span><span class="p">(</span><span class="n">n_basis</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">xo</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">po</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Define our coordinate x and p operators</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_coordinate_operators</span><span class="p">()</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Initialize the ladder operators</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">initialize_operators</span><span class="p">()</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Define the default initial state (note that custom initialization is also supported)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">()</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># Define some parameters for the time evolution</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">total_time</span> <span class="o">=</span> <span class="mf">20.0</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">N_steps</span> <span class="o">=</span> <span class="mi">400</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_propagation_time</span><span class="p">(</span><span class="n">total_time</span><span class="p">,</span> <span class="n">N_steps</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># Set the Potential/Hamiltonian for our object, in this case using the pre-defined &#39;harmonic&#39; oscillator potential</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_hamiltonian</span><span class="p">(</span><span class="n">potential_type</span><span class="o">=</span><span class="s1">&#39;harmonic&#39;</span><span class="p">)</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1"># Propagate using the QuTiP sesolve method</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">propagate_qt</span><span class="p">()</span>
+</span></code></pre></div>
+<p>We can validate our result by computing and plotting the expectation values of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(p\)</span> as a function of time and comparing to the analytic results: </p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qt</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span> 
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Compute expectation values &lt;x&gt; and &lt;p&gt;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">exp_x_qt</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">x_op</span><span class="p">,</span> <span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">dynamics_results_op</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">exp_p_qt</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">p_op</span><span class="p">,</span> <span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">dynamics_results_op</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">exp_x_ana</span> <span class="o">=</span> <span class="p">[</span> <span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">xo</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">po</span><span class="o">/</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">mass</span><span class="o">/</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">omega</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">]</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">exp_p_ana</span> <span class="o">=</span> <span class="p">[</span> <span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">po</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">xo</span><span class="o">*</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">omega</span><span class="o">*</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">mass</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>  <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">]</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># Plot the final result</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">,</span> <span class="n">exp_x_qt</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\left\langle x \right\rangle$ (QuTiP)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">,</span> <span class="n">exp_x_ana</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\left\langle x \right\rangle$ (Analytic)&#39;</span><span class="p">,</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>         <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">,</span> <span class="n">exp_p_qt</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\left\langle p \right\rangle$ (QuTiP)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">,</span> <span class="n">exp_p_ana</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\left\langle p \right\rangle$ (Analytic)&#39;</span><span class="p">,</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>         <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="c1"># plt.plot(qho_dyn_obj.tlist, exp_p_grid, color=&#39;orange&#39;)</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.55</span><span class="p">,</span> <span class="mf">1.55</span><span class="p">)</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">)</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:grey&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></code></pre></div>
+<p><img alt="expectation_vals_ho" src="../images/QHO-Expectation-Values.png" /></p>
+<p>Hopefully the agreement in this plot convinces you that we're doing something correct! </p>
+<h4 id="propagation-in-the-coordinate-basis">Propagation in the Coordinate Basis</h4>
+<p>We can also propagate a wavefunction in a coordinate-grid representation using the so-called Split-Operator Fourier Transform (SOFT) method. </p>
+<p><span class="arithmatex">\(\renewcommand{\intertext}[1]{\\\ \textrm{#1}\\}\)</span></p>
+<p>Here, we compute the time-evolution of a wavepacket defined in the position basis (<span class="arithmatex">\(\psi(x)\)</span>) according to the Split-Operator Fourier Transform (SOFT) method. This differs slightly from the approach utilized in the last section in the following ways:</p>
+<ul>
+<li>As mentioned above, we will describe the wavefunction in terms of the position. To do this, we must define a closed range of positions <span class="arithmatex">\(x\)</span> and momenta <span class="arithmatex">\(p\)</span> and discretize over some finite number of points (analagous to the finite number of Fock states considered above).</li>
+<li>We will compute the time evolution as:</li>
+</ul>
+<div class="arithmatex">\[ \left| \psi (t) \right\rangle =  e^{- \frac{i}{\hbar} {H} t} \left| \psi(0) \right\rangle \]</div>
+<p>Writing <span class="arithmatex">\(H\)</span> in terms of Kinetic and Potential energy <span class="arithmatex">\(H = T + V\)</span>:</p>
+<div class="arithmatex">\[\begin{align*}
+        \left| \psi (t) \right\rangle &amp;\approx \lim\limits_{N\to\infty} \left[e^{\frac{-ip^2t}{2m\hbar N}}\ e^{\frac{-i{V}({x})t}{\hbar N}}\right]^N \space |\psi(0)\rangle \\
+                                  &amp;\approx\lim\limits_{N\to\infty} \left[e^{\frac{-i{V}({x})t}{2\hbar N}}\space e^{\frac{-ip^2t}{2m\hbar N}}\space e^{\frac{-i{V}({x})t}{2\hbar N}}\right]^N \space |\psi(0)\rangle
+    \intertext{Inserting closure and writing in the plane-wave basis: }
+     \left| \psi (x, t) \right\rangle &amp;= \int d x_0 \space \langle x_t | e^{\frac{-iĤt}{\hbar}} | x_0 \rangle \space \langle x_0 | \psi(0) \rangle
+\end{align*}\]</div>
+<p>Propagation for a single timestep is then:</p>
+<div class="arithmatex">\[\psi(x,\frac{t_{i+1}}{N}) =
+\overbrace{\vphantom{\int \frac{dp}{\sqrt{2\hbar}} e^{\frac{-iV(x)p^{2}}{2 \hbar N}}} e^{\frac{-iV(x)t}{2\hbar N}} }^\textrm{P.E. Propagator} \ \cdot \
+\overbrace{\vphantom{\int \frac{dp}{\sqrt{2\hbar}} e^{\frac{-iV(x)p^{2}}{2 \hbar N}}} { \int \frac{dp}{\sqrt{2\pi\hbar}}  \   e^{\frac{-ipx}{\hbar}}} }^\textrm{Inverse Fourier Transform} \ \cdot
+\overbrace{\vphantom{\int \frac{dp}{\sqrt{2\hbar}} e^{\frac{-iV(x)p^{2}}{2 \hbar N}}} \ e^{\frac{-ip^2t}{2m\hbar N}}}^\textrm{K.E. Propagator} \ \cdot \
+\overbrace{\vphantom{\int \frac{dp}{\sqrt{2\hbar}} e^{\frac{-iV(x)p^{2}}{2 \hbar N}}} {\int \frac{dx}{\sqrt{2\pi\hbar}} \  e^{\frac{ipx}{\hbar}} }}^\textrm{Fourier Transform} \ \cdot \
+\overbrace{\vphantom{\int \frac{dp}{\sqrt{2\hbar}} e^{\frac{-iV(x)p^{2}}{2 \hbar N}}}\ e^{\frac{-iV(x)t}{2\hbar N}} }^\textrm{P.E. Propagator} \ \cdot \ \psi(x,t_{i})\]</div>
+<p>The Fourier and inverse Fourier transforms are used to convert between the position and momentum basis. To translate the formula above, the algorithm will consist of 5 steps per iteration:</p>
+<ol>
+<li>Apply a half step of the potential energy propagator to the initial state.</li>
+<li>Fourier transform into the momentum basis.</li>
+<li>Apply a full step of the kinetic energy propagator on the momentum basis.</li>
+<li>Inverse Fourier transform back into the coordinate basis.</li>
+<li>Apply the second half step of the potential energy propagator.</li>
+</ol>
+<p>This is can be done in QFlux with the following code:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Instantiate our Closed-Systems Dynamics Class</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">qho_dyn_obj</span> <span class="o">=</span> <span class="n">QFlux_CS</span><span class="p">(</span><span class="n">n_basis</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">xo</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">po</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Define our coordinate x and p operators</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_coordinate_operators</span><span class="p">()</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Initialize the ladder operators</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">initialize_operators</span><span class="p">()</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Define the default initial state (note that custom initialization is also supported)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">()</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># Define some parameters for the time evolution</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">total_time</span> <span class="o">=</span> <span class="mf">20.0</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">N_steps</span> <span class="o">=</span> <span class="mi">400</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_propagation_time</span><span class="p">(</span><span class="n">total_time</span><span class="p">,</span> <span class="n">N_steps</span><span class="p">)</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1"># Set the Potential/Hamiltonian for our object, in this case using the pre-defined &#39;harmonic&#39; oscillator potential</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">set_hamiltonian</span><span class="p">(</span><span class="n">potential_type</span><span class="o">=</span><span class="s1">&#39;harmonic&#39;</span><span class="p">)</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># Propagate using the QuTiP sesolve method</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">propagate_qt</span><span class="p">()</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># Propagate with SOFT and QuTiP</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">propagate_SOFT</span><span class="p">()</span>
+</span></code></pre></div>
 <h2 id="source-code">Source Code</h2>
 
 

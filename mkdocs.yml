@@ -1,6 +1,8 @@
 site_name: QFlux Docs
 theme:
   name: material
+  logo: img/qflux-logo.png
+  favicon: img/qflux_favicon.png
   features:
     - content.code.copy
     
