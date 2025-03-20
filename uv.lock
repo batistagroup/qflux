@@ -409,6 +409,19 @@ wheels = [
 ]
 
 [[package]]
+name = "material-plausible-plugin"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "mkdocs" },
+    { name = "mkdocs-material" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/27/e6/73f7206cfbbcfaf083466ecc5f164a4742111beecfe2d5d87f8273e1800e/material_plausible_plugin-0.3.0.tar.gz", hash = "sha256:31c872608bfa4e94ef05c128f7bf1e476c55b0576ba418a983977a75216d10cc", size = 3688 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/32/42/097a9eee92b2b96979823ae55b2b42fba590f79f979a0b24138db628fac4/material_plausible_plugin-0.3.0-py3-none-any.whl", hash = "sha256:4e1cbaf0eef86dbd34fafa2f25830960416c989f80e0b1d1fabceed6cf6b40aa", size = 5033 },
+]
+
+[[package]]
 name = "matplotlib-inline"
 version = "0.1.7"
 source = { registry = "https://pypi.org/simple" }
@@ -890,6 +903,7 @@ name = "qflux"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "material-plausible-plugin" },
     { name = "tomli" },
 ]
 
@@ -910,6 +924,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "ipykernel", marker = "extra == 'dev'", specifier = ">=6.29.5" },
+    { name = "material-plausible-plugin", specifier = ">=0.3.0" },
     { name = "mkdocs", marker = "extra == 'dev'", specifier = ">=1.6.1" },
     { name = "mkdocs-material", marker = "extra == 'dev'", specifier = ">=9.6.4" },
     { name = "mkdocstrings-python", marker = "extra == 'dev'", specifier = ">=1.15.0" },
