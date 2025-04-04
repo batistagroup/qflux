@@ -252,6 +252,99 @@ HO_dyn_obj.custom_ladder_state_initialization(custom_coherent_state, **qt_func_a
 
 For the custom Fock/ladder basis initialization, the custom function must return a `qutip.Qobj`. 
 
+#### Defining the Hamiltonian
+
+The next step for running our dynamics simulation is to define the Hamiltonian, which should describe the system of interest. For the coordinate basis, we assume that the Hamiltonian takes the form of: 
+
+$$ H = V(x) + \frac{p^{2}}{2 m} $$ 
+
+where $V(x)$ describes the potential energy of our system. `qflux` provides some example systems out of the box, which we will now demonstrate how to use.
+
+To use the built-in potential energy functions, all one must do is use the `.set_hamiltonian()` method. This method has the optional keyword argument `potential_type`, which can be used to choose one of the two currently implemented potentials:
+- Harmonic Oscillator Potential
+- Arbitrary Quartic Potential
+
+
+The harmonic oscilator potential is implemented in the grid-basis as: 
+
+$$ V(x) = \frac{1}{2} m \omega^{2} x^{2} $$ 
+
+and in the ladder basis as: 
+
+$$ H = \hbar \omega \left( \hat{a}^{\dagger} \hat{a} + \frac{1}{2} \right) $$ 
+
+The frequency ($\omega$) and mass ($m$) can be controlled when instantiating the dynamics object with the `mass` and `omega` keyword arguments. 
+
+
+The quartic potential is implemented as: 
+
+$$ V(x) = a_{0} + a_{1} \frac{x}{x_{0}} + a_{2} \frac{x^{2}}{x_{0}^{2}} + a_{3} \frac{x^{3}}{x_{0}^{3}} + a_{4} \frac{x^{4}}{x_{0}^{4}} $$ 
+
+To use a custom quartic potential, the user should provide a dictionary of keyword arguments that define the coefficients ($a_{0}, a_{1}, a_{2}, a_{3}, a_{4}$) and the scaling factor $x_{0}$: 
+
+```python
+coeffs_dict = {'a0': 1, 'a1': 1, 'a2': 1, 'a3': 1, 'a4': 1, 'x0': 1}
+dyn_obj.set_hamiltonian(potential_type='quartic', **coeffs_dict)
+```
+
+For the Fock/ladder basis, the $x$ in the previous equation is replaced with an operator $\hat{a}$ defined in terms of the creation and annihilation operators as $\hat{x} = \frac{1}{\sqrt{2}} \left( \hat{a}^{\dagger} + \hat{a} \right)$ and in the kinetic energy term $\frac{p^{2}}{2m}$, $p$ is replaced with $\hat{p} =  \frac{i}{\sqrt{2}} \left( \hat{a}^{dagger} - \hat{a} \right)$.
+
+`qflux` also supports arbitrary customization of the potential energy function by use of the `.set_H_grid_with_custom_potential()` and `.set_H_op_with_custom_potential()` methods. These methods expect a function and a dictionary (of keyword arguments for that function) as arguments. This is illustrated in the following example: 
+
+Suppose you have some arbitrary Morse-like potential of the form:
+
+$$ V_{Morse} = De ( 1 - e^{- a (x-x_{eq}))^{2} $$
+
+We can define a python function to to construct this potential:
+
+```python
+def morse_potential(x_eq=None, mass=None, omega=None, xval=None):
+    De = 8
+    xe = 0
+    k = mass*omega**2
+    a = np.sqrt(k/(2*De))
+    y = De * ((1 - np.exp(-a*(xval-x_eq)))**2)
+    return(y)
+```
+
+And define a dictionary with parameters to define a specific potential:
+
+```python
+morse_args = {'x_eq': -1.0, 'mass': 1.0, 'omega': 1.5, 'xval': dyn_obj.x_grid}
+```
+
+And then construct a Hamiltonian with this custom function for our dynamics object by calling: 
+
+```python
+dyn_obj.set_H_grid_with_custom_potential(morse_potential, **morse_args)
+```
+
+Similarly, we can do this in a `qutip.Qobj`-compatible format: 
+
+```python
+def morse_potential_op(x_eq=None, mass=None, omega=None, xval=None):
+    De = 8
+    xe = 0
+    k = mass*omega**2
+    a = np.sqrt(k/(2*De))
+    exponential_f = (-a * (xval - x_eq)).expm()
+    y = De * ((1 - exponential_f)**2)
+    return(y)
+```
+
+And define our dictionary of custom parameters: 
+
+```python
+morse_op_args = {'x_eq': -1.0, 'mass': 1.0, 'omega': 1.5, 'xval': dyn_obj.x_op}
+```
+
+And finally we can set our Hamiltonian for the Fock/ladder basis by calling: 
+
+```python
+dyn_obj.set_H_op_with_custom_potential(morse_potential_op, **morse_op_args)
+```
+
+
 ## Source Code
 
 ::: qflux.closed_systems
