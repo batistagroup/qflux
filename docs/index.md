@@ -1,5 +1,7 @@
 # Welcome to the QFlux Documentation
 
+![Logo](img/qflux-logo.png)
+
 This is a Python package containing various protocols for performing quantum dynamics simulations with quantum devices. Each submodule contains object-oriented implementations for these protocols as demonstrated in our publication, as well as comprehensive tutorial notebooks designed to help users understand, implement and build upon various simulation techniques for studying quantum dynamics using quantum computer frameworks. Each tutorial is provided in Python, using Jupyter Notebooks to offer detailed explanations in both markdown and code comments.
 
 ## Installation
@@ -107,25 +109,3 @@ This project follows a structured approach to documentation. Each module should 
 3. **Examples**: Code examples showing common usage patterns
 4. **Source Code**: Auto-generated documentation from source code annotations
 
-#### Source Code Documentation
-
-Each documentation file should end with a Source Code section that imports and displays the module's classes and functions. Use the following structure:
-
-```markdown
-## Source Code
-
-::: batistatemplate.module_name
-    handler: python
-    options:
-      show_root_heading: true
-      show_source: true
-      members:
-        - ClassName1
-        - ClassName2
-        - function_name1
-        - function_name2
-```
-
-## Getting Started
-
-For more detailed information about specific components and usage examples, please navigate through the documentation using the navigation menu.

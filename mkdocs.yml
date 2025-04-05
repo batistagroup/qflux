@@ -4,6 +4,8 @@ repo_name: batistagroup/qflux
 copyright: CC-BY 4.0 &copy; 2025 Batista Group
 theme:
   name: material
+  logo: img/qflux-logo.png
+  favicon: img/qflux_favicon.png
   features:
     - content.code.copy
     - navigation.footer
