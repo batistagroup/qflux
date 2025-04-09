@@ -60,14 +60,17 @@ plugins:
 
 nav: # Note: All paths must be relative to the docs dir
   - Home: 'index.md'
-  - Closed Systems:
-    - 'qflux/Closed_Systems/index.md'
+  - Closed Systems: # Directory Page
+    - 'qflux/Closed_Systems/index.md' # Specifies landing page for directory
+    # Subpages within the directory are indented, specified as key/value pairs
     - Anatomy of a Dynamics Simulation: 'qflux/Closed_Systems/basics.md'
     - The Quantum Harmonic Oscillator: 'qflux/Closed_Systems/qho_example.md'
     - Adenine-Thymine Base Pair: 'qflux/Closed_Systems/AT_basepair.md'
     - Spin Chain Simulation: 'qflux/Closed_Systems/spinchain.md'
     - Source Code: 'qflux/Closed_Systems/cs_api.md'
-  - Open Systems: 'qflux/Open_Systems/open_systems.md'
+  - Open Systems: 
+    - 'qflux/Open_Systems/index.md'
+    - Tutorial: 'qflux/Open_Systems/open_systems.md'
   - Variational Methods: 'qflux/variational_methods.md'
 
 extra:
