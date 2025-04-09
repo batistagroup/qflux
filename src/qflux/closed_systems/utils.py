@@ -1,5 +1,6 @@
 # Utilities
 # Plotting utilities, conversion factors, etc.
+import numpy as np 
 
 # Conversion Factors:
 def convert_au_to_eV(input_val):
@@ -74,3 +75,26 @@ def execute(self, QCircuit, backend=None, shots=None):
         # Run the transpiled circuit
         job = backend.run(tmp_circuit, n_shots=shots)
     return(job)
+
+
+# Calculation of Expectation Value: 
+def calculate_expectation_values(dynamics_results, observable_grid, do_FFT=False, dx=None):
+    '''
+    Function to calculate the time-dependent expectation value of an observable O defined on a grid.
+    Inputs:
+
+        - `dynamics_results`: np.ndarray of wavefunctions/propagated states with shape: (n_steps, nx)
+        - `observable_grid`: np.array of observable
+    '''
+    if dx:
+        d_observable = dx
+    else:
+        d_observable = observable_grid[1] - observable_grid[0]
+    if do_FFT:
+        psi_list = np.fft.fft(dynamics_results, axis=1, norm='ortho')
+    else:
+        psi_list = dynamics_results
+    # Compute the expectation value.
+    expectation  = np.real(np.sum(psi_list.conj()*observable_grid*psi_list*d_observable, axis=1))
+
+    return(expectation)
