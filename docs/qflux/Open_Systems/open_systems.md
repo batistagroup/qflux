@@ -44,7 +44,7 @@ result_matrix_exp = spin1_dissipative.propagate_matrix_exp(time_arr=time_arr, ob
 expec_vals_qutip_Lindblad = spin1_dissipative.propagate_qt(time_arr=time_arr, observable=pa.Z)
 ```
 
-We can plot the results to show agreement between matrix-vector multiplication, Lindblad propagation with QuTiP and highlight the difference between those appraoches and propagation with the Liouville appraoch: 
+We can plot the results to show agreement between matrix-vector multiplication, Lindblad propagation with QuTiP and highlight the difference between those approaches and propagation with the Liouville approach:
 
 ```python
 #==============plot
@@ -75,7 +75,7 @@ rho0_sdam = np.array([[1/4,1/4],[1/4,3/4]],dtype=np.complex128)
 time_sdam = np.arange(0, 1000, 1) #time array, from t=0 to t=1000 ps
 
 #=============instantiation
-spin1_sdam = DynamicsQ(rep='Density', Nsys=2, Hsys=Hsys, rho0=rho0_sdam, c_ops = [c_ops])
+spin1_sdam = QubitDynamicsOS(rep='Density', Nsys=2, Hsys=Hsys, rho0=rho0_sdam, c_ops = [c_ops])
 #set qubit state to measurement
 spin1_sdam.set_count_str(['000','011'])
 #set the dilation method, which can be 'Sz-Nagy' or 'SVD' or 'SVD-Walsh'
@@ -93,7 +93,7 @@ for i in range(len(time_sdam)):
     Pop_Mexp[i,1] = res_sdam_classical.density_matrix[i][1,1].real
 ```
 
-And plotting the results shows agreement with a benchmarking calculation: 
+And plotting the results shows agreement with a benchmarking calculation:
 
 ```python
 #============plot
@@ -175,8 +175,8 @@ for isite in range(nsite):
 ```python
 ##===========Classical Simulation
 #=============instantiation
-spin_chain_puresys =  Dynamics(Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc)
-spin_chain_opensys =  Dynamics(Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc, c_ops = L_sc)
+spin_chain_puresys =  DynamicsOS(Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc)
+spin_chain_opensys =  DynamicsOS(Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc, c_ops = L_sc)
 
 #=============propagation
 # QuTiP Propagation for the pure system Liouville equation (for comparison)
@@ -193,7 +193,7 @@ As_qutip = np.sqrt(result_qutip_Lindblad[0][:])
 As_qutip_liouv = np.sqrt(result_qutip_Liouv[0][:])
 ```
 
-And we can plot the results: 
+And we can plot the results:
 
 ```python
 #==============plot
@@ -210,7 +210,7 @@ plt.legend(loc = 'upper right')
 
 ```python
 ##===========Quantum Simulation
-qspin_chain = DynamicsQ(rep='Density',Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc, c_ops = L_sc)
+qspin_chain = QubitDynamicsOS(rep='Density',Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc, c_ops = L_sc)
 qspin_chain.set_count_str(['0011011'])
 
 res_qc_1k = qspin_chain.qc_simulation_vecdens(time_arr,shots=1000)
@@ -220,7 +220,7 @@ As_qc_1k = np.sqrt(res_qc_1k)
 As_qc_1w = np.sqrt(res_qc_1w)
 ```
 
-And we can plot the results: 
+And we can plot the results:
 
 ```python
 #==============plot
@@ -233,9 +233,9 @@ plt.ylabel('$A_s$(t)',fontsize=15)
 plt.legend(loc = 'upper right')
 ```
 
-## The Double-Well
+## The Double Well
 
-### Set up the double well
+### Setting Things Up
 
 ```python
 from qflux.open_systems.numerical_methods import DVR_grid
@@ -257,7 +257,7 @@ dw_grid = DVR_grid(xmin = -4.0, xmax = 4.0, Ngrid = 1024, mass = mass0)
 dw_grid.set_potential(pot_doublewell)
 ```
 
-### The eigen state of the double-well
+### Visualizing Eigenstates of the Double Well
 
 ```python
 #=============The eigen_state
@@ -351,6 +351,133 @@ ini_occu[5] = 1.0
 rho0 = np.outer(ini_occu,ini_occu.conj())
 ```
 
-## Classical simulation
+### Classical Simulation
 
+```python
+#==================classical simulation============================
+#propogate using QuTiP
+gamma1 = np.sqrt(kappa*(nth+1))
+gamma2 = np.sqrt(kappa*(nth))
 
+time_qtp = np.linspace(0,1000/pa.au2fs,20000)
+
+# Double_Well with different eigenstates truncation
+dw_eig = {}
+result_qtp = {}
+for N_eig_use in [20,30,40]:
+    c_ops = [gamma1*amat_eig[:N_eig_use,:N_eig_use], gamma2*adegmat_eig[:N_eig_use,:N_eig_use]]
+    dw_eig[N_eig_use] = DynamicsOS(Nsys = N_eig_use, Hsys = H_dw[:N_eig_use,:N_eig_use], \
+                                      rho0 = rho0[:N_eig_use,:N_eig_use], c_ops = c_ops)
+
+    obs = [P_R_eig[:N_eig_use,:N_eig_use], P_L_eig[:N_eig_use,:N_eig_use]]
+    result_qtp[N_eig_use] = dw_eig[N_eig_use].propagate_qt(time_qtp, obs, progress_bar=True)
+```
+
+```python
+#this section will approximate take 10 minutes
+#propagate using matrix exponential propagation
+N_eig_use=30
+c_ops = [gamma1*amat_eig[:N_eig_use,:N_eig_use], gamma2*adegmat_eig[:N_eig_use,:N_eig_use]]
+observable = P_R_eig[:N_eig_use,:N_eig_use]
+
+time_short = np.linspace(0,1000/pa.au2fs,30) #compare to QuTiP time scale
+result_s = dw_eig[N_eig_use].propagate_matrix_exp(time_short, observable, Is_show_step=True)
+
+time_long = np.linspace(0,20000/pa.au2fs,60) #long time propagation
+result_dw_l = dw_eig[N_eig_use].propagate_matrix_exp(time_long, observable, \
+                                Is_store_state = True, Is_show_step=True, Is_Gt=True)
+
+```
+
+And we can plot the populations for our classical simulation results:
+
+```python
+#======================plot the classical results======================
+fig, axs = plt.subplots(2, 1, figsize=(6, 7))
+axs[0].plot(time_qtp*pa.au2fs,result_qtp[20][0],'r-',label = 'QuTiP-Neig20')
+axs[0].plot(time_qtp*pa.au2fs,result_qtp[30][0],'b-',label = 'QuTiP-Neig30')
+axs[0].plot(time_qtp*pa.au2fs,result_qtp[40][0],'ko',markersize=4,markevery=400,label = 'QuTiP-Neig40')
+axs[0].set_xlabel('t (fs)',fontsize=15)
+axs[0].set_ylabel('Population',fontsize=15)
+axs[0].legend(loc = 'upper right')
+
+#plt.figure(figsize=(6,3))
+axs[1].plot(time_qtp*pa.au2fs,result_qtp[30][0],'b-',label = 'QuTiP')
+axs[1].plot(time_short*pa.au2fs,result_s.expect[:],'ko',label = 'Matrix Exponential')
+axs[1].set_xlabel('t (fs)',fontsize=15)
+axs[1].set_ylabel('Population',fontsize=15)
+axs[1].legend(loc = 'upper right')
+
+plt.tight_layout()
+```
+
+We can also plot the distribution over time:
+
+```python
+#plot the distribution
+plt.plot(xgrid,dis_list[0],'b',label='t=0 fs')
+plt.plot(xgrid,dis_list[1],'y',label=rf'$t={{{int(time_long[20]*pa.au2fs)}}}$ fs')
+plt.plot(xgrid,dis_list[2],'g',label=rf'$t={{{int(time_long[40]*pa.au2fs)}}}$ fs')
+plt.plot(xgrid,dis_list[3],'r',label=rf'$t={{{int(time_long[59]*pa.au2fs)}}}$ fs')
+plt.plot(xgrid,pot_arr*10,'k')
+plt.xlabel('x (Bohr)',fontsize=15)
+plt.ylabel('distribution',fontsize=15)
+plt.legend(loc = 'upper right')
+plt.show()
+```
+
+### Quantum Simulation
+
+```python
+from qflux.open_systems.quantum_simulation import expand
+
+##===============Quantum Simulation ====================================
+dim_dw = 32
+
+# initial state of the double-well in the dilated space
+ini_occu = np.zeros(dim_dw,dtype=np.complex128)
+ini_occu[5] = 1.0
+rho0 = np.outer(ini_occu,ini_occu.conj())
+
+#hamiltonian
+Hsys = H_dw[:dim_dw,:dim_dw]
+
+#collapse operator and observable
+c_ops = [gamma1*amat_eig[:dim_dw,:dim_dw], gamma2*adegmat_eig[:dim_dw,:dim_dw]]
+observable = P_R_eig[:dim_dw,:dim_dw]
+
+#extract the propagator from result of classical simulation,
+#and expand to match the dimension of qubit space
+#For saving calculation, only choose some time points
+ilarge = 5
+nsteps = int(len(time_long)/ilarge)
+time_qdw = np.zeros(nsteps)
+Gprop_dw = []
+
+for i0 in range(nsteps):
+    i = i0*ilarge
+    org_dim = result_dw_l.density_matrix[i].shape[0]
+    Gprop_dw.append(expand(result_dw_l.Gprop[i],org_dim,dim_dw))
+
+    time_qdw[i0] = time_long[i]
+
+#double well instance
+dw_quantum = QubitDynamicsOS(rep='Kraus', Nsys=dim_dw, Hsys=Hsys, rho0=rho0, c_ops = c_ops)
+dw_quantum.set_observable(observable)
+
+#running the quantum simulation
+P_dw_qc = dw_quantum.qc_simulation_kraus(time_qdw, shots=2000,  Gprop = Gprop_dw, tolk = 1E-2, tolo = 5E-3)
+```
+
+We can then plot the results:
+
+```python
+#=================plot=========================
+plt.figure(figsize=(6,3))
+plt.plot(time_long*pa.au2fs,result_dw_l.expect,'k-',label = 'Matrix Exponential')
+plt.plot(time_qdw*pa.au2fs,P_dw_qc,'ro',label = 'quantum simulation')
+plt.xlabel('t (fs)',fontsize=15)
+plt.ylabel('Population',fontsize=15)
+plt.legend(loc = 'upper right')
+plt.show()
+```
