@@ -32,7 +32,7 @@ $$ \psi_{0} = \left( \frac{m \omega}{\pi \hbar} \right)^{1/4} e^{- \frac{m \omeg
 
 The default initial state in the ladder/Fock basis is defined as the coherent state with amplitude $\alpha = (x_{0} + i p_{0})/ \sqrt{2}$, defined in the Fock basis as: 
 
-$$ \left| \alpha \right\rangle = \sum_{n=0}^{n_{basis}} \frac{\alpha^{n}}{\sqrt{n!}} e^{- \frac{1}{2} \left| \alpha \right|^{2} \left| n \right\rangle $$ 
+$$ \left| \alpha \right\rangle = \sum_{n=0}^{n_{basis}} \frac{\alpha^{n}}{\sqrt{n!}} e^{- \frac{1}{2} \left| \alpha \right|^{2}} \left| n \right\rangle $$ 
 
 where $n$ is a state in the Fock basis. 
 
@@ -137,7 +137,7 @@ coeffs_dict = {'a0': 1, 'a1': 1, 'a2': 1, 'a3': 1, 'a4': 1, 'x0': 1}
 dyn_obj.set_hamiltonian(potential_type='quartic', **coeffs_dict)
 ```
 
-For the Fock/ladder basis, the $x$ in the previous equation is replaced with an operator $\hat{a}$ defined in terms of the creation and annihilation operators as $\hat{x} = \frac{1}{\sqrt{2}} \left( \hat{a}^{\dagger} + \hat{a} \right)$ and in the kinetic energy term $\frac{p^{2}}{2m}$, $p$ is replaced with $\hat{p} =  \frac{i}{\sqrt{2}} \left( \hat{a}^{dagger} - \hat{a} \right)$.
+For the Fock/ladder basis, the $x$ in the previous equation is replaced with an operator $\hat{a}$ defined in terms of the creation and annihilation operators as $\hat{x} = \frac{1}{\sqrt{2}} \left( \hat{a}^{\dagger} + \hat{a} \right)$ and in the kinetic energy term $\frac{p^{2}}{2m}$, $p$ is replaced with $\hat{p} =  \frac{i}{\sqrt{2}} \left( \hat{a}^{\dagger} - \hat{a} \right)$.
 
 `qflux` also supports arbitrary customization of the potential energy function by use of the `.set_H_grid_with_custom_potential()` and `.set_H_op_with_custom_potential()` methods. These methods expect a function and a dictionary (of keyword arguments for that function) as arguments. This is illustrated in the following example: 
 
