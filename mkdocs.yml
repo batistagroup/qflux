@@ -9,6 +9,7 @@ theme:
   features:
     - content.code.copy
     - navigation.footer
+    - navigation.indexes
   palette:
       # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -23,12 +24,13 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
 extra_css:
-- stylesheets/extra.css
+  - stylesheets/extra.css
 
 extra_javascript:
-- javascripts/mathjax.js
-- https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -44,16 +46,28 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.arithmatex:
       generic: true
-  - toc: 
+  - toc:
       toc_depth: 3
 
 plugins:
-- search
-- material-plausible
-- mkdocstrings:
-    handlers:
-      python:
-        paths: [src]  # if your package is in a src folder (src-layout)
+  - search
+  - material-plausible
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]  # if your package is in a src folder (src-layout)
+
+
+nav: # Note: All paths must be relative to the docs dir
+  - Home: 'index.md'
+  - Closed Systems:
+    - 'qflux/Closed_Systems/index.md'
+    - Anatomy of a Dynamics Simulation: 'qflux/Closed_Systems/basics.md'
+    - The Quantum Harmonic Oscillator: 'qflux/Closed_Systems/qho_example.md'
+    - Adenine-Thymine Base Pair: 'qflux/Closed_Systems/AT_basepair.md'
+    - Source Code: 'qflux/Closed_Systems/cs_api.md'
+  - Open Systems: 'qflux/Open_Systems/open_systems.md'
+  - Variational Methods: 'qflux/variational_methods.md'
 
 extra:
   analytics:

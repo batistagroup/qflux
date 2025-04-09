@@ -72,7 +72,7 @@ plt.legend(ncols=2, loc='upper center')
 plt.hlines([-1, 0, 1], min(qho_dyn_obj.tlist), max(qho_dyn_obj.tlist), ls='--', lw=0.85, color='tab:grey', zorder=2)
 ```
 
-![expectation_vals_ho](../../images/QHO-Expectation-Values.png)
+![expectation_vals_ho](../images/QHO-Expectation-Values.png)
 
 Hopefully the agreement in this plot convinces you that we're doing something correct! 
 

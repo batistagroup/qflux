@@ -16,9 +16,9 @@ We will now look at how each of these steps can be done with qflux.
 
 ## Definition of the Initial State
 
-The initial state is our wavefunction $\psi_{0}$. In order to define this abstract object on a computer, we must define a finite space in which it exists. The number of discrete points in this space is controlled by the `n_basis` parameter that is passed to the `Dynamics_CS` class upon instantiation. Note that if you do not define this argument, the default value of 128 is used. Given 128 grid points, we can begin defining operators. To compute the dynamics in the so-called "Fock basis", we define the ladder operators $\hat{a}$, $\hat{x}$, and $\hat{p}$. This is done by calling the `.intialize_operator()` method. To compute the dynamics in the position/coordinate basis, we must define a range of position-values that define the x-grid of our space. This can be done with the `.set_coordinate_operators(x_min=-7., x_max=7)` method, which will define an array of `n_basis` points, ranging from `x_min` to `x_max`. Now that we've defined the space in which our wavefunction can exist, we can finally define the wavefunction. 
+The initial state is our wavefunction $\psi_{0}$. In order to define this abstract object on a computer, we must define a finite space in which it exists. The number of discrete points in this space is controlled by the `n_basis` parameter that is passed to the `DynamicsCS` class upon instantiation. Note that if you do not define this argument, the default value of 128 is used. Given 128 grid points, we can begin defining operators. To compute the dynamics in the so-called "Fock basis", we define the ladder operators $\hat{a}$, $\hat{x}$, and $\hat{p}$. This is done by calling the `.intialize_operator()` method. To compute the dynamics in the position/coordinate basis, we must define a range of position-values that define the x-grid of our space. This can be done with the `.set_coordinate_operators(x_min=-7., x_max=7)` method, which will define an array of `n_basis` points, ranging from `x_min` to `x_max`. Now that we've defined the space in which our wavefunction can exist, we can finally define the wavefunction. 
 
-When instantiating a dynamics object with the `Dynamics_CS` class, there are some other important arguments that are taken into account: 
+When instantiating a dynamics object with the `DynamicsCS` class, there are some other important arguments that are taken into account: 
 
 - `xo`: The initial displacement in the position-coordinate. 
 - `po`: The initial displacement in the momentum-coordinate. 
@@ -52,7 +52,9 @@ def custom_gaussian(xvals, xo, po, omega, mass, hbar):
 Then, we can set-up a dynamics object that is ready to initialize a state: 
 
 ```python 
-dyn_obj = Dynamics_CS(n_basis=128, xo=1.0, po=0.0, mass=1.0, omega=0.2)
+from qflux.closed_systems import DynamicsCS, QubitDynamicsCS
+
+dyn_obj = DynamicsCS(n_basis=128, xo=1.0, po=0.0, mass=1.0, omega=0.2)
 dyn_obj.set_coordinate_operators()
 dyn_obj.initialize_operators()
 ```
@@ -100,7 +102,7 @@ dyn_obj.custom_ladder_state_initialization(custom_coherent_state, **qt_func_args
 
 For the custom Fock/ladder basis initialization, the custom function must return a `qutip.Qobj`. 
 
-#### Defining the Hamiltonian
+## Defining the Hamiltonian
 
 The next step for running our dynamics simulation is to define the Hamiltonian, which should describe the system of interest. For the coordinate basis, we assume that the Hamiltonian takes the form of: 
 
@@ -192,4 +194,6 @@ And finally we can set our Hamiltonian for the Fock/ladder basis by calling:
 dyn_obj.set_H_op_with_custom_potential(morse_potential_op, **morse_op_args)
 ```
 
+## Definition of the Time Grid
 
+Given some total propagation time $t_{\text{final}}$ and a number of steps $N_{\text{steps}}$, the time list is generated as a numpy array ranging from $0$ to $t_{\text{final}}$ with an interval $dt = t_{\textrm{final}} / N_{\text{steps}}$. This is done with `qflux` by calling the `.set_propagation_time(total_time=20, n_tsteps=400)` method. 

@@ -5,7 +5,7 @@ from matplotlib import axes
 from tqdm.auto import trange
 import qutip as qt
 from typing import Callable
-from utils import *
+from .utils import *
 
 
 class DynamicsCS:
@@ -363,7 +363,7 @@ class DynamicsCS:
 
         """
 
-        self.tlist = np.linspace(0., total_time, n_tsteps)
+        self.tlist = np.linspace(0., total_time, n_tsteps+1)
         self.dt = self.tlist[1] - self.tlist[0]
         return
 
@@ -416,7 +416,7 @@ class DynamicsCS:
 
         propagated_states = [self.psio_grid]
         psi_t = self.psio_grid
-        for ii in range(len(self.tlist)):
+        for ii in range(1, len(self.tlist)):
             psi_t_position_grid = PE_prop * psi_t
             psi_t_momentum_grid = KE_prop * np.fft.fft(psi_t_position_grid, norm="ortho")
             psi_t = PE_prop * np.fft.ifft(psi_t_momentum_grid, norm="ortho")
