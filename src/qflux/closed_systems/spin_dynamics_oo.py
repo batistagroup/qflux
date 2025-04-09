@@ -1,10 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from utils import execute
+from .utils import execute
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit_aer import Aer
-from spin_propagators import get_time_evolution_operator
-
+from .spin_propagators import get_time_evolution_operator
 
 class SpinDynamicsS:
     """
@@ -56,7 +55,6 @@ class SpinDynamicsS:
 
         # Plot settings
         self.dpi = 300
-        plt.style.use("plot_style.txt")
         plt.rcParams["axes.linewidth"] = 1.5
         plt.rcParams["lines.markersize"] = 11
         plt.rcParams["figure.figsize"] = (6.4, 3.6)
@@ -154,13 +152,11 @@ class SpinDynamicsS:
 
         plt.plot(time, sa_observable, "-o")
         plt.xlabel("Time")
-        plt.ylabel(
-            "Absolute Value of Survival Amplitude, "
-            r"$\left|\langle \psi | \psi \rangle \right|$"
-        )
+        plt.ylabel(r"$\left|\langle \psi | \psi (t)  \rangle \right|$")
         plt.xlim((min(time), max(time)))
         plt.yscale("log")
-        plt.legend()
+        #plt.legend()
+        plt.tight_layout()
         plt.savefig(f"{filename_prefix}.pdf", format="pdf", dpi=self.dpi)
         plt.savefig(f"{filename_prefix}.png", format="png", dpi=self.dpi)
         plt.show()
@@ -331,13 +327,14 @@ class SpinDynamicsH:
         abs_corr = np.abs(np.array(self.real_amp_list) + 1j * np.array(self.imag_amp_list))
 
         plt.plot(self.time_range, abs_corr, '.', label='Hadamard Test')
-        ref_sa = np.load(f'data/{self.num_qubits}_spin_chain_SA_obs.npy')
-        ref_time = np.load(f'data/{self.num_qubits}_spin_chain_time.npy')
+        ref_sa = np.load(f'../../../data/{self.num_qubits}_spin_chain_SA_obs.npy')
+        ref_time = np.load(f'../../../data/{self.num_qubits}_spin_chain_time.npy')
         plt.plot(ref_time, ref_sa, '-', label='Statevector')
 
         plt.xlabel('Time')
-        plt.ylabel('Absolute Value of Survival Amplitude')
-        plt.legend()
+        plt.ylabel(r"$\left|\langle \psi | \psi (t)  \rangle \right|$")
+        plt.tight_layout()
+        #plt.legend()
         plt.show()
 
 

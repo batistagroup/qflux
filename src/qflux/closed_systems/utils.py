@@ -1,6 +1,9 @@
 # Utilities
 # Plotting utilities, conversion factors, etc.
 import numpy as np 
+import qiskit_aer
+from qiskit.compiler import transpile
+from qiskit_ibm_runtime import Sampler
 
 # Conversion Factors:
 def convert_au_to_eV(input_val):
@@ -41,7 +44,7 @@ def get_proton_mass():
     return(proton_mass)
 
 
-def execute(self, QCircuit, backend=None, shots=None):
+def execute(QCircuit, backend=None, shots=None, real_backend=False):
     '''
         Function to replace the now-deprecated Qiskit
         `QuantumCircuit.execute()` method.
@@ -57,12 +60,6 @@ def execute(self, QCircuit, backend=None, shots=None):
         n_shots = shots
     else:
         n_shots = 1024 # Use the qiskit default if not specified
-    backend_type = type(backend)
-    sv_type = qiskit_aer.backends.statevector_simulator.StatevectorSimulator
-    if backend_type == sv_type:
-        real_backend = False
-    else:
-        real_backend = True
 
     if real_backend:
         QCircuit.measure_all()
