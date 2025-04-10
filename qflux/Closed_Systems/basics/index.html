@@ -343,6 +343,8 @@
       
         
       
+        
+      
     
     
     
@@ -523,6 +525,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../spinchain/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spin Chain Simulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cs_api/" class="md-nav__link">
         
   
@@ -551,9 +575,31 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../Open_Systems/open_systems/" class="md-nav__link">
+    
+    
+      
         
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Open_Systems/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Open Systems
@@ -561,7 +607,71 @@
   </span>
   
 
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Open Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Open_Systems/open_systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Open_Systems/os_api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -572,8 +682,50 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Variational Methods
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Variational Methods
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../variational_methods/" class="md-nav__link">
+      <a href="../../Variational_Methods/variational_methods/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -583,6 +735,90 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Variational_Methods/var_api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../GQME/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    GQME
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            GQME
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -682,7 +918,7 @@
 <p>To define the initial state in our default way, you can simply use the <code>.set_initial_state()</code> method. This takes the optional argument of <code>wfn_omega</code> defining the frequency/width of the intiial state, which takes the default value of 1.0 au. The default initial state in the coordinate basis is defined as a Gaussian coherent state: </p>
 <div class="arithmatex">\[ \psi_{0} = \left( \frac{m \omega}{\pi \hbar} \right)^{1/4} e^{- \frac{m \omega}{2 \hbar} \left( x - x_{0} \right)^{2} + \frac{i}{\hbar} p_{0} x} \]</div>
 <p>The default initial state in the ladder/Fock basis is defined as the coherent state with amplitude <span class="arithmatex">\(\alpha = (x_{0} + i p_{0})/ \sqrt{2}\)</span>, defined in the Fock basis as: </p>
-<div class="arithmatex">\[ \left| \alpha \right\rangle = \sum_{n=0}^{n_{basis}} \frac{\alpha^{n}}{\sqrt{n!}} e^{- \frac{1}{2} \left| \alpha \right|^{2} \left| n \right\rangle \]</div>
+<div class="arithmatex">\[ \left| \alpha \right\rangle = \sum_{n=0}^{n_{basis}} \frac{\alpha^{n}}{\sqrt{n!}} e^{- \frac{1}{2} \left| \alpha \right|^{2}} \left| n \right\rangle \]</div>
 <p>where <span class="arithmatex">\(n\)</span> is a state in the Fock basis. </p>
 <p>Note that <code>qflux</code> also provides functionality for custom state initialization, in which a user-defined function can be provided. </p>
 <p>Custom initialization in the coordinate basis is done with the <code>.custom_grid_state_initialization()</code> method. This can be used if you wish to initialize with a different state. To exemplify the usage of this functionality, we can define some function that takes arguments necessary to define a state: </p>
@@ -744,7 +980,7 @@
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">coeffs_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a0&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a3&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a4&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;x0&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">dyn_obj</span><span class="o">.</span><span class="n">set_hamiltonian</span><span class="p">(</span><span class="n">potential_type</span><span class="o">=</span><span class="s1">&#39;quartic&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">coeffs_dict</span><span class="p">)</span>
 </span></code></pre></div>
-<p>For the Fock/ladder basis, the <span class="arithmatex">\(x\)</span> in the previous equation is replaced with an operator <span class="arithmatex">\(\hat{a}\)</span> defined in terms of the creation and annihilation operators as <span class="arithmatex">\(\hat{x} = \frac{1}{\sqrt{2}} \left( \hat{a}^{\dagger} + \hat{a} \right)\)</span> and in the kinetic energy term <span class="arithmatex">\(\frac{p^{2}}{2m}\)</span>, <span class="arithmatex">\(p\)</span> is replaced with <span class="arithmatex">\(\hat{p} =  \frac{i}{\sqrt{2}} \left( \hat{a}^{dagger} - \hat{a} \right)\)</span>.</p>
+<p>For the Fock/ladder basis, the <span class="arithmatex">\(x\)</span> in the previous equation is replaced with an operator <span class="arithmatex">\(\hat{a}\)</span> defined in terms of the creation and annihilation operators as <span class="arithmatex">\(\hat{x} = \frac{1}{\sqrt{2}} \left( \hat{a}^{\dagger} + \hat{a} \right)\)</span> and in the kinetic energy term <span class="arithmatex">\(\frac{p^{2}}{2m}\)</span>, <span class="arithmatex">\(p\)</span> is replaced with <span class="arithmatex">\(\hat{p} =  \frac{i}{\sqrt{2}} \left( \hat{a}^{\dagger} - \hat{a} \right)\)</span>.</p>
 <p><code>qflux</code> also supports arbitrary customization of the potential energy function by use of the <code>.set_H_grid_with_custom_potential()</code> and <code>.set_H_op_with_custom_potential()</code> methods. These methods expect a function and a dictionary (of keyword arguments for that function) as arguments. This is illustrated in the following example: </p>
 <p>Suppose you have some arbitrary Morse-like potential of the form:</p>
 <div class="arithmatex">\[ V_{Morse} = De ( 1 - e^{- a (x-x_{eq})})^{2} \]</div>
