@@ -4,11 +4,11 @@
 
 This section demonstrates the practical considerations for perfoming dynamical evolution of an Hamiltonian written in the basis of Pauli matrices using a qubit-based quantum computer framework. The chosen Hamiltonian can be used to describe the chemical process of electron transfer across a chromophore chain, with the onsite parameters describing the strength of the electronic affinity at each chromophore and off-site couplings describing the barrier for transferring an electron between adjacent sites.
 
-![electron-transfer](../images/spin_chain_cartoon.png)
+![electron-transfer](../images/Part_I/spin_chain_cartoon.png)
 
 A problem of practical interest that could be modelled by this method would be a functionalized graphene nanoribbon, where alternating sites contain radical character ([Nano Lett. 2022, 22, 1, 164–171](https://pubs.acs.org/doi/10.1021/acs.nanolett.1c03578)).
 
-![radical-figure](../images/spin_chain_figure.png)
+![radical-figure](../images/Part_I/spin_chain_figure.png)
 
 The stability of the radical character at each site can be described by the on-site parameter ($\Omega _n$) and the coupling between sites ($J _{n,n+1}$) governed by the properties of the linker regions containing the diketone groups. These parameters can be tuned by synthetic design of each component part of the nanoribbon.
 
@@ -30,10 +30,13 @@ Protocol for Hamiltonian evolution in a quantum computer framework:
 ## Model Hamiltonian and Parameters
 
 Here we use as an example the Hamiltonian for the Heisenberg model, defined as follows:
+
 \begin{align}
 H=  \sum_{n=0}^{N-1} \hbar \Omega _n \sigma_n ^z - \dfrac{1}{2} \sum_{n=0}^{N-2} \big(J_{n,n+1}^x \hat{\sigma}_{n}^x \hat{\sigma}_{n+1}^x + J_{n,n+1}^y \hat{\sigma}_{n}^y \hat{\sigma}_{n+1}^y + J_{n,n+1}^z \hat{\sigma}_{n}^z \hat{\sigma}_{n+1}^z \big)
 \end{align}
+
 where the coupling elements are described in terms of the $\sigma _x, \sigma _y, \sigma _z$ (Pauli X, Y and Z) matrices with a coupling associated with each type of interaction term for each site/pair of sites. We consider the following parameters, as used in the publication [Non-Markovian decay beyond the Fermi Golden Rule: Survival Collapse of the polarization in spin chains.](https://arxiv.org/pdf/quant-ph/0511176v2.pdf)(but with reduced number of spin sites):
+
 \begin{align}
     N &= 3 \\
     \hbar \Omega _0 &= 0.65 \\
@@ -42,6 +45,7 @@ where the coupling elements are described in terms of the $\sigma _x, \sigma _y,
     J_{n,n+1}^x = J_{n,n+1}^y &= 1.0, \; n > 0  \\
     J_{n,n+1}^z &= 0, \; \forall n \\
 \end{align}
+
 for a chain of $N=3$ spins and an initial state with the first spin up, $| \uparrow \rangle = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$, and the remaining spins down, $| \downarrow \rangle = \begin{bmatrix} 0 \\ 1\end{bmatrix}$.
 Although the dynamics of this Hamiltonian can be simulated in a classical computer, we could also use quantum computer to simulate this same problem. One way to do so is by harnessing Qiskit, a python library containing functions that ease the simulation of the problem in quantum device framework.
 

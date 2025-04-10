@@ -158,7 +158,7 @@ class DynamicsCS:
         if potential_type == 'harmonic':
 
             # Set attributes for the coordinate basis
-            self._PE_grid = self.mass * self.omega ** 2 * self.x_grid ** 2 / 0.5
+            self._PE_grid = self.mass * self.omega ** 2 * self.x_grid ** 2 / 2.
             self._KE_grid = self.p_grid ** 2 / (2. * self.mass)
             self.H_grid = self._PE_grid + self._KE_grid
         elif potential_type == 'quartic':
@@ -422,5 +422,5 @@ class DynamicsCS:
             psi_t = PE_prop * np.fft.ifft(psi_t_momentum_grid, norm="ortho")
             propagated_states.append(psi_t)
 
-        self.dynamics_results_grid = np.asarray(propagated_states)[:-1]
+        self.dynamics_results_grid = np.asarray(propagated_states)
         return

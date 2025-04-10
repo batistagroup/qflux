@@ -2,7 +2,7 @@
 
 In this section, we will compute the dynamics for the proton transfer in an Adenine-Thymine Base Pair!
 
-![AT-Basepair](../images/AT-BasePair-Figure.png)
+![AT-Basepair](../images/Part_I/AT-BasePair-Figure.png)
 
 ## Setting Up The Simulation
 
@@ -59,7 +59,7 @@ plt.legend(fontsize=14,loc='upper center')
 
 Which should produce a plot like this: 
 
-![AT-Initialization](../images/Double-Well-Initialization.png)
+![AT-Initialization](../images/Part_I/Double-Well-Initialization.png)
 
 And we can also visualize with the final propagated state: 
 
@@ -87,7 +87,7 @@ plt.ylim(-0.03,0.07)
 plt.legend(fontsize=14,loc='upper center')
 ```
 
-![AT-Propagation](../images/Double-Well-Propagation.png)
+![AT-Propagation](../images/Part_I/Double-Well-Propagation.png)
 
 And we can also look at the expectation value of the position as a function of time: 
 
@@ -108,6 +108,6 @@ plt.ylim(-3,4)
 plt.legend(loc='upper right')
 ```
 
-![AT-Expectation](../images/Double-Well-Position-Time.png)
+![AT-Expectation](../images/Part_I/Double-Well-Position-Time.png)
 
 

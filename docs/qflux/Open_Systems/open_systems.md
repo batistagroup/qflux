@@ -58,6 +58,8 @@ plt.legend(loc = 'upper right')
 plt.show()
 ```
 
+![tls-classical](../images/Part_II/TLS_Classical_Dynamics.png)
+
 ### Quantum Simulation of the Spin-1/2 system: Amplitude-channel damping
 
 ```python
@@ -106,6 +108,8 @@ plt.xlabel('time (ps)',fontsize=15)
 plt.ylabel('$P(t)$',fontsize=15)
 plt.legend(loc = 'upper right')
 ```
+
+![tls-quantum](../images/Part_II/TLS_Quantum_Dynamics.png)
 
 ## Spin-Chain
 
@@ -206,6 +210,8 @@ plt.ylabel('$A_s$(t)',fontsize=15)
 plt.legend(loc = 'upper right')
 ```
 
+![spinchain-os-classical](../images/Part_II/Spinchain_Classical_Dynamics.png)
+
 ### Quantum Simulation
 
 ```python
@@ -232,6 +238,8 @@ plt.xlabel('Time',fontsize=15)
 plt.ylabel('$A_s$(t)',fontsize=15)
 plt.legend(loc = 'upper right')
 ```
+
+![spinchain-os-quantum](../images/Part_II/Spinchain_Quantum_Dynamics.png)
 
 ## The Double Well
 
@@ -317,6 +325,8 @@ plt.legend(loc = 'lower right')
 plt.show()
 #=================
 ```
+
+![doublewell-eigenstates](../images/Part_II/DoubleWell-Eigenstates.png)
 
 ### Express the double well in terms of eigenstate basis
 
@@ -411,6 +421,8 @@ axs[1].legend(loc = 'upper right')
 plt.tight_layout()
 ```
 
+![doublewell-os-populations](../images/Part_II/DoubleWell-Classical-Results.png)
+
 We can also plot the distribution over time:
 
 ```python
@@ -425,6 +437,8 @@ plt.ylabel('distribution',fontsize=15)
 plt.legend(loc = 'upper right')
 plt.show()
 ```
+
+![doublewell-os-distributions](../images/Part_II/DoubleWell-Classical-Distributions.png)
 
 ### Quantum Simulation
 
@@ -481,3 +495,6 @@ plt.ylabel('Population',fontsize=15)
 plt.legend(loc = 'upper right')
 plt.show()
 ```
+
+![doublewell-os-quantum-results](../images/Part_II/DoubleWell-Quantum-Results.png)
+

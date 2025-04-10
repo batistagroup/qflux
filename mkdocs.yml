@@ -71,8 +71,12 @@ nav: # Note: All paths must be relative to the docs dir
   - Open Systems: 
     - 'qflux/Open_Systems/index.md'
     - Tutorial: 'qflux/Open_Systems/open_systems.md'
-  - Variational Methods: 'qflux/variational_methods.md'
-
+    - Source Code: 'qflux/Open_Systems/os_api.md'
+  - Variational Methods: 
+    - Variational Methods: 'qflux/Variational_Methods/variational_methods.md'
+    - Source Code: 'qflux/Variational_Methods/var_api.md' 
+  - GQME: 
+    - 'qflux/GQME/index.md'
 extra:
   analytics:
     provider: plausible
