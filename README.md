@@ -12,15 +12,28 @@ This repository contains various protocols for performing quantum dynamics simul
 1. [Getting Started](#start)
    - [Notebooks For Tutorial Manuscript](#notebooks)
    - [Additional Repositories](#repos)
-2. [Citation](#citation)
-3. [License](#license)
-4. [Acknowledgements](#acknowledgement)
+2. [Contribution Guidelines](#contribute)
+3. [Citation](#citation)
+4. [License](#license)
+5. [Acknowledgements](#acknowledgement)
 
 
 ## Getting Started <a name="start"></a>
 
 Simply select a notebook and execute them locally or in google collab. Necessary dependencies will be installed using `pip`.
 
+If using uv through the commandline, use the following syntax to create and activate a virtual environment:
+
+```bash
+uv venv
+source .venv/bin/activate
+```
+
+The necessary packages, including development, can be installed as follows:
+
+```bash
+uv pip install -e ".[dev]"
+```
 
 ### Notebooks For Tutorial Manuscript <a name="notebooks"></a>
 
@@ -38,6 +51,26 @@ Simply select a notebook and execute them locally or in google collab. Necessary
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_IV.ipynb) | Part IV - Generalized Quantum Master Equation Dynamics
 
+### Contribution Guidelines <a name="contribute"></a>
+
+To contribute to the repository, clone the qflux repository and create a new branch:
+
+```bash
+git clone git@github.com:batistagroup/qflux.git
+git pull
+git checkout -b part_II_docs_spinchain
+```
+
+For example to contribute to the documentation, written in markdown (.md), edit the markdown in some form and make it complete (vim spin_chain.md for example).
+Once complete, commit changes to file: 
+
+```bash
+git add spin_chain.md
+git commit -m 'DOCS: Added docs on the spin chain example with Lindblad'
+git push
+```
+
+Generate a new pull request through github and assign to a tentative reviewer.
 
 ### Additional Repositories <a name="repos"></a>
 
