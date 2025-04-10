@@ -9,6 +9,7 @@ wheels/
 .ruff_cache/
 .pytest_cache/
 site/
+.ipynb_checkpoints/
 # Other junk
 .DS_Store
 

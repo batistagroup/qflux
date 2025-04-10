@@ -123,9 +123,10 @@ class QubitDynamicsCS(DynamicsCS):
             qc.initialize(self.psio_grid, q_reg[:], normalize=True)
             qc_result = self._execute_circuit(qc, backend=backend, shots=n_shots)
             psio_cirq = qc_result.result().get_statevector().data
+            psi_in = psio_cirq
             # Now do propagation loop
             qubit_dynamics_results = [psio_cirq]
-            for ii in trange(len(self.tlist)):
+            for ii in trange(1, len(self.tlist)):
                 circuit = self._create_QSOFT_Circuit(psio=psi_in)
                 executed_circuit = self._execute_circuit(circuit, backend=backend, shots=n_shots)
                 psi_out = executed_circuit.result().get_statevector().data
