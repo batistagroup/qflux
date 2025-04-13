@@ -11,9 +11,9 @@ dependencies = [
     "qiskit-ibm-runtime>=0.37.0",
     "tomli>=2.2.1",
 ]
-authors = [{ name = "Delmar Cabral", email = "delmar.azevedocabral@yale.edu" }]
-authors = [{ name = "Brandon Allen", email = "brandon.allen@yale.edu" }]
-authors = [{ name = "Anton Morgunov", email = "anton@ischemist.com" }]
+authors = [{ name = "Delmar Cabral", email = "delmar.azevedocabral@yale.edu" },
+           { name = "Brandon Allen", email = "brandon.allen@yale.edu" },
+           { name = "Anton Morgunov", email = "anton@ischemist.com" }]
 license = { text = "MIT" }
 
 [project.urls]

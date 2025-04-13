@@ -2,13 +2,14 @@ from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit.compiler import transpile, assemble
 from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
 from qiskit.quantum_info.operators import Operator
-from qiskit.circuit.library import QFT
+from qiskit.circuit.library import QFT, PauliEvolutionGate
 from qiskit_aer import Aer
 import qiskit_aer
 import numpy as np
 import scipy.linalg as spLA
 from tqdm.auto import trange
 from .classical_methods import DynamicsCS
+from .utils import decompose, pauli_strings_2_pauli_sum
 import numpy.typing as npt
 
 
@@ -182,4 +183,64 @@ class QubitDynamicsCS(DynamicsCS):
             psi_in = psi_out
 
         self.dynamics_results_qubit = np.asarray(qubit_dynamics_results)
+        return
+
+
+    def _construct_pauli_gate(self):
+        '''
+        Function to construct a pauli evolution gate from Hamiltonian
+        '''
+        decomposed_H = decompose(self.H_op.full())
+        H_pauli_sum  = pauli_strings_2_pauli_sum(decomposed_H)
+        prop_pauli_H = PauliEvolutionGate(operator=H_pauli_sum, time=self.dt)
+        self.pauli_prop = prop_pauli_H
+        return
+
+    
+    def _construct_pauli_cirq(self, psio=None):
+        q_reg = QuantumRegister(self.n_qubits)
+        c_reg = ClassicalRegister(self.n_qubits)
+        qc = QuantumCircuit(q_reg, c_reg)
+
+        qc.initialize(psio, q_reg[:], normalize=True)
+        qc.append(self.pauli_prop, q_reg)
+        self.quantum_circuit = qc
+        return(qc)
+
+
+    def propagate_qmatvec(self, backend=None, n_shots: int = 1024):
+        """
+            Function to propagate dynamics object with the qubit matvec method.
+
+            Args:
+                backend (qiskit.Backend): qiskit backend object
+                n_shots (int): specifies the number of shots to use when
+                    executing the circuit
+
+            Example for using the Statevector Simulator backend:
+                >>> from qiskit_aer import Aer
+                >>> backend = Aer.get_backend('statevector_simulator')
+                >>> self.propagate_qSOFT(backend=backend)
+        """
+        # Create the Pauli propagator:
+        self._construct_pauli_gate()
+
+        q_reg = QuantumRegister(self.n_qubits)
+        c_reg = ClassicalRegister(self.n_qubits)
+        qc = QuantumCircuit(q_reg, c_reg)
+        # Initialize state:
+        qc.initialize(self.psio_op.full().flatten(), q_reg[:], normalize=True)
+        qc_result = self._execute_circuit(qc, backend=backend, shots=n_shots)
+        psio_cirq = qc_result.result().get_statevector().data
+        psi_in = psio_cirq
+        
+        new_qubit_dynamics_result = [psio_cirq]
+
+        for ii in trange(1, len(self.tlist)):
+            circuit = self._construct_pauli_cirq(psi_in)
+            executed_circuit = self._execute_circuit(circuit, backend=backend, shots=n_shots)
+            psi_out = executed_circuit.result().get_statevector().data
+            new_qubit_dynamics_result.append(psi_out)
+            psi_in = psi_out
+        self.dynamics_results_qubit = np.asarray(new_qubit_dynamics_result)
         return
