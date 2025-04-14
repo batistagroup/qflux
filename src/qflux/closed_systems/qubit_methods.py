@@ -134,7 +134,7 @@ class QubitDynamicsCS(DynamicsCS):
                 qubit_dynamics_results.append(psi_out)
                 psi_in = psi_out
 
-            self.dynamics_results_qubit = np.asarray(qubit_dynamics_results)
+            self.dynamics_results_qSOFT = np.asarray(qubit_dynamics_results)
             return
 
 
@@ -182,7 +182,7 @@ class QubitDynamicsCS(DynamicsCS):
             qubit_dynamics_results.append(psi_out)
             psi_in = psi_out
 
-        self.dynamics_results_qubit = np.asarray(qubit_dynamics_results)
+        self.dynamics_results_qSOFT = np.asarray(qubit_dynamics_results)
         return
 
 
@@ -237,7 +237,7 @@ class QubitDynamicsCS(DynamicsCS):
         new_qubit_dynamics_result = [psio_cirq]
 
         for ii in trange(1, len(self.tlist)):
-            circuit = self._construct_pauli_cirq(psi_in)
+            circuit = self._construct_pauli_cirq(psio=psi_in)
             executed_circuit = self._execute_circuit(circuit, backend=backend, shots=n_shots)
             psi_out = executed_circuit.result().get_statevector().data
             new_qubit_dynamics_result.append(psi_out)

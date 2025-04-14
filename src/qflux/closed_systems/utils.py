@@ -171,9 +171,9 @@ def decompose(H, verbose=False):
             else:
                 # If verbose, print the coefficient and the Pauli string
                 if verbose == True:
-                    print(np.round(a_coeff.real, 6),'', name)
+                    print(np.round(a_coeff.real, 12),'', name)
                 # Alternatively, we convert to a string of the form: a_coeff*pauli_string[ii]
-                output_string += str(np.round(a_coeff.real, 6))+'*'+alt_name
+                output_string += str(np.round(a_coeff.real, 12))+'*'+alt_name
                 output_string += '+' # Add a plus sign for the next term!
     return output_string[:-1] # To ignore that extra plus sign
 
