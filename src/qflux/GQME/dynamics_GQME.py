@@ -6,6 +6,7 @@ import numpy as np
 import scipy.linalg as LA
 from . import params as pa
 from . import tt_tfd as tfd
+from typing import Tuple, Optional
 
 import time
 import sys
@@ -13,21 +14,32 @@ import sys
 
 class DynamicsGQME:
     """
-    Class for GQME calculation. 
-
-    Parameters
-    ----------
-    Nsys : int
-        System Hilbert Space Dimension
-    Hsys: 
-        Hamiltonian of the system (numpy array of shape (N, N)).
-    rho0: 
-        Initial density matrix (numpy array of shape (N, N)).
-    c_ops: 
-        List of Collapse operators (numpy array of shape (N, N)).
-
+    Class for Generalized Quantum Master Equation (GQME) calculation.
+    
+    This class provides methods for calculating the memory kernel, 
+    performing TT-TFD calculations, and solving the GQME for open quantum systems.
+    
+    Attributes:
+        Nsys (int): System Hilbert space dimension.
+        Hsys (np.ndarray): System Hamiltonian of shape (N, N).
+        rho0 (np.ndarray): Initial density matrix of shape (N, N).
+        vec_rho0 (np.ndarray): Vectorized initial density matrix of shape (N^2,).
+        Liouv (Optional[np.ndarray]): Liouvillian superoperator.
+        DT (Optional[float]): Time step for evolution.
+        TIME_STEPS (Optional[int]): Number of time steps.
+        time_array (Optional[np.ndarray]): Array of time points.
+        Gt (Optional[np.ndarray]): Time-evolution propagator.
     """
-    def __init__(self, Nsys, Hsys, rho0):    
+    
+    def __init__(self, Nsys: int, Hsys: np.ndarray, rho0: np.ndarray) -> None:
+        """
+        Initialize the DynamicsGQME instance.
+        
+        Args:
+            Nsys (int): System Hilbert space dimension.
+            Hsys (np.ndarray): System Hamiltonian of shape (N, N).
+            rho0 (np.ndarray): Initial density matrix of shape (N, N).
+        """
         self.Nsys           =    Nsys
         self.Hsys           =    Hsys
         self.rho0           =    rho0
@@ -45,40 +57,79 @@ class DynamicsGQME:
         #propagator
         self.Gt             =   None
 
-        
     
-    def get_Liouvillian(self):
-        """Get The projected Liouvillian from Hsys"""
+    def get_Liouvillian(self) -> None:
+        """
+        Construct the Liouvillian superoperator using the system Hamiltonian.
+        
+        The Liouvillian is defined as:
+            L = H \otimes I - I \otimes H^T
+        """
         Isys = np.eye(self.Nsys)
         self.Liouv = np.kron(self.Hsys,Isys) -  np.kron(Isys,self.Hsys.T)
         
-    def setup_propagator(self,Gt):
-        """Setup the propagator from the input"""
+    def setup_propagator(self, Gt: np.ndarray) -> None:
+        """
+        Set the time-evolution propagator.
+
+        Args:
+            Gt (np.ndarray): Time-dependent propagator.
+        """
         self.Gt = Gt        
     
-    def setup_timestep(self,DT,TIME_STEPS):
+    def setup_timestep(self, DT: float, TIME_STEPS: int) -> None:
+        """
+        Set up the time discretization parameters.
+
+        Args:
+            DT (float): Time step size.
+            TIME_STEPS (int): Number of time steps.
+        """
         self.DT = DT
         self.TIME_STEPS = TIME_STEPS
         self.time_array = np.linspace(0,(TIME_STEPS-1)*DT,TIME_STEPS)
 
-    def tt_tfd(self, initial_state=0, update_type='rk4', rk4slices = 1, mmax=4, RDO_arr_bench=None, show_steptime=False):
-        """
-        Performing the TT-TFD calculation
+    def tt_tfd(
+        self,
+        initial_state: int = 0,
+        update_type: str = 'rk4',
+        rk4slices: int = 1,
+        mmax: int = 4,
+        RDO_arr_bench: Optional[np.ndarray] = None,
+        show_steptime: bool = False
+        ) -> Tuple[np.ndarray, np.ndarray]:
         
-        update_type: In TDVP calculations, the method for updating each core of the MPS. 
-                    can be either 'rk4' or 'krylov'. can be 'rk4' or 'krylov'
-        rk4slices: the timeslices for update_type='rk4'
-        mmax: the size of Krylov subspace for update_type='krylov'
-        RDO_arr_bench: An array. If given, print the error of each step's calculation compared to the benchmark RDO_arr_bench.
-        show_steptime: if True, then show the time for each step. 
-        
         """
-        time_arr, RDO_arr = tfd.tt_tfd(initial_state, update_type, rk4slices = rk4slices, mmax=mmax, RDO_arr_bench=RDO_arr_bench, show_steptime=show_steptime)
+        Perform Tensor-Train Thermofield Dynamics (TT-TFD) calculation.
+        
+        Args:
+            initial_state (int, optional): Index of the initial state. Defaults to 0.
+            update_type (str, optional): Method for time evolution. Either 'rk4' or 'krylov'.
+            rk4slices (int, optional): Number of RK4 substeps if update_type is 'rk4'. Defaults to 1.
+            mmax (int, optional): Dimension of Krylov subspace if update_type is 'krylov'. Defaults to 4.
+            RDO_arr_bench (Optional[np.ndarray], optional): Benchmark RDO array to compute error at each step. Defaults to None.
+            show_steptime (bool, optional): Whether to print timing for each step. Defaults to False.
+        
+        Returns:
+            Tuple[np.ndarray, np.ndarray]: Time array and RDO (reduced density operator) array.
+        """
+        time_arr, RDO_arr = tfd.tt_tfd(
+            initial_state,
+            update_type,
+            rk4slices=rk4slices,
+            mmax=mmax,
+            RDO_arr_bench=RDO_arr_bench,
+            show_steptime=show_steptime
+        )
+
         return time_arr, RDO_arr
     
-    def cal_propagator_tttfd(self):
+    def cal_propagator_tttfd(self) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Calculate the numerical exact propagator through TT-TFD method
+        Calculate the numerical exact propagator for Spin-Boson model using the TT-TFD method.
+
+        Returns:
+            Tuple[np.ndarray, np.ndarray]: Time array and 3D propagator array.
         """
         
         U = np.zeros((pa.TIME_STEPS, pa.DOF_E_SQ, pa.DOF_E_SQ), dtype=np.complex128)
@@ -86,16 +137,10 @@ class DynamicsGQME:
         # tt-tfd with initial state 0,1,2,3
         # initial state |0> means donor state |D>, |3> means acceptor state |A>
         # |1> is (|D> + |A>)/sqrt(2), |2> is (|D> + i|A>)/sqrt(2)
-        print('========calculate the propagator, starting from 0 state========')
-        t,U[:,:,0] = tfd.tt_tfd(0)
-        print('========calculate the propagator, starting from 1 state========')
-        t,U[:,:,1] = tfd.tt_tfd(1)
-        print('========calculate the propagator, starting from 2 state========')
-        t,U[:,:,2] = tfd.tt_tfd(2)
-        print('========calculate the propagator, starting from 3 state========')
-        t,U[:,:,3] = tfd.tt_tfd(3)
-        print('========calculate the propagator done========')
-    
+        for i in range(4):
+            print(f"======== calculate the propagator, starting from state {i} ========")
+            t, U[:, :, i] = tfd.tt_tfd(i)
+   
         U_final = U.copy()
     
         # the coherence elements that start at initial state |D><A| and |A><D|
@@ -107,11 +152,17 @@ class DynamicsGQME:
         U_final[:,:,2] = U[:,:,1] - 1.j * U[:,:,2] - 0.5 * (1. - 1.j) * (U[:,:,0] + U[:,:,3])
 
         self.setup_propagator(U_final)
+        print('========calculate the propagator done========')
         
         return t,U_final
     
-    def prop_puresystem(self):
-        """Propogate the pure system"""
+    def prop_puresystem(self) -> np.ndarray:
+        """
+        Propagate the pure system under the unitary evolution.
+
+        Returns:
+            np.ndarray: Vectorized density matrix at each time step (shape (TIME_STEPS, N^2)).
+        """
         Nstep = len(self.time_array)
         vec_rho = np.zeros((Nstep, self.Nsys**2), dtype=np.complex128)
         vec_rho[0] = self.vec_rho0.copy()
@@ -119,13 +170,12 @@ class DynamicsGQME:
             vec_rho[i] = LA.expm(-1j*self.Liouv*(self.time_array[i]-self.time_array[i-1]))@vec_rho[i-1]
         return vec_rho
         
-    def cal_F(self):
+    def cal_F(self) -> Tuple[np.ndarray, np.ndarray]:
         """
-        get the time-derivative of the propagator
-        
-        Returns
-        -------
-        F, Fdot: the 1st and 2nd order time-derivative of the propagator
+        Compute the first and second order time derivatives of the propagator.
+
+        Returns:
+            Tuple[np.ndarray, np.ndarray]: F and Fdot matrices (each of shape (TIME_STEPS, N^2, N^2)).
         """
 
         F = np.zeros((self.TIME_STEPS, self.Nsys**2, self.Nsys**2), dtype=np.complex128)
@@ -155,9 +205,24 @@ class DynamicsGQME:
         return F,Fdot
     
         
-    def _CalculateIntegral(self, F, linearTerm, prevKernel, kernel):
+    def _CalculateIntegral(
+        self,
+        F: np.ndarray,
+        linearTerm: np.ndarray,
+        prevKernel: np.ndarray,
+        kernel: np.ndarray
+        ) -> np.ndarray:
         """
-        Function to Calculate Volterra Integral via Trapezoidal Rule
+        Compute the Volterra integral using the trapezoidal rule.
+
+        Args:
+            F (np.ndarray): Derivative of the propagator.
+            linearTerm (np.ndarray): Linear term from memory kernel equation.
+            prevKernel (np.ndarray): Kernel from previous iteration.
+            kernel (np.ndarray): Kernel to be updated.
+
+        Returns:
+            np.ndarray: Updated kernel.
         """
         
         # time step loop starts at 1 because K is equal to linear part at t = 0
@@ -180,9 +245,12 @@ class DynamicsGQME:
     
         return kernel
     
-    def get_memory_kernel(self):
+    def get_memory_kernel(self) -> np.ndarray:
         """
-        calculating the Memory kernel using volterra scheme
+        Compute the memory kernel using the Volterra scheme.
+
+        Returns:
+            np.ndarray: Memory kernel array (shape (TIME_STEPS, N^2, N^2)).
         """
         F,Fdot = self.cal_F()
         
@@ -240,9 +308,27 @@ class DynamicsGQME:
         return kernel
 
 
-    def PropagateRK4(self,currentTime, memTime, kernel,
-                 sigma_hold, sigma):
-
+    def PropagateRK4(
+        self,
+        currentTime: float,
+        memTime: float,
+        kernel: np.ndarray,
+        sigma_hold: np.ndarray,
+        sigma: np.ndarray
+        ) -> np.ndarray:
+        """
+        Perform one 4th-order Runge-Kutta (RK4) integration step for GQME.
+    
+        Args:
+            currentTime (float): Current time.
+            memTime (float): Memory time cutoff.
+            kernel (np.ndarray): Memory kernel array (shape (TIME_STEPS, N^2, N^2)).
+            sigma_hold (np.ndarray): Current vectorized reduced density matrix (N^2,).
+            sigma (np.ndarray): Array of vectorized reduced density matrix up to current time (TIME_STEPS, N^2).
+    
+        Returns:
+            np.ndarray: Updated vectorized reduced density matrix after one RK4 step (N^2,).
+        """
         f_0 = self._Calculatef(currentTime, memTime,
                          kernel, sigma, sigma_hold)
     
@@ -262,8 +348,27 @@ class DynamicsGQME:
     
         return sigma_hold
     
-    def _Calculatef(self,currentTime, memTime, kernel, sigma_array, kVec):
-    
+    def _Calculatef(
+                    self,
+                    currentTime: float,
+                    memTime: float,
+                    kernel: np.ndarray,
+                    sigma_array: np.ndarray,
+                    kVec: np.ndarray
+                ) -> np.ndarray:
+        """
+        Evaluate the time derivative in GQME.
+        
+        Args:
+            currentTime (float): Current time.
+            memTime (float): Memory time cutoff.
+            kernel (np.ndarray): Memory kernel (shape (TIME_STEPS, N^2, N^2)).
+            sigma_array (np.ndarray): History of vectorized system density matrix (TIME_STEPS, N^2).
+            kVec (np.ndarray): Vector to be evolved (N^2,).
+        
+        Returns:
+            np.ndarray: Time derivative vector f(t) (N^2,).
+        """
         memTimeSteps = int(memTime / self.DT)
         currentTimeStep = int(currentTime / self.DT)
     
@@ -280,9 +385,22 @@ class DynamicsGQME:
         return f_t
 
 
-    def solve_gqme(self, kernel, MEM_TIME, dtype = "Density"):
+    def solve_gqme(
+                self,
+                kernel: np.ndarray,
+                MEM_TIME: float,
+                dtype: str = "Density"
+            ) -> np.ndarray:
         """
-        solve the GQME through RK4
+        Solve the GQME using RK4 integration.
+    
+        Args:
+            kernel (np.ndarray): Memory kernel (shape (TIME_STEPS, N^2, N^2)).
+            MEM_TIME (float): Memory cutoff time.
+            dtype (str): Type of data to propagate: "Density" or "Propagator".
+    
+        Returns:
+            np.ndarray: Propagated state (shape depends on dtype).
         """
         
         if(dtype=="Density"):

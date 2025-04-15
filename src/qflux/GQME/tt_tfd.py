@@ -12,11 +12,19 @@ from .tdvp import tdvp1site
 import time
 
  
-def initial(istate):
-        
+def initial(istate: int) -> MPS:
     """
-    initialize the state in the tensor train format For TT-TFD calculation 
-    
+    Initialize the state in the tensor train format for TT-TFD calculation.
+
+    Args:
+        istate (int): The initial state type to be used:
+            - 0: Spin-Up state.
+            - 1: Equal superposition of spin-Up and spin-Down.
+            - 2: Superposition of spin-Up and 1j * spin-Down.
+            - 3: Spin-Down state.
+
+    Returns:
+        MPS: The initialized MPS object with the specified initial state.
     """
       
     #initial state 
@@ -55,14 +63,15 @@ def initial(istate):
     return y0
 
 
-def construct_Hamil(eps=1E-14):
+def construct_Hamil(eps: float = 1E-14) -> MPS:
     """
-    construct -iH for TT-TFD calculation, H is the effective Hamiltonian 
-    Spin-Boson model, Ohmic spectral density
-    
-    eps: the truncation precision for effective Hamiltonian
-    
-    Return: an MPO object. 
+    Construct the effective Hamiltonian -iH for TT-TFD calculation in the Spin-Boson model with an Ohmic spectral density.
+
+    Args:
+        eps (float, optional): The truncation precision for the effective Hamiltonian. Default is 1E-14.
+
+    Returns:
+        MPS: The MPO object representing the effective Hamiltonian.
     """
     
     om = pa.OMEGA_C / pa.DOF_N * (1 - np.exp(-pa.OMEGA_MAX/pa.OMEGA_C))
@@ -197,15 +206,16 @@ def construct_Hamil(eps=1E-14):
     return A
 
 
-def tt_eye(length,mode_dim):
+def tt_eye(length: int, mode_dim: int) -> MPS:
     """
-    generate Identity MPO (in the form of MPS) with rank-1.
+    Generate an identity MPO (in the form of MPS) with rank-1.
 
-    length: an INT number, specify the number of MPS nodes. 
-    mode_dim: an INT number, specify the size of physical index.
-    
-    Returns: MPS
-    -------
+    Args:
+        length (int): The number of MPS nodes.
+        mode_dim (int): The size of the physical index.
+
+    Returns:
+        MPS: The resulting MPS representation of the identity matrix.
     """
     
     nb_arr = np.ones(length,dtype=int)*mode_dim
@@ -218,13 +228,19 @@ def tt_eye(length,mode_dim):
     return y0
 
 
-def tt_matrix(array):
+def tt_matrix(array: np.ndarray) -> MPS:
     """
-    generate a tensor train (in the form of MPS) from the input array.
-    Now the array should be square matrix
+    Generate a tensor train (in the form of MPS) from the input array.
+    Now the input array should be a square matrix.
+
+    Args:
+        array (np.ndarray): A 2D square matrix to be converted into a tensor train.
+
+    Returns:
+        MPS: The resulting tensor train (MPS) representation of the input array.
     
-    Returns: MPS
-    -------
+    Raises:
+        SystemExit: If the input array is not square.
     """
     M, N = array.shape
     if(M!=N): 
@@ -236,19 +252,19 @@ def tt_matrix(array):
     
     return y0
 
-def tt_kron(mps1,mps2):
+def tt_kron(mps1: MPS, mps2: MPS) -> MPS:
     """
-    kron product of two MPS
+    Compute the Kronecker product of two MPS (Matrix Product States).
 
-    Parameters
-    ----------
-    mps1 : TYPE MPS
-    mps2 : TYPE MPS
+    This function combines two MPS objects into a new MPS which represents the Kronecker 
+    product of the two input MPS objects.
 
-    Returns
-    -------
-    New MPS which is the kron product of two MPS.
+    Args:
+        mps1 (MPS): The first Matrix Product State.
+        mps2 (MPS): The second Matrix Product State.
 
+    Returns:
+        MPS: A new MPS object which is the Kronecker product of mps1 and mps2.
     """
     new_length = mps1.length + mps2.length
     
@@ -265,15 +281,16 @@ def tt_kron(mps1,mps2):
         
     return new_mps
 
-def tt_ones(length,mode_dim):
+def tt_ones(length: int, mode_dim: int) -> MPS:
     """
-    generate MPS with rank-1, and all the elements are one.
+    Generate an MPS with rank-1, where all the elements are set to one.
 
-    length: an INT number specify the number of MPS nodes. 
-    mode_dim: an INT number specify the size of the physical index.
-    
-    Returns: MPS
-    -------
+    Args:
+        length (int): The number of MPS nodes (the length of the tensor chain).
+        mode_dim (int): The size of the physical index for each node in the MPS.
+
+    Returns:
+        MPS: The MPS object with the specified number of nodes, each having rank-1 and elements initialized to one.
     """
     
     nb_arr = np.ones(length,dtype=int)*mode_dim
@@ -285,16 +302,25 @@ def tt_ones(length,mode_dim):
 
     return y0
 
-def cal_property(mps0):
+def cal_property(mps0: MPS) -> np.ndarray:
     """
-    calculate the population and cohrerence for the spin-boson model
-    input: mps0, the wavefunction MPS
+    Calculate the population and coherence for the spin-boson model.
+
+    Args:
+        mps0 (MPS): The wavefunction MPS representing the state.
+
+    Returns:
+        np.ndarray: An array containing the population and coherence values.
     """
+    
+    # Initialize the sigma array to hold the results
     sigma_arr = np.zeros(pa.DOF_E_SQ,dtype=np.complex128)
     
+    # Define the spin-up and spin-down states
     su = pa.spin_up
     sd = pa.spin_down
     
+    # Create copies of the original MPS for the calculations
     mps_up = mps0.copy()
     mps_down = mps0.copy()
     
@@ -302,6 +328,7 @@ def cal_property(mps0):
     ur = np.array([[0,1],[0,0]])
     mps_ur = mps0.copy()
     
+    # Calculate the overlaps for population and coherence
     mps_up.nodes[0] = np.multiply(mps_up.nodes[0], su.reshape((1,-1,1)))
     mps_down.nodes[0] = np.multiply(mps_down.nodes[0], sd.reshape(1,-1,1))
     mps_ur.nodes[0] = (np.tensordot(ur, mps_ur.nodes[0],axes=((1),(1)))).transpose(1,0,2)
@@ -312,15 +339,22 @@ def cal_property(mps0):
     return sigma_arr
     
 
-def multiply_mps(mps1,mps2):
+def multiply_mps(mps1: MPS, mps2: MPS) -> MPS:
     """
-    performing element wise multiplication of two MPS
+    Perform element-wise multiplication of two MPS.
+
+    Args:
+        mps1 (MPS): The first MPS object.
+        mps2 (MPS): The second MPS object.
+
+    Returns:
+        MPS: A new MPS object resulting from the element-wise multiplication of the two MPS.
     """
     
     nlen1 = len(mps1.nodes)
     nlen2 = len(mps2.nodes)
     if(nlen1!=nlen2):
-        sys.exit('MPS length not matched! for multiply MPS')
+        raise ValueError('MPS lengths do not match! Unable to perform element-wise multiplication.')
     nb1 = mps1.nb
     nb2 = mps2.nb
     
@@ -328,7 +362,7 @@ def multiply_mps(mps1,mps2):
     
     for i in range(nlen1):
         if(nb1[i]!=nb2[i]):
-            sys.exit('MPS physical index not matched! for multiply MPS')
+            raise ValueError(f'Physical indices do not match for node {i}!')
         ra1,ra2,ra3 = mps1.nodes[i].shape
         rb1,rb2,rb3 = mps2.nodes[i].shape
         
@@ -339,18 +373,30 @@ def multiply_mps(mps1,mps2):
 
 
 
-def tt_tfd(initial_state, update_type='rk4', rk4slices = 1, mmax=4, RDO_arr_bench=None, show_steptime=False):
-
+def tt_tfd(
+    initial_state: int,
+    update_type: str = 'rk4',
+    rk4slices: int = 1,
+    mmax: int = 4,
+    RDO_arr_bench: np.ndarray = None,
+    show_steptime: bool = False
+    ) -> tuple[np.ndarray, np.ndarray]:
     """
-    Performing the TT-TFD calculation
+    Perform the TT-TFD calculation.
     
-    update_type: In TDVP calculations, the method for updating each core of the MPS. 
-                can be either 'rk4' or 'krylov'. can be 'rk4' or 'krylov'
-    rk4slices: the timeslices for update_type='rk4'
-    mmax: the size of Krylov subspace for update_type='krylov'
-    RDO_arr_bench: An array. If given, print the error of each step's calculation compared to the benchmark RDO_arr_bench.
-    show_steptime: if True, then show the time for each step. 
+    Args:
+        initial_state (int): The initial state of the system. This determines the starting state for the calculation.
+        update_type (str, optional): The method used for updating each core of the MPS. Can be either 'rk4' (Runge-Kutta 4th order) or 'krylov'. Default is 'rk4'.
+        rk4slices (int, optional): The number of time slices for 'rk4' method when performing the update. Default is 1.
+        mmax (int, optional): The size of the Krylov subspace when using the 'krylov' method. Default is 4.
+        RDO_arr_bench (np.ndarray, optional): If provided, the function will compare the calculated reduced density matrix (RDO) at each step with this benchmark array. Default is None.
+        show_steptime (bool, optional): If True, the function will print the time taken for each propagation step. Default is False.
     
+    Returns:
+        tuple[np.ndarray, np.ndarray]:
+            A tuple containing:
+            - A time array (`t`) representing the simulation times.
+            - The reduced density matrix (`RDO_arr`) over time.
     """
 
     y0 = initial(initial_state)
