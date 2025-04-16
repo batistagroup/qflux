@@ -1,83 +1,119 @@
 import numpy as np
 from . import params as pa
+from typing import List, Tuple
 
-def output_superoper_array(t,s_array,pre_name):
+def output_superoper_array(
+    time: List[float],
+    s_array: np.ndarray,
+    prefix: str
+    ) -> None:
+    """
+    Write the time-dependent superoperator array to disk.
 
-  Nlen = len(t)
-  for j in range(pa.DOF_E_SQ):
-    a = str(int(j/pa.DOF_E))
-    b = str(int(j%pa.DOF_E))
-    for k in range(pa.DOF_E_SQ):
-      c = str(int(k/pa.DOF_E))
-      d = str(int(k%pa.DOF_E))
+    Args:
+        time (List[float]): List of time values.
+        s_array (np.ndarray): Superoperator array (shape (T, N^2, N^2)).
+        prefix (str): Output file name prefix.
+    """
+    Nlen = len(time)
+    for j in range(pa.DOF_E_SQ):
+        a, b = divmod(j, pa.DOF_E)
+        for k in range(pa.DOF_E_SQ):
+            c, d = divmod(k, pa.DOF_E)
 
-      # outfileStr for super-operator
-      outfileStr = pre_name + a + b + c + d + pa.PARAM_STR + ".txt"
+            filename = f"{prefix}{a}{b}{c}{d}{pa.PARAM_STR}.txt"
+            with open(filename, "w") as f:
+                for i in range(Nlen):
+                    real_part = s_array[i, j, k].real
+                    imag_part = s_array[i, j, k].imag
+                    f.write(f"{time[i]}\t{real_part}\t{imag_part}\n")
 
-      f = open(outfileStr, "w")
 
-      for i in range(Nlen):
-          f.write("%s\t%s\t%s\n"%(float(t[i]), s_array[i][j][k].real, s_array[i][j][k].imag))
-      f.close()
-  return 0
+def read_superoper_array(
+    Nlen: int,
+    prefix: str
+    ) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Read the time-dependent superoperator array from disk.
 
-def read_superoper_array(Nlen, pre_name):
+    Args:
+        Nlen (int): Number of time steps.
+        prefix (str): Input file name prefix.
 
-    S_array_read = np.zeros((Nlen, pa.DOF_E_SQ, pa.DOF_E_SQ), dtype=np.complex128)
-    time = np.zeros((Nlen), dtype=np.float64)
+    Returns:
+        Tuple[np.ndarray, np.ndarray]: 
+            - time (array of shape (Nlen,))
+            - S_array (array of shape (Nlen, N^2, N^2))
+    """
+    S_array = np.zeros((Nlen, pa.DOF_E_SQ, pa.DOF_E_SQ), dtype=np.complex128)
+    time = np.zeros(Nlen, dtype=np.float64)
 
     for j in range(pa.DOF_E_SQ):
-        a = str(int(j/pa.DOF_E))
-        b = str(int(j%pa.DOF_E))
+        a, b = divmod(j, pa.DOF_E)
         for k in range(pa.DOF_E_SQ):
-            c = str(int(k/pa.DOF_E))
-            d = str(int(k%pa.DOF_E))
+            c, d = divmod(k, pa.DOF_E)
 
-            # opens and reads the super-operator file
-            time_read, Sreal, Simag = np.hsplit(
-                np.loadtxt(pre_name+"%s%s%s%s"%(a,b,c,d) + pa.PARAM_STR
-                               + ".txt"), 3)
+            filename = f"{prefix}{a}{b}{c}{d}{pa.PARAM_STR}.txt"
+            data = np.loadtxt(filename)
+            time_read, real_part, imag_part = np.hsplit(data, 3)
 
-            # stores values in variables and combines real and imag parts of super-operator
             for i in range(Nlen):
                 time[i] = time_read[i]
-                S_array_read[i][j][k] = Sreal[i] + 1.j * Simag[i]
+                S_array[i, j, k] = real_part[i] + 1j * imag_part[i]
 
-    return time,S_array_read
+    return time, S_array
 
-def output_operator_array(timeVec, sigma, pre_name):
+
+def output_operator_array(
+    time: List[float],
+    sigma: np.ndarray,
+    prefix: str
+    ) -> None:
+    """
+    Write the time-dependent vectorized operator array to disk.
+
+    Args:
+        time (List[float]): List of time values.
+        sigma (np.ndarray): Operator array (shape (T, N^2)).
+        prefix (str): Output file name prefix.
+    """
+    for j in range(pa.DOF_E_SQ):
+        a, b = divmod(j, pa.DOF_E)
+        filename = f"{prefix}{a}{b}{pa.PARAM_STR}.txt"
+        with open(filename, "w") as f:
+            for i in range(len(time)):
+                real_part = sigma[i, j].real
+                imag_part = sigma[i, j].imag
+                f.write(f"{time[i]}\t{real_part}\t{imag_part}\n")
+
+
+def read_operator_array(
+    Nlen: int,
+    prefix: str
+    ) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Read the time-dependent vectorized operator array from disk.
+
+    Args:
+        Nlen (int): Number of time steps.
+        prefix (str): Input file name prefix.
+
+    Returns:
+        Tuple[np.ndarray, np.ndarray]: 
+            - time (array of shape (Nlen,))
+            - O_array (array of shape (Nlen, N^2))
+    """
+    O_array = np.zeros((Nlen, pa.DOF_E_SQ), dtype=np.complex128)
+    time = np.zeros(Nlen, dtype=np.float64)
 
     for j in range(pa.DOF_E_SQ):
-        a = str(int(j/pa.DOF_E))
-        b = str(int(j%pa.DOF_E))
+        a, b = divmod(j, pa.DOF_E)
+        filename = f"{prefix}{a}{b}{pa.PARAM_STR}.txt"
+        data = np.loadtxt(filename)
+        time_read, real_part, imag_part = np.hsplit(data, 3)
 
-        # outfileStr for vectorize form of operator
-        outfileGQMEStr = pre_name + a + b 
-        outfileGQMEStr += pa.PARAM_STR + ".txt"
-
-        f = open(outfileGQMEStr, "w")
-
-        for i in range(len(timeVec)):
-            f.write("%s\t%s\t%s\n"%(timeVec[i], sigma[i][j].real, sigma[i][j].imag))
-        f.close()
-
-def read_operator_array(Nlen,pre_name):
-
-    O_array_read = np.zeros((Nlen, pa.DOF_E_SQ), dtype=np.complex128)
-    time = np.zeros((Nlen), dtype=np.float64)
-
-    for j in range(pa.DOF_E_SQ):
-        a = str(int(j/pa.DOF_E))
-        b = str(int(j%pa.DOF_E))
-
-        # opens and reads the operator file
-        time_read, Oreal, Oimag = np.hsplit(
-            np.loadtxt(pre_name+"%s%s"%(a,b) + pa.PARAM_STR
-                           + ".txt"), 3)
-
-        # stores values in variables and combines real and imag parts of U
         for i in range(Nlen):
             time[i] = time_read[i]
-            O_array_read[i][j] = Oreal[i] + 1.j * Oimag[i]
+            O_array[i, j] = real_part[i] + 1j * imag_part[i]
 
-    return time,O_array_read
+    return time, O_array
