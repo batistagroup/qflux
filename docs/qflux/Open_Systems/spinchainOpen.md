@@ -6,19 +6,17 @@ This documentation describes how to simulate the open quantum dynamics of a spin
 
 ## System Setup
 
-![Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  $Omega n$ is the energy required to flip the spin state at the particular polymer site $n$, and $J_{n, n+1}$ is the offsite couplings between spins at site $n$ and $n+1$.  The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate $\gamma$][qflux/images/Part_II/Lindbladian_radicals.png]
+![Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  $Omega n$ is the energy required to flip the spin state at the particular polymer site $n$, and $J_{n, n+1}$ is the offsite couplings between spins at site $n$ and $n+1$.  The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate $\gamma$][../images/Part_II/Lindbladian_radicals.png]
 
 
 We begin by specifying the system Hamiltonian and initial state for a chain of $n = 3$ spins, with the form
 
-$$
-H = \sum_{n=0}^{N-1} \Omega_n \sigma_n^z
+$$ H = \sum_{n=0}^{N-1} \Omega_n \sigma_n^z
 - \frac{1}{2} \sum_{n=0}^{N-2} \left(
 J_{n,n+1}^x \hat{\sigma}_n^x \hat{\sigma}_{n+1}^x
 + J_{n,n+1}^y \hat{\sigma}_n^y \hat{\sigma}_{n+1}^y
 + J_{n,n+1}^z \hat{\sigma}_n^z \hat{\sigma}_{n+1}^z
-\right)
-$$.
+\right) $$.
 
 The Hamiltonian is defined using a Pauli string representation and includes local $Z$-field terms and $XX$, $YY$, and $ZZ$ couplings, with cofficients given according to the table:
 
@@ -81,14 +79,12 @@ time_arr = np.linspace(0, (250 - 1) * 0.1, 250)
 
 Open quantum dynamics are modeled using the Lindblad master equation.
 
-$$
-\dot{\rho}(t) = -i [H, \rho(t)] 
+$$ \dot{\rho}(t) = -i [H, \rho(t)] 
 + \frac{1}{2} \sum_{m=1}^2 \sum_{n=0}^{N-1} \gamma_{m,n} \left[
 2 L_{m,n} \rho(t) L_{m,n}^{\dagger} 
 - \rho(t) L_{m,n}^{\dagger} L_{m,n}
 - L_{m,n}^{\dagger} L_{m,n} \rho(t)
-\right]
-$$
+\right] $$
 
 Here we construct collapse operators $L_i$ representing two types of dissipation:
 
@@ -176,7 +172,7 @@ plt.legend(loc = 'upper right')
 
 The comparison between matrix exponential, QuTiP Lindblad, and pure unitary evolution offers a benchmark for accuracy and computational cost.
 
-![Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation][qflux/images/Part_II/Spinchain_Classical_Dynamics.png]
+![Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation][../images/Part_II/Spinchain_Classical_Dynamics.png]
 
 ---
 
@@ -215,7 +211,7 @@ plt.legend(loc = 'upper right')
 
 This plot illustrates convergence of quantum simulation with classical reference as the number of measurement shots increases.
 
-![Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation][qflux/images/Part_II/Spinchain_Quantum_Dynamics.png]
+![Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation][../images/Part_II/Spinchain_Quantum_Dynamics.png]
 
 ---
 
