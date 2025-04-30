@@ -6,7 +6,28 @@ This documentation describes how to simulate the open quantum dynamics of a spin
 
 ## System Setup
 
-We begin by specifying the system Hamiltonian and initial state for a chain of $n = 3$ spins. The Hamiltonian is defined using a Pauli string representation and includes local $Z$-field terms and $XX$, $YY$, and $ZZ$ couplings.
+![Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  $Omega n$ is the energy required to flip the spin state at the particular polymer site $n$, and $J_{n, n+1}$ is the offsite couplings between spins at site $n$ and $n+1$.  The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate $\gamma$][qflux/images/Part_II/Lindbladian_radicals.png]
+
+
+We begin by specifying the system Hamiltonian and initial state for a chain of $n = 3$ spins, with the form
+
+$$
+H = \sum_{n=0}^{N-1} \Omega_n \sigma_n^z
+- \frac{1}{2} \sum_{n=0}^{N-2} \left(
+J_{n,n+1}^x \hat{\sigma}_n^x \hat{\sigma}_{n+1}^x
++ J_{n,n+1}^y \hat{\sigma}_n^y \hat{\sigma}_{n+1}^y
++ J_{n,n+1}^z \hat{\sigma}_n^z \hat{\sigma}_{n+1}^z
+\right)
+$$.
+
+The Hamiltonian is defined using a Pauli string representation and includes local $Z$-field terms and $XX$, $YY$, and $ZZ$ couplings, with cofficients given according to the table:
+
+| Parameter             | \( n = 0 \) | \( n \neq 0 \) |
+|-----------------------|-------------|----------------|
+| \( \Omega_n \)        | 0.65        | 1.0            |
+| \( J_{n,n+1}^x \)     | 0.75        | 1.0            |
+| \( J_{n,n+1}^y \)     | 0.75        | 1.0            |
+| \( J_{n,n+1}^z \)     | 0.0         | 0.0            |
 
 ```python
 import numpy as np
@@ -35,8 +56,12 @@ H_pauli_str = {'ZII':Omegai_list[0], 'IZI':Omegai_list[1], 'IIZ':Omegai_list[2],
 
 #system hamiltonian
 Hsys = tb.pauli_to_ham(H_pauli_str, 3)
+```
+
+The initial state is constructed as a product state $|\uparrow\downarrow\downarrow\cdots\rangle$, and its corresponding density matrix is stored in `rho0_sc`. The time evolution will be simulated over a grid defined in `time_arr`.
 
 
+```python
 #set up the initial state at [up,down,down...]
 init_state = pa.spin_up
 for i in range(nsite-1):
@@ -50,13 +75,22 @@ rho0_sc += np.outer(init_state,init_state.conj())
 time_arr = np.linspace(0, (250 - 1) * 0.1, 250)
 ```
 
-The initial state is constructed as a product state $|\uparrow\downarrow\downarrow\cdots\rangle$, and its corresponding density matrix is stored in `rho0_sc`. The time evolution will be simulated over a grid defined in `time_arr`.
-
 ---
 
 ## Collapse Operators (Lindblad Dissipators)
 
-Open quantum dynamics are modeled using the Lindblad master equation. Here we construct collapse operators $L_i$ representing two types of dissipation:
+Open quantum dynamics are modeled using the Lindblad master equation.
+
+$$
+\dot{\rho}(t) = -i [H, \rho(t)] 
++ \frac{1}{2} \sum_{m=1}^2 \sum_{n=0}^{N-1} \gamma_{m,n} \left[
+2 L_{m,n} \rho(t) L_{m,n}^{\dagger} 
+- \rho(t) L_{m,n}^{\dagger} L_{m,n}
+- L_{m,n}^{\dagger} L_{m,n} \rho(t)
+\right]
+$$
+
+Here we construct collapse operators $L_i$ representing two types of dissipation:
 
 - Type 1: Amplitude damping via $\sigma^-$
 - Type 2: Dephasing via $\sigma^+ \sigma^-$
@@ -142,6 +176,8 @@ plt.legend(loc = 'upper right')
 
 The comparison between matrix exponential, QuTiP Lindblad, and pure unitary evolution offers a benchmark for accuracy and computational cost.
 
+![Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation][qflux/images/Part_II/Spinchain_Classical_Dynamics.png]
+
 ---
 
 ## Quantum Simulation
@@ -179,14 +215,16 @@ plt.legend(loc = 'upper right')
 
 This plot illustrates convergence of quantum simulation with classical reference as the number of measurement shots increases.
 
+![Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation][qflux/images/Part_II/Spinchain_Quantum_Dynamics.png]
+
 ---
 
 ## Summary
 
-This example presents a flexible simulation pipeline for open quantum systems:
+This example presents a flexible simulation pipeline for open quantum systems, written in a basis of Pauli strings:
 
 - Supports classical (QuTiP, matrix exponential) and quantum (density matrix) backends
 - Compares open vs. closed evolution
 - Allows benchmarking between solver strategies
 
-The use of Lindbladian formalism and collapse operators enables modeling dissipative processes essential for realistic simulations of quantum hardware.
+The use of Lindbladian formalism and collapse operators enables modeling dissipative processes essential for realistic simulations of physical processes.
