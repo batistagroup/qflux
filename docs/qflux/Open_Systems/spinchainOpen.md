@@ -6,7 +6,7 @@ This documentation describes how to simulate the open quantum dynamics of a spin
 
 ## System Setup
 
-![Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  $Omega n$ is the energy required to flip the spin state at the particular polymer site $n$, and $J_{n, n+1}$ is the offsite couplings between spins at site $n$ and $n+1$.  The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate $\gamma$][../images/Part_II/Lindbladian_radicals.png]
+![Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  $Omega n$ is the energy required to flip the spin state at the particular polymer site $n$, and $J_{n, n+1}$ is the offsite couplings between spins at site $n$ and $n+1$.  The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate $\gamma$](../images/Part_II/Lindbladian_radicals.png)
 
 
 We begin by specifying the system Hamiltonian and initial state for a chain of $n = 3$ spins, with the form
@@ -172,7 +172,7 @@ plt.legend(loc = 'upper right')
 
 The comparison between matrix exponential, QuTiP Lindblad, and pure unitary evolution offers a benchmark for accuracy and computational cost.
 
-![Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation][../images/Part_II/Spinchain_Classical_Dynamics.png]
+![Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation](../images/Part_II/Spinchain_Classical_Dynamics.png)
 
 ---
 
@@ -211,7 +211,7 @@ plt.legend(loc = 'upper right')
 
 This plot illustrates convergence of quantum simulation with classical reference as the number of measurement shots increases.
 
-![Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation][../images/Part_II/Spinchain_Quantum_Dynamics.png]
+![Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation](../images/Part_II/Spinchain_Quantum_Dynamics.png)
 
 ---
 
