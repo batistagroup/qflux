@@ -11,21 +11,16 @@ This documentation describes how to simulate the open quantum dynamics of a spin
 
 We begin by specifying the system Hamiltonian and initial state for a chain of $n = 3$ spins, with the form
 
-$$ H = \sum_{n=0}^{N-1} \Omega_n \sigma_n^z
-- \frac{1}{2} \sum_{n=0}^{N-2} \left(
-J_{n,n+1}^x \hat{\sigma}_n^x \hat{\sigma}_{n+1}^x
-+ J_{n,n+1}^y \hat{\sigma}_n^y \hat{\sigma}_{n+1}^y
-+ J_{n,n+1}^z \hat{\sigma}_n^z \hat{\sigma}_{n+1}^z
-\right) $$.
+$$  H = \sum_{n=0}^{N-1} \Omega_{n} \sigma_{n}^{z} - \frac{1}{2} \sum_{n=0}^{N-2} ( J_{n,n+1}^{x} \sigma_{n}^{x} \sigma_{n+1}^{x} + J_{n,n+1}^{y} \sigma_{n}^{y} \sigma_{n+1}^{y} + J_{n,n+1}^{z} \sigma_{n}^{z} \sigma_{n+1}^{z} ) $$
 
 The Hamiltonian is defined using a Pauli string representation and includes local $Z$-field terms and $XX$, $YY$, and $ZZ$ couplings, with cofficients given according to the table:
 
-| Parameter             | \( n = 0 \) | \( n \neq 0 \) |
+| Parameter             |  $ n = 0 $  |  $ n \neq 0 $  |
 |-----------------------|-------------|----------------|
-| \( \Omega_n \)        | 0.65        | 1.0            |
-| \( J_{n,n+1}^x \)     | 0.75        | 1.0            |
-| \( J_{n,n+1}^y \)     | 0.75        | 1.0            |
-| \( J_{n,n+1}^z \)     | 0.0         | 0.0            |
+|  $ \Omega_n  $        | 0.65        | 1.0            |
+|  $ J_{n,n+1}^{x} $    | 0.75        | 1.0            |
+|  $ J_{n,n+1}^{y} $    | 0.75        | 1.0            |
+|  $ J_{n,n+1}^{z} $    | 0.0         | 0.0            |
 
 ```python
 import numpy as np
@@ -79,12 +74,7 @@ time_arr = np.linspace(0, (250 - 1) * 0.1, 250)
 
 Open quantum dynamics are modeled using the Lindblad master equation.
 
-$$ \dot{\rho}(t) = -i [H, \rho(t)] 
-+ \frac{1}{2} \sum_{m=1}^2 \sum_{n=0}^{N-1} \gamma_{m,n} \left[
-2 L_{m,n} \rho(t) L_{m,n}^{\dagger} 
-- \rho(t) L_{m,n}^{\dagger} L_{m,n}
-- L_{m,n}^{\dagger} L_{m,n} \rho(t)
-\right] $$
+$$ \dot{\rho}(t) = -i [H, \rho(t)] + \frac{1}{2} \sum_{m=1}^{2} \sum_{n=0}^{N-1} \gamma_{m,n} \left[ 2 L_{m,n} \rho(t) L_{m,n}^{\dagger} - \rho(t) L_{m,n}^{\dagger} L_{m,n} - L_{m,n}^{\dagger} L_{m,n} \rho(t) \right] $$
 
 Here we construct collapse operators $L_i$ representing two types of dissipation:
 
