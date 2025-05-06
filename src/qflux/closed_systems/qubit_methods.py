@@ -4,6 +4,7 @@ from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
 from qiskit.quantum_info.operators import Operator
 from qiskit.circuit.library import QFT, PauliEvolutionGate
 from qiskit_aer import Aer
+from qiskit.synthesis import LieTrotter
 import qiskit_aer
 import numpy as np
 import scipy.linalg as spLA
@@ -186,14 +187,25 @@ class QubitDynamicsCS(DynamicsCS):
         return
 
 
-    def _construct_pauli_gate(self):
-        '''
-        Function to construct a pauli evolution gate from Hamiltonian
-        '''
-        decomposed_H = decompose(self.H_op.full())
+    def _construct_pauli_gate(self, hamiltonian_matrix=None):
+        """
+            Function to construct a pauli evolution gate from Hamiltonian
+        
+            Args:
+                hamiltonian_matrix (npt.ArrayLike): array-like matrix representing the hamiltonian of interest
+                    If not provided, use the operator representation of the Hamiltonian by default.
+
+        """
+
+        if type(hamiltonian_matrix) == type(None):
+            decomposed_H = decompose(self.H_op.full())
+        else:
+            decomposed_H = decompose(hamiltonian_matrix)
         H_pauli_sum  = pauli_strings_2_pauli_sum(decomposed_H)
-        prop_pauli_H = PauliEvolutionGate(operator=H_pauli_sum, time=self.dt)
+        synthesizer  = LieTrotter(reps=2)
+        prop_pauli_H = PauliEvolutionGate(operator=H_pauli_sum, time=self.dt, synthesis=synthesizer)
         self.pauli_prop = prop_pauli_H
+        self._pauli_hamiltonian = decomposed_H
         return
 
     
@@ -201,14 +213,13 @@ class QubitDynamicsCS(DynamicsCS):
         q_reg = QuantumRegister(self.n_qubits)
         c_reg = ClassicalRegister(self.n_qubits)
         qc = QuantumCircuit(q_reg, c_reg)
-
         qc.initialize(psio, q_reg[:], normalize=True)
         qc.append(self.pauli_prop, q_reg)
         self.quantum_circuit = qc
         return(qc)
 
 
-    def propagate_qmatvec(self, backend=None, n_shots: int = 1024):
+    def propagate_qmatvec(self, backend=None, n_shots: int = 1024, hamiltonian_matrix=None, initial_state=None):
         """
             Function to propagate dynamics object with the qubit matvec method.
 
@@ -216,26 +227,34 @@ class QubitDynamicsCS(DynamicsCS):
                 backend (qiskit.Backend): qiskit backend object
                 n_shots (int): specifies the number of shots to use when
                     executing the circuit
+                hamiltonian_matrix (npt.ArrayLike): array-like matrix representing the Hamiltonian
+                    Used to construct the propagator:
 
+                    $$ U(t) = e^{- i H t / \hbar} $$ 
+
+                    By default, the operator representation of the hamiltonian `self.H_op` is used.
+                initial_state (npt.ArrayLike): array-like vector representing the initial state
             Example for using the Statevector Simulator backend:
                 >>> from qiskit_aer import Aer
                 >>> backend = Aer.get_backend('statevector_simulator')
                 >>> self.propagate_qSOFT(backend=backend)
         """
+
         # Create the Pauli propagator:
-        self._construct_pauli_gate()
+        self._construct_pauli_gate(hamiltonian_matrix=hamiltonian_matrix)
 
         q_reg = QuantumRegister(self.n_qubits)
         c_reg = ClassicalRegister(self.n_qubits)
         qc = QuantumCircuit(q_reg, c_reg)
-        # Initialize state:
-        qc.initialize(self.psio_op.full().flatten(), q_reg[:], normalize=True)
+        # Initialize State
+        if type(initial_state) == type(None):
+            qc.initialize(self.psio_op.full().flatten(), q_reg[:], normalize=True)
+        else:
+            qc.initialize(initial_state, q_reg[:], normalize=True)
         qc_result = self._execute_circuit(qc, backend=backend, shots=n_shots)
         psio_cirq = qc_result.result().get_statevector().data
         psi_in = psio_cirq
-        
         new_qubit_dynamics_result = [psio_cirq]
-
         for ii in trange(1, len(self.tlist)):
             circuit = self._construct_pauli_cirq(psio=psi_in)
             executed_circuit = self._execute_circuit(circuit, backend=backend, shots=n_shots)
@@ -244,3 +263,4 @@ class QubitDynamicsCS(DynamicsCS):
             psi_in = psi_out
         self.dynamics_results_qubit = np.asarray(new_qubit_dynamics_result)
         return
+
