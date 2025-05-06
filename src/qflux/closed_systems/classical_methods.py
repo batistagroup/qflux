@@ -365,6 +365,7 @@ class DynamicsCS:
 
         self.tlist = np.linspace(0., total_time, n_tsteps+1)
         self.dt = self.tlist[1] - self.tlist[0]
+        self.n_tsteps = n_tsteps
         return
 
 
@@ -390,7 +391,7 @@ class DynamicsCS:
         results = qt.sesolve(self.H_op, self.psio_op, self.tlist,
                              options=options)
 
-        self.dynamics_results_op = results
+        self.dynamics_results_op = results.states
         return
 
 
