@@ -120,7 +120,7 @@ def nested_kronecker_product(a):
 
 def Hilbert_Schmidt(mat1, mat2):
     'Return the Hilbert-Schmidt Inner Product of two matrices.'
-    return np.trace(mat1.conj().T * mat2)
+    return np.trace(mat1.conj().T @ mat2)
 
 
 def decompose(Ham_arr, tol=12, subset = None):
@@ -163,7 +163,7 @@ def decompose(Ham_arr, tol=12, subset = None):
         pauli_str = ''.join(sigma_combinations[ii])
 
         # Convert the Pauli string into a list of matrices
-        tmp_mat_list = vec_query(np.array(sigma_combinations[ii]), pms)
+        tmp_mat_list = vec_query(np.array(list(sigma_combinations[ii])), pms)
 
         # Evaluate the Kronecker product of the matrix array
         tmp_p_matrix = nested_kronecker_product(tmp_mat_list)
