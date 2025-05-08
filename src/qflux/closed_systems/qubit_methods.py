@@ -220,7 +220,7 @@ class QubitDynamicsCS(DynamicsCS):
 
 
     def propagate_qmatvec(self, backend=None, n_shots: int = 1024, hamiltonian_matrix=None, initial_state=None):
-        """
+        r"""
             Function to propagate dynamics object with the qubit matvec method.
 
             Args:
