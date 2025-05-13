@@ -18,4 +18,5 @@ Before we look at doing Quantum Dynamics on a quantum computer, we'll start out 
 - [Example: Quantum Harmonic Oscillator](qho_example.md)
 - [Example: Adenine-Thymine Base Pair](AT_basepair.md)
 - [Example: Spin Chain](spinchain.md)
+- [Example: Dynamics for an Arbitrary Hamiltonian](arbitrary_evo.md)
 - [API Documentation](cs_api.md)

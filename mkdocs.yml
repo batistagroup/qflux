@@ -67,6 +67,7 @@ nav: # Note: All paths must be relative to the docs dir
     - The Quantum Harmonic Oscillator: 'qflux/Closed_Systems/qho_example.md'
     - Adenine-Thymine Base Pair: 'qflux/Closed_Systems/AT_basepair.md'
     - Spin Chain Simulation: 'qflux/Closed_Systems/spinchain.md'
+    - Arbitrary Hamiltonian Dynamics: 'qflux/Closed_Systems/arbitrary_evo.md'
     - Source Code: 'qflux/Closed_Systems/cs_api.md'
   - Open Systems: 
     - 'qflux/Open_Systems/index.md'
