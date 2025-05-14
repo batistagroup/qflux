@@ -1,5 +1,5 @@
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
-from qiskit.compiler import transpile, assemble
+from qiskit.compiler import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
 from qiskit.quantum_info.operators import Operator
 from qiskit.circuit.library import QFT, PauliEvolutionGate
@@ -220,7 +220,7 @@ class QubitDynamicsCS(DynamicsCS):
 
 
     def propagate_qmatvec(self, backend=None, n_shots: int = 1024, hamiltonian_matrix=None, initial_state=None):
-        r"""
+        """
             Function to propagate dynamics object with the qubit matvec method.
 
             Args:

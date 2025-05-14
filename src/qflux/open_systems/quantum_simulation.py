@@ -4,7 +4,8 @@ from typing import List, Tuple, Optional, Dict, Any, Union
 
 from qiskit import transpile
 from qiskit_aer import AerSimulator
-from qiskit.primitives import Estimator
+#from qiskit.primitives import Estimator
+from qiskit_ibm_runtime import EstimatorV2 as Estimator
 from qiskit.quantum_info import SparsePauliOp
 from qiskit.circuit import QuantumCircuit
 
