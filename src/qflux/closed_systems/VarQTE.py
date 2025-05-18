@@ -257,7 +257,7 @@ def VarQRTE(n_reps_ansatz, hamiltonian, total_time=1.0, timestep=0.1, init_circ=
     all_params = [np.copy(initial_params)]
     my_params = np.copy(initial_params) # Reset Initial Parameters after each run
     for i in range(num_timesteps):
-        print(f"Simulating Time={str(timestep*(i+1))}    ", end="\r")
+        print(f"Simulating Time={str(timestep*(i+1))}                      ", end="\r")
         theta_dot = np.array([0.0 for j in range(len(my_params))])
         A = Measure_A(init_circ, my_params, hamiltonian.num_qubits, shots=shots, noisy=noisy)
         C = Measure_C(init_circ, my_params, hamiltonian, hamiltonian.num_qubits, shots=shots, evolution_type="real", noisy=noisy)
@@ -302,7 +302,7 @@ def VarQITE(n_reps_ansatz, hamiltonian, total_time, timestep, init_circ=None, sh
     
     my_params = np.copy(initial_params) # Reset Initial Parameters after each run
     for i in range(num_timesteps):
-        print(f"Timestep: {str(i*timestep)}    ", end="\r")
+        print(f"Timestep: {str(i*timestep)}                      ", end="\r")
         theta_dot = np.array([0.0 for j in range(len(my_params))])
         A = np.array(Measure_A(init_circ, my_params, hamiltonian.num_qubits, shots=shots, noisy=noisy))
         C = np.array(Measure_C(init_circ, my_params, hamiltonian, hamiltonian.num_qubits, shots=shots, noisy=noisy, evolution_type="imaginary"))
