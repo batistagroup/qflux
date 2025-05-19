@@ -1,30 +1,47 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# Configure the package directory (tell it that everything is in src/)
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project]
 name = "qflux"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.0.1"
+description = "qflux is a package for running quantum dynamics calculations on quantum devices."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
+    "requests",
+    "importlib-metadata",
     "qiskit>=2.0.0",
     "qiskit-aer>=0.17.0",
     "qiskit-algorithms>=0.3.1",
     "qiskit-ibm-runtime>=0.37.0",
     "tomli>=2.2.1",
+    "matplotlib>=3.10",
+    "numpy>=2.0",
+    "pylatexenc>=2.10",
+    "qutip>=5.0",
+    "scipy",
+    "tqdm"
 ]
-authors = [{ name = "Delmar Cabral", email = "delmar.azevedocabral@yale.edu" },
+authors = [
            { name = "Brandon Allen", email = "brandon.allen@yale.edu" },
+           { name = "Delmar Cabral", email = "delmar.azevedocabral@yale.edu" },
+           { name = "Alexander Soudackov", email = "alexander.soudackov@yale.edu"},
            { name = "Anton Morgunov", email = "anton@ischemist.com" }]
 license = { text = "MIT" }
+keywords = ["Quantum Computing", "chemistry", "quantum dynamics"]
 
 [project.urls]
 Homepage = "https://github.com/batistagroup/qflux"
 Issues = "https://github.com/batistagroup/qflux/issues"
-
-
-[tool.setuptools]
-packages = ["qflux"]
-package-dir = { "" = "src" }
-
+Documentation = "https://qflux.batistalab.com"
 
 [project.optional-dependencies]
 dev = [
@@ -40,6 +57,7 @@ dev = [
     "mkdocs-material>=9.6.4",
     "types-tqdm>=4.67.0.20241221",
 ]
+gqme = ["mpsqd"]
 
 [tool.mypy]
 strict = true
