@@ -7,9 +7,9 @@ Here, we present the general procedure for simulating open quantum system dynami
 An open system represents a system that interacts with its surrounding environment, and these interactions fundamentally affect the dynamics of the system. Due to the presence of the environment, the system’s evolution can no longer be described by the Schrödinger equation. For instance, while the Schrödinger equation describes unitary evolution with conserved system energy, open systems exhibit energy exchange with the environment, which can lead to gradual energy dissipation.
 
 Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schrödinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most general forms of a trace-preserving evolution equation is the Lindblad master equation, given by
-$$
-\frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamma_n\left[2L_n \rho(t)L_n^\dagger - \rho(t) L_n^\dagger L_n - L_n^\dagger L_n \rho(t)\right].
-$$
+
+$$ \frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamma_n\left[2L_n \rho(t)L_n^\dagger - \rho(t) L_n^\dagger L_n - L_n^\dagger L_n \rho(t)\right]. $$
+
 In this equation, here $\rho(t)$ is the reduced density matrix of the system, and $H$ represents the Hamiltonian of the system. The jump operators $L_n$ represent the environmental effects on the dynamics, with the rates $\gamma_n$ quantifying these effects.
 
 To numerically solve the Lindblad equation, `QFlux` adopts a matrix–vector multiplication approach. This method leverages commonly used Python packages such as `NumPy` and `SciPy`, and consists of three main steps:
@@ -20,27 +20,36 @@ To numerically solve the Lindblad equation, `QFlux` adopts a matrix–vector mul
 (i) Vectorizing the density matrix:
 
 The density matrix $\rho(t)$ of a system with an N-dimensional Hilbert space is an $N\times N$ matrix. For numerical purposes, it is reshaped into a vector of dimension $N^2$.
+
 $$\rho \to |\nu_{\rho} \rangle= \left[ \rho_{11}, \ldots, \rho_{1N}, \rho_{21}, \ldots, \rho_{2N}, \ldots, \rho_{N1}, \ldots, \rho_{NN} \right]^\top,$$
+
 Here the superscript ``$\top$'' represents a transpose operation.
 
 (ii) Converting the Lindblad equation into a matrix–vector form
 
 The Lindblad equation can be recasted into the equivalent matrix-vector form:
+
 $$\frac{\mathrm{d}|\nu_{\rho}(t) \rangle}{\mathrm{d}t} = -i H_{\mathrm{eff}} |\nu_{\rho}(t) \rangle\;\;,$$
+
 Where the effective Hamiltonian is $H_{\mathrm{eff}} = H_C + i H_D$, with $H_C$ and $H_D$ representing the $N^2 \times N^2$ matrix forms of the commutator and the Lindbladian dissipator, respectively:
-$$H_C = H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,$$
-$$H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
-    \right] ~~,$$
+
+$$ H_C = H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~, $$
+
+$$ H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
+    \right] ~~, $$
+
 Here, $L^*_{n}$ is the complex conjugate of $L_{n}$ and $\mathbb{I}$ is the identity matrix in the Hilbert space of the Hamiltonian $H$.
 
 (iii) Integrating the Lindblad equation
 
 The density matrix at time $t$ can be expressed
 as the action of the exponential of the matrix $-i H_{\mathrm{eff}}$ on the vectorized density matrix at $t=0$,
+
+$$ 
+| \nu_{\rho}(t)\rangle = \mathbf{G}(t)  
+    | \nu_{\rho}(0)\rangle . 
 $$
-    | \nu_{\rho}(t)\rangle = \mathbf{G}(t)  
-    | \nu_{\rho}(0)\rangle ~~.
-$$
+
 Where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$.
 
 
@@ -48,6 +57,7 @@ Where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)
 ## Solve the Lindblad equation
 
 As a reminder, the task at hand is compute the time evolution of the density matrix according to the Lindblad equation:
+
 $$
     | \nu_{\rho}(t)\rangle = \mathbf{G}(t)  
     | \nu_{\rho}(0)\rangle ~~.
@@ -87,6 +97,7 @@ rho0_1spin = np.outer(spin_up, spin_up.conj())
 ### Definition of the propagator
 
 The propagator $\mathbf{G}(t)$ is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$. Where the effective Hamiltonian is $H_{\mathrm{eff}} = H_C + i H_D$, with
+
 $$
     H_C = H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,\\
     H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
@@ -98,9 +109,11 @@ Given the system Hamiltonian $H$, the jump operators $L_n$, and their correspond
 The computation of $\mathbf{G}(t)$ is encapsulated within the `Gt_matrix_expo` function of the `DynamicsOS` class. The user only needs to provide $H$, $L_n$, and $\gamma_n$ during the initialization of the `DynamicsOS` class.
 
 Continuing with the spin-1/2 system as an example, we define the Hamiltonian as
+
 $$
 H = E_0 \sigma^z + \Delta \sigma^x,
 $$
+
 where $\sigma^z$ and $\sigma^x$ are Pauli matrices.
 
 
