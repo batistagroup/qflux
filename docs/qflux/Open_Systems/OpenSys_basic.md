@@ -73,15 +73,18 @@ To do this, we must:
 The initial state is the vectorized density matrix $| \nu_{\rho}(0)\rangle$. However, the `DynamicsOS` class in `qflux.open_system` automatically performs the vectorization, so the user only needs to define the initial density matrix $\rho(0)$ as an $N\times N$ array and pass it to the `DynamicsOS` class.
 
 As an example, consider a single spin-1/2 system. We define the spin-up and spin-down states as
-$$    
+
+$$  
 |\uparrow\rangle = |0\rangle = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \qquad
     |\downarrow\rangle = |1\rangle = \begin{bmatrix} 0 \\ 1 \end{bmatrix} ~~.
 $$
+
 This Hilbert space dimension of spin-1/2 is 2, so the initial density matrix $\rho(0)$ is a $2\times 2$ array.
 If the system is initially in the spin-up state, then
-\begin{equation}
+
+$$
 \rho(0) = |0\rangle\langle 0| .
-\end{equation}
+$$
 
 This can be defined in Python as:
 
@@ -99,7 +102,10 @@ rho0_1spin = np.outer(spin_up, spin_up.conj())
 The propagator $\mathbf{G}(t)$ is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$. Where the effective Hamiltonian is $H_{\mathrm{eff}} = H_C + i H_D$, with
 
 $$
-    H_C = H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,\\
+    H_C = H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,
+$$
+
+$$
     H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
     \right] ~~,
 $$
