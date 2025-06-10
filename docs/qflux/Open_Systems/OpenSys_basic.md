@@ -4,9 +4,9 @@ Here, we present the general procedure for simulating open quantum system dynami
 
 ## What is Open Quantum System?
 
-An open system represents a system that interacts with its surrounding environment, and these interactions fundamentally affect the dynamics of the system. Due to the presence of the environment, the system’s evolution can no longer be described by the Schr\"odinger equation. For instance, while the Schr\"odinger equation describes unitary evolution with conserved system energy, open systems exhibit energy exchange with the environment, which can lead to gradual energy dissipation.
+An open system represents a system that interacts with its surrounding environment, and these interactions fundamentally affect the dynamics of the system. Due to the presence of the environment, the system’s evolution can no longer be described by the Schrödinger equation. For instance, while the Schrödinger equation describes unitary evolution with conserved system energy, open systems exhibit energy exchange with the environment, which can lead to gradual energy dissipation.
 
-Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schr\"odinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most general forms of a trace-preserving evolution equation is the Lindblad master equation, given by
+Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schrödinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most general forms of a trace-preserving evolution equation is the Lindblad master equation, given by
 $$
 \frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamma_n\left[2L_n \rho(t)L_n^\dagger - \rho(t) L_n^\dagger L_n - L_n^\dagger L_n \rho(t)\right].
 $$
@@ -28,35 +28,30 @@ Here the superscript ``$\top$'' represents a transpose operation.
 The Lindblad equation can be recasted into the equivalent matrix-vector form:
 $$\frac{\mathrm{d}|\nu_{\rho}(t) \rangle}{\mathrm{d}t} = -i H_{\mathrm{eff}} |\nu_{\rho}(t) \rangle\;\;,$$
 Where the effective Hamiltonian is $H_{\mathrm{eff}} = H_C + i H_D$, with $H_C$ and $H_D$ representing the $N^2 \times N^2$ matrix forms of the commutator and the Lindbladian dissipator, respectively:
-\begin{equation}
-\begin{split}
-    H_C &= H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,\\
-    H_D &= \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
-    \right] ~~,
-\end{split}
-\end{equation}
+$$H_C = H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,$$
+$$H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
+    \right] ~~,$$
 Here, $L^*_{n}$ is the complex conjugate of $L_{n}$ and $\mathbb{I}$ is the identity matrix in the Hilbert space of the Hamiltonian $H$.
 
 (iii) Integrating the Lindblad equation
 
 The density matrix at time $t$ can be expressed
 as the action of the exponential of the matrix $-i H_{\mathrm{eff}}$ on the vectorized density matrix at $t=0$,
-\begin{equation}
+$$
     | \nu_{\rho}(t)\rangle = \mathbf{G}(t)  
     | \nu_{\rho}(0)\rangle ~~.
-\end{equation}
+$$
 Where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$.
-
 
 
 
 ## Solve the Lindblad equation
 
 As a reminder, the task at hand is compute the time evolution of the density matrix according to the Lindblad equation:
-\begin{equation}
+$$
     | \nu_{\rho}(t)\rangle = \mathbf{G}(t)  
     | \nu_{\rho}(0)\rangle ~~.
-\end{equation}
+$$
 
 To do this, we must:
 - Define the initial state $| \nu_{\rho}(0)\rangle$
@@ -68,10 +63,10 @@ To do this, we must:
 The initial state is the vectorized density matrix $| \nu_{\rho}(0)\rangle$. However, the `DynamicsOS` class in `qflux.open_system` automatically performs the vectorization, so the user only needs to define the initial density matrix $\rho(0)$ as an $N\times N$ array and pass it to the `DynamicsOS` class.
 
 As an example, consider a single spin-1/2 system. We define the spin-up and spin-down states as
-\begin{equation}
-    |\uparrow\rangle = |0\rangle = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \qquad
-    |\downarrow\rangle = |1\rangle = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
-\end{equation}
+$$    
+|\uparrow\rangle = |0\rangle = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \qquad
+    |\downarrow\rangle = |1\rangle = \begin{bmatrix} 0 \\ 1 \end{bmatrix} ~~.
+$$
 This Hilbert space dimension of spin-1/2 is 2, so the initial density matrix $\rho(0)$ is a $2\times 2$ array.
 If the system is initially in the spin-up state, then
 \begin{equation}
@@ -92,23 +87,20 @@ rho0_1spin = np.outer(spin_up, spin_up.conj())
 ### Definition of the propagator
 
 The propagator $\mathbf{G}(t)$ is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$. Where the effective Hamiltonian is $H_{\mathrm{eff}} = H_C + i H_D$, with
-\begin{equation}
-\begin{split}
-    H_C &= H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,\\
-    H_D &= \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
+$$
+    H_C = H \otimes \mathbb{I}-\mathbb{I} \otimes H^T ~~,\\
+    H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
     \right] ~~,
-\end{split}
-\end{equation}
-
+$$
 
 Given the system Hamiltonian $H$, the jump operators $L_n$, and their corresponding rates $\gamma_n$, the propagator $\mathbf{G}(t)$ is fully specified.
 
 The computation of $\mathbf{G}(t)$ is encapsulated within the `Gt_matrix_expo` function of the `DynamicsOS` class. The user only needs to provide $H$, $L_n$, and $\gamma_n$ during the initialization of the `DynamicsOS` class.
 
 Continuing with the spin-1/2 system as an example, we define the Hamiltonian as
-\begin{equation}
+$$
 H = E_0 \sigma^z + \Delta \sigma^x,
-\end{equation}
+$$
 where $\sigma^z$ and $\sigma^x$ are Pauli matrices.
 
 
@@ -125,7 +117,7 @@ Delta = 0.1 * np.pi * 2
 H_1spin = E0*Z + Delta*X
 ```
 
-Here we set $E_0 = 0, ∆ = 0.1 \times 2π$. In `qflux`, the jump operator $L_n$ and the damping rate $\gamma_n$ are combined into a collapse operator, defined as
+Here we set $E_0 = 0$, $∆ = 0.1 \times 2π$. In `qflux`, the jump operator $L_n$ and the damping rate $\gamma_n$ are combined into a collapse operator, defined as
 $C_n = \sqrt{\gamma_n}L_n$. This collapse operator is then passed to the `DynamicsOS`. For example, if only a single jump operator exist with $L = \sigma^x$ and $\gamma=0.05$, we have:
 
 
@@ -174,6 +166,7 @@ Note that in most cases, only the observable is of interest. Therefore, both `Is
 ```python
 expec_vals_qutip_Lindblad = spin1_dissipative.propagate_qt(time_arr=time_arr, observable=Z)
 ```
+    
 
 ## Quantum Simulation of the Lindblad Equation
 
@@ -212,6 +205,7 @@ spin1_quantum.set_count_str(['000','011'])
 #run the quantum simulation
 Pop_qc = spin1_quantum.qc_simulation_vecdens(time_arr)
 ```
+    
 
 One can verify that the quantum simulation results are consistent with the corresponding classical results.
 
@@ -225,6 +219,7 @@ plt.xlabel('time (ps)',fontsize=15)
 plt.ylabel('$P(t)$',fontsize=15)
 plt.legend(fontsize=10)
 ```
+
 
     
 ![png](OpenSys_basic_files/OpenSys_basic_33_1.png)
