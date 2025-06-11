@@ -260,7 +260,7 @@ class QubitDynamicsOS(DynamicsOS):
         print('Kraus operator generation complete')
 
         # Perform Qiskit simulation using the Estimator.
-        estimator = Estimator(backend=backend)
+        estimator = Estimator(mode=backend)
 
         statevec, prob = self.init_statevec_Kraus()
         n_inistate = len(statevec)
