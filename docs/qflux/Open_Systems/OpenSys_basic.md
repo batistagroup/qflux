@@ -12,7 +12,9 @@ $$ \frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamm
 
 In this equation, here $\rho(t)$ is the reduced density matrix of the system, and $H$ represents the Hamiltonian of the system. The jump operators $L_n$ represent the environmental effects on the dynamics, with the rates $\gamma_n$ quantifying these effects.
 
-To numerically solve the Lindblad equation, `QFlux` adopts a matrix–vector multiplication approach. This method leverages commonly used Python packages such as `NumPy` and `SciPy`, and consists of three main steps:
+The purpose of this tutorial is to demonstrate how to solve the Lindblad equation described above using `qflux`, both on classical and quantum computing platforms. To that end, we first introduce the general procedure for solving the equation, and then illustrate it with a spin-1/2 example to familiarize the reader with the basic usage of `qflux`.
+
+To numerically solve the Lindblad equation, `qflux` adopts a matrix–vector multiplication approach. This method leverages commonly used Python packages such as `NumPy` and `SciPy`, and consists of three main steps:
 - vectorizing the density matrix,
 - converting the Lindblad equation into a matrix–vector form
 - integrating the resulting equation to obtain the time evolution of the system.
@@ -200,7 +202,7 @@ spin1_quantum = QubitDynamicsOS(rep='Density', Nsys=2, Hsys=H_1spin, rho0=rho0_1
 
 The `QubitDynamicsOS` class in `qflux` performs quantum simulation of the Lindblad equation using `Qiskit` backends and interfaces. It provides a simplified interface for executing quantum simulations via `Qiskit`.
 
-By default, the backend is set to `Qiskit Aer`'s `AerSimulator`. The parameter rep can be either `'Density'` or `'Kraus'`, which determines how the density matrix is encoded into a quantum state vector. In this tutorial, we use the default option `'Density'`, which corresponds to vectorizing the density matrix.
+By default, the backend is set to `Qiskit Aer`'s `AerSimulator`. The parameter `rep` can be either `'Density'` or `'Kraus'`, which determines how the density matrix is encoded into a quantum state vector. In this tutorial, we use the default option `'Density'`, which corresponds to vectorizing the density matrix.
 
 Since open system dynamics are intrinsically non-unitary, and quantum circuits are built from unitary gates, a dilation approach is employed to represent non-unitary propagators within an enlarged Hilbert space using extra qubits. Various dilation methods have been developed, and the default method used here is `'Sz-Nagy'`.
 
