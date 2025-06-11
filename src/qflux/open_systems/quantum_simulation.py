@@ -217,6 +217,7 @@ class QubitDynamicsOS(DynamicsOS):
         time_arr: List[float],
         shots: int = 1024,
         Kraus: Optional[Dict[int, List[np.ndarray]]] = None,
+        backend: Any = AerSimulator(), 
         Gprop: Optional[List[np.ndarray]] = None,
         tolk: float = 1e-5,
         tolo: float = 1e-5,
@@ -234,6 +235,7 @@ class QubitDynamicsOS(DynamicsOS):
             shots (int, optional): Number of shots for each measurement. Defaults to 1024.
             Kraus (Optional[Dict[int, List[np.ndarray]]], optional): Dictionary mapping time step index to a list of Kraus operators.
                 If None, Kraus operators are generated from the propagator. Defaults to None.
+            backend (Any, optional): Quantum simulation backend. Defaults to AerSimulator().
             Gprop (Optional[List[np.ndarray]], optional): Propagator matrix (or list of matrices) for simulation.
                 If None, it will be calculated. Defaults to None.
             tolk (float, optional): Tolerance for generating Kraus operators. Defaults to 1e-5.
@@ -258,7 +260,7 @@ class QubitDynamicsOS(DynamicsOS):
         print('Kraus operator generation complete')
 
         # Perform Qiskit simulation using the Estimator.
-        estimator = Estimator()
+        estimator = Estimator(backend=backend)
 
         statevec, prob = self.init_statevec_Kraus()
         n_inistate = len(statevec)
