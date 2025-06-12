@@ -15,4 +15,5 @@ Before we look at doing Quantum Dynamics on a quantum computer, we'll start out 
 - [Basic of open system simulation](OpenSys_basic.md)
 - [Spin Chain Demo](spinchainOpen.md)
 - [Spin 1/2 Demo](spinhalfOpen.md)
+- [Double Well Demo](DoubleWellOpen.md)
 - [API Documentation](os_api.md)

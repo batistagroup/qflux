@@ -243,6 +243,6 @@ plt.legend(fontsize=10)
 
 
     
-![png](OpenSys_basic_files/OpenSys_basic_33_1.png)
+![png](../images/Part_II/OpenSys_basic_dyn.png)
     
 
