@@ -215,13 +215,13 @@ class QubitDynamicsOS(DynamicsOS):
     def qc_simulation_kraus(
         self,
         time_arr: List[float],
-        shots: int = 1024,
         Kraus: Optional[Dict[int, List[np.ndarray]]] = None,
+        backend: Any = AerSimulator(), 
         Gprop: Optional[List[np.ndarray]] = None,
         tolk: float = 1e-5,
         tolo: float = 1e-5,
         **kwargs: Any
-    ) -> np.ndarray:
+        ) -> np.ndarray:
         """
         Perform quantum simulation using the Kraus operator representation.
 
@@ -231,9 +231,10 @@ class QubitDynamicsOS(DynamicsOS):
 
         Args:
             time_arr (List[float]): List of time steps for simulation.
-            shots (int, optional): Number of shots for each measurement. Defaults to 1024.
+            
             Kraus (Optional[Dict[int, List[np.ndarray]]], optional): Dictionary mapping time step index to a list of Kraus operators.
                 If None, Kraus operators are generated from the propagator. Defaults to None.
+            backend (Any, optional): Quantum simulation backend. Defaults to AerSimulator().
             Gprop (Optional[List[np.ndarray]], optional): Propagator matrix (or list of matrices) for simulation.
                 If None, it will be calculated. Defaults to None.
             tolk (float, optional): Tolerance for generating Kraus operators. Defaults to 1e-5.
@@ -258,7 +259,7 @@ class QubitDynamicsOS(DynamicsOS):
         print('Kraus operator generation complete')
 
         # Perform Qiskit simulation using the Estimator.
-        estimator = Estimator()
+        estimator = Estimator(mode=backend)
 
         statevec, prob = self.init_statevec_Kraus()
         n_inistate = len(statevec)
@@ -278,8 +279,8 @@ class QubitDynamicsOS(DynamicsOS):
             for kraus_op in current_kraus_list:
                 for istate in range(n_inistate):
                     qc = self._create_circuit(kraus_op, statevec[istate], Isscale=False)
-                    result = estimator.run(qc, obs_q, shots=shots).result()
-                    result_simulation[i] += result.values[0] * prob[istate]
+                    result = estimator.run([(qc, obs_q)]).result()
+                    result_simulation[i] += result[0].data.evs * prob[istate]
 
         return result_simulation
 

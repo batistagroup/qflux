@@ -10,7 +10,7 @@ To do this, we must:
 
 - Define the initial state $\psi_{0}$. 
 - Define the Hamiltonian describing the system of interest.
-- Define a propgation time-step $t$ and the number of time steps $n$ for which we want to compute the evolved wavefunction. 
+- Define a propagation time-step $t$ and the number of time steps $n$ for which we want to compute the evolved wavefunction. 
 
 We will now look at how each of these steps can be done with qflux. 
 
@@ -106,7 +106,7 @@ For the custom Fock/ladder basis initialization, the custom function must return
 
 The next step for running our dynamics simulation is to define the Hamiltonian, which should describe the system of interest. For the coordinate basis, we assume that the Hamiltonian takes the form of: 
 
-$$ H = V(x) + \frac{p^{2}}{2 m} $$ 
+$$ H = \frac{p^{2}}{2 m} + V(x) $$ 
 
 where $V(x)$ describes the potential energy of our system. `qflux` provides some example systems out of the box, which we will now demonstrate how to use.
 
