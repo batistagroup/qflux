@@ -614,6 +614,8 @@
       
         
       
+        
+      
     
     
     
@@ -660,11 +662,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Open_Systems/open_systems/" class="md-nav__link">
+      <a href="../../Open_Systems/basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Tutorial
+    Open System Dynamics Overview
     
   </span>
   
@@ -709,6 +711,28 @@
   
   <span class="md-ellipsis">
     Spin 1/2 Demo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Open_Systems/DoubleWellOpen/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Double Well Demo
     
   </span>
   
@@ -1004,7 +1028,7 @@
 <ul>
 <li>Define the initial state <span class="arithmatex">\(\psi_{0}\)</span>. </li>
 <li>Define the Hamiltonian describing the system of interest.</li>
-<li>Define a propgation time-step <span class="arithmatex">\(t\)</span> and the number of time steps <span class="arithmatex">\(n\)</span> for which we want to compute the evolved wavefunction. </li>
+<li>Define a propagation time-step <span class="arithmatex">\(t\)</span> and the number of time steps <span class="arithmatex">\(n\)</span> for which we want to compute the evolved wavefunction. </li>
 </ul>
 <p>We will now look at how each of these steps can be done with qflux. </p>
 <h2 id="definition-of-the-initial-state">Definition of the Initial State</h2>
@@ -1065,7 +1089,7 @@
 <p>For the custom Fock/ladder basis initialization, the custom function must return a <code>qutip.Qobj</code>. </p>
 <h2 id="defining-the-hamiltonian">Defining the Hamiltonian</h2>
 <p>The next step for running our dynamics simulation is to define the Hamiltonian, which should describe the system of interest. For the coordinate basis, we assume that the Hamiltonian takes the form of: </p>
-<div class="arithmatex">\[ H = V(x) + \frac{p^{2}}{2 m} \]</div>
+<div class="arithmatex">\[ H = \frac{p^{2}}{2 m} + V(x) \]</div>
 <p>where <span class="arithmatex">\(V(x)\)</span> describes the potential energy of our system. <code>qflux</code> provides some example systems out of the box, which we will now demonstrate how to use.</p>
 <p>To use the built-in potential energy functions, all one must do is use the <code>.set_hamiltonian()</code> method. This method has the optional keyword argument <code>potential_type</code>, which can be used to choose one of the two currently implemented potentials:
 - Harmonic Oscillator Potential
