@@ -48,7 +48,7 @@ $$
 The parameter $\kappa$ characterizes the coupling strength between the system and the environment, while $n_{\mathrm{th}} = 1/(\exp(\hbar \omega/k_B T)-1)$ is the thermally averaged occupation number of the environmental harmonic oscillator at temperature $T$. We choose $\kappa = 1/10\, {\rm fs}^{-1}$ and $T=300 \, {\rm K}$  (corresponding to $n_{th} = 0.01$ a.u.).
 
 
-## set up the double well potential
+## Set Up the Double Well Potential
 
 We begin by defining the double-well potential $V(x)$. To simulate the system on a computer, the spatial coordinate $x$ is discretized onto a finite grid. The `DVR_grid` class in the `numerical_methods` module enables the discretization of continuous functions onto a discrete variable representation (DVR).
 
@@ -78,21 +78,24 @@ dw_grid.set_potential(pot_doublewell)
 The plot of the potential $V(x)$ is shown here:
 
 
-    
+
 ![png](../images/Part_II/Part2_doublewell_pot.png)
-    
+
 
 
 The population of the proton in the left (L) and right (R) wells can be characterized by the following expectation values:
+
 $$
 P_R = \langle \Theta(x - x^*) \rangle
 $$
+
 $$
-P_L = \langle 1 - \Theta(x - x^*) \rangle ,
+P_L = \langle 1 - \Theta(x - x^*) \rangle
 $$
+
 where $\langle A \rangle = {\rm Tr}[A \rho]$ for a given operator $A$, $\Theta (x)$ is the Heaviside function and $x^*$ defines the dividing surface between the left and right wells. Here, $x^* =0.37321768$ a.u. corresponds to the position at the top of the barrier.
 
-## the eigen state of the double-well system
+## Visualize the Eigenstates of the Potential
 
 We can diagonalize the double-well system Hamiltonian $H$ to obtain its eigenstates:
 
@@ -109,11 +112,11 @@ eneg_DW,psi_DW = dw_grid.get_eig_state(Neig)
 
 We can visualize the potential energy surface along with the energy levels and spatial distributions of the lowest 12 eigenstates.
 
-    
-![png](../images/Part_II/Part2_doublewell_eigstate.png)
-    
 
-## Express the double well in terms of eigenstate basis
+![png](../images/Part_II/Part2_doublewell_eigstate.png)
+
+
+## Express the Double Well in the Basis of Eigenstates
 
 Due to the large size of the density matrix in the DVR representation, we perform a basis transformation. Specifically, we use the previously computed eigenstates as a reduced basis set for subsequent calculations and express all operators and observables in this eigenstate basis.
 
@@ -144,7 +147,7 @@ P_R_eig = tb.trans_basis_diag(P_R, Neig, psi_DW)*dw_grid.dx
 P_L_eig = tb.trans_basis_diag(P_L, Neig, psi_DW)*dw_grid.dx
 ```
 
-## set up the initial state
+## Set Up the Initial State
 
 We set the initial state to the eigenstate $|\phi_6\rangle$, which is the first eigenstate localized in the right well:
 
@@ -160,9 +163,9 @@ ini_occu[5] = 1.0
 rho0 = np.outer(ini_occu,ini_occu.conj())
 ```
 
-## Classical simulation
+## Classical Simulation
 
-Following a similar procedure as outlined in [Basic of open system simulation](OpenSys_basic.md), we use the predefined initial state, system Hamiltonian, collapse operators, and observables to instantiate the `DynamicsOS` class. We then perform long-time evolution using the `propagate_matrix_exp` method.
+Following a similar procedure as outlined in [Basics of open system simulation](basics.md), we use the predefined initial state, system Hamiltonian, collapse operators, and observables to instantiate the `DynamicsOS` class. We then perform long-time evolution using the `propagate_matrix_exp` method.
 
 
 ```python
@@ -185,14 +188,14 @@ result_dw_l = dw_eig.propagate_matrix_exp(time_long, observable, Is_store_state 
 
 We can visualize the population in the right well as a function of time:
 
-    
+
 ![png](../images/Part_II/Part2_doublewell_classicaldyn.png)
-    
+
 
 
 We can also visualize the time evolution of the proton's probability distribution over the double-well potential:
 
-<video controls src="./double_well_open_evolution.mp4"></video>
+<video controls src="../../images/Part_II/double_well_open_evolution.mp4"></video>
 
 ## Quantum Simulation
 
@@ -205,10 +208,10 @@ $$
 
 where $M_i(t)$ are the Kraus operators ($N\times N$ matrix) that describe the evolution of the system. These Kraus operators define a mapping from $\rho(0)$ to $\rho(t)$. This approach avoids the need to vectorize the density matrix and instead evolves a state vector directly in the system's original $N$-dimensional Hilbert space.
 
-With the initial density matrix writtern as $\rho(0)  = \sum_n p_n(0) |\psi_n (0)\rangle \langle \psi_n (0)|$ (in our example, $\rho(0) = |\phi_6\rangle \langle \phi_6| $), we have
+With the initial density matrix written as $\rho(0)  = \sum_n p_n(0) |\psi_n (0)\rangle \langle \psi_n (0)|$ (in our example, $\rho (0) = | \phi_{6} \rangle \langle \phi_{6} |$ ), we have
 
 $$
-    \rho(t) = \sum_{in} p_n(0) |\psi_n (0)\rangle \langle \psi_n (0)| \;\;,
+    \rho(t) = \sum_{in} p_n(0) |\psi_n (0)\rangle \langle \psi_n (0)| \;\;
 $$
 
 where
@@ -222,13 +225,14 @@ is the state obtained by applying the Kraus operator $M_i(t)$ to the initial sta
 
 Quantum simulation can be carried out through the following steps:
 
-- Initialize the quantum qubits' statevector to $|\psi_n (0)\rangle$.
+- Initialize the qubit statevector to $|\psi_n (0)\rangle$.
 
 - Construct Kraus operators $M_i(t)$ and the corresponding quantum gates $\mathbf{U}_{M_i}(t)$. For non-unitary $M_i(t)$, `qflux` provides a dilation method (default: Sz.-Nagy) to implement the operation within an enlarged Hilbert space.
 
 - Execute the quantum circuits to obtain $|\psi^i_n(t)\rangle$ for each Kraus path, and reconstruct the density matrix from all resulting trajectories $|\psi^i_n(t)\rangle$.
 
 For the observable $P_R (t)$, we have:
+
 $$
 \begin{aligned}
     P_R(t) &= \mathrm{Tr}[\rho(t) \hat{P}_R] \\
@@ -236,6 +240,7 @@ $$
            &= \sum_i \langle \psi_i(t) | \hat{P}_R | \psi_i(t) \rangle,
 \end{aligned}
 $$
+
 which means that in quantum simulation, one simply needs to measure the expectation value of $\hat{P}_R$  with respect to each $|\psi^i_n(t)\rangle$, and then sum over all results to obtain $P_R (t)$.
 
 `qflux` provides quantum circuit simulation based on the Kraus operator representation. To enable this, one simply needs to set `rep='Kraus'` when instantiating the `QubitDynamicsOS` class.
@@ -269,7 +274,5 @@ P_dw_qc = dw_quantum.qc_simulation_kraus(time_qdw, Gprop = Gprop_dw, tolk = 1E-2
 
 One can visualize $P_R(t)$ after the simulation is complete:
 
-    
-![png](../images/Part_II/Part2_doublewell_Krausq.png)
-    
 
+![png](../images/Part_II/Part2_doublewell_Krausq.png)

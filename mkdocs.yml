@@ -71,7 +71,7 @@ nav: # Note: All paths must be relative to the docs dir
     - Source Code: 'qflux/Closed_Systems/cs_api.md'
   - Open Systems: 
     - 'qflux/Open_Systems/index.md'
-    - Basic of open system simulation: 'qflux/Open_Systems/OpenSys_basic.md'
+    - Open System Dynamics Overview: 'qflux/Open_Systems/basics.md'
     - Spin Chain Demo: 'qflux/Open_Systems/spinchainOpen.md'
     - Spin 1/2 Demo: 'qflux/Open_Systems/spinhalfOpen.md'
     - Double Well Demo: 'qflux/Open_Systems/DoubleWellOpen.md'
