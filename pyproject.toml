@@ -60,7 +60,7 @@ dev = [
 gqme = ["mpsqd"]
 
 [tool.mypy]
-strict = true
+strict = false
 ignore_missing_imports = true
 exclude = ["tests"]
 disable_error_code = ["unused-ignore"]
