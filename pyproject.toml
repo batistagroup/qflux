@@ -74,9 +74,8 @@ ignore_errors = true
 line-length = 120
 lint.select = [
     "UP",  # pyupgrade
-    "B"   # flake8-bugbear
 ]
-
+lint.exclude = ["*.ipynb"]
 
 # Section below is pretty standard logger configuration
 

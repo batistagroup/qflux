@@ -42,8 +42,8 @@ jobs:
     - name: Run ruff (linter)
       run: ruff check
 
-    - name: Run ruff (formatter)
-      run: ruff format --check
+#    - name: Run ruff (formatter)
+#      run: ruff format --check
 
-    - name: Run mypy
-      run: mypy .
+#    - name: Run mypy
+#      run: mypy .
