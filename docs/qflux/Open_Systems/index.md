@@ -12,7 +12,8 @@ First, we will provide some conceptual explanations that provide the user with a
 
 Before we look at doing Quantum Dynamics on a quantum computer, we'll start out by looking at some ways that we can do quantum dynamics on a classical computer! This is an important step as it will familiarize you with the general ingredients of a quantum dynamics simulation and will also provide us with a means of validating the results obtained from a quantum computer.
 
-- [Tutorial](open_systems.md)
+- [Open System Dynamics Overview](basics.md)
 - [Spin Chain Demo](spinchainOpen.md)
 - [Spin 1/2 Demo](spinhalfOpen.md)
+- [Double Well Demo](DoubleWellOpen.md)
 - [API Documentation](os_api.md)

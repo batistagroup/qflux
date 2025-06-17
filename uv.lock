@@ -1715,7 +1715,7 @@ wheels = [
 
 [[package]]
 name = "qflux"
-version = "0.1.3"
+version = "0.0.1"
 source = { editable = "." }
 dependencies = [
     { name = "importlib-metadata" },
