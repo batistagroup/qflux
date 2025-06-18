@@ -6,7 +6,7 @@ Here, we present the general procedure for simulating open quantum system dynami
 
 An open system represents a system that interacts with its surrounding environment, and these interactions fundamentally affect the dynamics of the system. Due to the presence of the environment, the system’s evolution can no longer be described by the Schrödinger equation. For instance, while the Schrödinger equation describes unitary evolution with conserved system energy, open systems exhibit energy exchange with the environment, which can lead to gradual energy dissipation.
 
-Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schrödinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most general forms of a trace-preserving evolution equation is the Lindblad master equation, given by
+Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schrödinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most popular forms of a trace-preserving evolution equation is the Lindblad master equation, given by
 
 $$ \frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamma_n\left[2L_n \rho(t)L_n^\dagger - \rho(t) L_n^\dagger L_n - L_n^\dagger L_n \rho(t)\right] $$
 
@@ -52,7 +52,7 @@ $$
     | \nu_{\rho}(0)\rangle
 $$
 
-where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t} $.
+where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$.
 
 
 
