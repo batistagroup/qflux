@@ -197,6 +197,9 @@ We can also visualize the time evolution of the proton's probability distributio
 ## Quantum Simulation
 
 Using the `QubitDynamicsOS` class from the `qflux.open_systems.quantum_simulation` module, `qflux` enables quantum simulation of the Lindblad equation. When the system has a Hilbert space dimension of $N=32$, the vectorized density matrix becomes a state vector of dimension $N^2$, and the corresponding propagator is of size $N^2 \times N^2$. For such large-dimensional systems, we can utilize the Kraus operator representation to evolve the system dynamics.
+
+Therefore, compared to the approach used in the [Basic of open system simulation example](./OpenSys_basic.md)—where quantum circuits are constructed based on the full propagator—the Kraus operator representation reduces the number of required qubits from $log_{2}N^2$ to $log_2 N$. However, the trade-off is that multiple circuits (corresponding to multiple Kraus operators) must be executed.
+
 The Kraus operator representation is defined as:
 
 $$
@@ -224,7 +227,7 @@ Quantum simulation can be carried out through the following steps:
 
 - Initialize the quantum qubits' statevector to $|\psi_n (0)\rangle$.
 
-- Construct Kraus operators $M_i(t)$ and the corresponding quantum gates $\mathbf{U}_{M_i}(t)$. For non-unitary $M_i(t)$, `qflux` provides a dilation method (default: Sz.-Nagy) to implement the operation within an enlarged Hilbert space.
+- Construct Kraus operators $M_i(t)$ and the corresponding quantum gates $\mathbf{U}_{M_i}(t)$. For non-unitary $M_i(t)$, `qflux` provides a dilation method (default: `'Sz.-Nagy'`) to implement the operation within an enlarged Hilbert space.
 
 - Execute the quantum circuits to obtain $|\psi^i_n(t)\rangle$ for each Kraus path, and reconstruct the density matrix from all resulting trajectories $|\psi^i_n(t)\rangle$.
 
@@ -240,7 +243,11 @@ which means that in quantum simulation, one simply needs to measure the expectat
 
 `qflux` provides quantum circuit simulation based on the Kraus operator representation. To enable this, one simply needs to set `rep='Kraus'` when instantiating the `QubitDynamicsOS` class.
 
-The `qc_simulation_kraus` function can then be used to simulate the Lindblad dynamics using the Kraus operator representation. This function first computes the propagator (unless it is provided as input), and then derives the corresponding set of Kraus operators using a specified tolerance parameter `tolk`. Once the Kraus operators are obtained, `qc_simulation_kraus` performs the quantum simulation and evaluates the observable of interest — in this case,  $\hat{P}_R$:
+The `qc_simulation_kraus` function can then be used to simulate the Lindblad dynamics using the Kraus operator representation. 
+
+This function first computes the propagator (unless it is provided as input), and then calls the [`gen_Kraus_list`](../../../src/qflux/open_systems/quantum_simulation.py) method to construct the corresponding set of Kraus operators from the propagator, using methods described in [this paper](https://doi.org/10.1063/1.1518555) and [this paper](https://doi.org/10.1021/acsomega.3c09720), with a specified tolerance parameter `tolk`. 
+
+Once the Kraus operators are obtained, `qc_simulation_kraus` performs the quantum simulation and evaluates the observable of interest — in this case,  $\hat{P}_R$:
 
 
 ```python
