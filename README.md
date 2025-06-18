@@ -21,7 +21,13 @@ This repository contains various protocols for performing quantum dynamics simul
 
 ## Getting Started <a name="start"></a>
 
-Simply select a notebook and execute them locally or in google collab. Necessary dependencies will be installed using `pip`.
+`qflux` can be installed via `pip`: 
+
+```bash
+pip install qflux
+```
+
+To get started, one can simply select a notebook and execute them locally or in google collab. Necessary dependencies will be installed using `pip`.
 
 If using uv through the commandline, use the following syntax to create and activate a virtual environment:
 

@@ -6,7 +6,9 @@ Here, we present the general procedure for simulating open quantum system dynami
 
 An open system represents a system that interacts with its surrounding environment, and these interactions fundamentally affect the dynamics of the system. Due to the presence of the environment, the system’s evolution can no longer be described by the Schrödinger equation. For instance, while the Schrödinger equation describes unitary evolution with conserved system energy, open systems exhibit energy exchange with the environment, which can lead to gradual energy dissipation.
 
+
 Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schrödinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most popular forms of a trace-preserving evolution equation is [the Lindblad master equation](https://doi.org/10.1063/1.5115323), given by
+
 
 $$ \frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamma_n\left[2L_n \rho(t)L_n^\dagger - \rho(t) L_n^\dagger L_n - L_n^\dagger L_n \rho(t)\right] $$
 
@@ -24,6 +26,7 @@ To numerically solve the Lindblad equation, `qflux` adopts a matrix–vector mul
 The density matrix $\rho(t)$ of a system with an N-dimensional Hilbert space is an $N\times N$ matrix. For numerical purposes, it is reshaped into a vector of dimension $N^2$.
 
 $$\rho \to |\nu_{\rho} \rangle= \left[ \rho_{11}, \ldots, \rho_{1N}, \rho_{21}, \ldots, \rho_{2N}, \ldots, \rho_{N1}, \ldots, \rho_{NN} \right]^\top$$
+
 
 Here the superscript "$\top$" represents a transpose operation. This is equivalent to working in Liouville space, where operators are represented as vectors and superoperators act as matrices.
 
@@ -52,7 +55,9 @@ $$
     | \nu_{\rho}(0)\rangle
 $$
 
+
 where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$.
+
 
 
 
@@ -72,6 +77,7 @@ To do this, we must:
 - Define the propagator $\mathbf{G}(t)$ describing the time-evolution.
 
 - Define a propagation time-step and the number of time steps for which we want to compute the evolved density matrix.
+
 
 We now describe in detail how to solve the Lindblad equation using the [`DynamicsOS` class](./os_api.md) from the `qflux.open_systems` module.
 
@@ -196,7 +202,9 @@ expec_vals_qutip_Lindblad = spin1_dissipative.propagate_qt(time_arr=time_arr, ob
 
 ## Quantum Simulation of the Lindblad Equation
 
+
 Using the [`QubitDynamicsOS` class](./os_api.md) from the `qflux.open_systems.quantum_simulation` module, `qflux` enables quantum simulation of the Lindblad equation. The procedure closely parallels the classical simulation workflow: first, define the initial state, system Hamiltonian, and collapse operators, and then instantiate a `QubitDynamicsOS` object accordingly.
+
 
 
 ```python
