@@ -20,14 +20,13 @@ If you're new to open-source or QFlux, welcome! You're encouraged to start by:
 
 ## Getting Started
 
-### Requirements
+The general procedure for contributing to `QFlux` is: 
 
-QFlux uses [uv](https://github.com/astral-sh/uv) for dependency management. You will need:
-
-* Python ≥3.10
-* [uv](https://github.com/astral-sh/uv): Install with `pip install uv`
-* [mkdocs](https://www.mkdocs.org/) for documentation
-* [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) theme
+1. Clone the repository.
+2. Install dependencies.
+3. Create a branch.
+4. Add your edits/modifications.
+5. Create a pull request.
 
 ### Clone the repository
 
@@ -35,6 +34,43 @@ QFlux uses [uv](https://github.com/astral-sh/uv) for dependency management. You 
 git clone git@github.com:batistagroup/qflux.git
 cd qflux
 ```
+
+### Requirements
+
+QFlux uses [uv](https://github.com/astral-sh/uv) for dependency management. You will need:
+
+* Python ≥3.10
+* [uv](https://github.com/astral-sh/uv): Install with `pip install uv`
+* [mkdocs](https://www.mkdocs.org/) for documentation
+* [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) documentation theme
+
+All dependencies can be installed with the following steps (assuming you have already cloned the github repository and are within the main `qflux` directory): 
+
+1. Install `uv`:
+
+```bash
+pip install uv
+```
+
+2. Create a virtual environment:
+
+```bash
+uv venv
+```
+
+3. Activate the virtual environment:
+
+```bash
+source .venv/bin/activate
+```
+
+4. Install dependencies:
+
+```bash
+uv  pip install -e ".[dev]"
+```
+
+You should now have a proper environment with all necessary dependencies! 
 
 ### Project structure
 
@@ -85,22 +121,24 @@ qflux/
 
 ### Documentation Updates
 
+In this section, we will provide a general workflow for updating the documentation. We will first emphasize an important consideration prior to editing the docs. You should navigate to the directory for the module that you want to edit the documentation for. In order to determine the "routing" for these markdown files, you should consult the `mkdocs` configuration file in the top-level `qflux/` directory, named `mkdocs.yml`. In this file, you'll see a `nav:` section which  specifies the pages/routing for the documentation website. Individual pages are specified as key-value pairs where the key specifies the page title and the  value specifies the corresponding markdown file that the page is constructed from. 
+
 1. Make a docs-related branch:
 
    ```bash
    git checkout -b docs/pII_open_systems_spinchain
    ```
-2. Edit the relevant markdown file in the `docs/` directory:
+2. Edit the relevant markdown file in the `docs/` directory. Within the `docs/` directory, we are only concerned with the `docs/qflux/`, which contains separate directories for each module, as well as a global `images/` directory. 
 
    ```bash
    vim docs/qflux/Open_Systems/spin_chain.md
    ```
-3. Preview the documentation to ensure all markdown is correctly rendered under mkdocs:
+3. Preview the documentation to ensure all markdown is correctly rendered within `mkdocs`. You can create a live preview server to see your changes as you edit by running:
 
    ```bash
    mkdocs serve
    ```
-4. If a new page, ensure it is added to the navigation of `qflux/mkdocs.yml`:
+4. If a new page, ensure it is added to the navigation section of `qflux/mkdocs.yml`:
    ```yml
    nav: # Note: All paths must be relative to the docs dir
      - Open Systems:
@@ -114,7 +152,7 @@ qflux/
    git push
    ```
 
-> 📌 All documentation should be concise and **not a copy-paste of manuscripts or tutorials**. Use clear markdown formatting. For ease of editing, use VSCode, jupyter nobeooks or vim with mkdocs serve.
+> 📌 All documentation should be concise and **not a copy-paste of manuscripts or tutorials**. Use clear markdown formatting. For ease of editing, you can use your favorite markdown editor, IDE, or Jupyter Notebooks to write your initial markdown and then refine/ensure everything renders properly by using your favorite text-editor with the live interactive preview server created via `mkdocs serve`.
 
 ---
 
