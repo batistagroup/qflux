@@ -64,10 +64,10 @@ uv venv
 source .venv/bin/activate
 ```
 
-4. Install dependencies:
+4. Install dependencies, including those necessary for development:
 
 ```bash
-uv  pip install -e ".[dev]"
+uv pip install -e ".[dev]"
 ```
 
 You should now have a proper environment with all necessary dependencies! 
@@ -103,6 +103,8 @@ qflux/
 
 ## Make Changes
 
+All changes and additions to the QFlux code and documentation will follow the [MIT License](https://github.com/batistagroup/qflux/blob/master/LICENSE) for the repository.
+
 ### New Feature
 
 1. Create a feature branch:
@@ -112,7 +114,12 @@ qflux/
    ```
 2. Implement your code under a relevant submodule of `src/qflux/`.
 3. Add or update relevant tests in `tests/`.
-4. Ensure the test suite passes:
+4. Add or update relevant `[package_name]` dependencies through `uv`:
+
+```bash
+uv add package_name
+```
+5. Ensure the test suite passes:
 
    ```bash
    uv pip install -r requirements-dev.txt

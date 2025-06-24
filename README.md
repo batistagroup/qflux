@@ -66,7 +66,7 @@ https://qflux.batistalab.com/
 
 ### Contribution Guidelines <a name="contribute"></a>
 
-To contribute to the repository, follow the procedure outlined in the [Contribution Guidelines](https://github.com/batistagroup/qflux/blob/update/contribution_guide/CONTRIBUTING.md) markdown file. 
+To contribute to the repository, follow the procedure outlined in the [Contribution Guidelines](https://github.com/batistagroup/qflux/blob/master/CONTRIBUTING.md) markdown file. 
 
 ### Additional Repositories <a name="repos"></a>
 
