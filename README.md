@@ -66,26 +66,11 @@ https://qflux.batistalab.com/
 
 ### Contribution Guidelines <a name="contribute"></a>
 
-To contribute to the repository, clone the qflux repository and create a new branch:
-
-```bash
-git clone git@github.com:batistagroup/qflux.git
-git pull
-git checkout -b part_II_docs_spinchain
-```
-
-For example to contribute to the documentation, written in markdown (.md), edit the markdown in some form and make it complete (vim spin_chain.md for example).
-Once complete, commit changes to file: 
-
-```bash
-git add spin_chain.md
-git commit -m 'DOCS: Added docs on the spin chain example with Lindblad'
-git push
-```
-
-Generate a new pull request through github and assign to a tentative reviewer.
+To contribute to the repository, follow the procedure outlined in the [Contribution Guidelines](https://github.com/batistagroup/qflux/blob/update/contribution_guide/CONTRIBUTING.md) markdown file. 
 
 ### Additional Repositories <a name="repos"></a>
+
+This section includes additional repositories with functionality that has been integrated within QFlux.
 
 [![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/dcabral00/qc_spin_tutorial) | Spin Chain Tutorial Repository 
 
