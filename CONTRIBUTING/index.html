@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="../variational_methods/">
+        <link rel="prev" href="..">
       
       
-        <link rel="next" href="../../GQME/">
+        <link rel="next" href="../qflux/Closed_Systems/">
       
       
-      <link rel="icon" href="../../../img/qflux_favicon.png">
+      <link rel="icon" href="../img/qflux_favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
     
     
       
-        <title>Source Code - QFlux Docs</title>
+        <title>Contribution Guide - QFlux Docs</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,11 +46,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -129,7 +129,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#variational-methods-module" class="md-skip">
+        <a href="#welcome-to-the-qflux-contributing-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -145,9 +145,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="QFlux Docs" class="md-header__button md-logo" aria-label="QFlux Docs" data-md-component="logo">
+    <a href=".." title="QFlux Docs" class="md-header__button md-logo" aria-label="QFlux Docs" data-md-component="logo">
       
-  <img src="../../../img/qflux-logo.png" alt="logo">
+  <img src="../img/qflux-logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -164,7 +164,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Source Code
+              Contribution Guide
             
           </span>
         </div>
@@ -277,9 +277,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="QFlux Docs" class="md-nav__button md-logo" aria-label="QFlux Docs" data-md-component="logo">
+    <a href=".." title="QFlux Docs" class="md-nav__button md-logo" aria-label="QFlux Docs" data-md-component="logo">
       
-  <img src="../../../img/qflux-logo.png" alt="logo">
+  <img src="../img/qflux-logo.png" alt="logo">
 
     </a>
     QFlux Docs
@@ -306,7 +306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -324,10 +324,31 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../CONTRIBUTING/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Contribution Guide
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -337,6 +358,179 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#new-contributor-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Contributor Guide
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone the repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create an Issue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solve-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solve an Issue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Make Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Feature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Updates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commiting-the-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commiting the Update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Request
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#merging-a-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Merging a Pull Request
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keeping-your-fork-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keeping Your Fork Updated
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -378,7 +572,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../Closed_Systems/" class="md-nav__link ">
+            <a href="../qflux/Closed_Systems/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -412,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Closed_Systems/basics/" class="md-nav__link">
+      <a href="../qflux/Closed_Systems/basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -434,7 +628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Closed_Systems/qho_example/" class="md-nav__link">
+      <a href="../qflux/Closed_Systems/qho_example/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -456,7 +650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Closed_Systems/AT_basepair/" class="md-nav__link">
+      <a href="../qflux/Closed_Systems/AT_basepair/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -478,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Closed_Systems/spinchain/" class="md-nav__link">
+      <a href="../qflux/Closed_Systems/spinchain/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -500,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Closed_Systems/arbitrary_evo/" class="md-nav__link">
+      <a href="../qflux/Closed_Systems/arbitrary_evo/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -522,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Closed_Systems/cs_api/" class="md-nav__link">
+      <a href="../qflux/Closed_Systems/cs_api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -579,7 +773,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../Open_Systems/" class="md-nav__link ">
+            <a href="../qflux/Open_Systems/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -613,7 +807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Open_Systems/basics/" class="md-nav__link">
+      <a href="../qflux/Open_Systems/basics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -635,7 +829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Open_Systems/spinchainOpen/" class="md-nav__link">
+      <a href="../qflux/Open_Systems/spinchainOpen/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -657,7 +851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Open_Systems/spinhalfOpen/" class="md-nav__link">
+      <a href="../qflux/Open_Systems/spinhalfOpen/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -679,7 +873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Open_Systems/DoubleWellOpen/" class="md-nav__link">
+      <a href="../qflux/Open_Systems/DoubleWellOpen/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -701,7 +895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Open_Systems/os_api/" class="md-nav__link">
+      <a href="../qflux/Open_Systems/os_api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -727,10 +921,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -741,11 +933,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -760,7 +952,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Variational Methods
@@ -774,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../variational_methods/" class="md-nav__link">
+      <a href="../qflux/Variational_Methods/variational_methods/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -793,31 +985,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Source Code
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../qflux/Variational_Methods/var_api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -827,71 +998,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
-    <span class="md-ellipsis">
-      Concepts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      Source Code
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#qflux.variational_methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      variational_methods
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -931,7 +1037,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../GQME/" class="md-nav__link ">
+            <a href="../qflux/GQME/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -965,7 +1071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../GQME/gqme_api/" class="md-nav__link">
+      <a href="../qflux/GQME/gqme_api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1014,45 +1120,153 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#new-contributor-guide" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      New Contributor Guide
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
+  <a href="#getting-started" class="md-nav__link">
     <span class="md-ellipsis">
-      Concepts
+      Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone the repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create an Issue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solve-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solve an Issue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Make Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Feature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Updates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commiting-the-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commiting the Update
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
+  <a href="#pull-request" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Pull Request
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
+  <a href="#merging-a-pull-request" class="md-nav__link">
     <span class="md-ellipsis">
-      Source Code
+      Merging a Pull Request
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#qflux.variational_methods" class="md-nav__link">
+  <a href="#keeping-your-fork-updated" class="md-nav__link">
     <span class="md-ellipsis">
-      variational_methods
+      Keeping Your Fork Updated
     </span>
   </a>
   
@@ -1077,54 +1291,168 @@
   
 
 
-<h1 id="variational-methods-module">Variational Methods  Module</h1>
-<h2 id="overview">Overview</h2>
-<p>In this section, we outline the main functionality of the <code>variational_methods</code> module. </p>
-<p>First, we will provide some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.</p>
-<h2 id="concepts">Concepts</h2>
-<p>In this section, we can add some theoretical background/explanation of relevant concepts.</p>
-<h2 id="examples">Examples</h2>
-<p>In this section, we can add some illustrative examples. </p>
-<h2 id="source-code">Source Code</h2>
-
-
-<div class="doc doc-object doc-module">
-
-
-
-<h2 id="qflux.variational_methods" class="doc doc-heading">
-            <code>qflux.variational_methods</code>
-
-
-</h2>
-
-    <div class="doc doc-contents first">
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-</div>
+<h1 id="welcome-to-the-qflux-contributing-guide">Welcome to the QFlux Contributing Guide!</h1>
+<p>Thank you for taking the time to contribute to the <strong>QFlux</strong> package. Your help improves the software and expands its utility for the scientific community.</p>
+<p>This guide contains an overview of how to open issues, make code or documentation changes, and contribute via pull requests (PRs).</p>
+<hr />
+<h2 id="new-contributor-guide">New Contributor Guide</h2>
+<p>If you're new to open-source or QFlux, welcome! You're encouraged to start by:</p>
+<ul>
+<li>Reading existing issues.</li>
+<li>Examining existing example notebooks under <code>demos/</code>.</li>
+<li>Looking at the <code>good first issue</code> or <code>help wanted</code> tags.</li>
+<li>Exploring the source code under <code>src/qflux</code>.</li>
+<li>Reviewing <a href="https://qflux.batistalab.com/">documentation</a> in the <code>docs/</code> folder (built with <a href="https://www.mkdocs.org/">MkDocs</a>).</li>
+</ul>
+<hr />
+<h2 id="getting-started">Getting Started</h2>
+<p>The general procedure for contributing to <code>QFlux</code> is: </p>
+<ol>
+<li>Clone the repository.</li>
+<li>Install dependencies.</li>
+<li>Create a branch.</li>
+<li>Add your edits/modifications.</li>
+<li>Create a pull request.</li>
+</ol>
+<h3 id="clone-the-repository">Clone the repository</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:batistagroup/qflux.git
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>qflux
+</span></code></pre></div>
+<h3 id="requirements">Requirements</h3>
+<p>QFlux uses <a href="https://github.com/astral-sh/uv">uv</a> for dependency management. You will need:</p>
+<ul>
+<li>Python ≥3.10</li>
+<li><a href="https://github.com/astral-sh/uv">uv</a>: Install with <code>pip install uv</code></li>
+<li><a href="https://www.mkdocs.org/">mkdocs</a> for documentation</li>
+<li><a href="https://squidfunk.github.io/mkdocs-material/">mkdocs-material</a> documentation theme</li>
+</ul>
+<p>All dependencies can be installed with the following steps (assuming you have already cloned the github repository and are within the main <code>qflux</code> directory): </p>
+<ol>
+<li>Install <code>uv</code>:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>uv
+</span></code></pre></div>
+<ol>
+<li>Create a virtual environment:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>venv
+</span></code></pre></div>
+<ol>
+<li>Activate the virtual environment:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</span></code></pre></div>
+<ol>
+<li>Install dependencies, including those necessary for development:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+</span></code></pre></div>
+<p>You should now have a proper environment with all necessary dependencies! </p>
+<h3 id="project-structure">Project structure</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>qflux/
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>├── src/           # Core package source code, split according to subdomain (e.g., src/qflux)
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>├── data/          # Input/output data files for examples
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>├── docs/          # Markdown documentation for use with MkDocs
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>├── tests/         # Unit and integration tests
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>├── pyproject.toml # Project configuration with uv and build info
+</span></code></pre></div>
+<hr />
+<h2 id="issues">Issues</h2>
+<h3 id="create-an-issue">Create an Issue</h3>
+<ol>
+<li>Go to the <a href="https://github.com/batistagroup/qflux/issues">Issues</a> tab.</li>
+<li>Use an appropriate template (e.g., <em>bug</em>, <em>feature request</em>, or <em>question</em>).</li>
+<li>Be concise and clear.</li>
+<li>Link to relevant code lines/commit if applicable.</li>
+</ol>
+<h3 id="solve-an-issue">Solve an Issue</h3>
+<ul>
+<li>If you'd like to address an open issue, comment on it to indicate you're working on it.</li>
+<li>Fork the repository and follow the development workflow below.</li>
+</ul>
+<hr />
+<h2 id="make-changes">Make Changes</h2>
+<p>All changes and additions to the QFlux code and documentation will follow the <a href="https://github.com/batistagroup/qflux/blob/master/LICENSE">MIT License</a> for the repository.</p>
+<h3 id="new-feature">New Feature</h3>
+<ol>
+<li>Create a feature branch:</li>
+</ol>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feat/qumode_dynamics
+</span></code></pre></div>
+2. Implement your code under a relevant submodule of <code>src/qflux/</code>.
+3. Add or update relevant tests in <code>tests/</code>.
+4. Add or update relevant <code>[package_name]</code> dependencies through <code>uv</code>:</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>uv<span class="w"> </span>add<span class="w"> </span>package_name
+</span></code></pre></div>
+5. Ensure the test suite passes:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>pytest
+</span></code></pre></div>
+<h3 id="documentation-updates">Documentation Updates</h3>
+<p>In this section, we will provide a general workflow for updating the documentation. We will first emphasize an important consideration prior to editing the docs. You should navigate to the directory for the module that you want to edit the documentation for. In order to determine the "routing" for these markdown files, you should consult the <code>mkdocs</code> configuration file in the top-level <code>qflux/</code> directory, named <code>mkdocs.yml</code>. In this file, you'll see a <code>nav:</code> section which  specifies the pages/routing for the documentation website. Individual pages are specified as key-value pairs where the key specifies the page title and the  value specifies the corresponding markdown file that the page is constructed from. </p>
+<ol>
+<li>Make a docs-related branch:</li>
+</ol>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>docs/pII_open_systems_spinchain
+</span></code></pre></div>
+2. Edit the relevant markdown file in the <code>docs/</code> directory. Within the <code>docs/</code> directory, we are only concerned with the <code>docs/qflux/</code>, which contains separate directories for each module, as well as a global <code>images/</code> directory. </p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>vim<span class="w"> </span>docs/qflux/Open_Systems/spin_chain.md
+</span></code></pre></div>
+3. Preview the documentation to ensure all markdown is correctly rendered within <code>mkdocs</code>. You can create a live preview server to see your changes as you edit by running:</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>mkdocs<span class="w"> </span>serve
+</span></code></pre></div>
+4. If a new page, ensure it is added to the navigation section of <code>qflux/mkdocs.yml</code>:
+   <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nav: # Note: All paths must be relative to the docs dir
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  - Open Systems:
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    - Spin Chain Demo: &#39;qflux/Open_Systems/spinchainOpen.md&#39;
+</span></code></pre></div>
+5. Commit your changes:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>add<span class="w"> </span>docs/qflux/Open_Systems/spin_chain.md
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;DOCS: Added docs on the spin chain example with Lindblad&#39;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>git<span class="w"> </span>push
+</span></code></pre></div>
+<blockquote>
+<p>📌 All documentation should be concise and <strong>not a copy-paste of manuscripts or tutorials</strong>. Use clear markdown formatting. For ease of editing, you can use your favorite markdown editor, IDE, or Jupyter Notebooks to write your initial markdown and then refine/ensure everything renders properly by using your favorite text-editor with the live interactive preview server created via <code>mkdocs serve</code>.</p>
+</blockquote>
+<hr />
+<h2 id="commiting-the-update">Commiting the Update</h2>
+<p>Follow <a href="https://www.conventionalcommits.org/en/v1.0.0/">conventional commit</a> guidelines:</p>
+<ul>
+<li><code>FEAT:</code> for new features</li>
+<li><code>FIX:</code> for bug fixes</li>
+<li><code>DOCS:</code> for documentation</li>
+<li><code>TEST:</code> for testing additions</li>
+<li><code>REFACTOR:</code> for code improvements</li>
+</ul>
+<p>Example:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;FEAT: Add Lindblad trajectory sampling module&quot;</span>
+</span></code></pre></div>
+<hr />
+<h2 id="pull-request">Pull Request</h2>
+<ol>
+<li>Push your feature branch:</li>
+</ol>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feat/qumode_dynamics
+</span></code></pre></div>
+2. Open a PR against the <code>main</code> branch via GitHub.
+3. Provide a meaningful title and description.
+4. Link related issues using keywords like <code>Closes #42</code>.</p>
+<hr />
+<h2 id="merging-a-pull-request">Merging a Pull Request</h2>
+<ul>
+<li>All PRs should be reviewed and approved by at least one maintainer.</li>
+<li>Ensure the CI (tests + docs build) passes.</li>
+</ul>
+<hr />
+<h2 id="keeping-your-fork-updated">Keeping Your Fork Updated</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/batistagroup/qflux.git
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</span></code></pre></div>
+<hr />
+<p>Thank you again for contributing!
+The QFlux development team appreciates your support.</p>
+<hr />
 
 
 
@@ -1196,7 +1524,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../variational_methods/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Variational Methods">
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1206,20 +1534,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Variational Methods
+                Home
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../GQME/" class="md-footer__link md-footer__link--next" aria-label="Next: Open Systems Documentation and User Guide">
+          <a href="../qflux/Closed_Systems/" class="md-footer__link md-footer__link--next" aria-label="Next: Closed Systems Documentation and User Guide">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Open Systems Documentation and User Guide
+                Closed Systems Documentation and User Guide
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1257,12 +1585,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.footer", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "navigation.footer", "navigation.indexes"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
-        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

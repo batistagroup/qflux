@@ -326,6 +326,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
@@ -352,7 +373,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           
@@ -369,14 +390,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Closed Systems
           </label>
@@ -555,7 +576,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           
@@ -572,14 +593,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Open Systems
           </label>
@@ -825,10 +846,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -840,8 +861,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Variational Methods
           </label>
@@ -920,7 +941,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           
@@ -937,14 +958,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             GQME
           </label>
@@ -1090,7 +1111,7 @@
 <p>Here, we present the general procedure for simulating open quantum system dynamics using <code>qflux</code>.</p>
 <h2 id="what-is-an-open-quantum-system">What is an Open Quantum System?</h2>
 <p>An open system represents a system that interacts with its surrounding environment, and these interactions fundamentally affect the dynamics of the system. Due to the presence of the environment, the system’s evolution can no longer be described by the Schrödinger equation. For instance, while the Schrödinger equation describes unitary evolution with conserved system energy, open systems exhibit energy exchange with the environment, which can lead to gradual energy dissipation.</p>
-<p>Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schrödinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most general forms of a trace-preserving evolution equation is the Lindblad master equation, given by</p>
+<p>Due to the large number of degrees of freedom in the environment, it is generally impractical to directly solve the Schrödinger equation for the combined system and environment. As a result, many equations of motion have been developed to describe the dynamics of open quantum systems under various approximations. One of the most popular forms of a trace-preserving evolution equation is <a href="https://doi.org/10.1063/1.5115323">the Lindblad master equation</a>, given by</p>
 <div class="arithmatex">\[ \frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamma_n\left[2L_n \rho(t)L_n^\dagger - \rho(t) L_n^\dagger L_n - L_n^\dagger L_n \rho(t)\right] \]</div>
 <p>In this equation, here <span class="arithmatex">\(\rho(t)\)</span> is the reduced density matrix of the system, and <span class="arithmatex">\(H\)</span> represents the Hamiltonian of the system. The jump operators <span class="arithmatex">\(L_n\)</span> represent the environmental effects on the dynamics, with the rates <span class="arithmatex">\(\gamma_n\)</span> quantifying these effects.</p>
 <p>The purpose of this tutorial is to demonstrate how to solve the Lindblad equation described above using <code>qflux</code>, both on classical and quantum computing platforms. To that end, we first introduce the general procedure for solving the equation, and then illustrate it with a spin-1/2 example to familiarize the reader with the basic usage of <code>qflux</code>.</p>
@@ -1101,7 +1122,7 @@
 <p>(i) Vectorizing the density matrix:</p>
 <p>The density matrix <span class="arithmatex">\(\rho(t)\)</span> of a system with an N-dimensional Hilbert space is an <span class="arithmatex">\(N\times N\)</span> matrix. For numerical purposes, it is reshaped into a vector of dimension <span class="arithmatex">\(N^2\)</span>.</p>
 <div class="arithmatex">\[\rho \to |\nu_{\rho} \rangle= \left[ \rho_{11}, \ldots, \rho_{1N}, \rho_{21}, \ldots, \rho_{2N}, \ldots, \rho_{N1}, \ldots, \rho_{NN} \right]^\top\]</div>
-<p>Here the superscript "<span class="arithmatex">\(\top\)</span>" represents a transpose operation.</p>
+<p>Here the superscript "<span class="arithmatex">\(\top\)</span>" represents a transpose operation. This is equivalent to working in Liouville space, where operators are represented as vectors and superoperators act as matrices.</p>
 <p>(ii) Converting the Lindblad equation into a matrix–vector form</p>
 <p>The Lindblad equation can be recast into the equivalent matrix-vector form:</p>
 <div class="arithmatex">\[\frac{\mathrm{d}|\nu_{\rho}(t) \rangle}{\mathrm{d}t} = -i H_{\mathrm{eff}} |\nu_{\rho}(t) \rangle\;\;\]</div>
@@ -1117,7 +1138,7 @@ as the action of the exponential of the matrix <span class="arithmatex">\(-i H_{
 | \nu_{\rho}(t)\rangle = \mathbf{G}(t)  
     | \nu_{\rho}(0)\rangle
 \]</div>
-<p>where <span class="arithmatex">\(\mathbf{G}(t)\)</span> is called the propagator, and is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t} $.</p>
+<p>where <span class="arithmatex">\(\mathbf{G}(t)\)</span> is called the propagator, and is defined as <span class="arithmatex">\(\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}\)</span>.</p>
 <h2 id="solve-the-lindblad-equation">Solve the Lindblad equation</h2>
 <p>As a reminder, the task at hand is compute the time evolution of the density matrix according to the Lindblad equation:</p>
 <div class="arithmatex">\[
@@ -1136,6 +1157,7 @@ as the action of the exponential of the matrix <span class="arithmatex">\(-i H_{
 <p>Define a propagation time-step and the number of time steps for which we want to compute the evolved density matrix.</p>
 </li>
 </ul>
+<p>We now describe in detail how to solve the Lindblad equation using the <a href="../os_api/"><code>DynamicsOS</code> class</a> from the <code>qflux.open_systems</code> module.</p>
 <h3 id="definition-of-the-initial-state">Definition of the Initial State</h3>
 <p>The initial state is the vectorized density matrix <span class="arithmatex">\(| \nu_{\rho}(0)\rangle\)</span>. However, the <code>DynamicsOS</code> class in <code>qflux.open_system</code> automatically performs the vectorization, so the user only needs to define the initial density matrix <span class="arithmatex">\(\rho(0)\)</span> as an <span class="arithmatex">\(N\times N\)</span> array and pass it to the <code>DynamicsOS</code> class.</p>
 <p>As an example, consider a single spin-1/2 system. We define the spin-up and spin-down states as</p>
@@ -1216,7 +1238,7 @@ H = E_0 \sigma^z + \Delta \sigma^x
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">expec_vals_qutip_Lindblad</span> <span class="o">=</span> <span class="n">spin1_dissipative</span><span class="o">.</span><span class="n">propagate_qt</span><span class="p">(</span><span class="n">time_arr</span><span class="o">=</span><span class="n">time_arr</span><span class="p">,</span> <span class="n">observable</span><span class="o">=</span><span class="n">Z</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="quantum-simulation-of-the-lindblad-equation">Quantum Simulation of the Lindblad Equation</h2>
-<p>Using the <code>QubitDynamicsOS</code> class from the <code>qflux.open_systems.quantum_simulation</code> module, <code>qflux</code> enables quantum simulation of the Lindblad equation. The procedure closely parallels the classical simulation workflow: first, define the initial state, system Hamiltonian, and collapse operators, and then instantiate a <code>QubitDynamicsOS</code> object accordingly.</p>
+<p>Using the <a href="../os_api/"><code>QubitDynamicsOS</code> class</a> from the <code>qflux.open_systems.quantum_simulation</code> module, <code>qflux</code> enables quantum simulation of the Lindblad equation. The procedure closely parallels the classical simulation workflow: first, define the initial state, system Hamiltonian, and collapse operators, and then instantiate a <code>QubitDynamicsOS</code> object accordingly.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.open_systems.quantum_simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">QubitDynamicsOS</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">spin1_quantum</span> <span class="o">=</span> <span class="n">QubitDynamicsOS</span><span class="p">(</span><span class="n">rep</span><span class="o">=</span><span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="n">Nsys</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Hsys</span><span class="o">=</span><span class="n">H_1spin</span><span class="p">,</span> <span class="n">rho0</span><span class="o">=</span><span class="n">rho0_1spin</span><span class="p">,</span> <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">L_1spin</span><span class="p">])</span>

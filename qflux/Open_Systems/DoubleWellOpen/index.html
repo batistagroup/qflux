@@ -326,6 +326,27 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
@@ -352,7 +373,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           
@@ -369,14 +390,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Closed Systems
           </label>
@@ -555,7 +576,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           
@@ -572,14 +593,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Open Systems
           </label>
@@ -819,10 +840,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -834,8 +855,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Variational Methods
           </label>
@@ -914,7 +935,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           
@@ -931,14 +952,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             GQME
           </label>
@@ -1206,8 +1227,9 @@ P_L = \langle 1 - \Theta(x - x^*) \rangle
 <video controls src="../../images/Part_II/double_well_open_evolution.mp4"></video>
 
 <h2 id="quantum-simulation">Quantum Simulation</h2>
-<p>Using the <code>QubitDynamicsOS</code> class from the <code>qflux.open_systems.quantum_simulation</code> module, <code>qflux</code> enables quantum simulation of the Lindblad equation. When the system has a Hilbert space dimension of <span class="arithmatex">\(N=32\)</span>, the vectorized density matrix becomes a state vector of dimension <span class="arithmatex">\(N^2\)</span>, and the corresponding propagator is of size <span class="arithmatex">\(N^2 \times N^2\)</span>. For such large-dimensional systems, we can utilize the Kraus operator representation to evolve the system dynamics.
-The Kraus operator representation is defined as:</p>
+<p>Using the <code>QubitDynamicsOS</code> class from the <code>qflux.open_systems.quantum_simulation</code> module, <code>qflux</code> enables quantum simulation of the Lindblad equation. When the system has a Hilbert space dimension of <span class="arithmatex">\(N=32\)</span>, the vectorized density matrix becomes a state vector of dimension <span class="arithmatex">\(N^2\)</span>, and the corresponding propagator is of size <span class="arithmatex">\(N^2 \times N^2\)</span>. For such large-dimensional systems, we can utilize the Kraus operator representation to evolve the system dynamics.</p>
+<p>Therefore, compared to the approach used in the <a href="./OpenSys_basic.md">Basic of open system simulation example</a>—where quantum circuits are constructed based on the full propagator—the Kraus operator representation reduces the number of required qubits from <span class="arithmatex">\(log_{2}N^2\)</span> to <span class="arithmatex">\(log_2 N\)</span>. However, the trade-off is that multiple circuits (corresponding to multiple Kraus operators) must be executed.</p>
+<p>The Kraus operator representation is defined as:</p>
 <div class="arithmatex">\[
     \rho(t) = \sum_i M_i(t) \rho(0) M_i^\dagger (t)
 \]</div>
@@ -1227,7 +1249,7 @@ The Kraus operator representation is defined as:</p>
 <p>Initialize the qubit statevector to <span class="arithmatex">\(|\psi_n (0)\rangle\)</span>.</p>
 </li>
 <li>
-<p>Construct Kraus operators <span class="arithmatex">\(M_i(t)\)</span> and the corresponding quantum gates <span class="arithmatex">\(\mathbf{U}_{M_i}(t)\)</span>. For non-unitary <span class="arithmatex">\(M_i(t)\)</span>, <code>qflux</code> provides a dilation method (default: Sz.-Nagy) to implement the operation within an enlarged Hilbert space.</p>
+<p>Construct Kraus operators <span class="arithmatex">\(M_i(t)\)</span> and the corresponding quantum gates <span class="arithmatex">\(\mathbf{U}_{M_i}(t)\)</span>. For non-unitary <span class="arithmatex">\(M_i(t)\)</span>, <code>qflux</code> provides a dilation method (default: <code>'Sz.-Nagy'</code>) to implement the operation within an enlarged Hilbert space.</p>
 </li>
 <li>
 <p>Execute the quantum circuits to obtain <span class="arithmatex">\(|\psi^i_n(t)\rangle\)</span> for each Kraus path, and reconstruct the density matrix from all resulting trajectories <span class="arithmatex">\(|\psi^i_n(t)\rangle\)</span>.</p>
@@ -1243,7 +1265,9 @@ The Kraus operator representation is defined as:</p>
 \]</div>
 <p>which means that in quantum simulation, one simply needs to measure the expectation value of <span class="arithmatex">\(\hat{P}_R\)</span>  with respect to each <span class="arithmatex">\(|\psi^i_n(t)\rangle\)</span>, and then sum over all results to obtain <span class="arithmatex">\(P_R (t)\)</span>.</p>
 <p><code>qflux</code> provides quantum circuit simulation based on the Kraus operator representation. To enable this, one simply needs to set <code>rep='Kraus'</code> when instantiating the <code>QubitDynamicsOS</code> class.</p>
-<p>The <code>qc_simulation_kraus</code> function can then be used to simulate the Lindblad dynamics using the Kraus operator representation. This function first computes the propagator (unless it is provided as input), and then derives the corresponding set of Kraus operators using a specified tolerance parameter <code>tolk</code>. Once the Kraus operators are obtained, <code>qc_simulation_kraus</code> performs the quantum simulation and evaluates the observable of interest — in this case,  <span class="arithmatex">\(\hat{P}_R\)</span>:</p>
+<p>The <code>qc_simulation_kraus</code> function can then be used to simulate the Lindblad dynamics using the Kraus operator representation. </p>
+<p>This function first computes the propagator (unless it is provided as input), and then calls the <a href="../../../src/qflux/open_systems/quantum_simulation.py"><code>gen_Kraus_list</code></a> method to construct the corresponding set of Kraus operators from the propagator, using methods described in <a href="https://doi.org/10.1063/1.1518555">this paper</a> and <a href="https://doi.org/10.1021/acsomega.3c09720">this paper</a>, with a specified tolerance parameter <code>tolk</code>.</p>
+<p>Once the Kraus operators are obtained, <code>qc_simulation_kraus</code> performs the quantum simulation and evaluates the observable of interest — in this case,  <span class="arithmatex">\(\hat{P}_R\)</span>:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">#extract the propagator from result of classical simulation,</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1">#and expand to match the dimension of qubit space</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1">#For saving calculation, only choose some time points</span>
