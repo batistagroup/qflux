@@ -60,6 +60,7 @@ plugins:
 
 nav: # Note: All paths must be relative to the docs dir
   - Home: 'index.md'
+  - Contribution Guide: 'CONTRIBUTING.md'
   - Closed Systems: # Directory Page
     - 'qflux/Closed_Systems/index.md' # Specifies landing page for directory
     # Subpages within the directory are indented, specified as key/value pairs
