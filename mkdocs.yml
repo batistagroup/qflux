@@ -82,6 +82,9 @@ nav: # Note: All paths must be relative to the docs dir
     - Source Code: 'qflux/Variational_Methods/var_api.md' 
   - GQME: 
     - 'qflux/GQME/index.md'
+    - Introduction to GQME: `qflux/GQME/What_is_GQME.md`
+    - Introduction to TT-TFD: `qflux/GQME/What_is_TTTFD.md`
+    - GQME for Spin-Boson model: `qflux/GQME/spin_boson_GQME.md`
     - Source Code: 'qflux/GQME/gqme_api.md'
 extra:
   analytics:
