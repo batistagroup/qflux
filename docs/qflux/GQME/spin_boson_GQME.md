@@ -78,7 +78,7 @@ sigma_liou = SBM.prop_puresystem()
 
 The results are shown in the figure below, along with the numerically exact TT-TFD results for comparison. As expected, the evolution of the isolated system exhibits no decay and no energy dissipation.
 
-![Liouville-only](Fig_SpinBoson_sysEvolution.png)
+![Liouville-only](../images/Part_IV/Fig_SpinBoson_sysEvolution.png)
 
 ## The Memory Kernel
 According to [What_is_GQME](What_is_GQME.md), the memory kernel can be obtained through the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t) $: 
@@ -122,7 +122,7 @@ kernel = SBM.get_memory_kernel()
 ```
 A representative result of the memory kernel is shown in the figure below. It captures the influence of the environment on the system dynamics, leading to non-Markovian behavior. The nonzero $\mathcal{K}_{DA,DD}(t)$ component in the figure indicates that the bath-induced population $\sigma_{DD}$ at an earlier time can influence the coherence dynamics of $\sigma_{DA}$ at a later time.
 
-![Memory_Kernel](Fig_SpinBoson_kernel.png)
+![Memory_Kernel](../images/Part_IV/Fig_SpinBoson_kernel.png)
 
 # Propagating System Dynamics using GQME
 With both the projected Liouvillian and the memory kernel available, Eq. (1) can be directly solved. The `solve_gqme` method in the `DynamicsGQME` class employs the fourth-order Runge-Kutta (RK4) method to solve the GQME. By providing the memory kernel and specifying a cutoff memory time, the `solve_gqme` method directly integrates the GQME and returns the reduced density operator $\hat{\sigma}(t)$.
@@ -144,7 +144,7 @@ plt.xlabel('', fontsize=15)
 plt.ylabel(r'$\sigma_{00}(t)$', fontsize=15)
 plt.legend()
 ```
-![GQME_evolution](Fig_SpinBoson_GQME.png)
+![GQME_evolution](../images/Part_IV/Fig_SpinBoson_GQME.png)
 
 ---
 

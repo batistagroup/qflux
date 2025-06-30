@@ -12,6 +12,6 @@ First, we will provide some conceptual explanations that provide the user with a
 
 Our documentation includes the following sections:
 
-- [What_is_GQME](What_is_GQME.md)
-- [What_is_TTTFD](What_is_TTTFD.md)
-- [spin_boson_GQME](spin_boson_GQME.md)
+- [Introduction to GQME](What_is_GQME.md)
+- [Introduction to TT-TFD](What_is_TTTFD.md)
+- [GQME for Spin-Boson model](spin_boson_GQME.md)

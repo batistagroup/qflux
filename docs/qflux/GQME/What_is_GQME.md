@@ -1,4 +1,4 @@
-# What is GQME?
+# Introduction to GQME
 In realistic physical and chemical processes, the system of interest is typically in contact with a thermal environment. This environment involves an enormous number of degrees of freedom—for example, think of the countless solvent molecules in a solution, on the order of Avogadro’s number—making it infeasible to solve the full quantum dynamics directly. However, we are not interested in the environment for its own sake, but only insofar as it influences the dynamics of the system.
 
 One natural strategy is to derive an equation of motion for the system alone, by effectively tracing out the environmental degrees of freedom. Such closed-form equations of motion for the reduced system are known as quantum master equations.
