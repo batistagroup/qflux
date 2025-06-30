@@ -1,14 +1,17 @@
-# Open Systems Documentation and User Guide
+# GQME Documentation and User Guide
 
 ![Logo](../../img/qflux-logo.png)
 
-This section includes documentation and tutorials focused on illustrating the usage and versatility of the `qflux.gqme` module. 
+This section includes documentation and tutorials focused on illustrating the usage and versatility of the `qflux.GQME` module. 
 
 ## Overview
 
-First, we will provide some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.
+First, we will provide some conceptual explanations that provide the user with a necessary background to understand the generalized quantum master equation (GQME). Then we provide some illustrative examples that demonstrate how the `qflux` can be used to solving the GQME. Finally, we provide the source code as an API reference to the source code.
 
 ## Examples and Introductory Concepts 
 
-Before we look at doing Quantum Dynamics on a quantum computer, we'll start out by looking at some ways that we can do quantum dynamics on a classical computer! This is an important step as it will familiarize you with the general ingredients of a quantum dynamics simulation and will also provide us with a means of validating the results obtained from a quantum computer.
+Our documentation includes the following sections:
 
+- [What_is_GQME](What_is_GQME.md)
+- [What_is_TTTFD](What_is_TTTFD.md)
+- [spin_boson_GQME](spin_boson_GQME.md)
