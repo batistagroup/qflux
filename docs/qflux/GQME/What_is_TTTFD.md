@@ -5,13 +5,17 @@ The TT-TFD method has been fully integrated into the `qflux.GQME` module.
 # What is TT-TFD?
 
 The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transform solving the Liouville equation $\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]$ into solving
+
 $$
 \frac{d}{dt} |\psi(\beta, t)\rangle = -\frac{i}{\hbar} \bar{H} |\psi(\beta, t)\rangle
 $$
+
 with $\bar{H} = \hat{H}\otimes \tilde{I}$. And $|\psi(\beta, t)\rangle$ is the thermal wave function from which the density operator $\hat{\rho}(t)$ can be obtained as follows:
+
 $$
 \hat{\rho}(t) = {\rm Tr}_f \{ |\psi(\beta, t)\rangle\langle \psi(\beta, t)|\}
 $$
+
 Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian $\bar{H}$ and initial state |$\psi(\beta, 0)\rangle$ used in the thermo-field dynamics framework.
 
 
@@ -24,26 +28,31 @@ $\lvert D \rangle$ and an acceptor state $\lvert A \rangle$, coupled to a harmon
 The total Hamiltonian can be written as:
 
 $$
-\hat{H} = \epsilon \hat{\sigma}_z + \Gamma \hat{\sigma}_x +\sum_{i = 1}^{N_n} \Bigg[\frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2 - c_i\hat{R}_i \hat{\sigma}_z\Bigg] 
+\hat{H} = \epsilon \hat{\sigma}_z + \Gamma \hat{\sigma}_x +\sum_{i = 1}^{N_{n}} \Bigg[\frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2 - c_i\hat{R}_i \hat{\sigma}_z\Bigg] 
 $$
 
 where $\hat{\sigma}_z = |D\rangle\langle D| - |A\rangle\langle A|$ and $\hat{\sigma}_x = |D\rangle \langle A| + |A\rangle\langle D|$ are the Pauli matrices for the electronic DOF (with $D$ standing for Donor and $A$ for acceptor), $2\epsilon$ is the energy gap between the electronic states, $\Gamma$ is the coupling between them, and $\hat R_i$ and $P_i$ are the mass-weighted position and momentum operators of the $i$-th nuclear DOF.
 
-The general discretized form of the nuclear modes frequencies and coupling coefficients, $\{\omega_k , c_k\}$, is given by
-$$J (\omega) = \frac{\pi}{2} \sum_{k=1}^{N_n} \frac{c_k^2}{\omega_k} \delta(\omega-\omega_k).$$
-We sample the $\{\omega_k , c_k\}$ from an Ohmic spectral density with exponential cutoff:
-$$J (\omega) =  \frac{\pi\hbar}{2}\xi \omega e^{-\omega/\omega_c}.$$
-Here, $\xi$ is the Kondo parameter and $\omega_c$ is the cutoff frequency.
+The general discretized form of the nuclear modes frequencies and coupling coefficients, $\{\omega_{k} , c_{k}\}$, is given by
+
+$$ J (\omega) = \frac{\pi}{2} \sum_{k=1}^{N_{n}} \frac{c_{k}^2}{\omega_{k}} \delta(\omega-\omega_{k}) $$
+
+We sample the $\{\omega_{k} , c_{k}\}$ from an Ohmic spectral density with exponential cutoff:
+
+$$ J (\omega) =  \frac{\pi\hbar}{2}\xi \omega e^{-\omega/\omega_{c}} $$
+
+Here, $\xi$ is the Kondo parameter and $\omega_{c}$ is the cutoff frequency.
 
 The initial state is assumed to be of the form
 
 $$
-\hat \rho(0) = \hat \sigma(0) \otimes \hat \rho_n(0)
+\hat \rho(0) = \hat \sigma(0) \otimes \hat \rho_{n}(0)
 $$
 
 with $\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |$ is the initial electronic density operator, where $|\gamma\rangle$ is one of the electronic basis states.
 The initial nuclear density operator given by
-$$\hat{\rho}_n (0) = \frac{\exp\bigg[\displaystyle -\beta \sum_{i = 1}^{N_n} \frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2\bigg]}{\text{Tr}_n \Bigg\{ \exp\bigg[\displaystyle -\beta\sum_{i = 1}^{N_n} \frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2\bigg] \Bigg\}}.$$
+
+$$ \hat{\rho}_{n} (0) = \frac{\exp\bigg[\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg]}{\text{Tr}_{n} \Bigg\{ \exp\bigg[\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg] \Bigg\}} $$
 
 We set the parameters as:
 
@@ -60,28 +69,32 @@ which are defined in [`qflux.GQME.params`](src/qflux/GQME/params.py).
 ## TT-TFD for spin-boson model
 
 The TT-TFD method evolves the spin-boson model in an extended Hilbert space, which is defined as the tensor product of the electronic subsystem, the physical nuclear degrees of freedom, and their thermal-field replicas:
+
 $$
 \mathcal{H}_{\text{total}} = \mathcal{H}_e \otimes \mathcal{H}_n \otimes \tilde{\mathcal{H}}_n
 $$  
 
 Here:
+
 - $\mathcal{H}_e$: Hilbert space of the two-level electronic system (donor/acceptor),
 - $\mathcal{H}_n$: Hilbert space of the nuclear (bath) degrees of freedom,
 - $\tilde{\mathcal{H}}_n$:  a fictitious copy of $\mathcal{H}_n$ introduced via the TFD formalism.
 
 The initial thermal wave function
-$$|\psi(\beta, 0)\rangle = |\gamma\rangle \otimes \frac{e^{-\beta \hat{H}_n/2}}{\sqrt{Z(\beta)}}\sum_{k=\tilde{k}}|k\rangle\otimes |\tilde{k}\rangle$$
-where $\hat{H}_n = \sum_{i = 1}^{N_n} \frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2$ is the nuclear bath, and $|k\rangle$ is the bath state.
+
+$$ |\psi(\beta, 0)\rangle = |\gamma\rangle \otimes \frac{e^{-\beta \hat{H}_n/2}}{\sqrt{Z(\beta)}}\sum_{k=\tilde{k}}|k\rangle\otimes |\tilde{k}\rangle $$
+
+where $\hat{H}_{n} = \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}$ is the nuclear bath, and $|k\rangle$ is the bath state.
 
 The preparation of the initial thermal wavepacket requires the evaluation of the quantum Boltzmann operator, which can be computationally challenging for systems with high dimensionality.
 However, when the initial nuclear Hamiltonian is harmonic, the initial thermal wavepacket can be obtained by taking advantage of the thermal Bogoliubov transformation.
 The transformation is defined by $e^{-i\hat{G}}$ with
 
 $$
-\hat{G} = -i \sum_j \theta_j (\hat{a}_j \tilde{a}_j - \hat{a}^\dagger_j \tilde{a}^\dagger_j)
+\hat{G} = -i \sum_{j} \theta_{j} (\hat{a}_j \tilde{a}_{j} - \hat{a}^{\dagger}_{j} \tilde{a}^{ \dagger }_{j})
 $$
 
-with $\theta_j = {\rm arctanh}(e^{-\beta \omega_j / 2}) $, where $\{ \hat{a}_j, \hat{a}_j^\dagger \}$ and $\{ \tilde{a}_j, \tilde{a}_j^\dagger \}$ are the creation and annihilation operators associated with the $j$-th nuclear degree of freedom in the physical and tilde Hilbert spaces, respectively.
+with $\theta_{j} = {\rm arctanh}(e^{-\beta \omega_{j} / 2})$, where $\{ \hat{a}_{j}, \hat{a}_{j}^{\dagger} \}$ and $\{ \tilde{a}_j, \tilde{a}_j^\dagger \}$ are the creation and annihilation operators associated with the $j$-th nuclear degree of freedom in the physical and tilde Hilbert spaces, respectively.
 
 After the transformation, the TT-TFD equation becomes
 
@@ -96,6 +109,7 @@ $$
 $$
 
 and the initial thermal wave function becomes
+
 $$
 |\psi(\beta, 0)\rangle = |\gamma\rangle \otimes |0, \tilde{0}\rangle 
 $$

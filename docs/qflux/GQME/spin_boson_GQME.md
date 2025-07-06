@@ -25,18 +25,24 @@ $\hat{\sigma}_x = \lvert D \rangle \langle A \rvert + \lvert A \rangle \langle D
 $2\epsilon$ is the reaction energy and $\Gamma = V_{DA}$ is the electronic coupling between the donor and acceptor states. More details about the model can be found in [What_is_TTFD](What_is_TTTFD.md). 
 
 The initial state is assumed to be of the form
+
 $$
 \hat \rho(0) = \hat \sigma(0) \otimes \hat \rho_n(0)
 $$
+
 With
+
 $$
 \hat{\sigma}(0) = \lvert D \rangle\langle D \rvert
 $$
+
 and 
+
 $$\hat{\rho}_n (0) = \frac{\exp\bigg[\displaystyle -\beta \sum_{i = 1}^{N_n} \frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2\bigg]}{\text{Tr}_n \Bigg\{ \exp\bigg[\displaystyle -\beta\sum_{i = 1}^{N_n} \frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2\bigg] \Bigg\}}$$
 
 
 By treating all nuclear degrees of freedom as the environment, the GQME for the spin-boson model can be written as follows: 
+
 $$
 \frac{d}{dt}\hat{\sigma}(t) = -\frac{i}{\hbar}\langle \mathcal{L}\rangle_n^0\hat{\sigma}(t) - \int_0^t d\tau\, \mathcal{K}(\tau)\hat{\sigma}(t - \tau) \tag{1}
 $$
@@ -81,15 +87,16 @@ The results are shown in the figure below, along with the numerically exact TT-T
 ![Liouville-only](../images/Part_IV/Fig_SpinBoson_sysEvolution.png)
 
 ## The Memory Kernel
-According to [What_is_GQME](What_is_GQME.md), the memory kernel can be obtained through the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t) $: 
+According to [What_is_GQME](What_is_GQME.md), the memory kernel can be obtained through the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t)$: 
+
 $$
 \mathcal{K}(t) 
 = i\dot{\mathcal{F}}(t) 
 - \frac{1}{\hbar}\mathcal{F}(t)\langle \mathcal{L}\rangle_n^0 
 + i\int_{0}^{t} d\tau \, \mathcal{F}(t - \tau)\mathcal{K}(\tau)
 $$
-with 
-$\mathcal{F}(t) = i\dot{\mathcal{G}}(t)$ is the time-derivative of the propagator $\mathcal{G}(t)$. 
+
+with $\mathcal{F}(t) = i\dot{\mathcal{G}}(t)$ is the time-derivative of the propagator $\mathcal{G}(t)$. 
 
 The propagator is a super-operator with the matrix element $\mathcal{G}_{jk,lm}(t)$ ($j, k, l, m \in \{D, A\}$) can be calculated by starting from initial state $|l⟩⟨m| ⊗ \hat{\rho}_n(0)$, measure the $\sigma_{jk}(t)$ at time $t$. 
 

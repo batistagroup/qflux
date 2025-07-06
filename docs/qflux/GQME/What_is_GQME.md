@@ -7,12 +7,13 @@ The **Generalized Quantum Master Equation (GQME)** is a formally exact framework
 
 In this documentation, we focus on the well-known Nakajima-Zwanzig GQME ([Nakajima, S. Prog. Theor. Phys. 1958](https://academic.oup.com/ptp/article/20/6/948/1930693), [Zwanzig, R. J.
 Chem. Phys. 1960](https://doi.org/10.1063/1.1731409)):
+
 $$
-\frac{d}{dt}\hat{\sigma}(t) = -\frac{i}{\hbar}\langle \mathcal{L}\rangle_n^0\hat{\sigma}(t) - \int_0^t d\tau\, \mathcal{K}(\tau)\hat{\sigma}(t - \tau) + \mathcal{I}(t)
+\frac{d}{dt}\hat{\sigma}(t) = -\frac{i}{\hbar}\langle \mathcal{L}\rangle_{n}^{0}\hat{\sigma}(t) - \int_{0}^{t} d\tau\, \mathcal{K}(\tau)\hat{\sigma}(t - \tau) + \mathcal{I}(t)
 $$
 
 - $\hat{\sigma}$: reduced density matrix of the subsystem of interest.
-- $\langle \mathcal{L}\rangle_n^0$: the projected Liouvillian.
+- $\langle \mathcal{L}\rangle_{n}^{0}$: the projected Liouvillian.
 - $\mathcal{K}(t)$: **memory kernel**, contains all the memory effects from the bath.
 - $\mathcal{I}(t)$: inhomogeneous term (often vanishes for factorized initial states).
 
@@ -26,13 +27,13 @@ $$
 \frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)] \equiv -i \mathcal{L} \hat{\rho}(t),
 $$
 
-where $\mathcal{L} \equiv \hbar^{-1}[\hat{H}, \cdot]$ is the Liouvillian superoperator.
+where $\mathcal{L} \equiv \hbar^{-1}[\hat{H}, \cdots]$ is the Liouvillian superoperator.
 
 Now suppose we are only interested in a particular subsystem $S$ while treating the rest of the system as the surrounding environment $B$. The total Hamiltonian can then be partitioned as:
-$$
-\hat{H} = \hat{H}_S + \hat{H}_B + \hat{H}_I
-$$
-where $\hat{H}_S$ and $\hat{H}_B$ are the system and bath Hamiltonians, respectively, and $\hat{H}_I$ denotes their interaction.
+
+$$ \hat{H} = \hat{H}_{S} + \hat{H}_{B} + \hat{H}_{I} $$
+
+where $\hat{H}_{S}$ and $\hat{H}_{B}$ are the system and bath Hamiltonians, respectively, and $\hat{H}_{I}$ denotes their interaction.
 
 
 To derive an equation of motion for the subsystem alone, we introduce a projection operator $\mathcal{P}$  that projects any operator onto the relevant subspace (i.e., the part we care about). Its complement is given by $\mathcal{Q} = 1 - \mathcal{P}$.
@@ -50,24 +51,26 @@ $$
 These equations describe how the projected components $\mathcal{P} \hat{\rho}(t)$ and $\mathcal{Q} \hat{\rho}(t)$ evolve and interact over time.
 
 Formally solving the second equation gives:
+
 $$
-\mathcal{Q} \hat{\rho}(t) = e^{-i \mathcal{Q} \mathcal{L} (t - t_0)} \mathcal{Q} \hat{\rho}(t_0)
-- i \int_{t_0}^{t} d\tau\, e^{-i \mathcal{Q} \mathcal{L} (t - \tau)} \mathcal{Q} \mathcal{L} \mathcal{P} \hat{\rho}(\tau)
+\mathcal{Q} \hat{\rho}(t) = e^{-i \mathcal{Q} \mathcal{L} (t - t_{0})} \mathcal{Q} \hat{\rho}(t_{0})
+- i \int_{t_{0}}^{t} d\tau\, e^{-i \mathcal{Q} \mathcal{L} (t - \tau)} \mathcal{Q} \mathcal{L} \mathcal{P} \hat{\rho}(\tau)
 $$
 
 Substituting this solution back into the first equation yields a formally closed equation for the relevant component $\mathcal{P} \hat{\rho}(t)$:
 
 $$
 \frac{d}{dt} \mathcal{P} \hat{\rho}(t) = -i \mathcal{P} \mathcal{L}\mathcal{P} \hat{\rho}(t)
-- \int_{t_0}^{t} d\tau\, \mathcal{P} \mathcal{L} e^{-i \mathcal{Q} \mathcal{L}(t - \tau)} \mathcal{Q} \mathcal{L} \mathcal{P} \hat{\rho}(\tau)
-- i \mathcal{P} \mathcal{L} e^{-i \mathcal{Q} \mathcal{L}(t - t_0)} \mathcal{Q} \hat{\rho}(t_0)
+- \int_{t_{0}}^{t} d\tau\, \mathcal{P} \mathcal{L} e^{-i \mathcal{Q} \mathcal{L}(t - \tau)} \mathcal{Q} \mathcal{L} \mathcal{P} \hat{\rho}(\tau)
+- i \mathcal{P} \mathcal{L} e^{-i \mathcal{Q} \mathcal{L}(t - t_{0})} \mathcal{Q} \hat{\rho}(t_{0})
 $$
 
 This is the **Nakajima-Zwanzig GQME** with:
+
 - $\hat{\sigma}(t) \equiv \mathcal{P} \hat{\rho}(t)$  the reduced density matrix,
 - $\mathcal{K}(t)\equiv \mathcal{P} \mathcal{L} e^{-i \mathcal{Q} \mathcal{L}(t - \tau)} \mathcal{Q} \mathcal{L} \mathcal{P}$ the memory kernel,
-- $\hbar^{-1}\langle \mathcal{L}\rangle_n^0\equiv \mathcal{P} \mathcal{L} \mathcal{P}$ the projected Liouvillian, which governs the system's unitary evolution in the absence of coupling to the bath,
-- $\mathcal{I}(t) \equiv - i \mathcal{P} \mathcal{L} e^{-i \mathcal{Q} \mathcal{L}(t - t_0)} \mathcal{Q} \hat{\rho}(t_0)$ the inhomogeneous term.
+- $\hbar^{-1}\langle \mathcal{L}\rangle_{n}^{0}\equiv \mathcal{P} \mathcal{L} \mathcal{P}$ the projected Liouvillian, which governs the system's unitary evolution in the absence of coupling to the bath,
+- $\mathcal{I}(t) \equiv - i \mathcal{P} \mathcal{L} e^{-i \mathcal{Q} \mathcal{L}(t - t_{0})} \mathcal{Q} \hat{\rho}(t_{0})$ the inhomogeneous term.
 
 This equation serves as the formal foundation for computing reduced system dynamics with full inclusion of environment-induced memory effects.
 
@@ -75,20 +78,25 @@ This equation serves as the formal foundation for computing reduced system dynam
 ## GQME for molecular systems
 
 For molecular systems with an overall Hamiltonian of the following form:
+
 $$
-\hat{H} = \sum_{j=1}^{N_e} \hat{H}_j(\hat{\mathbf{R}},\hat{\mathbf{P}}) |j\rangle\langle j|+ \sum_{\substack{j,k = 1 \\ k \neq j}}^{N_e} \hat{V}_{jk}(\hat{\mathbf{R}})|j\rangle\langle k|
+\hat{H} = \sum_{j=1}^{N_{e}} \hat{H}_{j} (\hat{\mathbf{R}}, \hat{\mathbf{P}}) \left| j\right \rangle \left\langle j \right| + \sum_{\substack{j,k = 1 \\ k \neq j}}^{N_{e}} \hat{V}_{jk}(\hat{\mathbf{R}}) \left| j \right\rangle\left\langle k \right|
 $$
-Here, $\hat{H}_j (\hat{\mathbf{R}},\hat{\mathbf{P}})= \hat{\mathbf{P}}^2/2+ V_j(\hat{\mathbf{R}})$ is the nuclear Hamiltonian when the system is in the electronic state $| j \rangle$, with the index $j$ running over the $N_e$ electronic states;
+
+Here, $\hat{H}_{j} (\hat{\mathbf{R}},\hat{\mathbf{P}}) = \hat{\mathbf{P}}^2/2+ V_{j}(\hat{\mathbf{R}})$ is the nuclear Hamiltonian when the system is in the electronic state $| j \rangle$, with the index $j$ running over the $N_{e}$ electronic states;
 $\{ \hat{V}_{jk} (\hat{\mathbf{R}})| j \neq k \}$ are coupling terms between electronic states;
-and $\hat{\mathbf{R}} = \{\hat{R}_1,\hat{R}_2,...,\hat{R}_{N_n} \}$ and $\hat{\mathbf{P}} = \{\hat{P}_1,\hat{P}_2,...,\hat{P}_{N_n} \}$ are the mass-weighted position and momentum operators of the $N_n$ nuclear degrees of freedom (DOFs).
+and $\hat{\mathbf{R}} = \{\hat{R}_1,\hat{R}_2,...,\hat{R}_{N_{n}} \}$ and $\hat{\mathbf{P}} = \{\hat{P}_1,\hat{P}_2,...,\hat{P}_{N_{n}} \}$ are the mass-weighted position and momentum operators of the $N_{n}$ nuclear degrees of freedom (DOFs).
 
 We choose the total initial state to be a product state:
+
 $$
-\hat{\rho} (0) = \hat{\rho}_n (0) \otimes \hat{\sigma} (0)
+\hat{\rho} (0) = \hat{\rho}_{n} (0) \otimes \hat{\sigma} (0)
 $$
-Here, $\hat{\rho}_n (0)$ is the initial density operator for the nuclear (bath) degrees of freedom, which is always taken to be in its own thermal equilibrium. Similarly, $\hat{\sigma} (0) = \text{Tr}_n \{ \hat{\rho} (0)\}$ is the reduced density operator that describes the initial state of the electronic DOFs. Here, ${\rm Tr}_n\{\cdot \}$ denotes the partial trace over nuclear (bath) degrees of freedom.
+
+Here, $\hat{\rho}_{n} (0)$ is the initial density operator for the nuclear (bath) degrees of freedom, which is always taken to be in its own thermal equilibrium. Similarly, $\hat{\sigma} (0) = \text{Tr}_n \{ \hat{\rho} (0)\}$ is the reduced density operator that describes the initial state of the electronic DOFs. Here, ${\rm Tr}_n\{\cdot \}$ denotes the partial trace over nuclear (bath) degrees of freedom.
 
 Now define the projection operator as:
+
 $$\mathcal{P} \hat{\rho}(t) = \hat{\rho}_n(0) \otimes \text{Tr}_n\{\hat{\rho}(t)\}$$
 
 This choice ensures that $\mathcal{P} \hat{\rho}(0) = \hat{\rho}(0)$, which means the inhomogeneous term $\mathcal{I}(t)$ in the GQME vanishes.
@@ -96,11 +104,11 @@ This choice ensures that $\mathcal{P} \hat{\rho}(0) = \hat{\rho}(0)$, which mean
 With this projection operator, the definitions of the projected Liouvillian and the memory kernel become:
 
 $$
-\langle \mathcal{L}\rangle_n^0 = \text{Tr}_n \left\{ \hat{\rho}_n (0) {\cal L} \right\}
+\langle \mathcal{L}\rangle_{n}^{0} = \text{Tr}_n \left\{ \hat{\rho}_n (0) {\cal L} \right\}
 $$
 
 $$
-\mathcal{K}(t) = \frac{1}{\hbar^2}\text{Tr}_n \Big\{ \mathcal{L} e^{-i \mathcal{QL} \tau / \hbar}\mathcal{QL} \hat{\rho}_n (0) \Big\}
+\mathcal{K}(t) = \frac{1}{\hbar^2}\text{Tr}_n \Big\{ \mathcal{L} e^{-i \mathcal{QL} \tau / \hbar}\mathcal{QL} \hat{\rho}_n (0) \Big\} 
 $$
 
 
@@ -119,17 +127,21 @@ e^{-i \mathcal{L}(t - \tau)/\hbar} \mathcal{P}\mathcal{L} e^{-i \mathcal{Q}\math
 $$
 
 The memory kernel becomes
+
 $$
 \mathcal{K}(t)
 = i\dot{\mathcal{F}}(t)
-- \frac{1}{\hbar}\mathcal{F}(t)\langle \mathcal{L}\rangle_n^0
+- \frac{1}{\hbar}\mathcal{F}(t)\langle \mathcal{L}\rangle_{n}^{0}
 + i\int_{0}^{t} d\tau \, \mathcal{F}(t - \tau)\mathcal{K}(\tau)
 $$
-with the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t) $ defined as
+
+with the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t)$ defined as
+
 $$
 \mathcal{F}(t)
 = \frac{1}{\hbar}\mathrm{Tr}_n\bigl[\mathcal{L} e^{-i\mathcal{L}t/\hbar}\hat{\rho}_n(0)\bigr]
 $$
+
 $$
 \dot{\mathcal{F}}(t)
 = -\frac{i}{\hbar^2}\mathrm{Tr}_n\bigl[\mathcal{L} e^{-i\mathcal{L}t/\hbar}\mathcal{L}\hat{\rho}_n(0)\bigr].
@@ -137,13 +149,15 @@ $$
 
 The projection-free inputs can be related to the dynamics of the reduced density operator.
 Note that the reduce density operator $\hat{\sigma}(t)$ can be formally written as
+
 $$
 \hat{\sigma}(t)  = \mathcal{G}(t) \hat{\sigma}(0) = \mathrm{Tr}_n [e^{-i\mathcal{L}t/\hbar}\hat{\rho}_n(0)] \hat{\sigma}(0)
 $$
-therefore, $\mathcal{F}(t) = i\dot{\mathcal{G}}(t)$. $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t) $ can be obtained through taking time-derivatives of $\mathcal{G}(t)$.
+
+therefore, $\mathcal{F}(t) = i\dot{\mathcal{G}}(t)$. $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t)$ can be obtained through taking time-derivatives of $\mathcal{G}(t)$.
 
 The propagator $\mathcal{G}(t)$, is a super-operator with the matrix
-element $\mathcal{G}_{jk,lm}(t)$, which can be defined by starting from initial state $|l⟩⟨m| ⊗ \hat{\rho}_n(0)$, measure the $\sigma_{jk}(t)$ at time $t$.
+element $\mathcal{G}_{jk,lm}(t)$, which can be defined by starting from initial state $|l⟩⟨m| \otimes \hat{\rho}_n(0)$, measure the $\sigma_{jk}(t)$ at time $t$.
 
 These quantities can be computed using various existing numerical methods, such as the numerically exact tensor-train thermo-field dynamics (TT-TFD) approach introduced in  [TT-TFD](What_is_TTTFD.md). We will demonstrate the practical solution of the GQME using `qflux` in [GQME for Spin-Boson model](spin_boson_GQME.md).
 
