@@ -15,3 +15,4 @@ Our documentation includes the following sections:
 - [Introduction to GQME](What_is_GQME.md)
 - [Introduction to TT-TFD](What_is_TTTFD.md)
 - [GQME for Spin-Boson model](spin_boson_GQME.md)
+- [Quantum Algorithms of GQME](quantum_GQME_dilation.md)

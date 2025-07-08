@@ -85,6 +85,7 @@ nav: # Note: All paths must be relative to the docs dir
     - Introduction to GQME: 'qflux/GQME/What_is_GQME.md'
     - Introduction to TT-TFD: 'qflux/GQME/What_is_TTTFD.md'
     - GQME for Spin-Boson model: 'qflux/GQME/spin_boson_GQME.md'
+    - Quantum Algorithms of GQME: 'qflux/GQME/quantum_GQME_dilation.md'
     - Source Code: 'qflux/GQME/gqme_api.md'
 extra:
   analytics:
