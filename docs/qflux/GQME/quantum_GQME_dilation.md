@@ -115,13 +115,18 @@ One can also visualize an example quantum circuit from the result output of the 
 res_qc['circuits'][200].draw('mpl')
 ```
 ![qcGQME200](../images/Part_IV/Fig_GQME_qc200.png)
+
 Here, we use the circuit at the 200th time step as an example.
 
-Furthermore, one can appreciate the circuit complexity by decomposing it into fundamental gates:
+Furthermore, the circuit complexity can be further illustrated by transpiling it into a specific basis gate set.:
 ```python
-res_qc['circuits'][200].decompose().draw('mpl')
+from qiskit import transpile
+
+basis_gates = ['cz', 'id', 'rx', 'rz', 'rzz', 'sx', 'x']
+compiled_circuit = transpile(res_qc['circuits'][200], basis_gates=basis_gates, optimization_level=1)
+compiled_circuit.draw('mpl')
 ```
-![qcGQME200_decompose](../images/Part_IV/Fig_GQME_qc200_decompose.png)
+![qcGQME200_decompose](../images/Part_IV/Fig_GQME_qc200_transpile.png)
 
 
 # Summary
