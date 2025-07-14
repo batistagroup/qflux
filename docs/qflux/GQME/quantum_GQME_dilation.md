@@ -100,14 +100,29 @@ qSBM = QubitDynamicsOS(rep='Density', Nsys = pa.DOF_E, Hsys = Hsys, rho0 = rho0)
 qSBM.set_count_str(['000','011'])
 qSBM.set_dilation_method('Sz-Nagy')
 
-pop_qc = qSBM.qc_simulation_vecdens(timeVec,Gprop=G_prop)
+res_qc = qSBM.qc_simulation_vecdens(timeVec,Gprop=G_prop)
+pop_qc = res_qc['data']
 ```
 
 Here, we instantiate the `QubitDynamicsOS` class with the parameters of the spin-boson model, set the final measurement states, and specify the dilation method. The `qc_simulation_vecdens` method supports quantum simulation with the propagator as input.
 
-The results are shown in the figure below.
+The population results are shown in the figure below.
 
 ![qGQME](../images/Part_IV/Fig_qGQME.png)
+
+One can also visualize an example quantum circuit from the result output of the `qc_simulation_vecdens` method:
+```python
+res_qc['circuits'][200].draw('mpl')
+```
+![qcGQME200](../images/Part_IV/Fig_GQME_qc200.png)
+Here, we use the circuit at the 200th time step as an example.
+
+Furthermore, one can appreciate the circuit complexity by decomposing it into fundamental gates:
+```python
+res_qc['circuits'][200].decompose().draw('mpl')
+```
+![qcGQME200_decompose](../images/Part_IV/Fig_GQME_qc200_decompose.png)
+
 
 # Summary
 This example demonstrates a modular quantum simulation of the Generalized Quantum Master Equation (GQME) using the spin-boson model as an illustrative example:
