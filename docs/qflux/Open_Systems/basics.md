@@ -240,9 +240,7 @@ spin1_quantum.set_count_str(['000','011'])
 Pop_qc = spin1_quantum.qc_simulation_vecdens(time_arr)
 ```
 
-
 One can verify that the quantum simulation results are consistent with the corresponding classical results.
-
 
 ```python
 import matplotlib.pyplot as plt
@@ -254,6 +252,24 @@ plt.ylabel('$P(t)$',fontsize=15)
 plt.legend(fontsize=10)
 ```
 
-
-
 ![png](../images/Part_II/OpenSys_basic_dyn.png)
+
+
+One can also visualize an example quantum circuit from the result output of the `qc_simulation_vecdens` method (here, we use the circuit at the 100th time step as an example):
+```python
+res_qc['circuits'][100].draw('mpl')
+```
+![qc100](../images/Part_II/Fig_basis_qc.png)
+
+The circuit complexity can be further illustrated by transpiling it into a specific basis gate set. Here, we adopt the basis gates used for the `ibm_kingston` backend:
+
+```python
+from qiskit import transpile
+
+basis_gates = ['cz', 'id', 'rx', 'rz', 'rzz', 'sx', 'x']
+compiled_circuit = transpile(result_qc['circuits'][100], basis_gates=basis_gates, optimization_level=1)
+compiled_circuit.draw('mpl')
+```
+![qc100_transpile](../images/Part_II/Fig_basis_qc_transpile.png)
+
+

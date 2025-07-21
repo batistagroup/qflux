@@ -220,6 +220,7 @@ class QubitDynamicsOS(DynamicsOS):
         Gprop: Optional[List[np.ndarray]] = None,
         tolk: float = 1e-5,
         tolo: float = 1e-5,
+        Is_store_circuit = False,
         **kwargs: Any
         ) -> np.ndarray:
         """
@@ -239,10 +240,14 @@ class QubitDynamicsOS(DynamicsOS):
                 If None, it will be calculated. Defaults to None.
             tolk (float, optional): Tolerance for generating Kraus operators. Defaults to 1e-5.
             tolo (float, optional): Tolerance for observable decomposition. Defaults to 1e-5.
+            Is_store_circuit (bool, optional): If True, store the generated quantum circuits at each time step. Defaults to False.
             **kwargs: Additional keyword arguments for propagator calculation.
 
         Returns:
-            np.ndarray: Array containing the quantum simulation results.
+            Dict[str, Any]: A dictionary containing quantum simulation results, including:
+                - 'data' (np.ndarray): Array of shape (nsteps,), containing the accumulated observable expectation values at each time step.
+                - 'circuits' (List[List[QuantumCircuit]], optional): If `Is_store_circuit` is True, this field contains a list of lists of quantum circuits.
+                  Each outer list corresponds to a time step, and each inner list contains all circuits used for that step (across different Kraus operators and initial states).
         """
         nsteps = len(time_arr)
 
@@ -270,7 +275,10 @@ class QubitDynamicsOS(DynamicsOS):
         obs_q = self._get_qiskit_observable(Isdilate=True, tol=tolo)
 
         print('Starting quantum simulation')
-        result_simulation = np.zeros(nsteps, dtype=np.float64)
+        
+        result_simu = {}
+        result_simu['data'] = np.zeros(nsteps, dtype=np.float64)
+        if(Is_store_circuit):  result_simu['circuits'] = [ [] for _ in range(nsteps) ]
 
         for i in range(nsteps):
             print('Simulation step', i, 'of', nsteps)
@@ -280,9 +288,11 @@ class QubitDynamicsOS(DynamicsOS):
                 for istate in range(n_inistate):
                     qc = self._create_circuit(kraus_op, statevec[istate], Isscale=False)
                     result = estimator.run([(qc, obs_q)]).result()
-                    result_simulation[i] += result[0].data.evs * prob[istate]
+                    
+                    if(Is_store_circuit):  result_simu['circuits'][i].append(qc)
+                    result_simu['data'][i] += result[0].data.evs * prob[istate]
 
-        return result_simulation
+        return result_simu
 
     def qc_simulation_vecdens(
         self,
@@ -307,7 +317,11 @@ class QubitDynamicsOS(DynamicsOS):
             **kwargs: Additional keyword arguments for propagator calculation.
 
         Returns:
-            np.ndarray: Array containing the quantum simulation results.
+            Dict[str, Any]: A dictionary containing the quantum simulation results, including:
+                - 'data' (np.ndarray): Array of shape (nsteps, n_bitstr), storing the processed probability amplitudes 
+                (i.e., normalized square root of the measured probabilities, scaled by norm factors) at each time step.
+                - 'circuits' (List[QuantumCircuit]): List of generated quantum circuits for each time step.
+                - 'norm' (List[float]): List of norm correction factors used in post-processing at each time step.
         """
         if Gprop is None:
             Gprop = self.Gt_matrix_expo(time_arr, **kwargs)
@@ -319,21 +333,32 @@ class QubitDynamicsOS(DynamicsOS):
 
         n_bitstr = len(self.count_str)
         statevec, norm0 = self.init_statevec_vecdens()
-        result = np.zeros((nsteps, n_bitstr), dtype=np.float64)
-
+        
+        result = {}
+        result['data'] = np.zeros((nsteps, n_bitstr), dtype=np.float64)
+        result['circuits'] = []
+        result['norm'] = []
+        
         for i in range(nsteps):
             if i % 100 == 0:
                 print('Quantum simulation step', i)
             Gt = Gprop[i]
+            
+            #create the circuit
             circuit, norm = self._create_circuit(Gt, statevec, Isscale=True)
             circuit.measure(range(self.Nqb + 1), range(self.Nqb + 1))
             if self.dilation_method == 'SVD-Walsh':
                 circuit = transpile(circuit, backend)
+            
+            #store the circuits and norm to the result
+            result['circuits'].append(circuit)
+            result['norm'].append(norm)
+            
             counts = backend.run(circuit, shots=shots).result().get_counts()
             for j in range(n_bitstr):
                 bitstr = self.count_str[j]
                 if bitstr in counts:
-                    result[i, j] = np.sqrt(counts[bitstr] / shots) * norm * norm0
+                    result['data'][i, j] = np.sqrt(counts[bitstr] / shots) * norm * norm0
                 else:
                     print('At time', i, 'with shots =', shots, "no counts for", bitstr)
 
