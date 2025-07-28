@@ -934,6 +934,14 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -971,6 +979,94 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GQME/What_is_GQME/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to GQME
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GQME/What_is_TTTFD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to TT-TFD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GQME/spin_boson_GQME/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GQME for Spin-Boson model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GQME/quantum_GQME_dilation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quantum Algorithms of GQME
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1267,6 +1363,18 @@ H = E_0 \sigma^z + \Delta \sigma^x
 </span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </span></code></pre></div>
 <p><img alt="png" src="../../images/Part_II/OpenSys_basic_dyn.png" /></p>
+<p>One can also visualize an example quantum circuit from the result output of the <code>qc_simulation_vecdens</code> method (here, we use the circuit at the 100th time step as an example):
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">res_qc</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<img alt="qc100" src="../../images/Part_II/Fig_basis_qc.png" /></p>
+<p>The circuit complexity can be further illustrated by transpiling it into a specific basis gate set. Here, we adopt the basis gates used for the <code>ibm_kingston</code> backend:</p>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">transpile</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">basis_gates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cz&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="s1">&#39;rz&#39;</span><span class="p">,</span> <span class="s1">&#39;rzz&#39;</span><span class="p">,</span> <span class="s1">&#39;sx&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">]</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">compiled_circuit</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span><span class="n">result_qc</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="mi">100</span><span class="p">],</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">compiled_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<img alt="qc100_transpile" src="../../images/Part_II/Fig_basis_qc_transpile.png" /></p>
 
 
 
