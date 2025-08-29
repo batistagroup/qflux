@@ -1,4 +1,7 @@
 import numpy as np
+import numpy.typing as npt
+from typing import List, Optional, Tuple
+
 from qiskit import QuantumCircuit
 from qiskit.primitives import Estimator
 from qiskit.quantum_info import SparsePauliOp
@@ -7,10 +10,12 @@ from qiskit.providers.fake_provider import FakeSherbrooke
 
 
 # To change the ansatz, apply_param and measure_der must both be modified.
-def apply_param(params, i, qc, N):
-    """Apply parameter i to the quantum circuit currently constructing the ansatz.  
-        The ansatz must be built in a peicewise manner to allow for hadamard tests 
-        of the generators of the parameters to later be inserted to measure the A_ij 
+def apply_param(
+    params: npt.NDArray[np.float_], i: int, qc: QuantumCircuit, N: int
+) -> None:
+    """Apply parameter i to the quantum circuit currently constructing the ansatz.
+        The ansatz must be built in a peicewise manner to allow for hadamard tests
+        of the generators of the parameters to later be inserted to measure the A_ij
         and C_i matrix elements.
 
     Args:
@@ -19,14 +24,15 @@ def apply_param(params, i, qc, N):
         qc (QuantumCircuit): The qiskit ansatz quantum circuit currently being constructed.
         N (int): Number of qubits
     """
-    qc.rx(params[i], i % N)
-    if(i % N == N-1 and i != len(params)-1):
-        for i in range(N-1):
-            qc.cz(i, i+1)
+    qc.rx(params[i], i % N))
+    if i % N == N - 1 and i != len(params) - 1:
+        for i in range(N - 1):
+            qc.cz(i, i + 1)
 
-def measure_der(i, qc, N):
-    """Append a Hadamard test to the circuit to measure the generator of parameter i in the ansatz.  
-        The ansatz currently used is simply the two-local ansatz with only rx gates.  
+
+def measure_der(i: int, qc: QuantumCircuit, N: int) -> None:
+    """Append a Hadamard test to the circuit to measure the generator of parameter i in the ansatz.
+        The ansatz currently used is simply the two-local ansatz with only rx gates.
         Therefore the generator is only x-gates on the corresponding qubit.
 
     Args:
@@ -35,8 +41,9 @@ def measure_der(i, qc, N):
         N (int): Number of qubits
     """
     qc.cx(N, i % N)
-        
-def A_Circuit(params, i, j, N):
+
+
+def A_Circuit(params: npt.NDArray[np.float_], i: int, j: int, N: int) -> QuantumCircuit:
     """Constructs the qiskit quantum circuits used to measure each element of the A_ij matrix.
 
     Args:
@@ -46,24 +53,31 @@ def A_Circuit(params, i, j, N):
         N (int): The number of qubits.
 
     Returns:
-        QuantumCircuit: The quantum circuit for an element of the A_ij matrix, in the form of a 
-            hadamard test of the generators of parameters i and j.  The value of the A_ij matrix 
+        QuantumCircuit: The quantum circuit for an element of the A_ij matrix, in the form of a
+            hadamard test of the generators of parameters i and j.  The value of the A_ij matrix
             can be found by measuring the ancilla qubit (qubit N) in the Z basis.
     """
-    qc = QuantumCircuit(N+1, 1)
+    qc = QuantumCircuit(N + 1, 1)
     qc.h(N)
-    for parameter in range(len(params)):# Apply parameterized gates
-        if(parameter == i):
+    for parameter in range(len(params)):  # Apply parameterized gates
+        if parameter == i:
             qc.x(N)
-            measure_der(parameter, qc, N) # Measure generator for i
+            measure_der(parameter, qc, N)  # Measure generator for i
             qc.x(N)
-        if(parameter == j):
-            measure_der(parameter, qc, N) # Measure second generator for j
+        if parameter == j:
+            measure_der(parameter, qc, N)  # Measure second generator for j
         apply_param(params, parameter, qc, N)
     qc.h(N)
     return qc
 
-def Measure_A(init_circ, params, N, shots=2**10, noisy=False):
+
+def Measure_A(
+    init_circ: QuantumCircuit,
+    params: npt.NDArray[np.float_],
+    N: int,
+    shots: int = 2**10,
+    noisy: bool = False,
+) -> npt.NDArray[np.float_]:
     """Create the A_ij matrix through measuring quantum circuits corresponding to each element.
 
     Args:
@@ -78,60 +92,83 @@ def Measure_A(init_circ, params, N, shots=2**10, noisy=False):
     """
     A = [[0.0 for i in range(len(params))] for j in range(len(params))]
     for i in range(len(params)):
-        for j in range(len(params)-i):
-            qc = QuantumCircuit(N+1, 1)
-            ansatz = A_Circuit(params, i, i+j, N)
+        for j in range(len(params) - i):
+            qc = QuantumCircuit(N + 1, 1)
+            ansatz = A_Circuit(params, i, i + j, N)
             qc = qc.compose(init_circ, [k for k in range(N)])
-            qc = qc.compose(ansatz, [k for k in range(N+1)])
-            
-            observable = SparsePauliOp.from_list([("Z"+"I"*N, 1.0)])
-            if(noisy):
-                device_backend = FakeSherbrooke() 
+            qc = qc.compose(ansatz, [k for k in range(N + 1)])
+
+            observable = SparsePauliOp.from_list([("Z" + "I" * N, 1.0)])
+            if noisy:
+                device_backend = FakeSherbrooke()
                 coupling_map = device_backend.coupling_map
                 noise_model = NoiseModel.from_backend(device_backend)
                 basis_gates = noise_model.basis_gates
-                estimator = Estimator(options={"shots": shots, "noise_model":noise_model, "coupling_map":coupling_map, "basis_gates":basis_gates})
+                estimator = Estimator(
+                    options={
+                        "shots": shots,
+                        "noise_model": noise_model,
+                        "coupling_map": coupling_map,
+                        "basis_gates": basis_gates,
+                    }
+                )
             else:
                 estimator = Estimator(options={"shots": shots})
             result = estimator.run(qc, observable).result()
-            
-            A[i][i+j] = result.values[0]
+            A[i][i + j] = result.values[0]
     return np.array(A)
 
-def C_Circuit(params, i, pauli_string, N, evolution_type="real"):
+
+def C_Circuit(
+    params: npt.NDArray[np.float_],
+    i: int,
+    pauli_string: str,
+    N: int,
+    evolution_type: str = "real",
+) -> QuantumCircuit:
+
     """Create the qiskit quantum circuits to measure each element of the C_i vector.
 
     Args:
         params (numpy.array): A numpy array which contains the values of each parameter of the ansatz.
-        i (int): The index of the C_i vector being measured. This also corresponds 
+        i (int): The index of the C_i vector being measured. This also corresponds
             to the index i of the parameter whose generator will be measured
         pauli_string (str): A string containing a description of the pauli operator of the Hamiltonian which will be measured.
         N (int): The number of qubits.
-        evolution_type (str, optional): This determines if the evolution will be real-time or imaginary-time 
+        evolution_type (str, optional): This determines if the evolution will be real-time or imaginary-time
             through the addition of an extra gate. Defaults to "real".
 
     Returns:
-        QuantumCircuit: The quantum circuit for an element of the C_i matrix, in the form of a 
-            hadamard test of the generators of parameter i.  The value of the C_i matrix 
+        QuantumCircuit: The quantum circuit for an element of the C_i matrix, in the form of a
+            hadamard test of the generators of parameter i.  The value of the C_i matrix
             can be found by measuring the ancilla qubit (qubit N) in the Z basis.
     """
-    qc = QuantumCircuit(N+1, 1)
+    qc = QuantumCircuit(N + 1, 1)
     qc.h(N)
-    if(evolution_type=="imaginary"):
-        qc.s(N)#To get only imaginary component
+    if evolution_type == "imaginary":
+        qc.s(N)  # To get only imaginary component
     else:
         qc.z(N)
-    for parameter in range(len(params)): # Apply parameterized gates
-        if(parameter == i):
+    for parameter in range(len(params)):  # Apply parameterized gates
+        if parameter == i:
             qc.x(N)
-            measure_der(parameter, qc, N) # Measure generators
+            measure_der(parameter, qc, N)  # Measure generators
             qc.x(N)
         apply_param(params, parameter, qc, N)
     pauli_measure(qc, pauli_string)
     qc.h(N)
     return qc
 
-def Measure_C(init_circ, params, H, N, shots=2**10, evolution_type="real", noisy=False):
+
+def Measure_C(
+    init_circ: QuantumCircuit,
+    params: npt.NDArray[np.float_],
+    H: SparsePauliOp,
+    N: int,
+    shots: int = 2**10,
+    evolution_type: str = "real",
+    noisy: bool = False,
+) -> npt.NDArray[np.float_]:
     """Create the C_i vector through measuring quantum circuits corresponding to each element.
 
     Args:
@@ -140,7 +177,7 @@ def Measure_C(init_circ, params, H, N, shots=2**10, evolution_type="real", noisy
         H (SparsePauliOp): The Hamiltonian.
         N (int): The number of qubits.
         shots (int, optional): The number of shots to be used to measure each element of the C_i vector. Defaults to 2**10.
-        evolution_type (str, optional): This determines if the evolution will be real-time or imaginary-time 
+        evolution_type (str, optional): This determines if the evolution will be real-time or imaginary-time
             through the addition of an extra gate. Defaults to "real".
         noisy (bool, optional): A boolean used to turn on and off the Fake-Sherbrooke qiskit noisy backend. Defaults to False.
 
@@ -150,25 +187,35 @@ def Measure_C(init_circ, params, H, N, shots=2**10, evolution_type="real", noisy
     C = [0.0 for i in range(len(params))]
     for i in range(len(params)):
         for pauli_string in range(len(H.paulis)):
-            qc = QuantumCircuit(N+1, 1)
-            ansatz = C_Circuit(params, i, H.paulis[pauli_string], N, evolution_type=evolution_type)
+            qc = QuantumCircuit(N + 1, 1)
+            ansatz = C_Circuit(
+                params, i, H.paulis[pauli_string], N, evolution_type=evolution_type
+            )
             qc = qc.compose(init_circ, [k for k in range(N)])
-            qc = qc.compose(ansatz, [k for k in range(N+1)])
-            observable = SparsePauliOp.from_list([("Z"+"I"*N, 1.0)])
-            if(noisy):
-                device_backend = FakeSherbrooke() 
+            qc = qc.compose(ansatz, [k for k in range(N + 1)])
+            observable = SparsePauliOp.from_list([("Z" + "I" * N, 1.0)])
+            if noisy:
+                device_backend = FakeSherbrooke()
                 coupling_map = device_backend.coupling_map
                 noise_model = NoiseModel.from_backend(device_backend)
                 basis_gates = noise_model.basis_gates
-                estimator = Estimator(options={"shots": shots, "noise_model":noise_model, "coupling_map":coupling_map, "basis_gates":basis_gates})
+                estimator = Estimator(
+                    options={
+                        "shots": shots,
+                        "noise_model": noise_model,
+                        "coupling_map": coupling_map,
+                        "basis_gates": basis_gates,
+                    }
+                )
             else:
                 estimator = Estimator(options={"shots": shots})
             result = estimator.run(qc, observable).result()
 
-            C[i] -= 1/2*H.coeffs[pauli_string].real*result.values[0]
+            C[i] -= 1 / 2 * H.coeffs[pauli_string].real * result.values[0]
     return np.array(C)
-    
-def pauli_measure(qc, pauli_string):
+
+
+def pauli_measure(qc: QuantumCircuit, pauli_string: str) -> None:
     """Measure the given pauli string on the provided quantum circuit using a hadamard test.
 
     Args:
@@ -176,15 +223,18 @@ def pauli_measure(qc, pauli_string):
         pauli_string (str): The pauli string to be measured as a string.
     """
     N = len(pauli_string)
-    for i in range(len(pauli_string)): # Measure Pauli Strings
-        if(str(pauli_string[i]) == "X"):
-            qc.cx(N,i)
-        if(str(pauli_string[i]) == "Y"):
-            qc.cy(N,i)
-        if(str(pauli_string[i]) == "Z"):
-            qc.cz(N,i)
+    for i in range(len(pauli_string)):  # Measure Pauli Strings
+        if str(pauli_string[i]) == "X":
+            qc.cx(N, i)
+        if str(pauli_string[i]) == "Y":
+            qc.cy(N, i)
+        if str(pauli_string[i]) == "Z":
+            qc.cz(N, i)
 
-def Construct_Ansatz(init_circ, params, N):
+
+def Construct_Ansatz(
+    init_circ: QuantumCircuit, params: npt.NDArray[np.float_], N: int
+) -> QuantumCircuit:
     """Construct the full ansatz for use in measuring observables.
 
     Args:
@@ -197,15 +247,22 @@ def Construct_Ansatz(init_circ, params, N):
     """
     qc = QuantumCircuit(N, 0)
     qc = qc.compose(init_circ, [k for k in range(N)])
-    
+
     ansatz = QuantumCircuit(N, 0)
-    for parameter in range(len(params)): # Apply parameterized gates
+    for parameter in range(len(params)):  # Apply parameterized gates
         apply_param(params, parameter, ansatz, N)
 
     qc = qc.compose(ansatz, [k for k in range(N)])
     return qc
 
-def ansatz_energy(init_circ, params, H, shots=2**14, noisy=False):
+
+def ansatz_energy(
+    init_circ: QuantumCircuit,
+    params: npt.NDArray[np.float_],
+    H: SparsePauliOp,
+    shots: int = 2**14,
+    noisy: bool = False,
+) -> Tuple[float, float]:
     """Measure the energy of the ansatz.
 
     Args:
@@ -219,21 +276,37 @@ def ansatz_energy(init_circ, params, H, shots=2**14, noisy=False):
         (float, float): Return (energy, variance) from the measured observables.
     """
     N = H.num_qubits
-    from qiskit.primitives import Estimator
-    if(noisy):
-        device_backend = FakeSherbrooke() 
+
+    if noisy:
+        device_backend = FakeSherbrooke()
         coupling_map = device_backend.coupling_map
         noise_model = NoiseModel.from_backend(device_backend)
         basis_gates = noise_model.basis_gates
-        estimator = Estimator(options={"shots": shots, "noise_model":noise_model, "coupling_map":coupling_map, "basis_gates":basis_gates})
+        estimator = Estimator(
+            options={
+                "shots": shots,
+                "noise_model": noise_model,
+                "coupling_map": coupling_map,
+                "basis_gates": basis_gates,
+            }
+        )
     else:
         estimator = Estimator(options={"shots": shots})
     qc = Construct_Ansatz(init_circ, params, N)
     result = estimator.run(qc, H).result()
     return result.values[0], result.metadata[0]["variance"]
 
-def VarQRTE(n_reps_ansatz, hamiltonian, total_time=1.0, timestep=0.1, init_circ=None, shots=2**10, noisy=False):
-    """The Variational Quantum Real Time Evolution (VarQRTE) algorithm.  This uses quantum circuits to measure 
+
+def VarQRTE(
+    n_reps_ansatz: int,
+    hamiltonian: SparsePauliOp,
+    total_time: float = 1.0,
+    timestep: float = 0.1,
+    init_circ: Optional[QuantumCircuit] = None,
+    shots: int = 2**10,
+    noisy: bool = False,
+) -> List[npt.NDArray[np.float_]]:
+    """The Variational Quantum Real Time Evolution (VarQRTE) algorithm.  This uses quantum circuits to measure
         the elements of two objects, the A_ij matrix and the C_i vector.
 
     Args:
@@ -246,38 +319,57 @@ def VarQRTE(n_reps_ansatz, hamiltonian, total_time=1.0, timestep=0.1, init_circ=
         noisy (bool, optional): A boolean used to turn on and off the Fake-Sherbrooke qiskit noisy backend. Defaults to False.
 
     Returns:
-        numpy.array: An array containing all the parameter values of the ansatz throughout its time evolution.  
+        numpy.array: An array containing all the parameter values of the ansatz throughout its time evolution.
             These values can be put into Construct_Ansatz, or anstaz_energy to obtain observables of the system.
     """
-    if(init_circ is None):
+    if init_circ is None:
         init_circ = QuantumCircuit(hamiltonian.num_qubits)
 
-    initial_params = np.zeros(hamiltonian.num_qubits*(n_reps_ansatz+1))
-    num_timesteps = int(total_time/timestep)
+    initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1))
+    num_timesteps = int(total_time / timestep)
     all_params = [np.copy(initial_params)]
-    my_params = np.copy(initial_params) # Reset Initial Parameters after each run
+    my_params = np.copy(initial_params)  # Reset Initial Parameters after each run
     for i in range(num_timesteps):
         print(f"Simulating Time={str(timestep*(i+1))}                      ", end="\r")
         theta_dot = np.array([0.0 for j in range(len(my_params))])
-        A = Measure_A(init_circ, my_params, hamiltonian.num_qubits, shots=shots, noisy=noisy)
-        C = Measure_C(init_circ, my_params, hamiltonian, hamiltonian.num_qubits, shots=shots, evolution_type="real", noisy=noisy)
+        A = Measure_A(
+            init_circ, my_params, hamiltonian.num_qubits, shots=shots, noisy=noisy
+        )
+        C = Measure_C(
+            init_circ,
+            my_params,
+            hamiltonian,
+            hamiltonian.num_qubits,
+            shots=shots,
+            evolution_type="real",
+            noisy=noisy,
+        )
 
         # Approximately invert A using Truncated SVD
-        u,s,v=np.linalg.svd(A)
-        for j in range(len(s)): 
-            if(s[j] < 1e-2):
+        u, s, v = np.linalg.svd(A)
+        for j in range(len(s)):
+            if s[j] < 1e-2:
                 s[j] = 1e8
         t = np.diag(s**-1)
-        A_inv=np.dot(v.transpose(),np.dot(t,u.transpose()))
-        
+        A_inv = np.dot(v.transpose(), np.dot(t, u.transpose()))
+
         theta_dot = np.matmul(A_inv, C)
 
-        my_params -= theta_dot*timestep
+        my_params -= theta_dot * timestep
         all_params.append(np.copy(my_params))
     return all_params
 
-def VarQITE(n_reps_ansatz, hamiltonian, total_time, timestep, init_circ=None, shots=2**10, noisy=False):
-    """The Variational Quantum Imaginary Time Evolution (VarQITE) algorithm.  This uses quantum circuits to measure 
+
+def VarQITE(
+    n_reps_ansatz: int,
+    hamiltonian: SparsePauliOp,
+    total_time: float,
+    timestep: float,
+    init_circ: Optional[QuantumCircuit] = None,
+    shots: int = 2**10,
+    noisy: bool = False,
+) -> List[npt.NDArray[np.float_]]:
+    """The Variational Quantum Imaginary Time Evolution (VarQITE) algorithm.  This uses quantum circuits to measure
         the elements of two objects, the A_ij matrix and the C_i vector.
 
     Args:
@@ -290,38 +382,52 @@ def VarQITE(n_reps_ansatz, hamiltonian, total_time, timestep, init_circ=None, sh
         noisy (bool, optional): A boolean used to turn on and off the Fake-Sherbrooke qiskit noisy backend. Defaults to False.
 
     Returns:
-        numpy.array: An array containing all the parameter values of the ansatz throughout its time evolution.  
+        numpy.array: An array containing all the parameter values of the ansatz throughout its time evolution.
             These values can be put into Construct_Ansatz, or anstaz_energy to obtain observables of the system.
     """
-    if(init_circ is None):
+    if init_circ is None:
         init_circ = QuantumCircuit(hamiltonian.num_qubits)
 
-    initial_params = np.zeros(hamiltonian.num_qubits*(n_reps_ansatz+1))
-    num_timesteps = int(total_time/timestep)
+    initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1))
+    num_timesteps = int(total_time / timestep)
     all_params = [np.copy(initial_params)]
-    
-    my_params = np.copy(initial_params) # Reset Initial Parameters after each run
+
+    my_params = np.copy(initial_params)  # Reset Initial Parameters after each run
     for i in range(num_timesteps):
         print(f"Timestep: {str(i*timestep)}                      ", end="\r")
         theta_dot = np.array([0.0 for j in range(len(my_params))])
-        A = np.array(Measure_A(init_circ, my_params, hamiltonian.num_qubits, shots=shots, noisy=noisy))
-        C = np.array(Measure_C(init_circ, my_params, hamiltonian, hamiltonian.num_qubits, shots=shots, noisy=noisy, evolution_type="imaginary"))
+        A = np.array(
+            Measure_A(
+                init_circ, my_params, hamiltonian.num_qubits, shots=shots, noisy=noisy
+            )
+        )
+        C = np.array(
+            Measure_C(
+                init_circ,
+                my_params,
+                hamiltonian,
+                hamiltonian.num_qubits,
+                shots=shots,
+                noisy=noisy,
+                evolution_type="imaginary",
+            )
+        )
 
         # Approximately invert A using Truncated SVD
-        u,s,v=np.linalg.svd(A)
-        for j in range(len(s)): 
-            if(s[j] < 1e-2):
+        u, s, v = np.linalg.svd(A)
+        for j in range(len(s)):
+            if s[j] < 1e-2:
                 s[j] = 1e7
         t = np.diag(s**-1)
-        A_inv=np.dot(v.transpose(),np.dot(t,u.transpose()))
-        #A_inv=np.dot(v,np.dot(t,u.transpose()))
-        
+        A_inv = np.dot(v.transpose(), np.dot(t, u.transpose()))
+        # A_inv=np.dot(v,np.dot(t,u.transpose()))
+
         theta_dot = np.matmul(A_inv, C)
-        
-        my_params += theta_dot*timestep
+
+        my_params += theta_dot * timestep
         all_params.append(np.copy(my_params))
-        
-        #print("Theta dot: "+str(np.sum(np.abs(theta_dot))))
-        #print("(Energy ,Variance): "+str(ansatz_energy(init_circ, my_params[:], hamiltonian)))
-        #print()
+
+        # print("Theta dot: "+str(np.sum(np.abs(theta_dot))))
+        # print("(Energy ,Variance): "+str(ansatz_energy(init_circ, my_params[:], hamiltonian)))
+        # print()
     return all_params
