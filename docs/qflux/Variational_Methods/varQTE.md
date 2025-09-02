@@ -112,6 +112,8 @@ plt.ylabel("Energy (eV)")
 plt.show()
 ```
 
+![VarQITE](../images/Part_I/VarQITE.png)
+
 The Variational Quantum Imaginary Time Evolution (VarQITE) algorithm will converge to the ground state of a system as it is evolved through imaginary time, given that the ansatz is large enough. This can be used to estimate the ground state energy of a system by measuring the energy of the system at long imaginary-time, as can be seen above.
 
 
@@ -208,5 +210,7 @@ plt.xlabel("Time")
 plt.ylabel("Expectation Value")
 plt.show()
 ```
+
+![VarQRTE](../images/Part_I/VarQRTE.png)
 
 This result matches our intuition that the evolution of the system provided above should follow a sine wave as it is evolved through real-time.
