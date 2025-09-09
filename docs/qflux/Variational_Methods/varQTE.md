@@ -45,13 +45,13 @@ from qflux.closed_systems.VarQTE import VarQITE, VarQRTE, ansatz_energy, Constru
 We begin with the **Wick-rotated Schrödinger equation** and apply McLachlan’s Variational Principle:
 
 $$
-\delta \bigg\lVert \Big(\frac{d}{d\tau} + \mathcal{H} - E_{\tau}\Big)\ket{\psi(\tau)} \bigg\rVert = 0
+\delta \bigg\lVert \Big(\frac{d}{d\tau} + \mathcal{H} - E_{\tau}\Big)\left|{\psi(\tau)}\right\rangle \bigg\rVert = 0
 $$
 
 For a parameterized ansatz state,
 
 $$
-\ket{\psi(\tau)} = \ket{\psi(\theta(\tau))}
+\left|{\psi(\tau)}\right\rangle = \left|{\psi(\theta(\tau))}\right\rangle
 $$
 
 this leads to a system of linear equations:
@@ -63,11 +63,11 @@ $$
 where
 
 $$
-A_{ij} = \Re\!\Bigg(\frac{\partial\bra{\phi(\theta(\tau))}}{\partial\theta_i}\frac{\partial\ket{\phi(\theta(\tau))}}{\partial\theta_j}\Bigg),
+A_{ij} = \Re\!\Bigg(\frac{\partial\left\langle{\phi(\theta(\tau))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(\tau))}\right\rangle}{\partial\theta_j}\Bigg),
 $$
 
 $$
-C_i = - \Re\!\Bigg(\bra{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\mathcal{H}\ket{\phi(\theta(\tau))}\Bigg).
+C_i = - \Re\!\Bigg(\left\langle{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\right|\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
 $$
 
 These \$A\_{ij}\$ and \$C\_i\$ values are measured on a quantum device and used to update ansatz parameters:
@@ -166,13 +166,13 @@ VarQITE drives the system toward the **ground state** as imaginary time increase
 We now consider **real-time dynamics** by starting with the Schrödinger equation and applying McLachlan’s Variational Principle:
 
 $$
-\delta \bigg\lVert \Big(\frac{d}{dt} - i\mathcal{H} - E_t\Big)\ket{\psi(t)} \bigg\rVert = 0
+\delta \bigg\lVert \Big(\frac{d}{dt} - i\mathcal{H} - E_t\Big)\left|{\psi(t)}\right\rangle \bigg\rVert = 0
 $$
 
 For a parameterized ansatz state,
 
 $$
-\ket{\psi(t)} = \ket{\psi(\theta(t))}
+\left|{\psi(t)}\right\rangle = \left|{\psi(\theta(t))}\right\rangle
 $$
 
 this simplifies to:
@@ -184,11 +184,11 @@ $$
 with
 
 $$
-A_{ij} = \Re\!\Bigg(\frac{\partial\bra{\phi(\theta(t))}}{\partial\theta_i}\frac{\partial\ket{\phi(\theta(t))}}{\partial\theta_j}\Bigg),
+A_{ij} = \Re\!\Bigg(\frac{\partial\left\langle{\phi(\theta(t))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(t))}\right\rangle}{\partial\theta_j}\Bigg),
 $$
 
 $$
-C_i = - \Im\!\Bigg(\bra{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\mathcal{H}\ket{\phi(\theta(t))}\Bigg).
+C_i = - \Im\!\Bigg(\left\langle{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\right| \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
 $$
 
 The updated parameters evolve as:
