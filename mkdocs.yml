@@ -79,6 +79,7 @@ nav: # Note: All paths must be relative to the docs dir
     - Source Code: 'qflux/Open_Systems/os_api.md' 
   - Variational Methods: 
     - Variational Methods: 'qflux/Variational_Methods/variational_methods.md'
+    - VarQTE Demo: 'qflux/Variational_Methods/varQTE.md'
     - Source Code: 'qflux/Variational_Methods/var_api.md' 
   - GQME: 
     - 'qflux/GQME/index.md'

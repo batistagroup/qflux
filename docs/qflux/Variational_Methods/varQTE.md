@@ -1,11 +1,28 @@
-# Introduction
+# **Variational Quantum Time Evolution (VarQTE)**
 
-The VarQTE module can be used to run the Variational Quantum Imaginary Time Evolution (VarQITE) or the Variational Quantum Real Time Evolution (VarQRTE) algorithms.  This is done through:
-1. Constructing the problem Hamiltonian as a qiskit SparsePauliOp object
-2. Constructing the initial state with a qiskit QuantumCircuit object
-3. Calling VarQITE or VarQRTE with the desired hyperparameters.
+## Motivation
 
-VarQITE and VarQRTE run their corresponding algorithms with a twolocal ansatz, and these functions return the parameter values of the twolocal ansatz at each timestep.  These parameter values can be used to measure useful observables such as the energy, or a custom obervable.  This can be done by calling the ansatz_energy function from the VarQTE module to return the energy of the given timestep, or the Construct_Ansatz function to directly return the twolocal ansatz with the corresponding parameter values, which can be used to measure custom observables.
+The **VarQTE module** provides tools to simulate quantum processes through two complementary approaches:
+
+* **Variational Quantum Imaginary Time Evolution (VarQITE)**
+* **Variational Quantum Real Time Evolution (VarQRTE)**
+
+Both methods allow the user to approximate observables of a quantum system by updating the parameters of a parameterized ansatz circuit.
+
+Protocol for using VarQTE in practice:
+
+1. **Construct the problem Hamiltonian** as a `qiskit.SparsePauliOp` object
+2. **Construct the initial state** as a `qiskit.QuantumCircuit`
+3. **Run VarQITE or VarQRTE** with the desired hyperparameters (layers, total time, timestep)
+4. **Obtain ansatz parameters** at each timestep
+5. **Measure observables**, either:
+
+   * directly with the `ansatz_energy` function (for energy), or
+   * by constructing the ansatz circuit with `Construct_Ansatz` (for custom observables).
+
+VarQITE and VarQRTE both employ a **TwoLocal ansatz**, returning the optimal parameter values at each timestep, which can then be analyzed to study system properties.
+
+---
 
 ## Import Dependencies
 
@@ -21,68 +38,95 @@ from qiskit.quantum_info import SparsePauliOp
 from qflux.closed_systems.VarQTE import VarQITE, VarQRTE, ansatz_energy, Construct_Ansatz
 ```
 
+---
 
-## VarQITE
+## Variational Quantum Imaginary Time Evolution (VarQITE)
 
-We begin with the Wick-Rotated Schrodinger equation, and apply McLachlan's Variational Principle,
-\begin{equation}
-    \delta ||(\frac{d}{d\tau} + \mathcal{H} - E_{\tau})\ket{\psi(\tau)}|| = 0.
-\end{equation}
+We begin with the **Wick-rotated Schrödinger equation** and apply McLachlan’s Variational Principle:
 
-Assuming we have a parameterized ansatz,
-\begin{equation}
-    \ket{\psi(\tau)} = \ket{\psi(\theta(\tau))}
-\end{equation}
+$$
+\delta \bigg\lVert \Big(\frac{d}{d\tau} + \mathcal{H} - E_{\tau}\Big)\left|{\psi(\tau)}\right\rangle \bigg\rVert = 0
+$$
 
-This simplifies to a system of linear equations,
-\begin{equation}
-    \sum_j A_{ij} \dot\theta_j = C_i,
-\end{equation}
+For a parameterized ansatz state,
 
-Where,
-\begin{equation}
-    A_{ij} = \Re(\frac{\partial\bra{\phi(\theta(\tau))}}{\partial\theta_i}\frac{\partial\ket{\phi(\theta(\tau))}}{\partial\theta_j}),
-\end{equation}
-and
-\begin{equation}
-    C_i = - \Re(\bra{\frac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\mathcal{H}\ket{\phi(\theta(\tau))}).
-\end{equation}
+$$
+\left|{\psi(\tau)}\right\rangle = \left|{\psi(\theta(\tau))}\right\rangle
+$$
 
-These $A_{ij}$ and $C_i$ values are measured in a quantum computer and used to determine how to change the paramters of the ansatz $\theta(\tau + d\tau) = \theta(\tau) + \dot\theta d\tau$ to evolve the system through imaginary time.
+this leads to a system of linear equations:
 
-### Demonstration
+$$
+\sum_j A_{ij} \dot\theta_j = C_i
+$$
+
+where
+
+$$
+A_{ij} = \Re\!\Bigg(\frac{\partial\left\langle{\phi(\theta(\tau))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(\tau))}\right\rangle}{\partial\theta_j}\Bigg),
+$$
+
+$$
+C_i = - \Re\!\Bigg(\left\langle{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\right|\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
+$$
+
+These \$A\_{ij}\$ and \$C\_i\$ values are measured on a quantum device and used to update ansatz parameters:
+
+$$
+\theta(\tau + d\tau) = \theta(\tau) + \dot\theta\, d\tau.
+$$
+
+---
+
+### Demonstrations
+
+#### Example 1: Simple Hamiltonian
+
+Focusing on a simple Hamiltonian, consisting of a spin chain defined by the Pauli-Z matrix, we setup the initial state using a qiskit QuantumCircuit and the hyperparameters for VarQITE, such as number of layers in the ansatz, the timestep and total simulation time.
+Finally, we call VarQITE to run the time evolution and output the ansatz parameter values.
+
 
 ```python
 # Define the problem Hamiltonian
 H = SparsePauliOp.from_list([("Z", 1.0)])
-# Set up the initial state using a qiskit QuantumCircuit
+
+# Set up the initial state
 qc = QuantumCircuit(3)
-# Set Hyperparameters for VarQITE such as number of layers in ansatz, total evolution time, and timestep size
+
+# Hyperparameters for VarQITE
 layers = 0
 total_time = 10
 timestep = 0.1
-# Call VarQITE to run the time evolution and output the ansatz parameter values
-params = VarQITE(layers, H, total_time, timestep, init_circ=qc)
 
-# These parameter values can be used to measure the energy
+# Run VarQITE
+params = VarQITE(layers, H, total_time, timestep, init_circ=qc)
+```
+
+Furethermore, we can use the parameters to measure observables with a quantum circuit:
+
+```python
+# Measure energy at a given timestep
 my_energy, my_stdev = ansatz_energy(qc, params[i], H)
 
-# Or the parameters can be used to measure custom observables
-# Define the observable
+# Measure a custom observable
 observable = SparsePauliOp.from_list([("Z", 1.0)])
-# Construct the ansatz circuit
 ansatz = Construct_Ansatz(qc, params[i], H.num_qubits)
-# Get the resulting values of the observable
 result = estimator.run(ansatz, observables=observable).result()
 ```
 
-Defining the Hamiltonian of interest:
+#### Example 2: Hamiltonian with couplings
+
+Similarly, we can apply this protocol for a more sophisticated Hamiltonian, containing couplings between different sites:
 
 ```python
-H = SparsePauliOp.from_list([("IIZ", 1.0), ("IZI", 1.0), ("ZII", 0.65), ("IXX", 1.0), ("IYY", 1.0), ("XXI", 0.75), ("YYI", 0.75)])
+H = SparsePauliOp.from_list([
+    ("IIZ", 1.0), ("IZI", 1.0), ("ZII", 0.65),
+    ("IXX", 1.0), ("IYY", 1.0),
+    ("XXI", 0.75), ("YYI", 0.75)
+])
 ```
 
-Creating the initial state and running VarQITE,
+**Initial state and execution:**
 
 ```python
 qc = QuantumCircuit(3)
@@ -90,14 +134,12 @@ qc.rx(0.5, 0)
 qc.rx(0.5, 1)
 qc.rx(0.5, 2)
 
-layers = 0
-total_time = 10
-timestep = 0.1
 params = VarQITE(layers, H, total_time, timestep, init_circ=qc)
-# Params now holds the parameter values for the ansatz at each timestep for Imaginary-Time Evolution
 ```
 
-and plotting the results of the time-dependent dynamics,
+Params now holds the parameter values for the ansatz at each timestep for Imaginary-Time Evolution
+
+**Plotting the dynamics:**
 
 ```python
 all_energies = []
@@ -114,98 +156,81 @@ plt.show()
 
 ![VarQITE](../images/Part_I/VarQITE.png)
 
-The Variational Quantum Imaginary Time Evolution (VarQITE) algorithm will converge to the ground state of a system as it is evolved through imaginary time, given that the ansatz is large enough. This can be used to estimate the ground state energy of a system by measuring the energy of the system at long imaginary-time, as can be seen above.
+**Interpretation:**
+VarQITE drives the system toward the **ground state** as imaginary time increases, provided the ansatz is expressive enough. This enables estimation of the ground-state energy by sampling the long-time behavior.
 
+---
 
-##VarQRTE
+## Variational Quantum Real Time Evolution (VarQRTE)
 
-We begin with the Schrodinger equation, and apply McLachlan's Variational Principle,
-\begin{equation}
-    \delta ||(\frac{d}{dt} -i\mathcal{H} - E_{t})\ket{\psi(t)}|| = 0.
-\end{equation}
+We now consider **real-time dynamics** by starting with the Schrödinger equation and applying McLachlan’s Variational Principle:
 
-Assuming we have a parameterized ansatz,
-\begin{equation}
-    \ket{\psi(t)} = \ket{\psi(\theta(t))}
-\end{equation}
+$$
+\delta \bigg\lVert \Big(\frac{d}{dt} - i\mathcal{H} - E_t\Big)\left|{\psi(t)}\right\rangle \bigg\rVert = 0
+$$
 
-This simplifies to a system of linear equations,
-\begin{equation}
-    \sum_j A_{ij} \dot\theta_j = C_i,
-\end{equation}
+For a parameterized ansatz state,
 
-Where,
-\begin{equation}
-    A_{ij} = \Re(\frac{\partial\bra{\phi(\theta(t))}}{\partial\theta_i}\frac{\partial\ket{\phi(\theta(t))}}{\partial\theta_j}),
-\end{equation}
-and
-\begin{equation}
-    C_i = - \Im(\bra{\frac{\partial\phi(\theta(t))}{\partial\theta_i}}\mathcal{H}\ket{\phi(\theta(t))}).
-\end{equation}
+$$
+\left|{\psi(t)}\right\rangle = \left|{\psi(\theta(t))}\right\rangle
+$$
 
-These $A_{ij}$ and $C_i$ values are measured in a quantum computer and used to determine how to change the paramters of the ansatz $\theta(t+dt) = \theta(t) + \dot\theta dt$ to evolve the system through real time.
+this simplifies to:
 
+$$
+\sum_j A_{ij} \dot\theta_j = C_i
+$$
 
-###Demonstration
+with
 
-```python
-# Define the problem Hamiltonian
-H = SparsePauliOp.from_list([("Z", 1.0)])
-# Set up the initial state using a qiskit QuantumCircuit
-qc = QuantumCircuit(3)
-# Set Hyperparameters for VarQRTE such as number of layers in ansatz, total evolution time, and timestep size
-layers = 0
-total_time = 10
-timestep = 0.1
-# Call VarQRTE to run the time evolution and output the ansatz parameter values
-params = VarQRTE(layers, H, total_time, timestep, init_circ=qc)
+$$
+A_{ij} = \Re\!\Bigg(\frac{\partial\left\langle{\phi(\theta(t))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(t))}\right\rangle}{\partial\theta_j}\Bigg),
+$$
 
-# These parameter values can be used to measure the energy
-my_energy, my_stdev = ansatz_energy(qc, params[i], H)
+$$
+C_i = - \Im\!\Bigg(\left\langle{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\right| \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
+$$
 
-# Or the parameters can be used to measure custom observables
-# Define the observable
-observable = SparsePauliOp.from_list([("Z", 1.0)])
-# Construct the ansatz circuit
-ansatz = Construct_Ansatz(qc, params[i], H.num_qubits)
-# Get the resulting values of the observable
-result = estimator.run(ansatz, observables=observable).result()
-```
+The updated parameters evolve as:
 
-Creating the Hamiltonian,
+$$
+\theta(t + dt) = \theta(t) + \dot\theta\, dt.
+$$
+
+---
+
+### Demonstration
+
+We proceed by defining the Hamiltonian and initial state, along with instantiating the VarQRTE class with appropriate hyper-parameters.
 
 ```python
 H = SparsePauliOp.from_list([("X", 1.0)])
-```
-
-Creating the intial state and parameters for dynamics,
-
-```python
 qc = QuantumCircuit(1)
-qc.x(0) # Creates |1> state
+qc.x(0)  # Prepare |1> state
 
 layers = 1
 total_time = 12
 timestep = 0.1
+
 params = VarQRTE(layers, H, total_time, timestep, init_circ=qc)
 ```
 
-Params now holds the parameter values for the ansatz at each timestep for Real-Time Evolution
+We can measure observables over time using an Estimator object, supplied with the optimized circuit parameters and the observable circuit.
 
 ```python
 from qiskit.primitives import Estimator
 
 estimator = Estimator()
 observable = SparsePauliOp.from_list([("Z", 1.0)])
-spin1_values = []
-spin2_values = []
+spin_values = []
+
 for i in range(len(params)):
     ansatz = Construct_Ansatz(qc, params[i], H.num_qubits)
     result = estimator.run(ansatz, observables=observable).result()
-    spin1_values.append(result.values[0])
+    spin_values.append(result.values[0])
 
 plt.title("Spin Expectation Value Over Time")
-plt.plot([i*timestep for i in range(int(total_time/timestep)+1)], spin1_values)
+plt.plot([i*timestep for i in range(int(total_time/timestep)+1)], spin_values)
 plt.xlabel("Time")
 plt.ylabel("Expectation Value")
 plt.show()
@@ -213,4 +238,5 @@ plt.show()
 
 ![VarQRTE](../images/Part_I/VarQRTE.png)
 
-This result matches our intuition that the evolution of the system provided above should follow a sine wave as it is evolved through real-time.
+**Interpretation:**
+VarQRTE captures the change in state of quantum systems in real-time. As seen in the example, the expectation value of spin follows the expected sinusoidal pattern of coherent quantum evolution.
