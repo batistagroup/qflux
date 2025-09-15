@@ -28,7 +28,8 @@ dependencies = [
     "pylatexenc>=2.10",
     "qutip>=5.0",
     "scipy",
-    "tqdm"
+    "tqdm",
+    "graycode>=1.0.5",
 ]
 authors = [
            { name = "Brandon Allen", email = "brandon.allen@yale.edu" },
