@@ -28,7 +28,8 @@ dependencies = [
     "pylatexenc>=2.10",
     "qutip>=5.0",
     "scipy",
-    "tqdm"
+    "tqdm",
+    "qmad@git+https://github.com/saurabhshivpuje/QMAD/tree/main"
 ]
 authors = [
            { name = "Brandon Allen", email = "brandon.allen@yale.edu" },
