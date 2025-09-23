@@ -29,7 +29,12 @@ dependencies = [
     "qutip>=5.0",
     "scipy",
     "tqdm",
+    "graycode>=1.0.5",
+<<<<<<< HEAD
     "qmad@git+https://github.com/saurabhshivpuje/QMAD/tree/main"
+=======
+    "graycode>=1.0.5",
+>>>>>>> origin/master
 ]
 authors = [
            { name = "Brandon Allen", email = "brandon.allen@yale.edu" },
