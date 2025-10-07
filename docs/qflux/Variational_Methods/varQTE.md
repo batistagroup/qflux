@@ -77,17 +77,17 @@ $$
 $$
 
 The derivatives of the quantum state with respect to the variational parameters are linked to the generators $G_i$ of the ansatz:
-%
+
 $$
     \dfrac{\partial\ket{\psi(\theta(t))}}{\partial\theta_i} = -\ii G_i\ket{\psi(\theta(t))}.
 $$
-%
+
 For instance, in the case of a single qubit $Z$-rotation,
-%
+
 $$
     \dfrac{\partial}{\partial\theta} e^{-\ii\theta\sigma_Z}\ket{\psi} = -\ii\sigma_Ze^{-\ii\theta\sigma_Z}\ket{\psi}
 $$
-%
+
 Therefore, one can evaluate the expectation values introduced by the $A_{ij}, C_{i}$ by performing Hadamard tests on the corresponding generators of the ansatz.
 
 For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter i ($G_i^\dagger$) and the parameter of generator j ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\ket{0}$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
@@ -186,7 +186,7 @@ Analogous to the problem of finding eigenstates of a Hamiltonian is the problem 
 We now consider **real-time dynamics** by starting with the Schrödinger equation and applying McLachlan’s Variational Principle:
 
 $$
-    \delta \left\Vert\left(\frac{\partial}{\partial t} + \ii\mathcal{H}\right)\ket{\psi(\theta(t))}\right\Vert = 0.
+    \delta \left\Vert\left(\frac{\partial}{\partial t} + i\mathcal{H}\right)\ket{\psi(\theta(t))}\right\Vert = 0.
 $$
 
 The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of $C_i$,
@@ -197,7 +197,7 @@ $$
 
 Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta dt$.
 
-Within QFlux, \texttt{VarQRTE} reuses the same modular components while invoking \texttt{Measure\_C} with \texttt{evolution\_type="imaginary"}. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.
+Within QFlux, `VarQRTE` reuses the same modular components while invoking `Measure_C` with `evolution_type="imaginary"`. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.
 
 ---
 
