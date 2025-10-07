@@ -11,7 +11,7 @@ from qiskit.providers.fake_provider import FakeSherbrooke
 
 # To change the ansatz, apply_param and measure_der must both be modified.
 def apply_param(
-    params: npt.NDArray[np.float_], i: int, qc: QuantumCircuit, N: int
+    params: npt.NDArray[np.float64], i: int, qc: QuantumCircuit, N: int
 ) -> None:
     """Apply parameter i to the quantum circuit currently constructing the ansatz.
         The ansatz must be built in a peicewise manner to allow for hadamard tests
@@ -24,7 +24,7 @@ def apply_param(
         qc (QuantumCircuit): The qiskit ansatz quantum circuit currently being constructed.
         N (int): Number of qubits
     """
-    qc.rx(params[i], i % N))
+    qc.rx(params[i], i % N)
     if i % N == N - 1 and i != len(params) - 1:
         for i in range(N - 1):
             qc.cz(i, i + 1)
@@ -43,7 +43,7 @@ def measure_der(i: int, qc: QuantumCircuit, N: int) -> None:
     qc.cx(N, i % N)
 
 
-def A_Circuit(params: npt.NDArray[np.float_], i: int, j: int, N: int) -> QuantumCircuit:
+def A_Circuit(params: npt.NDArray[np.float64], i: int, j: int, N: int) -> QuantumCircuit:
     """Constructs the qiskit quantum circuits used to measure each element of the A_ij matrix.
 
     Args:
@@ -73,11 +73,11 @@ def A_Circuit(params: npt.NDArray[np.float_], i: int, j: int, N: int) -> Quantum
 
 def Measure_A(
     init_circ: QuantumCircuit,
-    params: npt.NDArray[np.float_],
+    params: npt.NDArray[np.float64],
     N: int,
     shots: int = 2**10,
     noisy: bool = False,
-) -> npt.NDArray[np.float_]:
+) -> npt.NDArray[np.float64]:
     """Create the A_ij matrix through measuring quantum circuits corresponding to each element.
 
     Args:
@@ -120,7 +120,7 @@ def Measure_A(
 
 
 def C_Circuit(
-    params: npt.NDArray[np.float_],
+    params: npt.NDArray[np.float64],
     i: int,
     pauli_string: str,
     N: int,
@@ -162,13 +162,13 @@ def C_Circuit(
 
 def Measure_C(
     init_circ: QuantumCircuit,
-    params: npt.NDArray[np.float_],
+    params: npt.NDArray[np.float64],
     H: SparsePauliOp,
     N: int,
     shots: int = 2**10,
     evolution_type: str = "real",
     noisy: bool = False,
-) -> npt.NDArray[np.float_]:
+) -> npt.NDArray[np.float64]:
     """Create the C_i vector through measuring quantum circuits corresponding to each element.
 
     Args:
@@ -233,7 +233,7 @@ def pauli_measure(qc: QuantumCircuit, pauli_string: str) -> None:
 
 
 def Construct_Ansatz(
-    init_circ: QuantumCircuit, params: npt.NDArray[np.float_], N: int
+    init_circ: QuantumCircuit, params: npt.NDArray[np.float64], N: int
 ) -> QuantumCircuit:
     """Construct the full ansatz for use in measuring observables.
 
@@ -258,7 +258,7 @@ def Construct_Ansatz(
 
 def ansatz_energy(
     init_circ: QuantumCircuit,
-    params: npt.NDArray[np.float_],
+    params: npt.NDArray[np.float64],
     H: SparsePauliOp,
     shots: int = 2**14,
     noisy: bool = False,
@@ -305,7 +305,7 @@ def VarQRTE(
     init_circ: Optional[QuantumCircuit] = None,
     shots: int = 2**10,
     noisy: bool = False,
-) -> List[npt.NDArray[np.float_]]:
+) -> List[npt.NDArray[np.float64]]:
     """The Variational Quantum Real Time Evolution (VarQRTE) algorithm.  This uses quantum circuits to measure
         the elements of two objects, the A_ij matrix and the C_i vector.
 
@@ -368,7 +368,7 @@ def VarQITE(
     init_circ: Optional[QuantumCircuit] = None,
     shots: int = 2**10,
     noisy: bool = False,
-) -> List[npt.NDArray[np.float_]]:
+) -> List[npt.NDArray[np.float64]]:
     """The Variational Quantum Imaginary Time Evolution (VarQITE) algorithm.  This uses quantum circuits to measure
         the elements of two objects, the A_ij matrix and the C_i vector.
 
