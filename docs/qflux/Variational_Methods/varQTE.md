@@ -62,15 +62,13 @@ $$
 
 where
 
-\begin{equation}
+$$
     A_{ij} = \Re\Bigg(\frac{\partial\left\langle{\phi(\theta(\tau))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(\tau))}\right\rangle}{\partial\theta_j}\Bigg),
-        \label{eq:reac}
-\end{equation}
+$$
 
-\begin{equation}
+$$
     C_i = - \Re\Bigg(\left\langle{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\right|\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
-    \label{eq:imac}
-\end{equation}
+$$
 
 These \$A\_{ij}\$ and \$C\_i\$ values are measured on a quantum device and used to update ansatz parameters:
 
@@ -80,19 +78,17 @@ $$
 
 The derivatives of the quantum state with respect to the variational parameters are linked to the generators $G_i$ of the ansatz:
 %
-\begin{equation}
-    \label{eq:G-ansatz}
+$$
     \dfrac{\partial\ket{\psi(\theta(t))}}{\partial\theta_i} = -\ii G_i\ket{\psi(\theta(t))}.
-\end{equation}
+$$
 %
 For instance, in the case of a single qubit $Z$-rotation,
 %
-\begin{equation}
-    \label{eq:Z-rotation-example}
+$$
     \dfrac{\partial}{\partial\theta} e^{-\ii\theta\sigma_Z}\ket{\psi} = -\ii\sigma_Ze^{-\ii\theta\sigma_Z}\ket{\psi}
-\end{equation}
+$$
 %
-Therefore, one can evaluate the expectation values introduced by Eqs.~(\ref{eq:reac}) and~(\ref{eq:imac}) by performing Hadamard tests on the corresponding generators of the ansatz.
+Therefore, one can evaluate the expectation values introduced by the $A_{ij}, C_{i}$ by performing Hadamard tests on the corresponding generators of the ansatz.
 
 For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter i ($G_i^\dagger$) and the parameter of generator j ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\ket{0}$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
 
@@ -189,16 +185,15 @@ Analogous to the problem of finding eigenstates of a Hamiltonian is the problem 
 
 We now consider **real-time dynamics** by starting with the Schrödinger equation and applying McLachlan’s Variational Principle:
 
-\begin{equation}
+$$
     \delta \left\Vert\left(\frac{\partial}{\partial t} + \ii\mathcal{H}\right)\ket{\psi(\theta(t))}\right\Vert = 0.
-\end{equation}
+$$
 
 The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of $C_i$,
 
-\begin{equation}
+$$
     C_i = - \Im\Bigg(\left\langle{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\right| \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
-    \label{eq:rec}
-\end{equation}
+$$
 
 Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta dt$.
 
