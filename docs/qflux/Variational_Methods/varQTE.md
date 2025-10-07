@@ -62,19 +62,41 @@ $$
 
 where
 
-$$
-A_{ij} = \Re\!\Bigg(\frac{\partial\left\langle{\phi(\theta(\tau))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(\tau))}\right\rangle}{\partial\theta_j}\Bigg),
-$$
+\begin{equation}
+    A_{ij} = \Re\Bigg(\frac{\partial\left\langle{\phi(\theta(\tau))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(\tau))}\right\rangle}{\partial\theta_j}\Bigg),
+        \label{eq:reac}
+\end{equation}
 
-$$
-C_i = - \Re\!\Bigg(\left\langle{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\right|\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
-$$
+\begin{equation}
+    C_i = - \Re\Bigg(\left\langle{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\right|\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
+    \label{eq:imac}
+\end{equation}
 
 These \$A\_{ij}\$ and \$C\_i\$ values are measured on a quantum device and used to update ansatz parameters:
 
 $$
 \theta(\tau + d\tau) = \theta(\tau) + \dot\theta\, d\tau.
 $$
+
+The derivatives of the quantum state with respect to the variational parameters are linked to the generators $G_i$ of the ansatz:
+%
+\begin{equation}
+    \label{eq:G-ansatz}
+    \dfrac{\partial\ket{\psi(\theta(t))}}{\partial\theta_i} = -\ii G_i\ket{\psi(\theta(t))}.
+\end{equation}
+%
+For instance, in the case of a single qubit $Z$-rotation,
+%
+\begin{equation}
+    \label{eq:Z-rotation-example}
+    \dfrac{\partial}{\partial\theta} e^{-\ii\theta\sigma_Z}\ket{\psi} = -\ii\sigma_Ze^{-\ii\theta\sigma_Z}\ket{\psi}
+\end{equation}
+%
+Therefore, one can evaluate the expectation values introduced by Eqs.~(\ref{eq:reac}) and~(\ref{eq:imac}) by performing Hadamard tests on the corresponding generators of the ansatz.
+
+For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter i ($G_i^\dagger$) and the parameter of generator j ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\ket{0}$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
+
+Reference implementations of this algorithm are used below, using QFlux to simulate the imaginary-time evolution spin-systems. The simulations apply the McLachlan variational principle through the `VarQRTE` function, demonstrating how variational techniques can efficiently capture quantum dynamics within shallow, noise-resilient circuits.
 
 ---
 
@@ -137,7 +159,7 @@ qc.rx(0.5, 2)
 params = VarQITE(layers, H, total_time, timestep, init_circ=qc)
 ```
 
-Params now holds the parameter values for the ansatz at each timestep for Imaginary-Time Evolution
+`params` now holds the parameter values for the ansatz at each timestep for Imaginary-Time Evolution
 
 **Plotting the dynamics:**
 
@@ -163,39 +185,24 @@ VarQITE drives the system toward the **ground state** as imaginary time increase
 
 ## Variational Quantum Real Time Evolution (VarQRTE)
 
+Analogous to the problem of finding eigenstates of a Hamiltonian is the problem of dynamics, which can be also be approached with the Variational Quantum Real-Time Evolution (VarQRTE).
+
 We now consider **real-time dynamics** by starting with the Schrödinger equation and applying McLachlan’s Variational Principle:
 
-$$
-\delta \bigg\lVert \Big(\frac{d}{dt} - i\mathcal{H} - E_t\Big)\left|{\psi(t)}\right\rangle \bigg\rVert = 0
-$$
+\begin{equation}
+    \delta \left\Vert\left(\frac{\partial}{\partial t} + \ii\mathcal{H}\right)\ket{\psi(\theta(t))}\right\Vert = 0.
+\end{equation}
 
-For a parameterized ansatz state,
+The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of $C_i$,
 
-$$
-\left|{\psi(t)}\right\rangle = \left|{\psi(\theta(t))}\right\rangle
-$$
+\begin{equation}
+    C_i = - \Im\Bigg(\left\langle{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\right| \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
+    \label{eq:rec}
+\end{equation}
 
-this simplifies to:
+Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta dt$.
 
-$$
-\sum_j A_{ij} \dot\theta_j = C_i
-$$
-
-with
-
-$$
-A_{ij} = \Re\!\Bigg(\frac{\partial\left\langle{\phi(\theta(t))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(t))}\right\rangle}{\partial\theta_j}\Bigg),
-$$
-
-$$
-C_i = - \Im\!\Bigg(\left\langle{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\right| \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
-$$
-
-The updated parameters evolve as:
-
-$$
-\theta(t + dt) = \theta(t) + \dot\theta\, dt.
-$$
+Within QFlux, \texttt{VarQRTE} reuses the same modular components while invoking \texttt{Measure\_C} with \texttt{evolution\_type="imaginary"}. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.
 
 ---
 
