@@ -79,13 +79,13 @@ $$
 The derivatives of the quantum state with respect to the variational parameters are linked to the generators $G_i$ of the ansatz:
 
 $$
-    \dfrac{\partial\ket{\psi(\theta(t))}}{\partial\theta_i} = -\ii G_i\ket{\psi(\theta(t))}.
+    \dfrac{\partial\ket{\psi(\theta(t))}}{\partial\theta_i} = -i G_i\ket{\psi(\theta(t))}.
 $$
 
 For instance, in the case of a single qubit $Z$-rotation,
 
 $$
-    \dfrac{\partial}{\partial\theta} e^{-\ii\theta\sigma_Z}\ket{\psi} = -\ii\sigma_Ze^{-\ii\theta\sigma_Z}\ket{\psi}
+    \dfrac{\partial}{\partial\theta} e^{-i\theta\sigma_Z}\ket{\psi} = -i\sigma_Ze^{-i\theta\sigma_Z}\ket{\psi}
 $$
 
 Therefore, one can evaluate the expectation values introduced by the $A_{ij}, C_{i}$ by performing Hadamard tests on the corresponding generators of the ansatz.
