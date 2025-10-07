@@ -3,11 +3,10 @@ import numpy.typing as npt
 from typing import List, Optional, Tuple
 
 from qiskit import QuantumCircuit
-from qiskit.primitives import Estimator
+from qiskit_aer.primitives import EstimatorV2 as Estimator
 from qiskit.quantum_info import SparsePauliOp
-from qiskit.providers.aer.noise import NoiseModel
-from qiskit.providers.fake_provider import FakeSherbrooke
-
+from qiskit_aer.noise import NoiseModel
+from qiskit_ibm_runtime.fake_provider import FakeSherbrooke
 
 # To change the ansatz, apply_param and measure_der must both be modified.
 def apply_param(
@@ -104,18 +103,14 @@ def Measure_A(
                 coupling_map = device_backend.coupling_map
                 noise_model = NoiseModel.from_backend(device_backend)
                 basis_gates = noise_model.basis_gates
-                estimator = Estimator(
-                    options={
-                        "shots": shots,
-                        "noise_model": noise_model,
-                        "coupling_map": coupling_map,
-                        "basis_gates": basis_gates,
-                    }
+                estimator = Estimator(options={
+                                    "backend_options":{"noise_model": noise_model},
+                                    "run_options":{"shots": shots}}
                 )
             else:
-                estimator = Estimator(options={"shots": shots})
-            result = estimator.run(qc, observable).result()
-            A[i][i + j] = result.values[0]
+                estimator = Estimator(options={"run_options":{"shots": shots}})
+            result = estimator.run([(qc, observable)]).result()
+            A[i][i + j] = result[0].data.evs
     return np.array(A)
 
 
@@ -199,19 +194,15 @@ def Measure_C(
                 coupling_map = device_backend.coupling_map
                 noise_model = NoiseModel.from_backend(device_backend)
                 basis_gates = noise_model.basis_gates
-                estimator = Estimator(
-                    options={
-                        "shots": shots,
-                        "noise_model": noise_model,
-                        "coupling_map": coupling_map,
-                        "basis_gates": basis_gates,
-                    }
-                )
+                estimator = Estimator(options={
+                                        "backend_options":{"noise_model": noise_model},
+                                        "run_options":{"shots": shots}}
+                    )
             else:
-                estimator = Estimator(options={"shots": shots})
-            result = estimator.run(qc, observable).result()
+                estimator = Estimator(options={"run_options":{"shots": shots}})
+            result = estimator.run([(qc, observable)]).result()
 
-            C[i] -= 1 / 2 * H.coeffs[pauli_string].real * result.values[0]
+            C[i] -= 1 / 2 * H.coeffs[pauli_string].real * result[0].data.evs
     return np.array(C)
 
 
@@ -282,19 +273,15 @@ def ansatz_energy(
         coupling_map = device_backend.coupling_map
         noise_model = NoiseModel.from_backend(device_backend)
         basis_gates = noise_model.basis_gates
-        estimator = Estimator(
-            options={
-                "shots": shots,
-                "noise_model": noise_model,
-                "coupling_map": coupling_map,
-                "basis_gates": basis_gates,
-            }
-        )
+        estimator = Estimator(options={
+                                "backend_options":{"noise_model": noise_model},
+                                "run_options":{"shots": shots}}
+                                )
     else:
-        estimator = Estimator(options={"shots": shots})
+        estimator = Estimator(options={"run_options":{"shots": shots}})
     qc = Construct_Ansatz(init_circ, params, N)
-    result = estimator.run(qc, H).result()
-    return result.values[0], result.metadata[0]["variance"]
+    result = estimator.run([(qc, H)]).result()
+    return result[0].data.evs, result[0].data.stds
 
 
 def VarQRTE(
