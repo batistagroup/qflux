@@ -15,3 +15,4 @@ spin_dynamics_oo.py  --> SpinDynamicsS, SpinDynamicsH : Statevector and hadamard
 from .classical_methods import DynamicsCS
 from .qubit_methods import QubitDynamicsCS
 from .spin_dynamics_oo import SpinDynamicsS, SpinDynamicsH
+from .direct_method import hamiltonian_simulation
