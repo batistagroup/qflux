@@ -4,6 +4,8 @@ from .utils import execute
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit_aer import Aer
 from .spin_propagators import get_time_evolution_operator
+import os 
+
 
 class SpinDynamicsS:
     """
@@ -325,10 +327,14 @@ class SpinDynamicsH:
             prefix (str): Prefix for loading precomputed reference data.
         """
         abs_corr = np.abs(np.array(self.real_amp_list) + 1j * np.array(self.imag_amp_list))
-
+        
         plt.plot(self.time_range, abs_corr, '.', label='Hadamard Test')
-        ref_sa = np.load(f'../../../data/{self.num_qubits}_spin_chain_SA_obs.npy')
-        ref_time = np.load(f'../../../data/{self.num_qubits}_spin_chain_time.npy')
+        reference_filename = f'data/{self.num_qubits}_spin_chain_SA_obs.npy'
+        if os.path.exists(reference_filename):
+            ref_sa = np.load(f'data/{self.num_qubits}_spin_chain_SA_obs.npy')
+            ref_time = np.load(f'data/{self.num_qubits}_spin_chain_time.npy')
+        else:
+            print('No reference data file found!')
         plt.plot(ref_time, ref_sa, '-', label='Statevector')
 
         plt.xlabel('Time')
