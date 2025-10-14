@@ -67,7 +67,7 @@ $$
 $$
 
 $$
-    C_i = - \Re\Bigg(\left\langle{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\right|\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
+    C_i = - \Re\Bigg({\frac{\partial\left\langle\phi(\theta(\tau))\right|}{\partial\theta_i}}\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
 $$
 
 These \$A\_{ij}\$ and \$C\_i\$ values are measured on a quantum device and used to update ansatz parameters:
@@ -192,7 +192,7 @@ $$
 The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of $C_i$,
 
 $$
-    C_i = - \Im\Bigg(\left\langle{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\right| \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
+    C_i = - \Im\Bigg({\frac{\partial \left\langle\phi(\theta(t))\right|}{\partial\theta_i}} \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
 $$
 
 Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta dt$.
@@ -228,8 +228,8 @@ spin_values = []
 
 for i in range(len(params)):
     ansatz = Construct_Ansatz(qc, params[i], H.num_qubits)
-    result = estimator.run(ansatz, observables=observable).result()
-    spin_values.append(result.values[0])
+    result = estimator.run(ansatz, observables=observable).result() 
+    spin_values.append(result[0].data.evs())
 
 plt.title("Spin Expectation Value Over Time")
 plt.plot([i*timestep for i in range(int(total_time/timestep)+1)], spin_values)
