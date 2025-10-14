@@ -79,18 +79,18 @@ $$
 The derivatives of the quantum state with respect to the variational parameters are linked to the generators $G_i$ of the ansatz:
 
 $$
-    \dfrac{\partial\ket{\psi(\theta(t))}}{\partial\theta_i} = -i G_i\ket{\psi(\theta(t))}.
+    \dfrac{\partial\left|{\psi(\theta(t))}\right\rangle}{\partial\theta_i} = -i G_i\left|{\psi(\theta(t))}\right\rangle.
 $$
 
 For instance, in the case of a single qubit $Z$-rotation,
 
 $$
-    \dfrac{\partial}{\partial\theta} e^{-i\theta\sigma_Z}\ket{\psi} = -i\sigma_Ze^{-i\theta\sigma_Z}\ket{\psi}
+    \dfrac{\partial}{\partial\theta} e^{-i\theta\sigma_Z}\left|{\psi}\right\rangle = -i\sigma_Ze^{-i\theta\sigma_Z}\left|{\psi}\right\rangle
 $$
 
 Therefore, one can evaluate the expectation values introduced by the $A_{ij}, C_{i}$ by performing Hadamard tests on the corresponding generators of the ansatz.
 
-For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter i ($G_i^\dagger$) and the parameter of generator j ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\ket{0}$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
+For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter i ($G_i^\dagger$) and the parameter of generator j ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\left|{0}\right\rangle$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
 
 Reference implementations of this algorithm are used below, using QFlux to simulate the imaginary-time evolution spin-systems. The simulations apply the McLachlan variational principle through the `VarQRTE` function, demonstrating how variational techniques can efficiently capture quantum dynamics within shallow, noise-resilient circuits.
 
@@ -186,7 +186,7 @@ Analogous to the problem of finding eigenstates of a Hamiltonian is the problem 
 We now consider **real-time dynamics** by starting with the Schrödinger equation and applying McLachlan’s Variational Principle:
 
 $$
-    \delta \left\Vert\left(\frac{\partial}{\partial t} + i\mathcal{H}\right)\ket{\psi(\theta(t))}\right\Vert = 0.
+    \delta \left\Vert\left(\frac{\partial}{\partial t} + i\mathcal{H}\right)\left|{\psi(\theta(t))}\right\rangle\right\Vert = 0.
 $$
 
 The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of $C_i$,
@@ -220,7 +220,7 @@ params = VarQRTE(layers, H, total_time, timestep, init_circ=qc)
 We can measure observables over time using an Estimator object, supplied with the optimized circuit parameters and the observable circuit.
 
 ```python
-from qiskit.primitives import Estimator
+from qiskit_aer.primitives import EstimatorV2 as Estimator
 
 estimator = Estimator()
 observable = SparsePauliOp.from_list([("Z", 1.0)])
