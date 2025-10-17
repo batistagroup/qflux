@@ -53,23 +53,8 @@ We implement a **variational trajectory algorithm** that alternates deterministi
 ### Effective Hamiltonian Pre‑processing
 
 ```python
-# effh.py (QMAD)
-class EffectiveHamiltonian_class:
-    def __init__(self, He, Ha, Llist, LdL):
-        self.He = He      # Hermitian part
-        self.Ha = Ha      # Anti-Hermitian part (∝ Σ L†L)
-        self.Llist = Llist
-        self.LdL = LdL    # precomputed L†L terms
+from qflux.variational_methods.qmad.effh import EffectiveHamiltonian_class, EffectiveHamiltonian 
 
-def EffectiveHamiltonian(mats, Llist):
-    He = sum(mats)
-    Ha = 0.0
-    LdL = []
-    for LL in Llist:
-        for L in LL:
-            LdL.append(L.conj().T @ L)
-            Ha += L.conj().T @ L
-    return EffectiveHamiltonian_class(He, 0.5 * Ha, [L for LL in Llist for L in LL], LdL)
 ```
 
 *Purpose:* 
@@ -79,6 +64,8 @@ build ($H_\mathrm{eff} = H_\mathrm{e} - \tfrac{i}{2}\sum_k L_k^\dagger L_k$) and
 ### Main Trajectory Loop (Deterministic vs. Jump)
 
 ```python
+from qflux.variational_methods.qmad.solver import solve_avq_vect
+
 # solver.py (QMAD) — core evolution sketch
 while t + dt <= tspan[1]:
     He, Ha = H.He, H.Ha
@@ -156,9 +143,9 @@ u0 = np.zeros(8, dtype=np.complex_); u0_fmo = u0.copy(); u0_fmo[1] = 1
 ### Run Trajectories
 
 ```python
-from qmad.solver import solve_avq_trajectory
-from qmad.effh   import EffectiveHamiltonian
-from qmad.ansatz import Ansatz
+from qflux.variational_methods.qmad.solver import solve_avq_trajectory
+from qflux.variational_methods.qmad.effh   import EffectiveHamiltonian
+from qflux.variational_methods.qmad.ansatz import Ansatz
 
 if __name__ == "__main__":
     tf, dt = 450, 5
