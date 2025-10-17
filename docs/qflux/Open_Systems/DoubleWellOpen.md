@@ -201,7 +201,7 @@ We can also visualize the time evolution of the proton's probability distributio
 
 Using the `QubitDynamicsOS` class from the `qflux.open_systems.quantum_simulation` module, `qflux` enables quantum simulation of the Lindblad equation. When the system has a Hilbert space dimension of $N=32$, the vectorized density matrix becomes a state vector of dimension $N^2$, and the corresponding propagator is of size $N^2 \times N^2$. For such large-dimensional systems, we can utilize the Kraus operator representation to evolve the system dynamics.
 
-Therefore, compared to the approach used in the [Basic of open system simulation example](./OpenSys_basic.md)—where quantum circuits are constructed based on the full propagator—the Kraus operator representation reduces the number of required qubits from $log_{2}N^2$ to $log_2 N$. However, the trade-off is that multiple circuits (corresponding to multiple Kraus operators) must be executed.
+Therefore, compared to the approach used in the [Basic of open system simulation example](./basics.md)—where quantum circuits are constructed based on the full propagator—the Kraus operator representation reduces the number of required qubits from $log_{2}N^2$ to $log_2 N$. However, the trade-off is that multiple circuits (corresponding to multiple Kraus operators) must be executed.
 
 The Kraus operator representation is defined as:
 

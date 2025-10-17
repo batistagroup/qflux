@@ -59,7 +59,7 @@ class DynamicsGQME:
 
     
     def get_Liouvillian(self) -> None:
-        """
+        r"""
         Construct the Liouvillian superoperator using the system Hamiltonian.
         
         The Liouvillian is defined as:
