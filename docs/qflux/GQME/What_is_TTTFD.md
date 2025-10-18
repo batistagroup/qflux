@@ -64,7 +64,7 @@ XI = 0.1
 OMEGA_C = 2
 ```
 
-which are defined in [`qflux.GQME.params`](src/qflux/GQME/params.py).
+which are defined in [`qflux.GQME.params`](params.py).
 
 ## TT-TFD for spin-boson model
 

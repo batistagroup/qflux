@@ -4,6 +4,7 @@ from .utils import execute
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit_aer import Aer
 from .spin_propagators import get_time_evolution_operator
+import numpy.typing as npt
 import os 
 
 
@@ -39,7 +40,6 @@ class SpinDynamicsS:
             evolution_timestep (float): Time step for the evolution.
             trotter_steps (int): Number of Trotter steps for the simulation.
             hamiltonian_coefficients (list): Hamiltonian coefficients for the system.
-            initial_state (str or list): Initial state of the system, represented as a binary string or list.
         """
         self.num_qubits = num_qubits
         self.evolution_timestep = evolution_timestep
@@ -66,7 +66,7 @@ class SpinDynamicsS:
         Prepare the initial state vector from the binary string or list.
 
         Returns:
-            ndarray: Flattened initial state vector.
+            psin (npt.ArrayLike): Flattened initial state vector.
         """
         zero_state = np.array([[1], [0]])
         one_state = np.array([[0], [1]])
@@ -85,12 +85,13 @@ class SpinDynamicsS:
     def qsolve_statevector(self, psin):
         """
         Perform statevector propagation for the quantum circuit.
+            initial_state (str or list): Initial state of the system, represented as a binary string or list.
 
         Args:
-            psin (ndarray): Input statevector.
+            psin (npt.ArrayLike): Input statevector.
 
         Returns:
-            ndarray: Final statevector after execution.
+            ndarray (npt.ArrayLike): Final statevector after execution.
         """
         d = int(np.log2(np.size(psin)))
         qre = QuantumRegister(d)
@@ -206,7 +207,7 @@ class SpinDynamicsH:
             imag_expectation (bool): Whether to evaluate the imaginary component (default: False).
 
         Returns:
-            QuantumCircuit: The constructed Hadamard test circuit.
+            qc (QuantumCircuit): The constructed Hadamard test circuit.
         """
         qr = QuantumRegister(self.num_qubits + 1)
         cr = ClassicalRegister(1)
@@ -235,7 +236,7 @@ class SpinDynamicsH:
             num_shots (int): Number of shots for circuit execution (default: 100).
 
         Returns:
-            dict: Measurement counts.
+            dict (dict): Measurement counts.
         """
         job = execute(qc, self.simulator, shots=num_shots)
         return job.result().get_counts()
@@ -249,7 +250,7 @@ class SpinDynamicsH:
             counts (dict): Measurement counts.
 
         Returns:
-            float: Average spin correlation.
+            results (float): Average spin correlation.
         """
         qubit_to_spin_map = {'0': 1, '1': -1}
         total_counts = sum(counts.values())
@@ -266,7 +267,7 @@ class SpinDynamicsH:
             state_string (str): Binary string representing the initial state.
 
         Returns:
-            QuantumCircuit: Circuit for initializing the state.
+            qc (QuantumCircuit): Circuit for initializing the state.
         """
         state_string = ''.join('1' if char == '0' else '0' for char in state_string)
         qr = QuantumRegister(num_qubits)
