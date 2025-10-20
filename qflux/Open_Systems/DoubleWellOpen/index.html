@@ -854,6 +854,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -921,6 +925,52 @@
   
   <span class="md-ellipsis">
     VarQTE Demo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Variational_Methods/vectorized_AmpDamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vectorized Amplitude Damping
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Variational_Methods/trajectory_FMO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FMO Example
     
   </span>
   
@@ -1378,7 +1428,7 @@ P_L = \langle 1 - \Theta(x - x^*) \rangle
 
 <h2 id="quantum-simulation">Quantum Simulation</h2>
 <p>Using the <code>QubitDynamicsOS</code> class from the <code>qflux.open_systems.quantum_simulation</code> module, <code>qflux</code> enables quantum simulation of the Lindblad equation. When the system has a Hilbert space dimension of <span class="arithmatex">\(N=32\)</span>, the vectorized density matrix becomes a state vector of dimension <span class="arithmatex">\(N^2\)</span>, and the corresponding propagator is of size <span class="arithmatex">\(N^2 \times N^2\)</span>. For such large-dimensional systems, we can utilize the Kraus operator representation to evolve the system dynamics.</p>
-<p>Therefore, compared to the approach used in the <a href="./OpenSys_basic.md">Basic of open system simulation example</a>—where quantum circuits are constructed based on the full propagator—the Kraus operator representation reduces the number of required qubits from <span class="arithmatex">\(log_{2}N^2\)</span> to <span class="arithmatex">\(log_2 N\)</span>. However, the trade-off is that multiple circuits (corresponding to multiple Kraus operators) must be executed.</p>
+<p>Therefore, compared to the approach used in the <a href="../basics/">Basic of open system simulation example</a>—where quantum circuits are constructed based on the full propagator—the Kraus operator representation reduces the number of required qubits from <span class="arithmatex">\(log_{2}N^2\)</span> to <span class="arithmatex">\(log_2 N\)</span>. However, the trade-off is that multiple circuits (corresponding to multiple Kraus operators) must be executed.</p>
 <p>The Kraus operator representation is defined as:</p>
 <div class="arithmatex">\[
     \rho(t) = \sum_i M_i(t) \rho(0) M_i^\dagger (t)

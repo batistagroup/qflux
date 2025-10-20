@@ -12,7 +12,7 @@
         <link rel="prev" href="../variational_methods/">
       
       
-        <link rel="next" href="../var_api/">
+        <link rel="next" href="../vectorized_AmpDamp/">
       
       
       <link rel="icon" href="../../../img/qflux_favicon.png">
@@ -758,6 +758,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -938,6 +942,52 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vectorized_AmpDamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vectorized Amplitude Damping
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trajectory_FMO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FMO Example
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1321,7 +1371,7 @@
     A_{ij} = \Re\Bigg(\frac{\partial\left\langle{\phi(\theta(\tau))}\right|}{\partial\theta_i}\frac{\partial\left|{\phi(\theta(\tau))}\right\rangle}{\partial\theta_j}\Bigg),
 \]</div>
 <div class="arithmatex">\[
-    C_i = - \Re\Bigg(\left\langle{\tfrac{\partial\phi(\theta(\tau))}{\partial\theta_i}}\right|\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
+    C_i = - \Re\Bigg({\frac{\partial\left\langle\phi(\theta(\tau))\right|}{\partial\theta_i}}\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
 \]</div>
 <p>These $A_{ij}$ and $C_i$ values are measured on a quantum device and used to update ansatz parameters:</p>
 <div class="arithmatex">\[
@@ -1329,14 +1379,14 @@
 \]</div>
 <p>The derivatives of the quantum state with respect to the variational parameters are linked to the generators <span class="arithmatex">\(G_i\)</span> of the ansatz:</p>
 <div class="arithmatex">\[
-    \dfrac{\partial\ket{\psi(\theta(t))}}{\partial\theta_i} = -i G_i\ket{\psi(\theta(t))}.
+    \dfrac{\partial\left|{\psi(\theta(t))}\right\rangle}{\partial\theta_i} = -i G_i\left|{\psi(\theta(t))}\right\rangle.
 \]</div>
 <p>For instance, in the case of a single qubit <span class="arithmatex">\(Z\)</span>-rotation,</p>
 <div class="arithmatex">\[
-    \dfrac{\partial}{\partial\theta} e^{-i\theta\sigma_Z}\ket{\psi} = -i\sigma_Ze^{-i\theta\sigma_Z}\ket{\psi}
+    \dfrac{\partial}{\partial\theta} e^{-i\theta\sigma_Z}\left|{\psi}\right\rangle = -i\sigma_Ze^{-i\theta\sigma_Z}\left|{\psi}\right\rangle
 \]</div>
 <p>Therefore, one can evaluate the expectation values introduced by the <span class="arithmatex">\(A_{ij}, C_{i}\)</span> by performing Hadamard tests on the corresponding generators of the ansatz.</p>
-<p>For example, to determine the elements of the matrix <span class="arithmatex">\(A_{ij}\)</span>, the dagger of the generator of parameter i (<span class="arithmatex">\(G_i^\dagger\)</span>) and the parameter of generator j (<span class="arithmatex">\(G_j\)</span>) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the <span class="arithmatex">\(\ket{0}\)</span> state, and performing a pair of not-gates on the ancilla qubits before and after measuring <span class="arithmatex">\(G_i\)</span> to measure <span class="arithmatex">\(G_i^\dagger\)</span>, and subsequently measuring <span class="arithmatex">\(G_i\)</span> with a Hadamard test using the same ancilla.</p>
+<p>For example, to determine the elements of the matrix <span class="arithmatex">\(A_{ij}\)</span>, the dagger of the generator of parameter i (<span class="arithmatex">\(G_i^\dagger\)</span>) and the parameter of generator j (<span class="arithmatex">\(G_j\)</span>) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the <span class="arithmatex">\(\left|{0}\right\rangle\)</span> state, and performing a pair of not-gates on the ancilla qubits before and after measuring <span class="arithmatex">\(G_i\)</span> to measure <span class="arithmatex">\(G_i^\dagger\)</span>, and subsequently measuring <span class="arithmatex">\(G_i\)</span> with a Hadamard test using the same ancilla.</p>
 <p>Reference implementations of this algorithm are used below, using QFlux to simulate the imaginary-time evolution spin-systems. The simulations apply the McLachlan variational principle through the <code>VarQRTE</code> function, demonstrating how variational techniques can efficiently capture quantum dynamics within shallow, noise-resilient circuits.</p>
 <hr />
 <h3 id="demonstrations">Demonstrations</h3>
@@ -1403,11 +1453,11 @@ VarQITE drives the system toward the <strong>ground state</strong> as imaginary 
 <p>Analogous to the problem of finding eigenstates of a Hamiltonian is the problem of dynamics, which can be also be approached with the Variational Quantum Real-Time Evolution (VarQRTE).</p>
 <p>We now consider <strong>real-time dynamics</strong> by starting with the Schrödinger equation and applying McLachlan’s Variational Principle:</p>
 <div class="arithmatex">\[
-    \delta \left\Vert\left(\frac{\partial}{\partial t} + i\mathcal{H}\right)\ket{\psi(\theta(t))}\right\Vert = 0.
+    \delta \left\Vert\left(\frac{\partial}{\partial t} + i\mathcal{H}\right)\left|{\psi(\theta(t))}\right\rangle\right\Vert = 0.
 \]</div>
 <p>The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of <span class="arithmatex">\(C_i\)</span>,</p>
 <div class="arithmatex">\[
-    C_i = - \Im\Bigg(\left\langle{\tfrac{\partial\phi(\theta(t))}{\partial\theta_i}}\right| \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
+    C_i = - \Im\Bigg({\frac{\partial \left\langle\phi(\theta(t))\right|}{\partial\theta_i}} \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
 \]</div>
 <p>Building upon the same framework as VarQITE, one can measure the <span class="arithmatex">\(A_{ij}\)</span> and <span class="arithmatex">\(C_i\)</span> matrices on a quantum computer, and use them to change the parameters <span class="arithmatex">\(\theta(t+dt) = \theta(t)+\dot\theta dt\)</span>.</p>
 <p>Within QFlux, <code>VarQRTE</code> reuses the same modular components while invoking <code>Measure_C</code> with <code>evolution_type="imaginary"</code>. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.</p>
@@ -1425,7 +1475,7 @@ VarQITE drives the system toward the <strong>ground state</strong> as imaginary 
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">params</span> <span class="o">=</span> <span class="n">VarQRTE</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">total_time</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">init_circ</span><span class="o">=</span><span class="n">qc</span><span class="p">)</span>
 </span></code></pre></div>
 <p>We can measure observables over time using an Estimator object, supplied with the optimized circuit parameters and the observable circuit.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">Estimator</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">EstimatorV2</span> <span class="k">as</span> <span class="n">Estimator</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">estimator</span> <span class="o">=</span> <span class="n">Estimator</span><span class="p">()</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="o">.</span><span class="n">from_list</span><span class="p">([(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
@@ -1433,8 +1483,8 @@ VarQITE drives the system toward the <strong>ground state</strong> as imaginary 
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)):</span>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="n">ansatz</span> <span class="o">=</span> <span class="n">Construct_Ansatz</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">observables</span><span class="o">=</span><span class="n">observable</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">spin_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">observables</span><span class="o">=</span><span class="n">observable</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> 
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">spin_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">evs</span><span class="p">())</span>
 </span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
 </span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Spin Expectation Value Over Time&quot;</span><span class="p">)</span>
 </span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">*</span><span class="n">timestep</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">total_time</span><span class="o">/</span><span class="n">timestep</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">spin_values</span><span class="p">)</span>
@@ -1543,13 +1593,13 @@ VarQRTE captures the change in state of quantum systems in real-time. As seen in
         
         
           
-          <a href="../var_api/" class="md-footer__link md-footer__link--next" aria-label="Next: Source Code">
+          <a href="../vectorized_AmpDamp/" class="md-footer__link md-footer__link--next" aria-label="Next: Vectorized Amplitude Damping">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Source Code
+                Vectorized Amplitude Damping
               </div>
             </div>
             <div class="md-footer__button md-icon">
