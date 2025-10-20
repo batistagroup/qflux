@@ -1577,15 +1577,20 @@ Natural for jump/no‑jump dynamics and trajectory parallelization</p>
 </span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1"># time in results[0].t</span>
 </span></code></pre></div>
 <p><img alt="FMO_SSE_results" src="../../images/Part_III/fmo_ssetraj.png" /></p>
-<p><em>Observation:</em> With suitable (\Delta t), trajectory count, ansatz pool, and McLachlan threshold, SSE trajectories <strong>closely track</strong> QuTiP’s numerically exact curves.</p>
+<p><em>Observation:</em> With suitable (<span class="arithmatex">\(\Delta t\)</span>), trajectory count, ansatz pool, and McLachlan threshold, SSE trajectories <strong>closely track</strong> QuTiP’s numerically exact curves.</p>
 <hr />
 <h2 id="adaptive-updates-after-jumps-brief">Adaptive Updates After Jumps (Brief)</h2>
-<p>After each detected jump, we (i) reset the ansatz reference to the post‑jump state, (ii) <strong>re‑select</strong> operators from the pool, and (iii) <strong>re‑tune</strong> parameters via the McLachlan linear system. This keeps the variational circuit compact while maintaining accuracy under noise.</p>
+<p>After each detected jump, we </p>
+<ol>
+<li>reset the ansatz reference to the post‑jump state, </li>
+<li><strong>re‑select</strong> operators from the pool, and </li>
+<li><strong>re‑tune</strong> parameters via the McLachlan linear system. This keeps the variational circuit compact while maintaining accuracy under noise.</li>
+</ol>
 <hr />
 <h2 id="summary">Summary</h2>
 <ul>
 <li><strong>SSE</strong> avoids qubit doubling and non‑local Liouvillians, ideal for <strong>NISQ</strong> implementations.</li>
-<li>We decomposed an <strong>effective Hamiltonian</strong>, evolved <strong>quantum trajectories</strong> with deterministic and jump segments, and averaged to reconstruct (\rho(t)).</li>
+<li>We decomposed an <strong>effective Hamiltonian</strong>, evolved <strong>quantum trajectories</strong> with deterministic and jump segments, and averaged to reconstruct (<span class="arithmatex">\(\rho(t)\)</span>).</li>
 <li>On the <strong>FMO complex</strong>, SSE trajectories reproduce <strong>population dynamics</strong> in strong agreement with QuTiP baselines.</li>
 </ul>
 <hr />
