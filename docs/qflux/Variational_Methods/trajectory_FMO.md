@@ -1,11 +1,11 @@
-# FMO Trajectory Simulation
+# FMO Complex Exciton Transfer Dynamics using SSE
 
-This documentation describes how to simulate and visualize the **Fenna–Matthews–Olson (FMO)** complex trajectory using the `Qflux`'s adaptive ansatz variational method framework `QMAD`. The goal is to analyze excitation energy transfer within the FMO system and demonstrate time-dependent propagation of the reduced density matrix.
+This documentation describes how to simulate and visualize the **Fenna–Matthews–Olson (FMO)** complex exciton transfer dynamics trajectory using the `Qflux`'s adaptive ansatz variational method framework `QMAD`. The goal is to analyze excitation energy transfer within the FMO system and demonstrate time-dependent propagation of the reduced density matrix.
 
 ---
 
 
-This example of open‑system dynamics is based on the **stochastic Schrödinger equation (SSE)**. SSE simulates **quantum trajectories** on the **same number of qubits** as the system state.
+This example of open‑system dynamics is based on the **stochastic Schrödinger equation (SSE)**. This approach simulates **quantum trajectories** on the **same number of qubits** as the system state.
 
 **Features of SSE**
 Same qubit count as the system state (no duplication)
@@ -60,31 +60,6 @@ from qflux.variational_methods.qmad.effh import EffectiveHamiltonian_class, Effe
 *Purpose:* 
 
 build ($H_\mathrm{eff} = H_\mathrm{e} - \tfrac{i}{2}\sum_k L_k^\dagger L_k$) and cache jump structures.
-
-### Main Trajectory Loop (Deterministic vs. Jump)
-
-```python
-from qflux.variational_methods.qmad.solver import solve_avq_vect
-
-# solver.py (QMAD) — core evolution sketch
-while t + dt <= tspan[1]:
-    He, Ha = H.He, H.Ha
-    if np.exp(-Gamma) > q:              # no jump
-        one_step(A, He, Ha, dt)         # deterministic update
-        psi_ = A.state
-        Gamma += 2 * np.real(psi_.conj().T @ Ha @ psi_) * dt
-        # (optional) save intermediates
-    else:                               # quantum jump
-        psi_ = A.state
-        weights = np.array([np.real(psi_.conj().T @ LdL @ psi_) for LdL in H.LdL])
-        L = H.Llist[np.random.choice(range(len(H.Llist)), p=weights/weights.sum())]
-        psi_n = L @ psi_ / np.linalg.norm(L @ psi_)
-        # record jump, reset ansatz around new reference
-        set_ref(A, psi_n); reset(A)
-        Gamma = 0; q = rand()
-    if save_state: u_list.append(A.state.copy())
-    t += dt
-```
 
 *Notes:* After each jump, McLachlan‑based **adaptive ansatz updates** (see below) retune parameters to track the new state efficiently.
 
@@ -188,7 +163,7 @@ avg = [a/num_trajectory for a in avg]
 
 ---
 
-## Adaptive Updates After Jumps (Brief)
+## Adaptive Updates After Jumps
 
 After each detected jump, we (i) reset the ansatz reference to the post‑jump state, (ii) **re‑select** operators from the pool, and (iii) **re‑tune** parameters via the McLachlan linear system. This keeps the variational circuit compact while maintaining accuracy under noise.
 
