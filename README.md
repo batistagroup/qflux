@@ -74,7 +74,7 @@ This section includes additional repositories with functionality that has been i
 
 [![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/dcabral00/qc_spin_tutorial) | Spin Chain Tutorial Repository 
 
-[![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/saurabhshivpuje/QMAD) | QMultiAdapt Repository
+[![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/saurabhshivpuje/QMAD) | QMAD Repository
 
 [![Static Badge](https://img.shields.io/badge/Open_in_Github-181717.svg?&logo=github&logoColor=white)](https://github.com/XiaohanDan97/CCI_PartIII_GQME) | GQME Tutorial Repository
 

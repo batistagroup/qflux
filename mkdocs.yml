@@ -80,8 +80,8 @@ nav: # Note: All paths must be relative to the docs dir
   - Variational Methods: 
     - Variational Methods: 'qflux/Variational_Methods/variational_methods.md'
     - VarQTE Demo: 'qflux/Variational_Methods/varQTE.md'
-    - Amplitude Damping Example: 'qflux/Variational_Methods/Vectorized_Adaptive.md'
-    - FMO Example: 'qflux/Variational_Methods/trajectory_FMO.md'
+    - UAVQD for Open Systems: 'qflux/Variational_Methods/Vectorized_Adaptive.md'
+    - SSE for Open Systems: 'qflux/Variational_Methods/trajectory_FMO.md'
     - Source Code: 'qflux/Variational_Methods/var_api.md' 
   - GQME: 
     - 'qflux/GQME/index.md'

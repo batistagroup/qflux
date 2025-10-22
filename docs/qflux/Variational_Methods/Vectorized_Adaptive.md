@@ -1,4 +1,4 @@
-# Amplitude Damping using vectorized variational
+# Amplitude Damping Channel Using UAVQD
 
 This page focuses on the **example**: amplitude damping using the **vectorized variational** method with an **unrestricted adaptive** ansatz. The amplitude damping model describes energy loss from an excited quantum state to a lower-energy state (e.g., spontaneous emission). Here, we simulate this process using:
 
@@ -9,13 +9,13 @@ This page focuses on the **example**: amplitude damping using the **vectorized v
 
 ---
 
-## Unrestricted Adaptive Procedure — Vectorized Amplitude Damping (UAVQDS)
+## Unrestricted Adaptive Variational Quantum Dynamics (UAVQD)
 
-This section demonstrates the **unrestricted adaptive variational quantum dynamics (UAVQDS)** method using the **vectorized amplitude damping** model. The example illustrates how to set up the simulation, run it with adaptive variational updates, and compare the results against numerically exact QuTiP benchmarks.
+This section demonstrates the **UAVQD** method using the **vectorized amplitude damping** model. The example illustrates how to set up the simulation, run it with adaptive variational updates, and compare the results against numerically exact `QuTiP` benchmarks.
 
 ---
 
-We first import the required modules from the QMAD package and standard Python libraries.
+We first import the required QMAD module from the `qflux` package and other required standard Python libraries.
 
 ```python
 import numpy as np
@@ -26,7 +26,7 @@ from qflux.variational_methods.qmad.effh import VectorizedEffectiveHamiltonian
 from qflux.variational_methods.qmad.ansatzVect import Ansatz
 ```
 
-Define Pauli matrices and ladder operators, which will form the building blocks for the amplitude damping process.
+Define Pauli matrices and ladder operators, which will form the building block for the representation for the amplitude damping process.
 
 ```python
 sx = np.array([[0, 1], [1, 0]])
@@ -79,9 +79,9 @@ The `relrcut` parameter determines the sensitivity of adaptive growth: smaller v
 
 ---
 
-## Running the UAVQDS Simulation
+## Running the UAVQD Simulation
 
-We now evolve the system using the adaptive variational solver `solve_avq_vect`. The function returns time steps and density matrices over the full trajectory.
+We now evolve the system using the adaptive variational solver `solve_avq_vect`. The function returns time steps and density matrices over the full trajectory. 
 
 ```python
 res = solve_avq_vect(H_vec, ansatz, [0, tf], dt)
@@ -96,10 +96,25 @@ times   = np.arange(0, tf + 1e-30, dt)
 ```
 
 ---
+## Operator Pool Definition
 
+Please note that the **default operator pool** used in UAVQD simulations is defined within the source code.  
+It consists of basic **Pauli operators** (`sx`, `sy`, `sz`) that form the minimal basis for constructing the variational ansatz:
+
+```python
+def build_pool(nqbit):
+    pauliStr = ["sx", "sz", "sy"]
+    res = []
+    for order in range(1, 3):
+        for idx in combinations(range(1, nqbit + 1), order):
+            for op in product(pauliStr, repeat=order):
+                res.append(PauliOperator(op, list(idx), 1, nqbit))
+    return res
+```
+---
 ## Reference Calculation using QuTiP
 
-To validate the UAVQDS results, we compute a reference solution using **QuTiP’s master equation solver (`mesolve`)**.
+To validate the UAVQD results, we compute a reference solution using **QuTiP’s master equation solver (`mesolve`)**.
 
 ```python
 from qutip import mesolve, Qobj, basis
@@ -107,7 +122,7 @@ from qutip import mesolve, Qobj, basis
 sp = Qobj(sp)
 H  = Qobj(np.eye(2, dtype=np.complex128))
 
-# Time grid matches the UAVQDS simulation
+# Time grid matches the UAVQD simulation
 times = np.arange(0, tf, dt)
 
 # Define damping operator and initial state
@@ -142,7 +157,7 @@ plt.show()
 
 ## Combined Comparison Plot
 
-Overlay UAVQDS and QuTiP population curves for a unified view.
+Overlay UAVQD and QuTiP population curves for a unified view.
 
 ```python
 plt.figure(figsize=(8,5))
@@ -151,10 +166,10 @@ plt.figure(figsize=(8,5))
 plt.plot(times*1e12, G_q, label='Ground (QuTiP)')
 plt.plot(times*1e12, E_q, label='Excited (QuTiP)')
 
-# UAVQDS sampled markers
+# UAVQD sampled markers
 step = max(1, len(times)//10)
-plt.plot(times[::step]*1e12, ground[::step],  '*', label='Ground (UAVQDS)')
-plt.plot(times[::step]*1e12, excited[::step], '*', label='Excited (UAVQDS)')
+plt.plot(times[::step]*1e12, ground[::step],  '*', label='Ground (UAVQD)')
+plt.plot(times[::step]*1e12, excited[::step], '*', label='Excited (UAVQD)')
 
 plt.xlabel('Time (ps)')
 plt.ylabel('Population')
