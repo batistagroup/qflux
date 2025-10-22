@@ -1,6 +1,6 @@
 # FMO Complex Exciton Transfer Dynamics using SSE
 
-This documentation describes how to simulate and visualize the **Fenna–Matthews–Olson (FMO)** complex exciton transfer dynamics trajectory using the `Qflux`'s adaptive ansatz variational method framework `QMAD`. The goal is to analyze excitation energy transfer within the FMO system and demonstrate time-dependent propagation of the reduced density matrix.
+This documentation describes how to simulate and visualize the **Fenna–Matthews–Olson (FMO)** complex exciton transfer dynamics trajectory using an adaptive ansatz variational method framework (`QMAD`) within the `variational_methods` module of `qflux`. The goal is to analyze excitation energy transfer within the FMO system and demonstrate time-dependent propagation of the reduced density matrix.
 
 ---
 
@@ -40,7 +40,7 @@ and then **normalize** to obtain ($|\psi_j(t)\rangle = \tilde{\psi}_j(t)/\langle
 **Ensemble reconstruction** of the density matrix:
 
 $$
-\rho(t) = \frac{1}{n} \sum_{j=1}^n |\psi_j(t)\rangle\langle\psi_j(t)| ,
+\rho(t) = \frac{1}{n} \sum_{j=1}^n |\psi_j(t)\rangle\langle\psi_j(t)|
 $$
 
 with accuracy improving as (n) (the number of trajectories) increases.
@@ -122,12 +122,11 @@ from qflux.variational_methods.qmad.solver import solve_avq_trajectory
 from qflux.variational_methods.qmad.effh   import EffectiveHamiltonian
 from qflux.variational_methods.qmad.ansatz import Ansatz
 
-if __name__ == "__main__":
-    tf, dt = 450, 5
-    num_trajectory = 400
-    H = EffectiveHamiltonian([H_fmo], [Llist_f_padded])
-    ansatz = Ansatz(u0_fmo, relrcut=1e-5)
-    results = run_trajectories(num_trajectory, H, ansatz, tf, dt)
+tf, dt = 450, 5
+num_trajectory = 400
+H = EffectiveHamiltonian([H_fmo], [Llist_f_padded])
+ansatz = Ansatz(u0_fmo, relrcut=1e-5)
+results = run_trajectories(num_trajectory, H, ansatz, tf, dt)
 ```
 
 ### Post‑processing & Populations
@@ -159,13 +158,19 @@ avg = [a/num_trajectory for a in avg]
 
 ![FMO\_SSE\_results](../images/Part_III/fmo_ssetraj.png)
 
-*Observation:* With suitable (\Delta t), trajectory count, ansatz pool, and McLachlan threshold, SSE trajectories **closely track** QuTiP’s numerically exact curves.
+*Observation:* With suitable ($\Delta t$), trajectory count, ansatz pool, and McLachlan threshold, SSE trajectories **closely track** QuTiP’s numerically exact curves.
 
 ---
 
 ## Adaptive Updates After Jumps
 
-After each detected jump, we (i) reset the ansatz reference to the post‑jump state, (ii) **re‑select** operators from the pool, and (iii) **re‑tune** parameters via the McLachlan linear system. This keeps the variational circuit compact while maintaining accuracy under noise.
+After each detected jump, we:
+
+1. reset the ansatz reference to the post‑jump state,
+2. **re‑select** operators from the pool, and
+3. **re‑tune** parameters via the McLachlan linear system.
+  
+This keeps the variational circuit compact while maintaining accuracy under noise.
 
 ---
 
