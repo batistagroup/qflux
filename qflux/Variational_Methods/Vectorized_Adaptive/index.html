@@ -20,7 +20,7 @@
     
     
       
-        <title>Vectorized Amplitude Damping - QFlux Docs</title>
+        <title>UAVQD for Open Systems - QFlux Docs</title>
       
     
     
@@ -129,7 +129,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#amplitude-damping-using-vectorized-variational" class="md-skip">
+        <a href="#amplitude-damping-channel-using-uavqd" class="md-skip">
           Skip to content
         </a>
       
@@ -164,7 +164,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Vectorized Amplitude Damping
+              UAVQD for Open Systems
             
           </span>
         </div>
@@ -860,7 +860,7 @@
   
   
   <span class="md-ellipsis">
-    Vectorized Amplitude Damping
+    UAVQD for Open Systems
     
   </span>
   
@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Vectorized Amplitude Damping
+    UAVQD for Open Systems
     
   </span>
   
@@ -896,9 +896,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unrestricted-adaptive-procedure-vectorized-amplitude-damping-uavqds" class="md-nav__link">
+  <a href="#unrestricted-adaptive-variational-quantum-dynamics-uavqd" class="md-nav__link">
     <span class="md-ellipsis">
-      Unrestricted Adaptive Procedure — Vectorized Amplitude Damping (UAVQDS)
+      Unrestricted Adaptive Variational Quantum Dynamics (UAVQD)
     </span>
   </a>
   
@@ -914,9 +914,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-uavqds-simulation" class="md-nav__link">
+  <a href="#running-the-uavqd-simulation" class="md-nav__link">
     <span class="md-ellipsis">
-      Running the UAVQDS Simulation
+      Running the UAVQD Simulation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operator-pool-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operator Pool Definition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#def-build_poolnqbit-paulistr-sx-sz-sy-res-for-order-in-range1-3-for-idx-in-combinationsrange1-nqbit-1-order-for-op-in-productpaulistr-repeatorder-resappendpaulioperatorop-listidx-1-nqbit-return-res" class="md-nav__link">
+    <span class="md-ellipsis">
+      def build_pool(nqbit): pauliStr = [&quot;sx&quot;, &quot;sz&quot;, &quot;sy&quot;] res = [] for order in range(1, 3): for idx in combinations(range(1, nqbit + 1), order): for op in product(pauliStr, repeat=order): res.append(PauliOperator(op, list(idx), 1, nqbit)) return res
     </span>
   </a>
   
@@ -970,7 +988,7 @@
   
   
   <span class="md-ellipsis">
-    FMO Example
+    SSE for Open Systems
     
   </span>
   
@@ -1223,9 +1241,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unrestricted-adaptive-procedure-vectorized-amplitude-damping-uavqds" class="md-nav__link">
+  <a href="#unrestricted-adaptive-variational-quantum-dynamics-uavqd" class="md-nav__link">
     <span class="md-ellipsis">
-      Unrestricted Adaptive Procedure — Vectorized Amplitude Damping (UAVQDS)
+      Unrestricted Adaptive Variational Quantum Dynamics (UAVQD)
     </span>
   </a>
   
@@ -1241,9 +1259,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-uavqds-simulation" class="md-nav__link">
+  <a href="#running-the-uavqd-simulation" class="md-nav__link">
     <span class="md-ellipsis">
-      Running the UAVQDS Simulation
+      Running the UAVQD Simulation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operator-pool-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operator Pool Definition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#def-build_poolnqbit-paulistr-sx-sz-sy-res-for-order-in-range1-3-for-idx-in-combinationsrange1-nqbit-1-order-for-op-in-productpaulistr-repeatorder-resappendpaulioperatorop-listidx-1-nqbit-return-res" class="md-nav__link">
+    <span class="md-ellipsis">
+      def build_pool(nqbit): pauliStr = [&quot;sx&quot;, &quot;sz&quot;, &quot;sy&quot;] res = [] for order in range(1, 3): for idx in combinations(range(1, nqbit + 1), order): for op in product(pauliStr, repeat=order): res.append(PauliOperator(op, list(idx), 1, nqbit)) return res
     </span>
   </a>
   
@@ -1295,7 +1331,7 @@
   
 
 
-<h1 id="amplitude-damping-using-vectorized-variational">Amplitude Damping using vectorized variational</h1>
+<h1 id="amplitude-damping-channel-using-uavqd">Amplitude Damping Channel Using UAVQD</h1>
 <p>This page focuses on the <strong>example</strong>: amplitude damping using the <strong>vectorized variational</strong> method with an <strong>unrestricted adaptive</strong> ansatz. The amplitude damping model describes energy loss from an excited quantum state to a lower-energy state (e.g., spontaneous emission). Here, we simulate this process using:</p>
 <ul>
 <li>The <strong>vectorized representation</strong> of the density matrix.</li>
@@ -1303,10 +1339,10 @@
 <li>A <strong>single-qubit system</strong> undergoing amplitude damping with decay rate (<span class="arithmatex">\(\gamma = 1.52 \times 10^9 \text{ s}^{-1}\)</span>).</li>
 </ul>
 <hr />
-<h2 id="unrestricted-adaptive-procedure-vectorized-amplitude-damping-uavqds">Unrestricted Adaptive Procedure — Vectorized Amplitude Damping (UAVQDS)</h2>
-<p>This section demonstrates the <strong>unrestricted adaptive variational quantum dynamics (UAVQDS)</strong> method using the <strong>vectorized amplitude damping</strong> model. The example illustrates how to set up the simulation, run it with adaptive variational updates, and compare the results against numerically exact QuTiP benchmarks.</p>
+<h2 id="unrestricted-adaptive-variational-quantum-dynamics-uavqd">Unrestricted Adaptive Variational Quantum Dynamics (UAVQD)</h2>
+<p>This section demonstrates the <strong>UAVQD</strong> method using the <strong>vectorized amplitude damping</strong> model. The example illustrates how to set up the simulation, run it with adaptive variational updates, and compare the results against numerically exact <code>QuTiP</code> benchmarks.</p>
 <hr />
-<p>We first import the required modules from the QMAD package and standard Python libraries.</p>
+<p>We first import the required QMAD module from the <code>qflux</code> package and other required standard Python libraries.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -1314,7 +1350,7 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.variational_methods.qmad.effh</span><span class="w"> </span><span class="kn">import</span> <span class="n">VectorizedEffectiveHamiltonian</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.variational_methods.qmad.ansatzVect</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ansatz</span>
 </span></code></pre></div>
-<p>Define Pauli matrices and ladder operators, which will form the building blocks for the amplitude damping process.</p>
+<p>Define Pauli matrices and ladder operators, which will form the building block for the representation for the amplitude damping process.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">sy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">sp</span> <span class="o">=</span> <span class="p">(</span><span class="n">sx</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">sy</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># raising operator</span>
@@ -1343,8 +1379,8 @@
 </span></code></pre></div>
 <p>The <code>relrcut</code> parameter determines the sensitivity of adaptive growth: smaller values increase precision but require deeper circuits.</p>
 <hr />
-<h2 id="running-the-uavqds-simulation">Running the UAVQDS Simulation</h2>
-<p>We now evolve the system using the adaptive variational solver <code>solve_avq_vect</code>. The function returns time steps and density matrices over the full trajectory.</p>
+<h2 id="running-the-uavqd-simulation">Running the UAVQD Simulation</h2>
+<p>We now evolve the system using the adaptive variational solver <code>solve_avq_vect</code>. The function returns time steps and density matrices over the full trajectory. </p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">res</span> <span class="o">=</span> <span class="n">solve_avq_vect</span><span class="p">(</span><span class="n">H_vec</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Extract ground and excited state populations from the diagonal elements of the resulting density matrices.</p>
@@ -1353,59 +1389,71 @@
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">times</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span> <span class="o">+</span> <span class="mf">1e-30</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
+<h2 id="operator-pool-definition">Operator Pool Definition</h2>
+<p>Please note that the <strong>default operator pool</strong> used in UAVQD simulations is defined within the source code.<br />
+It consists of basic <strong>Pauli operators</strong> (<code>sx</code>, <code>sy</code>, <code>sz</code>) that form the minimal basis for constructing the variational ansatz:</p>
+<h2 id="def-build_poolnqbit-paulistr-sx-sz-sy-res-for-order-in-range1-3-for-idx-in-combinationsrange1-nqbit-1-order-for-op-in-productpaulistr-repeatorder-resappendpaulioperatorop-listidx-1-nqbit-return-res"><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">build_pool</span><span class="p">(</span><span class="n">nqbit</span><span class="p">):</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">pauliStr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sx&quot;</span><span class="p">,</span> <span class="s2">&quot;sz&quot;</span><span class="p">,</span> <span class="s2">&quot;sy&quot;</span><span class="p">]</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nqbit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>            <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">pauliStr</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">order</span><span class="p">):</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PauliOperator</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nqbit</span><span class="p">))</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="k">return</span> <span class="n">res</span>
+</span></code></pre></div></h2>
 <h2 id="reference-calculation-using-qutip">Reference Calculation using QuTiP</h2>
-<p>To validate the UAVQDS results, we compute a reference solution using <strong>QuTiP’s master equation solver (<code>mesolve</code>)</strong>.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">mesolve</span><span class="p">,</span> <span class="n">Qobj</span><span class="p">,</span> <span class="n">basis</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">sp</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">H</span>  <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">))</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Time grid matches the UAVQDS simulation</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># Define damping operator and initial state</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.52e9</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">psi0</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">u0</span><span class="p">)</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">rho0</span> <span class="o">=</span> <span class="n">psi0</span> <span class="o">*</span> <span class="n">psi0</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="p">]</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="c1"># Projectors for populations</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="n">proj_g</span> <span class="o">=</span> <span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="n">proj_e</span> <span class="o">=</span> <span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
-</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
-</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="n">res_qutip</span> <span class="o">=</span> <span class="n">mesolve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">rho0</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">,</span> <span class="p">[</span><span class="n">proj_g</span><span class="p">,</span> <span class="n">proj_e</span><span class="p">])</span>
-</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="n">G_q</span><span class="p">,</span> <span class="n">E_q</span> <span class="o">=</span> <span class="n">res_qutip</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_qutip</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<p>To validate the UAVQD results, we compute a reference solution using <strong>QuTiP’s master equation solver (<code>mesolve</code>)</strong>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qutip</span><span class="w"> </span><span class="kn">import</span> <span class="n">mesolve</span><span class="p">,</span> <span class="n">Qobj</span><span class="p">,</span> <span class="n">basis</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">sp</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">H</span>  <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">))</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Time grid matches the UAVQD simulation</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># Define damping operator and initial state</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.52e9</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">psi0</span> <span class="o">=</span> <span class="n">Qobj</span><span class="p">(</span><span class="n">u0</span><span class="p">)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="n">rho0</span> <span class="o">=</span> <span class="n">psi0</span> <span class="o">*</span> <span class="n">psi0</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="p">]</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="c1"># Projectors for populations</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="n">proj_g</span> <span class="o">=</span> <span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="n">proj_e</span> <span class="o">=</span> <span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">basis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dag</span><span class="p">()</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="n">res_qutip</span> <span class="o">=</span> <span class="n">mesolve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">rho0</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">c_ops</span><span class="p">,</span> <span class="p">[</span><span class="n">proj_g</span><span class="p">,</span> <span class="n">proj_e</span><span class="p">])</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="n">G_q</span><span class="p">,</span> <span class="n">E_q</span> <span class="o">=</span> <span class="n">res_qutip</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res_qutip</span><span class="o">.</span><span class="n">expect</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </span></code></pre></div>
 <p>Plot QuTiP results for direct comparison.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">G_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ground (QuTiP)&#39;</span><span class="p">)</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">E_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Excited (QuTiP)&#39;</span><span class="p">)</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (ps)&#39;</span><span class="p">)</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Population&#39;</span><span class="p">)</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">G_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ground (QuTiP)&#39;</span><span class="p">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">E_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Excited (QuTiP)&#39;</span><span class="p">)</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (ps)&#39;</span><span class="p">)</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Population&#39;</span><span class="p">)</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 <p><img alt="QuTiP_Populations" src="../../images/Part_III/qutip_ampdamp.png" /></p>
 <hr />
 <h2 id="combined-comparison-plot">Combined Comparison Plot</h2>
-<p>Overlay UAVQDS and QuTiP population curves for a unified view.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># QuTiP baseline (solid lines)</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">G_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ground (QuTiP)&#39;</span><span class="p">)</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">E_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Excited (QuTiP)&#39;</span><span class="p">)</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># UAVQDS sampled markers</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">step</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">[::</span><span class="n">step</span><span class="p">]</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">ground</span><span class="p">[::</span><span class="n">step</span><span class="p">],</span>  <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ground (UAVQDS)&#39;</span><span class="p">)</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">[::</span><span class="n">step</span><span class="p">]</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">excited</span><span class="p">[::</span><span class="n">step</span><span class="p">],</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Excited (UAVQDS)&#39;</span><span class="p">)</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (ps)&#39;</span><span class="p">)</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Population&#39;</span><span class="p">)</span>
-</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
-</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<p>Overlay UAVQD and QuTiP population curves for a unified view.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># QuTiP baseline (solid lines)</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">G_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ground (QuTiP)&#39;</span><span class="p">)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">E_q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Excited (QuTiP)&#39;</span><span class="p">)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># UAVQD sampled markers</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">step</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">[::</span><span class="n">step</span><span class="p">]</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">ground</span><span class="p">[::</span><span class="n">step</span><span class="p">],</span>  <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ground (UAVQD)&#39;</span><span class="p">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">[::</span><span class="n">step</span><span class="p">]</span><span class="o">*</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">excited</span><span class="p">[::</span><span class="n">step</span><span class="p">],</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Excited (UAVQD)&#39;</span><span class="p">)</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (ps)&#39;</span><span class="p">)</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Population&#39;</span><span class="p">)</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 <p><img alt="AmpDamp_Comparison" src="../../images/Part_III/ampdamp_comparison.png" /></p>
 <hr />
@@ -1512,13 +1560,13 @@
         
         
           
-          <a href="../trajectory_FMO/" class="md-footer__link md-footer__link--next" aria-label="Next: FMO Example">
+          <a href="../trajectory_FMO/" class="md-footer__link md-footer__link--next" aria-label="Next: SSE for Open Systems">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                FMO Example
+                SSE for Open Systems
               </div>
             </div>
             <div class="md-footer__button md-icon">
