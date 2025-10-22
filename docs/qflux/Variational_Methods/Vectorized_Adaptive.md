@@ -11,11 +11,11 @@ This page focuses on the **example**: amplitude damping using the **vectorized v
 
 ## Unrestricted Adaptive Variational Quantum Dynamics (UAVQD)
 
-This section demonstrates the **UAVQD** method using the **vectorized amplitude damping** model. The example illustrates how to set up the simulation, run it with adaptive variational updates, and compare the results against numerically exact QuTiP benchmarks.
+This section demonstrates the **UAVQD** method using the **vectorized amplitude damping** model. The example illustrates how to set up the simulation, run it with adaptive variational updates, and compare the results against numerically exact `QuTiP` benchmarks.
 
 ---
 
-We first import the required QMAD module from the QFlux package and other required standard Python libraries.
+We first import the required QMAD module from the `qflux` package and other required standard Python libraries.
 
 ```python
 import numpy as np
