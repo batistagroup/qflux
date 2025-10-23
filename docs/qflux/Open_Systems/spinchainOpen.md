@@ -15,21 +15,21 @@ $$  H = \sum_{n=0}^{N-1} \Omega_{n} \sigma_{n}^{z} - \frac{1}{2} \sum_{n=0}^{N-2
 
 The Hamiltonian is defined using a Pauli string representation and includes local $Z$-field terms and $XX$, $YY$, and $ZZ$ couplings, with cofficients given according to the table:
 
-| Parameter             |  $ n = 0 $  |  $ n \neq 0 $  |
+| Parameter             |  $n = 0$    |  $n \neq 0$    |
 |-----------------------|-------------|----------------|
-|  $ \Omega_n  $        | 0.65        | 1.0            |
-|  $ J_{n,n+1}^{x} $    | 0.75        | 1.0            |
-|  $ J_{n,n+1}^{y} $    | 0.75        | 1.0            |
-|  $ J_{n,n+1}^{z} $    | 0.0         | 0.0            |
+|  $\Omega_n$           | 0.65        | 1.0            |
+|  $J_{n,n+1}^{x}$      | 0.75        | 1.0            |
+|  $J_{n,n+1}^{y}$      | 0.75        | 1.0            |
+|  $J_{n,n+1}^{z}$      | 0.0         | 0.0            |
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-import QFlux.open_systems.params as pa
-from QFlux.open_systems.numerical_methods import DynamicsOS
-from QFlux.open_systems.quantum_simulation import QubitDynamicsOS
-import QFlux.open_systems.trans_basis as tb
+import qflux.open_systems.params as pa
+from qflux.open_systems.numerical_methods import DynamicsOS
+from qflux.open_systems.quantum_simulation import QubitDynamicsOS
+import qflux.open_systems.trans_basis as tb
 
 
 #============set the Hamiltonian and initial state

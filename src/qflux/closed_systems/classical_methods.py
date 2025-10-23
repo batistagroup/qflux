@@ -400,7 +400,7 @@ class DynamicsCS:
         Function used to propagate with the 2nd-Order Trotter Expansion.
 
         $$
-        e^{- \frac{i}{\\hbar} H t} \approx e^{- \frac{i}{\\hbar} V t/2} e^{- \frac{i}{\\hbar} T t} e^{- \frac{i}{\\hbar} V t/2} + \\mathcal{O}^{3}
+        e^{- \\frac{i}{\\hbar} H t} \\approx e^{- \\frac{i}{\\hbar} V t/2} e^{- \\frac{i}{\\hbar} T t} e^{- \\frac{i}{\\hbar} V t/2} + \\mathcal{O}^{3}
         $$
 
         Returns:

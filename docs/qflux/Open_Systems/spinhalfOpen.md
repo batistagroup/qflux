@@ -9,7 +9,7 @@ $$
 
 ## Classical Simulation
 
-We begin by setting up the classical evolution of a Spin-1/2 system governed by a simple Hamiltonian and subject to dissipation via a collapse operator, defined as $\sqrt{\gamma_j}L_j$. The system's evolution is computed using both matrix exponentiation and QuTiP solvers for benchmarking. We begin by importing the necessary modukes from QFlux, Numpy, and Matplotlib libraries
+We begin by setting up the classical evolution of a Spin-1/2 system governed by a simple Hamiltonian and subject to dissipation via a collapse operator, defined as $\sqrt{\gamma_j}L_j$. The system's evolution is computed using both matrix exponentiation and QuTiP solvers for benchmarking. We begin by importing the necessary modules from QFlux, Numpy, and Matplotlib libraries
 
 
 
@@ -65,7 +65,7 @@ $$
 \rho_0 = |\uparrow\rangle \langle\uparrow|
 $$
 
-Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propogation employing the `propagate_matrix_exp` method  then compare to results with QuTip, which is implemented using `propagate_qt`. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTip with our QFlux methods
+Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propogation employing the `propagate_matrix_exp` method  then compare to results with QuTiP, which is implemented using `propagate_qt`. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTiP with our QFlux methods
 
 ---
 
@@ -91,7 +91,7 @@ Simulation is carried out using matrix exponential propagation of the Lindbladia
 
 ---
 
-Now we provide the information for QuTip propogation
+Now we provide the information for QuTiP propogation
 
 ---
 
