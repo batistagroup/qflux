@@ -9,7 +9,9 @@ $$ \left| \psi (t) \right\rangle = e^{- \frac{i}{\hbar} H t} \left| \psi_{0} \ri
 To do this, we must: 
 
 - Define the initial state $\psi_{0}$. 
+
 - Define the Hamiltonian describing the system of interest.
+
 - Define a propagation time-step $t$ and the number of time steps $n$ for which we want to compute the evolved wavefunction. 
 
 We will now look at how each of these steps can be done with qflux. 

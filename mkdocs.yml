@@ -27,10 +27,12 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/collapse-sidebars.css
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/collapse-sidebars.js
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -82,7 +84,6 @@ nav: # Note: All paths must be relative to the docs dir
     - VarQTE Demo: 'qflux/Variational_Methods/varQTE.md'
     - UAVQD for Open Systems: 'qflux/Variational_Methods/Vectorized_Adaptive.md'
     - SSE for Open Systems: 'qflux/Variational_Methods/trajectory_FMO.md'
-    - Source Code: 'qflux/Variational_Methods/var_api.md' 
   - GQME: 
     - 'qflux/GQME/index.md'
     - Introduction to GQME: 'qflux/GQME/What_is_GQME.md'
