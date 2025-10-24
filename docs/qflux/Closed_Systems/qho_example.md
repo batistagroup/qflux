@@ -10,10 +10,6 @@ We begin by importing the necessary utilities from `qflux`:
 
 ```python
 import sys
-# Clone the qflux github repo to your local environment (laptop/Google Colab/etc.)
-# Then set the following line to your local copy of qflux:
-qflux_path = "{/path/to/downloaded/repo}/qflux/src/"
-sys.path.append(qflux_path)
 from qflux.closed_systems import DynamicsCS, QubitDynamicsCS
 ```
 
@@ -42,7 +38,7 @@ And we can define our harmonic oscillator hamiltonian (built-in to `qflux`):
 HO_dyn_obj.set_hamiltonian(potential_type='harmonic')
 ```
 
-Now that we have defined our system parameters and initial state, we should define a propagation time. In the following, we propagate for a total time of 20.0 a.u., divided evenly into 400 evenly spaced steps.
+Now that we have defined our system parameters and initial state, we should define a propagation time. In the following, we propagate for a total time of 20.0 a.u., divided into 400 evenly spaced steps.
 
 ```python
 total_time = 20.0

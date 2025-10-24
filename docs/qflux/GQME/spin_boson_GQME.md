@@ -22,7 +22,7 @@ $$
 
 where $\lvert D \rangle$ and $\lvert A \rangle$ are the electronic donor state and acceptor state, respectively.  $\hat{\sigma}_z = \lvert D \rangle \langle D \rvert  - \lvert A \rangle \langle A \rvert$,
 $\hat{\sigma}_x = \lvert D \rangle \langle A \rvert + \lvert A \rangle \langle D \rvert$,
-$2\epsilon$ is the reaction energy and $\Gamma = V_{DA}$ is the electronic coupling between the donor and acceptor states. More details about the model can be found in [What_is_TTFD](What_is_TTTFD.md). 
+$2\epsilon$ is the reaction energy and $\Gamma = V_{DA}$ is the electronic coupling between the donor and acceptor states. More details about the model can be found in [Introduction to TT-TFD](What_is_TTTFD.md) page. 
 
 The initial state is assumed to be of the form
 
@@ -87,7 +87,7 @@ The results are shown in the figure below, along with the numerically exact TT-T
 ![Liouville-only](../images/Part_IV/Fig_SpinBoson_sysEvolution.png)
 
 ## The Memory Kernel
-According to [What_is_GQME](What_is_GQME.md), the memory kernel can be obtained through the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t)$: 
+According to [Introduction to GQME](What_is_GQME.md), the memory kernel can be obtained through the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t)$: 
 
 $$
 \mathcal{K}(t) 

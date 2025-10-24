@@ -17,11 +17,15 @@ In this equation, here $\rho(t)$ is the reduced density matrix of the system, an
 The purpose of this tutorial is to demonstrate how to solve the Lindblad equation described above using `qflux`, both on classical and quantum computing platforms. To that end, we first introduce the general procedure for solving the equation, and then illustrate it with a spin-1/2 example to familiarize the reader with the basic usage of `qflux`.
 
 To numerically solve the Lindblad equation, `qflux` adopts a matrix–vector multiplication approach. This method leverages commonly used Python packages such as `NumPy` and `SciPy`, and consists of three main steps:
+
 - vectorizing the density matrix,
+
 - converting the Lindblad equation into a matrix–vector form
+
 - integrating the resulting equation to obtain the time evolution of the system.
 
-(i) Vectorizing the density matrix:
+
+### Vectorizing the density matrix:
 
 The density matrix $\rho(t)$ of a system with an N-dimensional Hilbert space is an $N\times N$ matrix. For numerical purposes, it is reshaped into a vector of dimension $N^2$.
 
@@ -30,7 +34,7 @@ $$\rho \to |\nu_{\rho} \rangle= \left[ \rho_{11}, \ldots, \rho_{1N}, \rho_{21}, 
 
 Here the superscript "$\top$" represents a transpose operation. This is equivalent to working in Liouville space, where operators are represented as vectors and superoperators act as matrices.
 
-(ii) Converting the Lindblad equation into a matrix–vector form
+### Converting the Lindblad equation into a matrix–vector form
 
 The Lindblad equation can be recast into the equivalent matrix-vector form:
 
@@ -45,7 +49,7 @@ $$ H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{
 
 Here, $L^*_{n}$ is the complex conjugate of $L_{n}$ and $\mathbb{I}$ is the identity matrix in the Hilbert space of the Hamiltonian $H$.
 
-(iii) Integrating the Lindblad equation
+### Integrating the Lindblad equation
 
 The density matrix at time $t$ can be expressed
 as the action of the exponential of the matrix $-i H_{\mathrm{eff}}$ on the vectorized density matrix at $t=0$,
