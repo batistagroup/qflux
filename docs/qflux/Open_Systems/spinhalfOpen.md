@@ -65,7 +65,7 @@ $$
 \rho_0 = |\uparrow\rangle \langle\uparrow|
 $$
 
-Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propogation employing the `propagate_matrix_exp` method  then compare to results with QuTiP, which is implemented using `propagate_qt`. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTiP with our QFlux methods
+Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propagation employing the `propagate_matrix_exp` method  then compare to results with QuTiP, which is implemented using `propagate_qt`. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTiP with our QFlux methods
 
 ---
 
@@ -91,7 +91,7 @@ Simulation is carried out using matrix exponential propagation of the Lindbladia
 
 ---
 
-Now we provide the information for QuTiP propogation
+Now we provide the information for QuTiP propagation
 
 ---
 
@@ -113,7 +113,7 @@ Now we provide the information for QuTiP propogation
 
 ---
 
-The following code begins by defining the Hamiltonian, dissipation parameter, Lindbladian collapse operators, initial state of the density matrix, and time points we evolve along. It continues to initialize the closed and open system dyanmics and solve the equations of motion with our QFlux methods
+The following code begins by defining the Hamiltonian, dissipation parameter, Lindbladian collapse operators, initial state of the density matrix, and time points we evolve along. It continues to initialize the closed and open system dynamics and solve the equations of motion with our QFlux methods
 
 
 ```python
@@ -191,7 +191,7 @@ time_sdam = np.arange(0, 1000, 1)
 
 In the following code, we instantiate the quantum simulation with `QubitDynamicsOS`, this class implements quantum dynamics simulation which can be non-unitary.
 
-The `QubitDynamicsOS` class extends `DynamicsOS` and provides support for simulating quantum dynamics using either a **density matrix** or a **Kraus operator** representation. One can specify performing either a Kraus operator or density matrix simulation when instantiating `QubitDynamicsOS`. Either can accept a propogator obtained from a quantum master equation of the users choice by specifying `Gprop` or by calculating it using the Lindblad equation through `DynamicsOS` shown above. The class `QubitDynamicsOS` also provides structure for circuit-based simulation with Qiskit backends.
+The `QubitDynamicsOS` class extends `DynamicsOS` and provides support for simulating quantum dynamics using either a **density matrix** or a **Kraus operator** representation. One can specify performing either a Kraus operator or density matrix simulation when instantiating `QubitDynamicsOS`. Either can accept a propagator obtained from a quantum master equation of the users choice by specifying `Gprop` or by calculating it using the Lindblad equation through `DynamicsOS` shown above. The class `QubitDynamicsOS` also provides structure for circuit-based simulation with Qiskit backends.
 
 ---
 
