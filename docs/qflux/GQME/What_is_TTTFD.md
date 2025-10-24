@@ -31,7 +31,7 @@ $$
 \hat{H} = \epsilon \hat{\sigma}_z + \Gamma \hat{\sigma}_x +\sum_{i = 1}^{N_{n}} \Bigg[\frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2 - c_i\hat{R}_i \hat{\sigma}_z\Bigg] 
 $$
 
-where $\hat{\sigma}_z = |D\rangle\langle D| - |A\rangle\langle A|$ and $\hat{\sigma}_x = |D\rangle \langle A| + |A\rangle\langle D|$ are the Pauli matrices for the electronic DOF (with $D$ standing for Donor and $A$ for acceptor), $2\epsilon$ is the energy gap between the electronic states, $\Gamma$ is the coupling between them, and $\hat R_i$ and $P_i$ are the mass-weighted position and momentum operators of the $i$-th nuclear DOF.
+where $\hat{\sigma}_z = |D\rangle\langle D| - |A\rangle\langle A|$ and $\hat{\sigma}_x = |D\rangle \langle A| + |A\rangle\langle D|$ are the Pauli matrices for the electronic DOF (with $D$ standing for Donor and $A$ for acceptor), $2\epsilon$ is the energy gap between the electronic states, $\Gamma$ is the coupling between them, and $\hat R_i$ and $\hat P_i$ are the mass-weighted position and momentum operators of the $i$-th nuclear DOF.
 
 The general discretized form of the nuclear modes frequencies and coupling coefficients, $\{\omega_{k} , c_{k}\}$, is given by
 
