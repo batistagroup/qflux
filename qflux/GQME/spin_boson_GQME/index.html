@@ -50,6 +50,8 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
+      <link rel="stylesheet" href="../../../stylesheets/collapse-sidebars.css">
+    
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -751,7 +753,7 @@
     
       
         
-      
+          
         
       
         
@@ -771,8 +773,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Variational_Methods/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -781,8 +784,14 @@
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -791,27 +800,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/variational_methods/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Variational Methods
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -883,29 +871,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/var_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -926,8 +891,6 @@
       
         
           
-        
-      
         
       
         
@@ -1128,30 +1091,7 @@
   
   
   <span class="md-ellipsis">
-    Quantum Algorithms of GQME
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../gqme_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
+    Quantum Algorithm for GQME
     
   </span>
   
@@ -1259,7 +1199,7 @@
 \]</div>
 <p>where <span class="arithmatex">\(\lvert D \rangle\)</span> and <span class="arithmatex">\(\lvert A \rangle\)</span> are the electronic donor state and acceptor state, respectively.  <span class="arithmatex">\(\hat{\sigma}_z = \lvert D \rangle \langle D \rvert  - \lvert A \rangle \langle A \rvert\)</span>,
 <span class="arithmatex">\(\hat{\sigma}_x = \lvert D \rangle \langle A \rvert + \lvert A \rangle \langle D \rvert\)</span>,
-<span class="arithmatex">\(2\epsilon\)</span> is the reaction energy and <span class="arithmatex">\(\Gamma = V_{DA}\)</span> is the electronic coupling between the donor and acceptor states. More details about the model can be found in <a href="../What_is_TTTFD/">What_is_TTFD</a>. </p>
+<span class="arithmatex">\(2\epsilon\)</span> is the reaction energy and <span class="arithmatex">\(\Gamma = V_{DA}\)</span> is the electronic coupling between the donor and acceptor states. More details about the model can be found in <a href="../What_is_TTTFD/">Introduction to TT-TFD</a> page. </p>
 <p>The initial state is assumed to be of the form</p>
 <div class="arithmatex">\[
 \hat \rho(0) = \hat \sigma(0) \otimes \hat \rho_n(0)
@@ -1302,7 +1242,7 @@ Then the method <code>DynamicsGQME.prop_puresystem()</code> allows for time evol
 <p>The results are shown in the figure below, along with the numerically exact TT-TFD results for comparison. As expected, the evolution of the isolated system exhibits no decay and no energy dissipation.</p>
 <p><img alt="Liouville-only" src="../../images/Part_IV/Fig_SpinBoson_sysEvolution.png" /></p>
 <h2 id="the-memory-kernel">The Memory Kernel</h2>
-<p>According to <a href="../What_is_GQME/">What_is_GQME</a>, the memory kernel can be obtained through the projection-free inputs (PFIs) <span class="arithmatex">\(\mathcal{F}(t)\)</span> and <span class="arithmatex">\(\dot{\mathcal{F}}(t)\)</span>: </p>
+<p>According to <a href="../What_is_GQME/">Introduction to GQME</a>, the memory kernel can be obtained through the projection-free inputs (PFIs) <span class="arithmatex">\(\mathcal{F}(t)\)</span> and <span class="arithmatex">\(\dot{\mathcal{F}}(t)\)</span>: </p>
 <div class="arithmatex">\[
 \mathcal{K}(t) 
 = i\dot{\mathcal{F}}(t) 
@@ -1455,13 +1395,13 @@ A representative result of the memory kernel is shown in the figure below. It ca
         
         
           
-          <a href="../quantum_GQME_dilation/" class="md-footer__link md-footer__link--next" aria-label="Next: Quantum Algorithms of GQME">
+          <a href="../quantum_GQME_dilation/" class="md-footer__link md-footer__link--next" aria-label="Next: Quantum Algorithm for GQME">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Quantum Algorithms of GQME
+                Quantum Algorithm for GQME
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1509,6 +1449,8 @@ A representative result of the memory kernel is shown in the figure below. It ca
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

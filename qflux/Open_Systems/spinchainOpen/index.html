@@ -50,6 +50,8 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
+      <link rel="stylesheet" href="../../../stylesheets/collapse-sidebars.css">
+    
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -858,7 +860,7 @@
     
       
         
-      
+          
         
       
         
@@ -878,8 +880,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Variational_Methods/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -888,8 +891,14 @@
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -898,27 +907,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/variational_methods/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Variational Methods
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -990,29 +978,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/var_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1031,8 +996,6 @@
       
         
           
-        
-      
         
       
         
@@ -1164,30 +1127,7 @@
   
   
   <span class="md-ellipsis">
-    Quantum Algorithms of GQME
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../GQME/gqme_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
+    Quantum Algorithm for GQME
     
   </span>
   
@@ -1325,28 +1265,28 @@
 <thead>
 <tr>
 <th>Parameter</th>
-<th>$ n = 0 $</th>
-<th>$ n \neq 0 $</th>
+<th><span class="arithmatex">\(n = 0\)</span></th>
+<th><span class="arithmatex">\(n \neq 0\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>$ \Omega_n  $</td>
+<td><span class="arithmatex">\(\Omega_n\)</span></td>
 <td>0.65</td>
 <td>1.0</td>
 </tr>
 <tr>
-<td>$ J_{n,n+1}^{x} $</td>
+<td><span class="arithmatex">\(J_{n,n+1}^{x}\)</span></td>
 <td>0.75</td>
 <td>1.0</td>
 </tr>
 <tr>
-<td>$ J_{n,n+1}^{y} $</td>
+<td><span class="arithmatex">\(J_{n,n+1}^{y}\)</span></td>
 <td>0.75</td>
 <td>1.0</td>
 </tr>
 <tr>
-<td>$ J_{n,n+1}^{z} $</td>
+<td><span class="arithmatex">\(J_{n,n+1}^{z}\)</span></td>
 <td>0.0</td>
 <td>0.0</td>
 </tr>
@@ -1355,10 +1295,10 @@
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">QFlux.open_systems.params</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">QFlux.open_systems.numerical_methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynamicsOS</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">QFlux.open_systems.quantum_simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">QubitDynamicsOS</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">QFlux.open_systems.trans_basis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tb</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qflux.open_systems.params</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.open_systems.numerical_methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynamicsOS</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.open_systems.quantum_simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">QubitDynamicsOS</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qflux.open_systems.trans_basis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tb</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">#============set the Hamiltonian and initial state</span>
@@ -1655,6 +1595,8 @@
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

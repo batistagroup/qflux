@@ -50,6 +50,8 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
+      <link rel="stylesheet" href="../../../stylesheets/collapse-sidebars.css">
+    
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -920,7 +922,7 @@
     
       
         
-      
+          
         
       
         
@@ -940,8 +942,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Variational_Methods/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -950,8 +953,14 @@
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -960,27 +969,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/variational_methods/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Variational Methods
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -1052,29 +1040,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/var_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1093,8 +1058,6 @@
       
         
           
-        
-      
         
       
         
@@ -1226,30 +1189,7 @@
   
   
   <span class="md-ellipsis">
-    Quantum Algorithms of GQME
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../GQME/gqme_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
+    Quantum Algorithm for GQME
     
   </span>
   
@@ -1447,7 +1387,7 @@
 \]</div>
 <p>The first is taking the jump operators <span class="arithmatex">\(L_j\)</span> as just the sigle operator <span class="arithmatex">\(\sigma_x\)</span>, the system is subject to a type of decoherence which damps both the system energy and coherences. Demonstrating the Lindblad formalism can incorporate both population relaxation and dephasing (loss of coherence), which is tyical of chemical reactions in the condensed phase. If instead we take the jump operators <span class="arithmatex">\(L_j\)</span> as just the single operator <span class="arithmatex">\(\sigma^+\)</span>, the system is subject to amplitude damping, a type of decoherence that affects only the populations. Modeling the irreversible decay from the excited to the ground state, while leaving the coherences intact. Although , we focus here on amplitude damping as one representative dissipation pathway. Simulation results from both classical and quantum methods are compared to validate the implementation.</p>
 <h2 id="classical-simulation">Classical Simulation</h2>
-<p>We begin by setting up the classical evolution of a Spin-1/2 system governed by a simple Hamiltonian and subject to dissipation via a collapse operator, defined as <span class="arithmatex">\(\sqrt{\gamma_j}L_j\)</span>. The system's evolution is computed using both matrix exponentiation and QuTiP solvers for benchmarking. We begin by importing the necessary modukes from QFlux, Numpy, and Matplotlib libraries</p>
+<p>We begin by setting up the classical evolution of a Spin-1/2 system governed by a simple Hamiltonian and subject to dissipation via a collapse operator, defined as <span class="arithmatex">\(\sqrt{\gamma_j}L_j\)</span>. The system's evolution is computed using both matrix exponentiation and QuTiP solvers for benchmarking. We begin by importing the necessary modules from QFlux, Numpy, and Matplotlib libraries</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qflux.open_systems.params</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.open_systems.numerical_methods</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynamicsOS</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.open_systems.quantum_simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">QubitDynamicsOS</span>
@@ -1507,7 +1447,7 @@ C = \sqrt{\gamma} \cdot \sigma^x
 <div class="arithmatex">\[
 \rho_0 = |\uparrow\rangle \langle\uparrow|
 \]</div>
-<p>Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propogation employing the <code>propagate_matrix_exp</code> method  then compare to results with QuTip, which is implemented using <code>propagate_qt</code>. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTip with our QFlux methods</p>
+<p>Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propagation employing the <code>propagate_matrix_exp</code> method  then compare to results with QuTiP, which is implemented using <code>propagate_qt</code>. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTiP with our QFlux methods</p>
 <hr />
 <h2 id="dynamicsospropagate_matrix_exp-input"><code>DynamicsOS.propagate_matrix_exp</code> Input</h2>
 <table>
@@ -1579,7 +1519,7 @@ C = \sqrt{\gamma} \cdot \sigma^x
 </tbody>
 </table>
 <hr />
-<p>Now we provide the information for QuTip propogation</p>
+<p>Now we provide the information for QuTiP propagation</p>
 <hr />
 <h2 id="dynamicsospropagate_qt-parameters"><code>DynamicsOS.propagate_qt</code> Parameters</h2>
 <table>
@@ -1627,7 +1567,7 @@ C = \sqrt{\gamma} \cdot \sigma^x
 </tbody>
 </table>
 <hr />
-<p>The following code begins by defining the Hamiltonian, dissipation parameter, Lindbladian collapse operators, initial state of the density matrix, and time points we evolve along. It continues to initialize the closed and open system dyanmics and solve the equations of motion with our QFlux methods</p>
+<p>The following code begins by defining the Hamiltonian, dissipation parameter, Lindbladian collapse operators, initial state of the density matrix, and time points we evolve along. It continues to initialize the closed and open system dynamics and solve the equations of motion with our QFlux methods</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Hsys</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">pa</span><span class="o">.</span><span class="n">X</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.05</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">c_ops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span><span class="o">*</span><span class="n">pa</span><span class="o">.</span><span class="n">X</span>
@@ -1681,7 +1621,7 @@ C = \sqrt{\gamma} \cdot \sigma^+
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">time_sdam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </span></code></pre></div>
 <p>In the following code, we instantiate the quantum simulation with <code>QubitDynamicsOS</code>, this class implements quantum dynamics simulation which can be non-unitary.</p>
-<p>The <code>QubitDynamicsOS</code> class extends <code>DynamicsOS</code> and provides support for simulating quantum dynamics using either a <strong>density matrix</strong> or a <strong>Kraus operator</strong> representation. One can specify performing either a Kraus operator or density matrix simulation when instantiating <code>QubitDynamicsOS</code>. Either can accept a propogator obtained from a quantum master equation of the users choice by specifying <code>Gprop</code> or by calculating it using the Lindblad equation through <code>DynamicsOS</code> shown above. The class <code>QubitDynamicsOS</code> also provides structure for circuit-based simulation with Qiskit backends.</p>
+<p>The <code>QubitDynamicsOS</code> class extends <code>DynamicsOS</code> and provides support for simulating quantum dynamics using either a <strong>density matrix</strong> or a <strong>Kraus operator</strong> representation. One can specify performing either a Kraus operator or density matrix simulation when instantiating <code>QubitDynamicsOS</code>. Either can accept a propagator obtained from a quantum master equation of the users choice by specifying <code>Gprop</code> or by calculating it using the Lindblad equation through <code>DynamicsOS</code> shown above. The class <code>QubitDynamicsOS</code> also provides structure for circuit-based simulation with Qiskit backends.</p>
 <hr />
 <h3 id="qubitdynamicsos-initialization-parameters"><code>QubitDynamicsOS</code> Initialization Parameters</h3>
 <table>
@@ -1982,6 +1922,8 @@ C = \sqrt{\gamma} \cdot \sigma^+
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

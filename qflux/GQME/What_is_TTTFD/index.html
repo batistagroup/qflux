@@ -50,6 +50,8 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
+      <link rel="stylesheet" href="../../../stylesheets/collapse-sidebars.css">
+    
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -751,7 +753,7 @@
     
       
         
-      
+          
         
       
         
@@ -771,8 +773,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Variational_Methods/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -781,8 +784,14 @@
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -791,27 +800,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/variational_methods/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Variational Methods
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -883,29 +871,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/var_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -926,8 +891,6 @@
       
         
           
-        
-      
         
       
         
@@ -1069,30 +1032,7 @@
   
   
   <span class="md-ellipsis">
-    Quantum Algorithms of GQME
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../gqme_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
+    Quantum Algorithm for GQME
     
   </span>
   
@@ -1167,7 +1107,7 @@ This model comprises two electronic states, representing a diabatic donor state
 <div class="arithmatex">\[
 \hat{H} = \epsilon \hat{\sigma}_z + \Gamma \hat{\sigma}_x +\sum_{i = 1}^{N_{n}} \Bigg[\frac{\hat{P}_i^2}{2} + \frac{1}{2} \omega_i^2 \hat{R}_i^2 - c_i\hat{R}_i \hat{\sigma}_z\Bigg] 
 \]</div>
-<p>where <span class="arithmatex">\(\hat{\sigma}_z = |D\rangle\langle D| - |A\rangle\langle A|\)</span> and <span class="arithmatex">\(\hat{\sigma}_x = |D\rangle \langle A| + |A\rangle\langle D|\)</span> are the Pauli matrices for the electronic DOF (with <span class="arithmatex">\(D\)</span> standing for Donor and <span class="arithmatex">\(A\)</span> for acceptor), <span class="arithmatex">\(2\epsilon\)</span> is the energy gap between the electronic states, <span class="arithmatex">\(\Gamma\)</span> is the coupling between them, and <span class="arithmatex">\(\hat R_i\)</span> and <span class="arithmatex">\(P_i\)</span> are the mass-weighted position and momentum operators of the <span class="arithmatex">\(i\)</span>-th nuclear DOF.</p>
+<p>where <span class="arithmatex">\(\hat{\sigma}_z = |D\rangle\langle D| - |A\rangle\langle A|\)</span> and <span class="arithmatex">\(\hat{\sigma}_x = |D\rangle \langle A| + |A\rangle\langle D|\)</span> are the Pauli matrices for the electronic DOF (with <span class="arithmatex">\(D\)</span> standing for Donor and <span class="arithmatex">\(A\)</span> for acceptor), <span class="arithmatex">\(2\epsilon\)</span> is the energy gap between the electronic states, <span class="arithmatex">\(\Gamma\)</span> is the coupling between them, and <span class="arithmatex">\(\hat R_i\)</span> and <span class="arithmatex">\(\hat P_i\)</span> are the mass-weighted position and momentum operators of the <span class="arithmatex">\(i\)</span>-th nuclear DOF.</p>
 <p>The general discretized form of the nuclear modes frequencies and coupling coefficients, <span class="arithmatex">\(\{\omega_{k} , c_{k}\}\)</span>, is given by</p>
 <div class="arithmatex">\[ J (\omega) = \frac{\pi}{2} \sum_{k=1}^{N_{n}} \frac{c_{k}^2}{\omega_{k}} \delta(\omega-\omega_{k}) \]</div>
 <p>We sample the <span class="arithmatex">\(\{\omega_{k} , c_{k}\}\)</span> from an Ohmic spectral density with exponential cutoff:</p>
@@ -1410,6 +1350,8 @@ Where we plot the donor-state population <span class="arithmatex">\(|D\rangle\)<
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

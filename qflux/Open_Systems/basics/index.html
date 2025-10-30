@@ -50,6 +50,8 @@
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
+      <link rel="stylesheet" href="../../../stylesheets/collapse-sidebars.css">
+    
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -684,6 +686,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="What is an Open Quantum System?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectorizing-the-density-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vectorizing the density matrix:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#converting-the-lindblad-equation-into-a-matrixvector-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Converting the Lindblad equation into a matrix–vector form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrating-the-lindblad-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating the Lindblad equation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -855,7 +890,7 @@
     
       
         
-      
+          
         
       
         
@@ -875,8 +910,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Variational_Methods/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -885,8 +921,14 @@
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -895,27 +937,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/variational_methods/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Variational Methods
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
               
             
               
@@ -987,29 +1008,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Variational_Methods/var_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1028,8 +1026,6 @@
       
         
           
-        
-      
         
       
         
@@ -1161,30 +1157,7 @@
   
   
   <span class="md-ellipsis">
-    Quantum Algorithms of GQME
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../GQME/gqme_api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Source Code
+    Quantum Algorithm for GQME
     
   </span>
   
@@ -1234,6 +1207,39 @@
       What is an Open Quantum System?
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="What is an Open Quantum System?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectorizing-the-density-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vectorizing the density matrix:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#converting-the-lindblad-equation-into-a-matrixvector-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Converting the Lindblad equation into a matrix–vector form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrating-the-lindblad-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integrating the Lindblad equation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1315,15 +1321,23 @@
 <div class="arithmatex">\[ \frac{d\rho{(t)}}{dt} = - \frac{i}{\hbar}[H,\rho(t)] + \frac{1}{2}\sum_n\gamma_n\left[2L_n \rho(t)L_n^\dagger - \rho(t) L_n^\dagger L_n - L_n^\dagger L_n \rho(t)\right] \]</div>
 <p>In this equation, here <span class="arithmatex">\(\rho(t)\)</span> is the reduced density matrix of the system, and <span class="arithmatex">\(H\)</span> represents the Hamiltonian of the system. The jump operators <span class="arithmatex">\(L_n\)</span> represent the environmental effects on the dynamics, with the rates <span class="arithmatex">\(\gamma_n\)</span> quantifying these effects.</p>
 <p>The purpose of this tutorial is to demonstrate how to solve the Lindblad equation described above using <code>qflux</code>, both on classical and quantum computing platforms. To that end, we first introduce the general procedure for solving the equation, and then illustrate it with a spin-1/2 example to familiarize the reader with the basic usage of <code>qflux</code>.</p>
-<p>To numerically solve the Lindblad equation, <code>qflux</code> adopts a matrix–vector multiplication approach. This method leverages commonly used Python packages such as <code>NumPy</code> and <code>SciPy</code>, and consists of three main steps:
-- vectorizing the density matrix,
-- converting the Lindblad equation into a matrix–vector form
-- integrating the resulting equation to obtain the time evolution of the system.</p>
-<p>(i) Vectorizing the density matrix:</p>
+<p>To numerically solve the Lindblad equation, <code>qflux</code> adopts a matrix–vector multiplication approach. This method leverages commonly used Python packages such as <code>NumPy</code> and <code>SciPy</code>, and consists of three main steps:</p>
+<ul>
+<li>
+<p>vectorizing the density matrix,</p>
+</li>
+<li>
+<p>converting the Lindblad equation into a matrix–vector form</p>
+</li>
+<li>
+<p>integrating the resulting equation to obtain the time evolution of the system.</p>
+</li>
+</ul>
+<h3 id="vectorizing-the-density-matrix">Vectorizing the density matrix:</h3>
 <p>The density matrix <span class="arithmatex">\(\rho(t)\)</span> of a system with an N-dimensional Hilbert space is an <span class="arithmatex">\(N\times N\)</span> matrix. For numerical purposes, it is reshaped into a vector of dimension <span class="arithmatex">\(N^2\)</span>.</p>
 <div class="arithmatex">\[\rho \to |\nu_{\rho} \rangle= \left[ \rho_{11}, \ldots, \rho_{1N}, \rho_{21}, \ldots, \rho_{2N}, \ldots, \rho_{N1}, \ldots, \rho_{NN} \right]^\top\]</div>
 <p>Here the superscript "<span class="arithmatex">\(\top\)</span>" represents a transpose operation. This is equivalent to working in Liouville space, where operators are represented as vectors and superoperators act as matrices.</p>
-<p>(ii) Converting the Lindblad equation into a matrix–vector form</p>
+<h3 id="converting-the-lindblad-equation-into-a-matrixvector-form">Converting the Lindblad equation into a matrix–vector form</h3>
 <p>The Lindblad equation can be recast into the equivalent matrix-vector form:</p>
 <div class="arithmatex">\[\frac{\mathrm{d}|\nu_{\rho}(t) \rangle}{\mathrm{d}t} = -i H_{\mathrm{eff}} |\nu_{\rho}(t) \rangle\;\;\]</div>
 <p>Where the effective Hamiltonian is <span class="arithmatex">\(H_{\mathrm{eff}} = H_C + i H_D\)</span>, with <span class="arithmatex">\(H_C\)</span> and <span class="arithmatex">\(H_D\)</span> representing the <span class="arithmatex">\(N^2 \times N^2\)</span> matrix forms of the commutator and the Lindbladian dissipator, respectively:</p>
@@ -1331,7 +1345,7 @@
 <div class="arithmatex">\[ H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{I}\otimes L^T_{n} L^*_{n} - L^\dagger_{n} L_{n} \otimes \mathbb{I}
     \right] ~~ \]</div>
 <p>Here, <span class="arithmatex">\(L^*_{n}\)</span> is the complex conjugate of <span class="arithmatex">\(L_{n}\)</span> and <span class="arithmatex">\(\mathbb{I}\)</span> is the identity matrix in the Hilbert space of the Hamiltonian <span class="arithmatex">\(H\)</span>.</p>
-<p>(iii) Integrating the Lindblad equation</p>
+<h3 id="integrating-the-lindblad-equation">Integrating the Lindblad equation</h3>
 <p>The density matrix at time <span class="arithmatex">\(t\)</span> can be expressed
 as the action of the exponential of the matrix <span class="arithmatex">\(-i H_{\mathrm{eff}}\)</span> on the vectorized density matrix at <span class="arithmatex">\(t=0\)</span>,</p>
 <div class="arithmatex">\[
@@ -1631,6 +1645,8 @@ H = E_0 \sigma^z + \Delta \sigma^x
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>
