@@ -1,27 +1,24 @@
-# Variational Methods  Module
+# Variational Methods Module Overview and User Guide
+
+![Logo](../../img/qflux-logo.png)
 
 ## Overview
 
 In this section, we outline the main functionality of the `variational_methods` module. 
 
+The `qflux.variational_methods` module aims to provide variational methods for computing dynamics and can be utilized for both open and closed systems that the user is interested in. 
+
 First, we will provide some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.
 
-## Concepts 
+## Examples and Introductory Concepts
 
-In this section, we can add some theoretical background/explanation of relevant concepts.
+The first example walks through variational protocols that can be employed for arbitrary real-time evolution `VarQRTE` and imaginary time evolution VarQITE with a simple model system. 
 
-## Examples
+The second example walks through the application of unrestricted adaptive variational quantum dynamics (UAVQD) as applied to a simple instance of the amplitude damping model.
 
-In this section, we can add some illustrative examples. 
+The third example takes things one step further and applies the AVQD protocol in the Stochastic Schrodinger Equation picture as applied to the Fenna-Matthews-Olson (FMO) Complex.
 
-## Source Code
-
-::: qflux.variational_methods
-    handler: python
-    options:
-      show_root_heading: true
-      show_source: true
-      heading_level: 2
-      members:
-        - qmad
+- [Example: Variational Quantum Time Evolution](varQTE.md)
+- [Example: Unrestricted Adaptive Variational Quantum Dynamics in an Amplitude Damping Channel](Vectorized_Adaptive.md)
+- [Example: Stochastic Schrodinger Equation for Open Systems](trajectory_FMO.md)
 
