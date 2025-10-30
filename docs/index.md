@@ -6,6 +6,55 @@ This is a Python package containing various protocols for performing quantum dyn
 
 ## Installation
 
+To get started with `qflux`, you only need to install via `pip`:
+
+```
+pip install qflux
+```
+
+This will install all necessary dependencies and set you up to check out our examples: 
+
+- **Closed Systems**
+    - [Anatomy of a Dynamics Simulation: Advanced Use Cases](basics.md)
+    - [Example: Quantum Harmonic Oscillator](qho_example.md)
+    - [Example: Adenine-Thymine Base Pair](AT_basepair.md)
+    - [Example: Spin Chain](spinchain.md)
+    - [Example: Dynamics for an Arbitrary Hamiltonian](arbitrary_evo.md)
+    - [API Documentation](cs_api.md)
+
+- **Open Systems**
+    - [Open System Dynamics Overview](basics.md)
+    - [Spin Chain Demo](spinchainOpen.md)
+    - [Spin 1/2 Demo](spinhalfOpen.md)
+    - [Double Well Demo](DoubleWellOpen.md)
+    - [API Documentation](os_api.md)
+
+- **Variational Methods**
+    - [Example: Variational Quantum Time Evolution](varQTE.md)
+    - [Example: Unrestricted Adaptive Variational Quantum Dynamics in an Amplitude Damping Channel](Vectorized_Adaptive.md)
+    - [Example: Stochastic Schrodinger Equation for Open Systems](trajectory_FMO.md)
+
+- **Generalized Quantum Master Equation (GQME)**
+    - [Introduction to GQME](What_is_GQME.md)
+    - [Introduction to TT-TFD](What_is_TTTFD.md)
+    - [GQME for Spin-Boson model](spin_boson_GQME.md)
+    - [Quantum Algorithms of GQME](quantum_GQME_dilation.md)
+
+
+## Development Setup
+
+If you're interested in contributing to `qflux`, you should consult of course checkout the source code and our [Contribution Guide](CONTRIBUTING.md).
+
+### Development Installation
+
+The first step to prepare your development environment is to clone the github repo. 
+
+Once you've cloned the github repo, you should go to that directory and begin setting up your development environment with the following commands: 
+
+```bash
+cd qflux-master/
+```
+
 This project uses `uv` for fast and reliable Python package management. To set up your development environment:
 
 ```bash
@@ -20,24 +69,6 @@ pre-commit install
 ```
 
 This will install all necessary dependencies, including development tools like pre-commit hooks, testing frameworks, and documentation generators.
-
-## Project Structure
-
-```md
-.
-├── data/           # Data files and resources
-├── docs/           # Documentation files (MkDocs)
-├── scripts/        # Utility and automation scripts
-├── src/            # Source code
-│   └── qflux/
-├── tests/          # Test files
-├── .github/        # GitHub Actions workflows
-├── mkdocs.yml      # MkDocs configuration
-├── pyproject.toml  # Project dependencies and settings
-└── .pre-commit-config.yaml  # Pre-commit hooks configuration
-```
-
-## Development Setup
 
 ### Documentation
 
