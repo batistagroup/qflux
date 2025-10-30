@@ -111,6 +111,7 @@ def build_pool(nqbit):
                 res.append(PauliOperator(op, list(idx), 1, nqbit))
     return res
 ```
+
 ---
 ## Reference Calculation using QuTiP
 
