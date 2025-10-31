@@ -40,10 +40,15 @@ This will install all necessary dependencies and set you up to check out our exa
     - [GQME for Spin-Boson model](spin_boson_GQME.md)
     - [Quantum Algorithms of GQME](quantum_GQME_dilation.md)
 
+## Questions, Issues, and Feature Requests
+
+This package and its accompanying documentation are part of an actively maintained research software project.
+If you encounter unexpected behavior, identify a reproducible bug, or have questions not addressed in the documentation, please open a new issue using the [issue template](ISSUE_TEMPLATE.md). 
+We also welcome suggestions for new features or improvements that could enhance the functionality, usability, or scientific scope of the codebase.
 
 ## Development Setup
 
-If you're interested in contributing to `qflux`, you should consult of course checkout the source code and our [Contribution Guide](CONTRIBUTING.md).
+If you're interested in contributing to `qflux`, you should checkout the source code and our [Contribution Guide](CONTRIBUTING.md). If you are unsure where to start, consider browsing the list of open issues or proposed enhancements to identify areas where your expertise could be most impactful.
 
 ### Development Installation
 
@@ -133,7 +138,7 @@ This ensures your virtual environment exactly matches the dependencies specified
 
 ### Writing Documentation
 
-This project follows a structured approach to documentation. Each module should have its own markdown file in the `docs/batistatemplate/` directory. Documentation files might include:
+This project follows a structured approach to documentation. Each module should have its own markdown file in the `docs/flux/` directory, organized by topic. Documentation files might include:
 
 1. **Overview**: A brief description of the module's purpose and key features
 2. **Concepts**: Explanation of important concepts and design decisions
