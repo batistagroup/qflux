@@ -6,6 +6,60 @@ This is a Python package containing various protocols for performing quantum dyn
 
 ## Installation
 
+To get started with `qflux`, you only need to install via `pip`:
+
+```
+pip install qflux
+```
+
+This will install all necessary dependencies and set you up to check out our examples: 
+
+- **Closed Systems**
+    - [Anatomy of a Dynamics Simulation: Advanced Use Cases](basics.md)
+    - [Example: Quantum Harmonic Oscillator](qho_example.md)
+    - [Example: Adenine-Thymine Base Pair](AT_basepair.md)
+    - [Example: Spin Chain](spinchain.md)
+    - [Example: Dynamics for an Arbitrary Hamiltonian](arbitrary_evo.md)
+    - [API Documentation](cs_api.md)
+
+- **Open Systems**
+    - [Open System Dynamics Overview](basics.md)
+    - [Spin Chain Demo](spinchainOpen.md)
+    - [Spin 1/2 Demo](spinhalfOpen.md)
+    - [Double Well Demo](DoubleWellOpen.md)
+    - [API Documentation](os_api.md)
+
+- **Variational Methods**
+    - [Example: Variational Quantum Time Evolution](varQTE.md)
+    - [Example: Unrestricted Adaptive Variational Quantum Dynamics in an Amplitude Damping Channel](Vectorized_Adaptive.md)
+    - [Example: Stochastic Schrodinger Equation for Open Systems](trajectory_FMO.md)
+
+- **Generalized Quantum Master Equation (GQME)**
+    - [Introduction to GQME](What_is_GQME.md)
+    - [Introduction to TT-TFD](What_is_TTTFD.md)
+    - [GQME for Spin-Boson model](spin_boson_GQME.md)
+    - [Quantum Algorithms of GQME](quantum_GQME_dilation.md)
+
+## Questions, Issues, and Feature Requests
+
+This package and its accompanying documentation are part of an actively maintained research software project.
+If you encounter unexpected behavior, identify a reproducible bug, or have questions not addressed in the documentation, please open a new issue using the [issue template](ISSUE_TEMPLATE.md). 
+We also welcome suggestions for new features or improvements that could enhance the functionality, usability, or scientific scope of the codebase.
+
+## Development Setup
+
+If you're interested in contributing to `qflux`, you should checkout the source code and our [Contribution Guide](CONTRIBUTING.md). If you are unsure where to start, consider browsing the list of open issues or proposed enhancements to identify areas where your expertise could be most impactful.
+
+### Development Installation
+
+The first step to prepare your development environment is to clone the github repo. 
+
+Once you've cloned the github repo, you should go to that directory and begin setting up your development environment with the following commands: 
+
+```bash
+cd qflux-master/
+```
+
 This project uses `uv` for fast and reliable Python package management. To set up your development environment:
 
 ```bash
@@ -20,24 +74,6 @@ pre-commit install
 ```
 
 This will install all necessary dependencies, including development tools like pre-commit hooks, testing frameworks, and documentation generators.
-
-## Project Structure
-
-```md
-.
-├── data/           # Data files and resources
-├── docs/           # Documentation files (MkDocs)
-├── scripts/        # Utility and automation scripts
-├── src/            # Source code
-│   └── qflux/
-├── tests/          # Test files
-├── .github/        # GitHub Actions workflows
-├── mkdocs.yml      # MkDocs configuration
-├── pyproject.toml  # Project dependencies and settings
-└── .pre-commit-config.yaml  # Pre-commit hooks configuration
-```
-
-## Development Setup
 
 ### Documentation
 
@@ -102,7 +138,7 @@ This ensures your virtual environment exactly matches the dependencies specified
 
 ### Writing Documentation
 
-This project follows a structured approach to documentation. Each module should have its own markdown file in the `docs/batistatemplate/` directory. Documentation files might include:
+This project follows a structured approach to documentation. Each module should have its own markdown file in the `docs/flux/` directory, organized by topic. Documentation files might include:
 
 1. **Overview**: A brief description of the module's purpose and key features
 2. **Concepts**: Explanation of important concepts and design decisions
