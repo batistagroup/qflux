@@ -6,13 +6,24 @@ This is a Python package containing various protocols for performing quantum dyn
 
 ## Installation
 
-To get started with `qflux`, you only need to install via `pip`:
+To get started with `qflux`, we recommend that you set-up a virtual environment with python ≥ 3.10. For example, you could create a conda environment: 
+
+```bash
+conda create -n qflux_env python=3.12
+conda activate qflux_env
+```
+
+Once this is completed, qflux can be installed with `pip`:
 
 ```
 pip install qflux
 ```
 
-This will install all necessary dependencies and set you up to check out our examples: 
+This will install all necessary dependencies and you are now ready to get started!
+
+### Getting Started
+
+You can learn how to use `qflux` through the tutorial-format examples on this documentation website:
 
 - **Closed Systems**
     - [Anatomy of a Dynamics Simulation: Advanced Use Cases](qflux/Closed_Systems/basics.md)
@@ -39,6 +50,18 @@ This will install all necessary dependencies and set you up to check out our exa
     - [Introduction to TT-TFD](qflux/GQME/What_is_TTTFD.md)
     - [GQME for Spin-Boson model](qflux/GQME/spin_boson_GQME.md)
     - [Quantum Algorithms of GQME](qflux/GQME/quantum_GQME_dilation.md)
+
+
+You can also open interactive notebooks in Google Colab: 
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Closed Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_I_qflux.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Open Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_II_qflux.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Variational Methods Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_III_qflux2.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) GQME Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_IV_qflux.ipynb)
+
 
 ## Questions, Issues, and Feature Requests
 
