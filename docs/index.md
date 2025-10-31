@@ -15,30 +15,30 @@ pip install qflux
 This will install all necessary dependencies and set you up to check out our examples: 
 
 - **Closed Systems**
-    - [Anatomy of a Dynamics Simulation: Advanced Use Cases](basics.md)
-    - [Example: Quantum Harmonic Oscillator](qho_example.md)
-    - [Example: Adenine-Thymine Base Pair](AT_basepair.md)
-    - [Example: Spin Chain](spinchain.md)
-    - [Example: Dynamics for an Arbitrary Hamiltonian](arbitrary_evo.md)
-    - [API Documentation](cs_api.md)
+    - [Anatomy of a Dynamics Simulation: Advanced Use Cases](qflux/Closed_Systems/basics.md)
+    - [Example: Quantum Harmonic Oscillator](qflux/Closed_Systems/qho_example.md)
+    - [Example: Adenine-Thymine Base Pair](qflux/Closed_Systems/AT_basepair.md)
+    - [Example: Spin Chain](qflux/Closed_Systems/spinchain.md)
+    - [Example: Dynamics for an Arbitrary Hamiltonian](qflux/Closed_Systems/arbitrary_evo.md)
+    - [API Documentation](qflux/Closed_Systems/cs_api.md)
 
 - **Open Systems**
-    - [Open System Dynamics Overview](basics.md)
-    - [Spin Chain Demo](spinchainOpen.md)
-    - [Spin 1/2 Demo](spinhalfOpen.md)
-    - [Double Well Demo](DoubleWellOpen.md)
-    - [API Documentation](os_api.md)
+    - [Open System Dynamics Overview](qflux/Open_Systems/basics.md)
+    - [Spin Chain Demo](qflux/Open_Systems/spinchainOpen.md)
+    - [Spin 1/2 Demo](qflux/Open_Systems/spinhalfOpen.md)
+    - [Double Well Demo](qflux/Open_Systems/DoubleWellOpen.md)
+    - [API Documentation](qflux/Open_Systems/os_api.md)
 
 - **Variational Methods**
-    - [Example: Variational Quantum Time Evolution](varQTE.md)
-    - [Example: Unrestricted Adaptive Variational Quantum Dynamics in an Amplitude Damping Channel](Vectorized_Adaptive.md)
-    - [Example: Stochastic Schrodinger Equation for Open Systems](trajectory_FMO.md)
+    - [Example: Variational Quantum Time Evolution](qflux/Variational_Methods/varQTE.md)
+    - [Example: Unrestricted Adaptive Variational Quantum Dynamics in an Amplitude Damping Channel](qflux/Variational_Methods/Vectorized_Adaptive.md)
+    - [Example: Stochastic Schrodinger Equation for Open Systems](qflux/Variational_Methods/trajectory_FMO.md)
 
 - **Generalized Quantum Master Equation (GQME)**
-    - [Introduction to GQME](What_is_GQME.md)
-    - [Introduction to TT-TFD](What_is_TTTFD.md)
-    - [GQME for Spin-Boson model](spin_boson_GQME.md)
-    - [Quantum Algorithms of GQME](quantum_GQME_dilation.md)
+    - [Introduction to GQME](qflux/GQME/What_is_GQME.md)
+    - [Introduction to TT-TFD](qflux/GQME/What_is_TTTFD.md)
+    - [GQME for Spin-Boson model](qflux/GQME/spin_boson_GQME.md)
+    - [Quantum Algorithms of GQME](qflux/GQME/quantum_GQME_dilation.md)
 
 ## Questions, Issues, and Feature Requests
 
