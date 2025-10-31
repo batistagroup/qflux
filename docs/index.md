@@ -75,9 +75,9 @@ If you're interested in contributing to `qflux`, you should checkout the source 
 
 ### Development Installation
 
-The first step to prepare your development environment is to clone the github repo. 
+The first step to prepare your development environment is to clone the [GitHub repo](https://github.com/batistagroup/qflux) using your preferred method (web/command line interface). For additional information on how to clone a GitHub repo, you can checkout the [GitHub Docs Page](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). 
 
-Once you've cloned the github repo, you should go to that directory and begin setting up your development environment with the following commands: 
+Once you've cloned the GitHub repo, you should go to that directory and begin setting up your development environment with the following commands: 
 
 ```bash
 cd qflux-master/
