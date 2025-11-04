@@ -1,7 +1,8 @@
-# GQME for Spin-Boson model
-This documentation describes how to simulate the dynamics of a spin-boson system using the generalized quantum master equation (GQME). This simulation also includes comparison plots to the numerically exact results obtained via tensor-train thermo-field dyanmics (TT-TFD).
+# GQME for Spin-Boson Model
+This documentation describes how to simulate the dynamics of a spin-boson system using the generalized quantum master equation (GQME). This simulation also includes comparison plots to the numerically exact results obtained via tensor-train thermo-field dynamics (TT-TFD).
 
 The following modules will be used throughout the documentation:
+
 ```python
 import numpy as np
 import time
@@ -10,6 +11,7 @@ import matplotlib.pyplot as plt
 import qflux.GQME.params as pa
 import qflux.GQME.readwrite as wr
 ```
+
 ---
 
 ## Spin Boson Model Hamiltonian
@@ -51,7 +53,7 @@ Here, $\hat{\sigma}(t)$ denotes the reduced density operator, which only include
 
 To propagate the GQME, two quantities are required: the projected Liouvillian $\langle {\cal L} \rangle_n^0$ and the memory kernel $\mathcal{K}(t)$. Their computation is described below.
 
-## The projected Liouvillian
+## The Projected Liouvillian
 
 When the memory kernel is absent, the system dynamics are governed solely by the projected Liouvillian $\langle {\cal L} \rangle_n^0$. Therefore, $\langle {\cal L} \rangle_n^0$ represents the unitary dynamics of the isolated system without environmental effects.
 
@@ -84,7 +86,9 @@ sigma_liou = SBM.prop_puresystem()
 
 The results are shown in the figure below, along with the numerically exact TT-TFD results for comparison. As expected, the evolution of the isolated system exhibits no decay and no energy dissipation.
 
-![Liouville-only](../images/Part_IV/Fig_SpinBoson_sysEvolution.png)
+<figure markdown="span">
+![Liouville-only](../images/Part_IV/Fig_SpinBoson_sysEvolution.png){: width="800"}
+</figure>
 
 ## The Memory Kernel
 According to [Introduction to GQME](What_is_GQME.md), the memory kernel can be obtained through the projection-free inputs (PFIs) $\mathcal{F}(t)$ and $\dot{\mathcal{F}}(t)$: 
@@ -129,9 +133,11 @@ kernel = SBM.get_memory_kernel()
 ```
 A representative result of the memory kernel is shown in the figure below. It captures the influence of the environment on the system dynamics, leading to non-Markovian behavior. The nonzero $\mathcal{K}_{DA,DD}(t)$ component in the figure indicates that the bath-induced population $\sigma_{DD}$ at an earlier time can influence the coherence dynamics of $\sigma_{DA}$ at a later time.
 
-![Memory_Kernel](../images/Part_IV/Fig_SpinBoson_kernel.png)
+<figure markdown="span">
+![Memory_Kernel](../images/Part_IV/Fig_SpinBoson_kernel.png){: width="800"}
+</figure>
 
-# Propagating System Dynamics using GQME
+# Propagating System Dynamics Using GQME
 With both the projected Liouvillian and the memory kernel available, Eq. (1) can be directly solved. The `solve_gqme` method in the `DynamicsGQME` class employs the fourth-order Runge-Kutta (RK4) method to solve the GQME. By providing the memory kernel and specifying a cutoff memory time, the `solve_gqme` method directly integrates the GQME and returns the reduced density operator $\hat{\sigma}(t)$.
 
 ```python
@@ -151,7 +157,10 @@ plt.xlabel('', fontsize=15)
 plt.ylabel(r'$\sigma_{00}(t)$', fontsize=15)
 plt.legend()
 ```
-![GQME_evolution](../images/Part_IV/Fig_SpinBoson_GQME.png)
+
+<figure markdown="span">
+![GQME_evolution](../images/Part_IV/Fig_SpinBoson_GQME.png){: width="800"}
+</figure>
 
 ---
 

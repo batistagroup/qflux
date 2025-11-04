@@ -4,7 +4,7 @@ The TT-TFD method has been fully integrated into the `qflux.GQME` module.
 
 # What is TT-TFD?
 
-The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transform solving the Liouville equation $\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]$ into solving
+The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transforms solving the Liouville equation $\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]$ into solving
 
 $$
 \frac{d}{dt} |\psi(\beta, t)\rangle = -\frac{i}{\hbar} \bar{H} |\psi(\beta, t)\rangle
@@ -49,7 +49,7 @@ $$
 \hat \rho(0) = \hat \sigma(0) \otimes \hat \rho_{n}(0)
 $$
 
-with $\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |$ is the initial electronic density operator, where $|\gamma\rangle$ is one of the electronic basis states.
+where $\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |$ is the initial electronic density operator, where $|\gamma\rangle$ is one of the electronic basis states.
 The initial nuclear density operator given by
 
 $$ \hat{\rho}_{n} (0) = \frac{\exp\bigg[\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg]}{\text{Tr}_{n} \Bigg\{ \exp\bigg[\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg] \Bigg\}} $$
@@ -114,7 +114,7 @@ $$
 |\psi(\beta, 0)\rangle = |\gamma\rangle \otimes |0, \tilde{0}\rangle 
 $$
 
-In practice, the $N_n$ pairs of $\{\omega_i , c_i\}$ are sampled from an Ohmic spectral density, and the TFD equations are solved in the tensor-train (TT) representation (more details can refer to ["Tensor-Train Thermo-Field Memory Kernels for Generalized Quantum Master Equations"](https://doi.org/10.1021/acs.jctc.2c00892)).
+In practice, the $N_n$ pairs of $\{\omega_i , c_i\}$ are sampled from an Ohmic spectral density, and the TFD equations are solved in the tensor-train (TT) representation (for more details, see ["Tensor-Train Thermo-Field Memory Kernels for Generalized Quantum Master Equations"](https://doi.org/10.1021/acs.jctc.2c00892)).
 
 ## TT-TFD Implementation in qflux
 
@@ -125,7 +125,7 @@ help of the `mpsqd` package developed by [Guan et al.](https://doi.org/10.1063/5
 
 
 ```python
-!pip install mpsqd
+!pip install "qflux[gqme]"
 ```
 
 
@@ -149,7 +149,9 @@ plt.ylabel('$\sigma_{DD}$(t)',fontsize=15)
 plt.legend()
 ```
 
-![png](../images/Part_IV/Fig_SpinBoson_TTTFD.png)
+<figure markdown="span">
+![png](../images/Part_IV/Fig_SpinBoson_TTTFD.png){: width="800"}
+</figure>
 
 # Summary
 
