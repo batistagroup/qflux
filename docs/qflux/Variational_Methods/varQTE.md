@@ -100,7 +100,7 @@ Reference implementations of this algorithm are used below, using QFlux to simul
 
 #### Example 1: Simple Hamiltonian
 
-Focusing on a simple Hamiltonian, consisting of a spin chain defined by the Pauli-Z matrix, we setup the initial state using a qiskit QuantumCircuit and the hyperparameters for VarQITE, such as number of layers in the ansatz, the timestep and total simulation time.
+Focusing on a simple Hamiltonian, consisting of a spin chain defined by the Pauli-Z matrix, we set up the initial state using a Qiskit `QuantumCircuit` and the hyperparameters for VarQITE, such as number of layers in the ansatz, the timestep and total simulation time.
 Finally, we call VarQITE to run the time evolution and output the ansatz parameter values.
 
 
@@ -120,7 +120,7 @@ timestep = 0.1
 params = VarQITE(layers, H, total_time, timestep, init_circ=qc)
 ```
 
-Furethermore, we can use the parameters to measure observables with a quantum circuit:
+Furthermore, we can use the parameters to measure observables with a quantum circuit:
 
 ```python
 # Measure energy at a given timestep
@@ -175,7 +175,7 @@ plt.show()
 ![VarQITE](../images/Part_I/VarQITE.png)
 
 **Interpretation:**
-VarQITE drives the system toward the **ground state** as imaginary time increases, provided the ansatz is expressive enough. This enables estimation of the ground-state energy by sampling the long-time behavior.
+VarQITE drives the system toward the **ground state** as imaginary-time increases, provided the ansatz is expressive enough. This enables estimation of the ground-state energy by sampling the long-time behavior.
 
 ---
 
@@ -189,7 +189,7 @@ $$
     \delta \left\Vert\left(\frac{\partial}{\partial t} + i\mathcal{H}\right)\left|{\psi(\theta(t))}\right\rangle\right\Vert = 0.
 $$
 
-The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of $C_i$,
+The starting state can be evolved through real-time in a variational form vary similar to VarQITE, except with one change when calculating the elements of $C_i$,
 
 $$
     C_i = - \Im\Bigg({\frac{\partial \left\langle\phi(\theta(t))\right|}{\partial\theta_i}} \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
@@ -197,13 +197,13 @@ $$
 
 Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta dt$.
 
-Within QFlux, `VarQRTE` reuses the same modular components while invoking `Measure_C` with `evolution_type="imaginary"`. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.
+Within QFlux, `VarQRTE` reuses the same modular components while invoking `Measure_C` with `evolution_type="real"`. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.
 
 ---
 
 ### Demonstration
 
-We proceed by defining the Hamiltonian and initial state, along with instantiating the VarQRTE class with appropriate hyper-parameters.
+We proceed by defining the Hamiltonian and initial state, along with instantiating the VarQRTE class with appropriate hyperparameters.
 
 ```python
 H = SparsePauliOp.from_list([("X", 1.0)])
