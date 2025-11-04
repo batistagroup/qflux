@@ -163,6 +163,11 @@ class DynamicsCS:
             self.H_grid = self._PE_grid + self._KE_grid
         elif potential_type == 'quartic':
             if kwargs:
+                a0 = 0.0
+                a1 = 0.0
+                a2 = 0.0
+                a3 = 0.0
+                a4 = 0.0
                 if 'a0' in kwargs:
                     a0 = kwargs['a0']
                 if 'a1' in kwargs:
@@ -205,6 +210,11 @@ class DynamicsCS:
             self.H_xp_op = self._PE_op + self._KE_op
         elif potential_type == 'quartic':
             if kwargs:
+                a0 = 0.0
+                a1 = 0.0
+                a2 = 0.0
+                a3 = 0.0
+                a4 = 0.0
                 if 'a0' in kwargs:
                     a0 = kwargs['a0']
                 if 'a1' in kwargs:

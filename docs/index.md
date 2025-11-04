@@ -94,6 +94,7 @@ source .venv/bin/activate
 uv pip install -e ".[dev]"
 # Initiate pre-commit checks
 pre-commit install
+uv sync
 ```
 
 This will install all necessary dependencies, including development tools like pre-commit hooks, testing frameworks, and documentation generators.
@@ -168,3 +169,10 @@ This project follows a structured approach to documentation. Each module should 
 3. **Examples**: Code examples showing common usage patterns
 4. **Source Code**: Auto-generated documentation from source code annotations
 
+## Citing QFlux
+
+Please cite the preprint of our work when using this code until the journal version becomes available. (We will add pre-formatted citation here once the pre-print goes live.)
+
+## Acknowledgement of Funding
+
+We acknowledge the financial support of the National Science Foundation under award number 2124511, CCI Phase I: NSF Center for Quantum Dynamics on Modular Quantum Devices (CQD-MQD).

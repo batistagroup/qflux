@@ -363,6 +363,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1187,6 +1202,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1281,10 +1311,16 @@
 <p><img alt="Logo" src="img/qflux-logo.png" /></p>
 <p>This is a Python package containing various protocols for performing quantum dynamics simulations with quantum devices. Each submodule contains object-oriented implementations for these protocols as demonstrated in our publication, as well as comprehensive tutorial notebooks designed to help users understand, implement and build upon various simulation techniques for studying quantum dynamics using quantum computer frameworks. Each tutorial is provided in Python, using Jupyter Notebooks to offer detailed explanations in both markdown and code comments.</p>
 <h2 id="installation">Installation</h2>
-<p>To get started with <code>qflux</code>, you only need to install via <code>pip</code>:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install qflux
+<p>To get started with <code>qflux</code>, we recommend that you set-up a virtual environment with python ≥ 3.10. For example, you could create a conda environment: </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>qflux_env<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>qflux_env
 </span></code></pre></div>
-<p>This will install all necessary dependencies and set you up to check out our examples: </p>
+<p>Once this is completed, qflux can be installed with <code>pip</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip install qflux
+</span></code></pre></div>
+<p>This will install all necessary dependencies and you are now ready to get started!</p>
+<h3 id="getting-started">Getting Started</h3>
+<p>You can learn how to use <code>qflux</code> through the tutorial-format examples on this documentation website:</p>
 <ul>
 <li>
 <p><strong>Closed Systems</strong></p>
@@ -1325,6 +1361,21 @@
 </ul>
 </li>
 </ul>
+<p>You can also open interactive notebooks in Google Colab: </p>
+<ul>
+<li>
+<p><a href="https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_I_qflux.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /> Closed Systems Demonstration</a></p>
+</li>
+<li>
+<p><a href="https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_II_qflux.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /> Open Systems Demonstration</a></p>
+</li>
+<li>
+<p><a href="https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_III_qflux2.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /> Variational Methods Demonstration</a></p>
+</li>
+<li>
+<p><a href="https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_IV_qflux.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /> GQME Demonstration</a></p>
+</li>
+</ul>
 <h2 id="questions-issues-and-feature-requests">Questions, Issues, and Feature Requests</h2>
 <p>This package and its accompanying documentation are part of an actively maintained research software project.
 If you encounter unexpected behavior, identify a reproducible bug, or have questions not addressed in the documentation, please open a new issue using the <a href="ISSUE_TEMPLATE.md">issue template</a>. 
@@ -1332,19 +1383,19 @@ We also welcome suggestions for new features or improvements that could enhance 
 <h2 id="development-setup">Development Setup</h2>
 <p>If you're interested in contributing to <code>qflux</code>, you should checkout the source code and our <a href="CONTRIBUTING/">Contribution Guide</a>. If you are unsure where to start, consider browsing the list of open issues or proposed enhancements to identify areas where your expertise could be most impactful.</p>
 <h3 id="development-installation">Development Installation</h3>
-<p>The first step to prepare your development environment is to clone the github repo. </p>
-<p>Once you've cloned the github repo, you should go to that directory and begin setting up your development environment with the following commands: </p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>qflux-master/
+<p>The first step to prepare your development environment is to clone the <a href="https://github.com/batistagroup/qflux">GitHub repo</a> using your preferred method (web/command line interface). For additional information on how to clone a GitHub repo, you can checkout the <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">GitHub Docs Page</a>. </p>
+<p>Once you've cloned the GitHub repo, you should go to that directory and begin setting up your development environment with the following commands: </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>qflux-master/
 </span></code></pre></div>
 <p>This project uses <code>uv</code> for fast and reliable Python package management. To set up your development environment:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Create and activate a virtual environment</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>uv<span class="w"> </span>venv
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Install the package and all development dependencies</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Initiate pre-commit checks</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>pre-commit<span class="w"> </span>install
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Create and activate a virtual environment</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>uv<span class="w"> </span>venv
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Install the package and all development dependencies</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Initiate pre-commit checks</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>pre-commit<span class="w"> </span>install
 </span></code></pre></div>
 <p>This will install all necessary dependencies, including development tools like pre-commit hooks, testing frameworks, and documentation generators.</p>
 <h3 id="documentation">Documentation</h3>
@@ -1353,7 +1404,7 @@ We also welcome suggestions for new features or improvements that could enhance 
 <li>Make sure you have all development dependencies installed</li>
 <li>Run the documentation server:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdocs<span class="w"> </span>serve
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdocs<span class="w"> </span>serve
 </span></code></pre></div>
 <ol>
 <li>Open your browser and navigate to <code>http://127.0.0.1:8000</code></li>
@@ -1367,16 +1418,16 @@ We also welcome suggestions for new features or improvements that could enhance 
 <li>Handles code formatting</li>
 </ul>
 <p>After installing the development dependencies (as described in the Installation section), enable the pre-commit hooks by running:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pre-commit<span class="w"> </span>install
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pre-commit<span class="w"> </span>install
 </span></code></pre></div>
 <p>Now the hooks will run automatically on every commit, ensuring code quality and consistency.</p>
 <h3 id="managing-dependencies">Managing Dependencies</h3>
 <p>This project uses <code>uv</code> for fast and reliable dependency management. Here's how to manage your dependencies:</p>
 <h4 id="adding-new-dependencies">Adding New Dependencies</h4>
 <p>To add a new package dependency:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>uv<span class="w"> </span>add<span class="w"> </span>package_name
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Add a development dependency</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>uv<span class="w"> </span>add<span class="w"> </span>--dev<span class="w"> </span>package_name
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>uv<span class="w"> </span>add<span class="w"> </span>package_name
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># Add a development dependency</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>uv<span class="w"> </span>add<span class="w"> </span>--dev<span class="w"> </span>package_name
 </span></code></pre></div>
 <p>This will:</p>
 <ol>
@@ -1386,7 +1437,7 @@ We also welcome suggestions for new features or improvements that could enhance 
 </ol>
 <h4 id="synchronizing-dependencies">Synchronizing Dependencies</h4>
 <p>If you pull changes that include new dependencies or switch branches, synchronize your environment:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>uv<span class="w"> </span>sync
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>uv<span class="w"> </span>sync
 </span></code></pre></div>
 <p>This ensures your virtual environment exactly matches the dependencies specified in the lock file, removing any packages you don't need and installing any that are missing.</p>
 <h3 id="writing-documentation">Writing Documentation</h3>
