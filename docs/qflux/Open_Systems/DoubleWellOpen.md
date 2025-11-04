@@ -35,7 +35,7 @@ $$ H = \frac{p^2}{2m} + V(x)   $$
 
 where $p$ is the proton's momentum, $m=1836.15$ a.u. is the mass of the proton, and the double well potential is defined by setting $V(x)$.
 
-The effect of the environment is incorporated through the jump operators $\hat{a}$ and $\hat{a}^\dagger$, correspond to [this paper](https://doi.org/10.48550/arXiv.2211.04605). Here, $\hat{a}$ and $\hat{a}^\dagger$ are the annihilation and creation operators, defined as:
+The effect of the environment is incorporated through the jump operators $\hat{a}$ and $\hat{a}^\dagger$, as in [this paper](https://doi.org/10.48550/arXiv.2211.04605). Here, $\hat{a}$ and $\hat{a}^\dagger$ are the annihilation and creation operators, defined as:
 
 $$
 \hat{a} = \sqrt{\frac{m\omega}{2\hbar}}\,\hat{x} + \frac{i}{\sqrt{2\hbar m \omega}}\,\hat{p}
@@ -77,10 +77,9 @@ dw_grid.set_potential(pot_doublewell)
 
 The plot of the potential $V(x)$ is shown here:
 
-
-
-![png](../images/Part_II/Part2_doublewell_pot.png)
-
+<figure markdown="span">
+![png](../images/Part_II/Part2_doublewell_pot.png){: width="800"}
+</figure>
 
 
 The population of the proton in the left (L) and right (R) wells can be characterized by the following expectation values:
@@ -112,9 +111,9 @@ eneg_DW,psi_DW = dw_grid.get_eig_state(Neig)
 
 We can visualize the potential energy surface along with the energy levels and spatial distributions of the lowest 12 eigenstates.
 
-
-![png](../images/Part_II/Part2_doublewell_eigstate.png)
-
+<figure markdown="span">
+![png](../images/Part_II/Part2_doublewell_eigstate.png){: width="800"}
+</figure>
 
 ## Express the Double Well in the Basis of Eigenstates
 
@@ -127,18 +126,18 @@ psik_DW = np.zeros((dw_grid.Ngrid,Neig),dtype=np.complex128)
 for i in range(Neig):
     psik_DW[:,i] = dw_grid.x2k_wave(psi_DW[:,i])
 
-#hamiltonian
+# hamiltonian
 H_dw = np.diag(eneg_DW)
 
-#The operator in the eigenstate
+# The operator in the eigenstate
 xmat_eig = tb.trans_basis_diag(dw_grid.xgrid, Neig, psi_DW)*dw_grid.dx
 pmat_eig = tb.trans_basis_diag(dw_grid.kgrid, Neig, psik_DW)*dw_grid.dk
 
-#creation/annihilation operator
+# creation/annihilation operator
 amat_eig = xmat_eig.copy()*np.sqrt(mass0*omega/2)+1j*pmat_eig.copy()/np.sqrt(mass0*omega*2)
 adegmat_eig = xmat_eig.copy()*np.sqrt(mass0*omega/2)-1j*pmat_eig.copy()/np.sqrt(mass0*omega*2)
 
-#define the population on the left/right well and transform to eigen state basis
+# define the population on the left/right well and transform to eigen state basis
 x_barrier = 0.37321768
 P_R = np.heaviside(xgrid-x_barrier,1)
 P_L = 1 - np.heaviside(xgrid-x_barrier,1)
@@ -188,9 +187,9 @@ result_dw_l = dw_eig.propagate_matrix_exp(time_long, observable, Is_store_state 
 
 We can visualize the population in the right well as a function of time:
 
-
-![png](../images/Part_II/Part2_doublewell_classicaldyn.png)
-
+<figure markdown="span">
+![png](../images/Part_II/Part2_doublewell_classicaldyn.png){: width="800"}
+</figure>
 
 
 We can also visualize the time evolution of the proton's probability distribution over the double-well potential:
@@ -280,5 +279,7 @@ P_dw_qc = dw_quantum.qc_simulation_kraus(time_qdw, Gprop = Gprop_dw, tolk = 1E-2
 
 One can visualize $P_R(t)$ after the simulation is complete:
 
+<figure markdown="span">
+![png](../images/Part_II/Part2_doublewell_Krausq.png){: width="800"}
+</figure>
 
-![png](../images/Part_II/Part2_doublewell_Krausq.png)

@@ -67,7 +67,7 @@ where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)
 
 ## Solve the Lindblad equation
 
-As a reminder, the task at hand is compute the time evolution of the density matrix according to the Lindblad equation:
+As a reminder, the task at hand is to compute the time evolution of the density matrix according to the Lindblad equation:
 
 $$
     | \nu_{\rho}(t)\rangle = \mathbf{G}(t)  
@@ -87,7 +87,7 @@ We now describe in detail how to solve the Lindblad equation using the [`Dynamic
 
 ### Definition of the Initial State
 
-The initial state is the vectorized density matrix $| \nu_{\rho}(0)\rangle$. However, the `DynamicsOS` class in `qflux.open_system` automatically performs the vectorization, so the user only needs to define the initial density matrix $\rho(0)$ as an $N\times N$ array and pass it to the `DynamicsOS` class.
+The initial state is the vectorized density matrix $| \nu_{\rho}(0)\rangle$. However, the `DynamicsOS` class in `qflux.open_systems` automatically performs the vectorization, so the user only needs to define the initial density matrix $\rho(0)$ as an $N\times N$ array and pass it to the `DynamicsOS` class.
 
 As an example, consider a single spin-1/2 system. We define the spin-up and spin-down states as
 

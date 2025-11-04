@@ -1,10 +1,10 @@
-This section illustrates the simulation of an open quantum Spin-1/2 system using both classical and quantum backends, implemented within QFlux. Spin-1/2 models are chemically relevant, as they capture key features of charge and energy transfer between donor and acceptor sites, that is each spin state corresponds to an electronic state for the chemical interpretation. We examine two types of Lindblad equations for describing open system dyanmics. The Linblad equation is given as
+This section illustrates the simulation of an open quantum Spin-1/2 system using both classical and quantum backends, implemented within QFlux. Spin-1/2 models are chemically relevant, as they capture key features of charge and energy transfer between donor and acceptor sites, that is each spin state corresponds to an electronic state for the chemical interpretation. We examine two types of Lindblad equations for describing open system dynamics. The Lindblad equation is given as
 
 $$
 \frac{d\rho}{dt} = -\frac{i}{\hbar} [H, \rho] + \sum_j \gamma_j \left( L_j \rho L_j^\dagger - \frac{1}{2} \left[ L_j^\dagger L_j, \rho \right] \right)
 $$
 
- The first is taking the jump operators $L_j$ as just the sigle operator $\sigma_x$, the system is subject to a type of decoherence which damps both the system energy and coherences. Demonstrating the Lindblad formalism can incorporate both population relaxation and dephasing (loss of coherence), which is tyical of chemical reactions in the condensed phase. If instead we take the jump operators $L_j$ as just the single operator $\sigma^+$, the system is subject to amplitude damping, a type of decoherence that affects only the populations. Modeling the irreversible decay from the excited to the ground state, while leaving the coherences intact. Although , we focus here on amplitude damping as one representative dissipation pathway. Simulation results from both classical and quantum methods are compared to validate the implementation.
+ The first is taking the jump operators $L_j$ as just the sigle operator $\sigma_x$, the system is subject to a type of decoherence which damps both the system energy and coherences. Demonstrating the Lindblad formalism can incorporate both population relaxation and dephasing (loss of coherence), which is typical of chemical reactions in the condensed phase. If instead we take the jump operators $L_j$ as just the single operator $\sigma^+$, the system is subject to amplitude damping, a type of decoherence that affects only the populations. Modeling the irreversible decay from the excited to the ground state, while leaving the coherences intact. Although we focus here on amplitude damping as one representative dissipation pathway. Simulation results from both classical and quantum methods are compared to validate the implementation.
 
 
 ## Classical Simulation
@@ -145,7 +145,9 @@ plt.legend(loc = 'upper right')
 plt.show()
 ```
 
-![tls-classical](../images/Part_II/TLS_Classical_Dynamics.png)
+<figure markdown="span">
+![tls-classical](../images/Part_II/TLS_Classical_Dynamics.png){: width="800"}
+</figure>
 
 ## Quantum Simulation of the Spin-1/2 System: Amplitude-Channel Damping
 
@@ -272,7 +274,9 @@ plt.ylabel('$P(t)$',fontsize=15)
 plt.legend(loc = 'upper right')
 ```
 
-![tls-quantum](../images/Part_II/TLS_Quantum_Dynamics.png)
+<figure markdown="span">
+![tls-quantum](../images/Part_II/TLS_Quantum_Dynamics.png){: width="800"}
+</figure>
 
 ## Summary
 
