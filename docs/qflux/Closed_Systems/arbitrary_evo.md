@@ -4,7 +4,7 @@ Let us now consider the task of running quantum dynamics for an arbitrary Hamilt
 
 $$ \hat{H}_{\text{Pauli}} = \sum_{i} \alpha_{i} P_{i} $$ 
 
-where $P_{i}$ is an $n$-qubit Pauli string corresponding to Pauli gates acting acting on an $n$-qubit quantum register. 
+where $P_{i}$ is an $n$-qubit Pauli string corresponding to Pauli gates acting on an $n$-qubit quantum register. 
 
 This task can be completed via the `decompose()` utility function in `qflux`. 
 
@@ -135,7 +135,9 @@ plt.tight_layout()
 
 Which gives us the following plot: 
 
-![linearchain-l2](../images/Part_I/Spin_L2_Probabilities.png)
+<figure markdown="span">
+![linearchain-l2](../images/Part_I/Spin_L2_Probabilities.png){: width="800"}
+</figure>
 
 ## Observables
 
@@ -257,7 +259,9 @@ fig.tight_layout()
 
 which should look like the following: 
 
-![linearchain-observables](../images/Part_I/Spin-Evolution.png)
+<figure markdown="span">
+![linearchain-observables](../images/Part_I/Spin-Evolution.png){: width="800"}
+</figure>
 
 We can also compute the site-specific magnetization: 
 
@@ -284,7 +288,9 @@ plt.xlabel("Time")
 plt.colorbar(label="$\\langle Z_i \\rangle$", aspect=1.8)
 ```
 
-![linear-chain-sitespecific-exact](../images/Part_I/Site-Specific-Magnetization.png)
+<figure markdown="span">
+![linear-chain-sitespecific-exact](../images/Part_I/Site-Specific-Magnetization.png){: width="800"}
+</figure>
 
 Similarly, we can compute the site-specific magnetization with our dynamics results: 
 
@@ -311,4 +317,7 @@ plt.xlabel("Time")
 plt.colorbar(label="$\\langle Z_i \\rangle$", aspect=1.8)
 ```
 
-![linear-chain-sitespecific-qflux](../images/Part_I/Site-Specific-Magnetization-qflux.png)
+<figure markdown="span">
+![linear-chain-sitespecific-qflux](../images/Part_I/Site-Specific-Magnetization-qflux.png){: width="800"}
+</figure>
+

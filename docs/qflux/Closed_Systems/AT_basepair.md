@@ -1,8 +1,10 @@
-# **Simulation of Proton Transfer Dynamics in Adenine-Thymine Base Pair**
+**Simulation of Proton Transfer Dynamics in Adenine-Thymine Base Pair**
 
 In this section, we will compute the dynamics for the proton transfer in an Adenine-Thymine Base Pair as it would be implemented on a qubit-based quantum computer. We will model the Adenine-Thymine base pair following [this paper](https://pubs.rsc.org/en/content/articlelanding/2015/cp/c5cp00472a). A cartoon schematic of our model is shown here:
 
-![AT-Basepair](../images/Part_I/AT-BasePair-Figure.png)
+<figure markdown="span">
+![AT-Basepair](../images/Part_I/AT-BasePair-Figure.png){: width="800" }
+</figure>
 
 ## Setting Up The Simulation
 
@@ -63,7 +65,9 @@ plt.legend(fontsize=14,loc='upper center')
 
 Which should produce a plot like this: 
 
-![AT-Initialization](../images/Part_I/Double-Well-Initialization.png)
+<figure markdown="span">
+![AT-Initialization](../images/Part_I/Double-Well-Initialization.png){: width="800" }
+</figure>
 
 And we can also visualize with the final propagated state: 
 
@@ -101,7 +105,9 @@ plt.xlim(-4, 4)
 plt.legend(fontsize=14,loc='upper center')
 ```
 
-![AT-Propagation](../images/Part_I/Double-Well-Propagation.png)
+<figure markdown="span">
+![AT-Propagation](../images/Part_I/Double-Well-Propagation.png){: width="800" }
+</figure>
 
 And we can also look at the expectation value of the position as a function of time: 
 
@@ -127,13 +133,16 @@ plt.xlim(-.10, 30.1)
 plt.legend(loc='upper right')
 ```
 
-![AT-Expectation](../images/Part_I/Double-Well-Position-Time.png)
+<figure markdown="span">
+![AT-Expectation](../images/Part_I/Double-Well-Position-Time.png){: width="800"}
+</figure>
 
 We can see that we have good agreement between the expectation values computed from the qubit dynamics and the classical grid-based dynamics. 
 
 Lastly, we can visualize the evolution over time and see that the dynamics are nearly identical: 
 
-<video controls src="../../images/Part_I/Basepair-Wavepacket-Animation.mp4"></video>
+
+<video width="1000" controls src="../../images/Part_I/Basepair-Wavepacket-Animation.mp4"></video>{: width="800"}
 
 **Note:** We can visualize the quantum circuit behind the evolution for a single time-step: 
 
@@ -143,7 +152,9 @@ dw_dyn_obj.quantum_circuit.draw('mpl', fold=-1)
 
 And get a nice simplified diagram for the quantum circuit: 
 
-![AT-Quantum-Circuit](../images/Part_I/AT-Basepair-Dynamics-Circuit-Simplified.png)
+<figure markdown="span">
+![AT-Quantum-Circuit](../images/Part_I/AT-Basepair-Dynamics-Circuit-Simplified.png){: width="800"}
+</figure>
 
 But, in order to get an actual idea for how complex the circuit is, we should first call the `.decompose()` method, which will break things up into fundamental gates. The resulting circuit is massive (I'll let you see for yourself!):
 
