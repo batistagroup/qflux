@@ -1,3 +1,12 @@
+---
+name: Bug Report
+about: Report a problem or unexpected behavior in the project
+title: "[BUG] "
+labels: ["bug"]
+assignees: ""
+---
+
+
 ## Description
 A clear and concise description of what the issue is about.
 

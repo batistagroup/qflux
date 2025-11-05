@@ -1,2 +1,8 @@
 blank_issues_enabled: True 
-contact_links: []
+contact_links:
+  - name: QFlux Documentation
+    url: https://qflux.batistalab.com/ 
+    about: Review or contribute to the official project documentation.
+  - name: QFlux Homepage
+    url: https://github.com/batistagroup/qflux
+    about: Visit the main repository page for source code, releases, and updates.
