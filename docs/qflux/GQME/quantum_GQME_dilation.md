@@ -108,13 +108,18 @@ Here, we instantiate the `QubitDynamicsOS` class with the parameters of the spin
 
 The population results are shown in the figure below.
 
-![qGQME](../images/Part_IV/Fig_qGQME.png)
+<figure markdown="span">
+![qGQME](../images/Part_IV/Fig_qGQME.png){: width="800"}
+</figure>
 
 One can also visualize an example quantum circuit from the result output of the `qc_simulation_vecdens` method:
 ```python
 res_qc['circuits'][200].draw('mpl')
 ```
+
+<figure markdown="span">
 ![qcGQME200](../images/Part_IV/Fig_GQME_qc200.png)
+</figure>
 
 Here, we use the circuit at the 200th time step as an example.
 
@@ -126,8 +131,10 @@ basis_gates = ['cz', 'id', 'rx', 'rz', 'rzz', 'sx', 'x']
 compiled_circuit = transpile(res_qc['circuits'][200], basis_gates=basis_gates, optimization_level=1)
 compiled_circuit.draw('mpl')
 ```
-![qcGQME200_decompose](../images/Part_IV/Fig_GQME_qc200_transpile.png)
 
+<figure markdown="span">
+![qcGQME200_decompose](../images/Part_IV/Fig_GQME_qc200_transpile.png)
+</figure>
 
 # Summary
 This example demonstrates a modular quantum simulation of the Generalized Quantum Master Equation (GQME) using the spin-boson model as an illustrative example:

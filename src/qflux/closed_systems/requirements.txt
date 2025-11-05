@@ -1,5 +1,0 @@
-!pip install numpy==1.23.5    # version compatible with qiskit
-!pip install qutip==5.0.3
-!pip install tqdm==4.66.5
-
-

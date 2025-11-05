@@ -39,7 +39,7 @@ cd qflux
 
 QFlux uses [uv](https://github.com/astral-sh/uv) for dependency management. You will need:
 
-* Python ≥3.10
+* Python 3.10+
 * [uv](https://github.com/astral-sh/uv): Install with `pip install uv`
 * [mkdocs](https://www.mkdocs.org/) for documentation
 * [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) documentation theme
@@ -103,7 +103,7 @@ qflux/
 
 ## Make Changes
 
-All changes and additions to the QFlux code and documentation will follow the [MIT License](https://github.com/batistagroup/qflux/blob/master/LICENSE) for the repository.
+All changes and additions to the QFlux code and documentation will follow the [GPLv3 License](https://github.com/batistagroup/qflux/blob/master/LICENSE) for the repository.
 
 ### New Feature
 
@@ -163,7 +163,7 @@ In this section, we will provide a general workflow for updating the documentati
 
 ---
 
-## Commiting the Update
+## Committing the Update
 
 Follow [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) guidelines:
 

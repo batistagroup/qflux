@@ -32,7 +32,7 @@ extra_css:
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - javascripts/collapse-sidebars.js
+#  - javascripts/collapse-sidebars.js
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -49,7 +49,10 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - toc:
+      title: On This Page
       toc_depth: 3
+  - attr_list
+  - md_in_html
 
 plugins:
   - search

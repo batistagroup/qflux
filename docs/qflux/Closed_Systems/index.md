@@ -8,7 +8,7 @@ This section includes documentation and tutorials focused on illustrating the us
 
 In this section, we outline the main functionality of the `closed_systems` module. 
 
-First, we will provide some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.
+First, we will recommend some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.
 
 ## Examples and Introductory Concepts 
 

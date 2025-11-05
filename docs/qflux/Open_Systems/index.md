@@ -6,7 +6,7 @@ This section includes documentation and tutorials focused on illustrating the us
 
 ## Overview
 
-First, we will provide some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.
+We begin with some conceptual explanations that provide the user with a necessary background to understand the code. Then we provide some illustrative examples that demonstrate how the code can be used. Finally, we provide the source code as an API reference to the source code.
 
 ## Examples and Introductory Concepts 
 
