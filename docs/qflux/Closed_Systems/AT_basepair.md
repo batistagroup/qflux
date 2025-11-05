@@ -6,7 +6,7 @@ In this section, we will compute the dynamics for the proton transfer in an Aden
 ![AT-Basepair](../images/Part_I/AT-BasePair-Figure.png){: width="800" }
 </figure>
 
-## Setting Up The Simulation
+## Setting Up the Simulation
 
 We have included the Adenine-Thymine base pair potential as a default quartic potential in `qflux`. It can be implemented with the following code: 
 
@@ -42,7 +42,11 @@ dw_dyn_obj.propagate_SOFT()
 dw_dyn_obj.propagate_qt()
 ```
 
+## Visualizing States
+
 We can check the initial state by plotting on the potential: 
+
+**NOTE:** To obtain agreement between wavefunction/amplitude plots obtained in the grid-based and qubit formalisms, one must carefully account for the grid-spacing with qubit-based objects.For all qubit-formalism state objects, `qflux` adheres to the norm required by `qiskit`: $\psi^{*} \cdot \psi = 1$, while the grid-based states will follow a more familiar normalization $\int \psi^{*} \psi \, dx = 1$.
 
 ```python 
 import matplotlib.pyplot as plt
@@ -68,6 +72,8 @@ Which should produce a plot like this:
 <figure markdown="span">
 ![AT-Initialization](../images/Part_I/Double-Well-Initialization.png){: width="800" }
 </figure>
+
+We see that there is excellent agreement between the our grid-based initial state and the state initialized in the qubit formalism, after accounting for the difference in normalization convention. 
 
 And we can also visualize with the final propagated state: 
 
@@ -109,7 +115,11 @@ plt.legend(fontsize=14,loc='upper center')
 ![AT-Propagation](../images/Part_I/Double-Well-Propagation.png){: width="800" }
 </figure>
 
-And we can also look at the expectation value of the position as a function of time: 
+We again see excellent agreement between our grid-based simulation result and the result from the qubit formalism!
+
+## Visualizing Expectation Values
+
+Another useful quantity to visualize would be the expectation value of the position as a function of time:
 
 ```python
 from qflux.closed_systems.utils import calculate_expectation_values, convert_au_to_fs
@@ -139,12 +149,15 @@ plt.legend(loc='upper right')
 
 We can see that we have good agreement between the expectation values computed from the qubit dynamics and the classical grid-based dynamics. 
 
-Lastly, we can visualize the evolution over time and see that the dynamics are nearly identical: 
+## Bonus: Dynamics Video
 
+Lastly, we can visualize the evolution over time and see that the dynamics are nearly identical:
 
-<video width="1000" controls src="../../images/Part_I/Basepair-Wavepacket-Animation.mp4"></video>{: width="800"}
+<video width="1000" controls src="../../images/Part_I/Basepair-Wavepacket-Animation.mp4"></video>
 
-**Note:** We can visualize the quantum circuit behind the evolution for a single time-step: 
+## Bonus: Visualizing a Quantum Circuit
+
+We can visualize the quantum circuit behind the evolution for a single time-step: 
 
 ```python
 dw_dyn_obj.quantum_circuit.draw('mpl', fold=-1)
@@ -153,7 +166,7 @@ dw_dyn_obj.quantum_circuit.draw('mpl', fold=-1)
 And get a nice simplified diagram for the quantum circuit: 
 
 <figure markdown="span">
-![AT-Quantum-Circuit](../images/Part_I/AT-Basepair-Dynamics-Circuit-Simplified.png){: width="800"}
+![AT-Quantum-Circuit](../images/Part_I/AT-Basepair-Dynamics-Circuit-Simplified.png){: width="1000"}
 </figure>
 
 But, in order to get an actual idea for how complex the circuit is, we should first call the `.decompose()` method, which will break things up into fundamental gates. The resulting circuit is massive (I'll let you see for yourself!):

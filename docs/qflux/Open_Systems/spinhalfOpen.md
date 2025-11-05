@@ -30,7 +30,7 @@ The table below outlines the required inputs to initialize a `DynamicsOS` instan
 
 ---
 
-### `DynamicsOS` Initialization Inputs
+`DynamicsOS` Initialization Inputs
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -69,7 +69,7 @@ Simulation is carried out using matrix exponential propagation of the Lindbladia
 
 ---
 
-## `DynamicsOS.propagate_matrix_exp` Input
+`DynamicsOS.propagate_matrix_exp` Input
 
 | Input | Type | Description |
 |-----------|------|-------------|
@@ -81,7 +81,7 @@ Simulation is carried out using matrix exponential propagation of the Lindbladia
 
 ---
 
-## `DynamicsOS.propagate_matrix_exp` Output
+`DynamicsOS.propagate_matrix_exp` Output
 
 | Return Object | Attribute | Type | Description |
 |---------------|-----------|------|-------------|
@@ -95,7 +95,7 @@ Now we provide the information for QuTiP propagation
 
 ---
 
-## `DynamicsOS.propagate_qt` Parameters
+`DynamicsOS.propagate_qt` Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -105,7 +105,7 @@ Now we provide the information for QuTiP propagation
 
 ---
 
-## `DynamicsOS.propagate_qt` Output
+`DynamicsOS.propagate_qt` Output
 
 | Return Object | Type | Description |
 |---------------|------|-------------|
@@ -197,7 +197,7 @@ The `QubitDynamicsOS` class extends `DynamicsOS` and provides support for simula
 
 ---
 
-### `QubitDynamicsOS` Initialization Parameters
+`QubitDynamicsOS` Initialization Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -206,7 +206,7 @@ The `QubitDynamicsOS` class extends `DynamicsOS` and provides support for simula
 
 ---
 
-### `QubitDynamicsOS` Attributes
+`QubitDynamicsOS` Attributes
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -227,7 +227,7 @@ spin1_sdam.set_dilation_method('SVD')
 
 The simulation is run using the quantum backend, and results are benchmarked against a classical matrix exponentiation method. There are two representations available for performing the quantum simulation, the first being quantum simulation using the vectorized density matrix which is done with the method `QubitDynamicsOS.qc_simulation_vecdens` and the second is with the Kraus operator representation, which we do not implement here but can be done so with `QubitDynamics.qc_simulation_kraus`. The inputs and outputs of `QubitDynamicsOS.qc_simulation_vecdens` are described by the tables below
 
-## `QubitDynamicsOS.qc_simulation_vecdens` Parameters
+`QubitDynamicsOS.qc_simulation_vecdens` Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -239,7 +239,7 @@ The simulation is run using the quantum backend, and results are benchmarked aga
 
 ---
 
-## `QubitDynamicsOS.qc_simulation_vecdens` Output
+`QubitDynamicsOS.qc_simulation_vecdens` Output
 
 | Return Object | Type | Description |
 |---------------|------|-------------|

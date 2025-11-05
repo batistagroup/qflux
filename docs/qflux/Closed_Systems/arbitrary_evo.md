@@ -1,5 +1,7 @@
 # Evolution for an Arbitrary Hamiltonian
 
+## Background
+
 Let us now consider the task of running quantum dynamics for an arbitrary Hamiltonian describing a system of interest, $\hat{H}$. To do this on a quantum device, we must first express the Hamiltonian in a way that can be easily understood by the quantum device, that is to say that we must express the Hamiltonian as a series of native quantum gates. We can do this by expressing the Hamiltonian as a weighted combination of Pauli strings: 
 
 $$ \hat{H}_{\text{Pauli}} = \sum_{i} \alpha_{i} P_{i} $$ 
@@ -13,6 +15,8 @@ Once we've rewritten our Hamiltonian, we can implement real-time dynamics on the
 $$ \hat{U} = e^{- \frac{i}{\hbar} \hat{H}_{\text{Pauli}} \tau} $$ 
 
 where $\tau$ is the time-step. By applying the propagator to a quantum register initialized to our initial state for dynamics calculation ($\left| \psi_{0} \right\rangle$), we can obtain the time-evolved state $\left| \psi ( t ) \right\rangle$. 
+
+## Example: Ising Model
 
 In the following example, we follow [this example](https://qiskit-community.github.io/qiskit-algorithms/tutorials/13_trotterQRTE.html) and look at the time evolution of an Ising Model on linear lattices of length $L$ consisting of an array of spins $\sigma_{i}^{z}$ with nearest-neighbor interactions. These spins can have two orientations: $\uparrow$ and $\downarrow$, which corresopnd to a magnetization of +1 and -1. 
 
@@ -87,6 +91,8 @@ spin_dyn_obj.propagate_qmatvec(backend=backend, n_shots=1024,
                                hamiltonian_matrix=spin_H.to_matrix(), 
                                initial_state=initial_state.data)
 ```
+
+## Visualizing Measurement Probabilities
 
 Now we can use this workflow to look at measurement probabilities at a series of angles for the applied external field: 
 

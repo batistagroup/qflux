@@ -25,7 +25,7 @@ To numerically solve the Lindblad equation, `qflux` adopts a matrix–vector mul
 - integrating the resulting equation to obtain the time evolution of the system.
 
 
-### Vectorizing the density matrix:
+### Vectorizing the Density Matrix
 
 The density matrix $\rho(t)$ of a system with an N-dimensional Hilbert space is an $N\times N$ matrix. For numerical purposes, it is reshaped into a vector of dimension $N^2$.
 
@@ -34,7 +34,7 @@ $$\rho \to |\nu_{\rho} \rangle= \left[ \rho_{11}, \ldots, \rho_{1N}, \rho_{21}, 
 
 Here the superscript "$\top$" represents a transpose operation. This is equivalent to working in Liouville space, where operators are represented as vectors and superoperators act as matrices.
 
-### Converting the Lindblad equation into a matrix–vector form
+### Converting the Lindblad Equation into Matrix–Vector Form
 
 The Lindblad equation can be recast into the equivalent matrix-vector form:
 
@@ -49,7 +49,7 @@ $$ H_D = \sum_{n} \frac{1}{2} \gamma_{n} \left[ 2L_{n}\otimes L^*_{n} - \mathbb{
 
 Here, $L^*_{n}$ is the complex conjugate of $L_{n}$ and $\mathbb{I}$ is the identity matrix in the Hilbert space of the Hamiltonian $H$.
 
-### Integrating the Lindblad equation
+### Integration of the Lindblad Equation
 
 The density matrix at time $t$ can be expressed
 as the action of the exponential of the matrix $-i H_{\mathrm{eff}}$ on the vectorized density matrix at $t=0$,
@@ -63,9 +63,7 @@ $$
 where $\mathbf{G}(t)$ is called the propagator, and is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$.
 
 
-
-
-## Solve the Lindblad equation
+## Solution of the Lindblad Equation
 
 As a reminder, the task at hand is to compute the time evolution of the density matrix according to the Lindblad equation:
 
@@ -114,7 +112,7 @@ spin_down = np.array([0.0, 1.0], dtype=np.float64)
 rho0_1spin = np.outer(spin_up, spin_up.conj())
 ```
 
-### Definition of the propagator
+### Definition of the Propagator
 
 The propagator $\mathbf{G}(t)$ is defined as $\mathbf{G}(t)=e^{-i H_{\mathrm{eff}}t}$. Where the effective Hamiltonian is $H_{\mathrm{eff}} = H_C + i H_D$, with
 
@@ -175,7 +173,7 @@ Note that the `c_ops` argument in `DynamicsOS` is a list. For example, setting `
 
 If no collapse operators are specified, `c_ops` defaults to an empty list. In this case, the code will still run, corresponding to the solution of the Liouville–von Neumann equation for a closed system (i.e., unitary evolution without environmental effects).
 
-### Define Simulation Time and Run the Dynamics
+### Definition of Simulation Time and Running the Dynamics
 
 Given a time array for the simulation, the `propagate_matrix_exp` method in the `DynamicsOS` class computes the time evolution operator $\mathbf{G}(t)$, and subsequently solves the Lindblad equation to obtain the density matrix $\rho(t)$. If an observable is specified, the method also returns the time-dependent expectation values of that observable.
 
