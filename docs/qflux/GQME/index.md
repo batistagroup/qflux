@@ -6,7 +6,15 @@ This section includes documentation and tutorials focused on illustrating the us
 
 ## Overview
 
-First, we will provide some conceptual explanations that provide the user with a necessary background to understand the generalized quantum master equation (GQME). Then we provide some illustrative examples that demonstrate how the `qflux` can be used to solving the GQME. Finally, we provide the source code as an API reference to the source code.
+We begin with some conceptual explanations that provide the user with a necessary background to understand the generalized quantum master equation (GQME). Then we provide some illustrative examples that demonstrate how the `qflux` can be used to solve the Generalized Quantum Master Equation (GQME). Finally, we provide the source code as an API reference to the source code.
+
+## Installation Note: 
+
+To run these tutorials, you will have to run:
+
+```python
+pip install "qflux[gqme]"
+```
 
 ## Examples and Introductory Concepts 
 

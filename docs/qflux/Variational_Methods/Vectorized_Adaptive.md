@@ -26,7 +26,7 @@ from qflux.variational_methods.qmad.effh import VectorizedEffectiveHamiltonian
 from qflux.variational_methods.qmad.ansatzVect import Ansatz
 ```
 
-Define Pauli matrices and ladder operators, which will form the building block for the representation for the amplitude damping process.
+Define Pauli matrices and ladder operators, which will form the building blocks for the representation for the amplitude damping process.
 
 ```python
 sx = np.array([[0, 1], [1, 0]])
@@ -111,6 +111,7 @@ def build_pool(nqbit):
                 res.append(PauliOperator(op, list(idx), 1, nqbit))
     return res
 ```
+
 ---
 ## Reference Calculation using QuTiP
 
@@ -151,7 +152,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-![QuTiP\_Populations](../images/Part_III/qutip_ampdamp.png)
+<figure markdown="span">
+![QuTiP\_Populations](../images/Part_III/qutip_ampdamp.png){: width="800"}
+</figure>
 
 ---
 
@@ -179,8 +182,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-![AmpDamp\_Comparison](../images/Part_III/ampdamp_comparison.png)
-
+<figure markdown="span">
+![AmpDamp\_Comparison](../images/Part_III/ampdamp_comparison.png){: width="800"}
+</figure>
 
 ---
 

@@ -6,30 +6,31 @@ This documentation describes how to simulate the open quantum dynamics of a spin
 
 ## System Setup
 
-![Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  Omega is the energy required to flip the spin state at the particular polymer site n, and J is the offsite couplings between adjacent spins. The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate gamma](../images/Part_II/Lindbladian_radicals.png)
-
+<figure markdown="span">
+![Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  Omega is the energy required to flip the spin state at the particular polymer site n, and J is the offsite couplings between adjacent spins. The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate gamma](../images/Part_II/Lindbladian_radicals.png){: width="800"}
+</figure>
 
 We begin by specifying the system Hamiltonian and initial state for a chain of $n = 3$ spins, with the form
 
 $$  H = \sum_{n=0}^{N-1} \Omega_{n} \sigma_{n}^{z} - \frac{1}{2} \sum_{n=0}^{N-2} ( J_{n,n+1}^{x} \sigma_{n}^{x} \sigma_{n+1}^{x} + J_{n,n+1}^{y} \sigma_{n}^{y} \sigma_{n+1}^{y} + J_{n,n+1}^{z} \sigma_{n}^{z} \sigma_{n+1}^{z} ) $$
 
-The Hamiltonian is defined using a Pauli string representation and includes local $Z$-field terms and $XX$, $YY$, and $ZZ$ couplings, with cofficients given according to the table:
+The Hamiltonian is defined using a Pauli string representation and includes local $Z$-field terms and $XX$, $YY$, and $ZZ$ couplings, with coefficients given according to the table:
 
-| Parameter             |  $ n = 0 $  |  $ n \neq 0 $  |
+| Parameter             |  $n = 0$    |  $n \neq 0$    |
 |-----------------------|-------------|----------------|
-|  $ \Omega_n  $        | 0.65        | 1.0            |
-|  $ J_{n,n+1}^{x} $    | 0.75        | 1.0            |
-|  $ J_{n,n+1}^{y} $    | 0.75        | 1.0            |
-|  $ J_{n,n+1}^{z} $    | 0.0         | 0.0            |
+|  $\Omega_n$           | 0.65        | 1.0            |
+|  $J_{n,n+1}^{x}$      | 0.75        | 1.0            |
+|  $J_{n,n+1}^{y}$      | 0.75        | 1.0            |
+|  $J_{n,n+1}^{z}$      | 0.0         | 0.0            |
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-import QFlux.open_systems.params as pa
-from QFlux.open_systems.numerical_methods import DynamicsOS
-from QFlux.open_systems.quantum_simulation import QubitDynamicsOS
-import QFlux.open_systems.trans_basis as tb
+import qflux.open_systems.params as pa
+from qflux.open_systems.numerical_methods import DynamicsOS
+from qflux.open_systems.quantum_simulation import QubitDynamicsOS
+import qflux.open_systems.trans_basis as tb
 
 
 #============set the Hamiltonian and initial state
@@ -162,7 +163,9 @@ plt.legend(loc = 'upper right')
 
 The comparison between matrix exponential, QuTiP Lindblad, and pure unitary evolution offers a benchmark for accuracy and computational cost.
 
-![Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation](../images/Part_II/Spinchain_Classical_Dynamics.png)
+<figure markdown="span">
+![Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation](../images/Part_II/Spinchain_Classical_Dynamics.png){: width="800"}
+</figure>
 
 ---
 
@@ -201,7 +204,9 @@ plt.legend(loc = 'upper right')
 
 This plot illustrates convergence of quantum simulation with classical reference as the number of measurement shots increases.
 
-![Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation](../images/Part_II/Spinchain_Quantum_Dynamics.png)
+<figure markdown="span">
+![Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation](../images/Part_II/Spinchain_Quantum_Dynamics.png){: width="800"}
+</figure>
 
 ---
 

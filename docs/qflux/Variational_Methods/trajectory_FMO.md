@@ -7,9 +7,10 @@ This documentation describes how to simulate and visualize the **Fenna–Matthew
 
 This example of open‑system dynamics is based on the **stochastic Schrödinger equation (SSE)**. This approach simulates **quantum trajectories** on the **same number of qubits** as the system state.
 
-**Features of SSE**
-Same qubit count as the system state (no duplication)
-Natural for jump/no‑jump dynamics and trajectory parallelization
+**Features of SSE:**
+
+- Same qubit count as the system state (no duplication)
+- Natural for jump/no‑jump dynamics and trajectory parallelization
 
 ---
 
@@ -18,7 +19,7 @@ Natural for jump/no‑jump dynamics and trajectory parallelization
 In the SSE picture, a mixed state ($\rho(t)$) (usually evolved by a Lindblad master equation) is represented by an **ensemble of pure‑state trajectories** ($\{ |\psi_c(t)\rangle \}$). Each trajectory obeys the stochastic differential equation
 
 $$
-\mathrm{d}|\psi_c(t)\rangle = \Big( -i H \tfrac{1}{2} \sum_k \big(L_k^\dagger L_k - \langle L_k^\dagger L_k\rangle\big) \Big) |\psi_c(t)\rangle,\mathrm{d}t - \sum_k \Big( \frac{L_k|\psi_c(t)\rangle}{\langle L_k^\dagger L_k\rangle} - |\psi_c(t)\rangle \Big), \mathrm{d}N_k ,
+\mathrm{d}|\psi_c(t)\rangle = \Big( -i H \tfrac{1}{2} \sum_k \big(L_k^\dagger L_k - \langle L_k^\dagger L_k\rangle\big) \Big) |\psi_c(t)\rangle,\mathrm{d}t - \sum_k \Big( \frac{L_k|\psi_c(t)\rangle}{\langle L_k^\dagger L_k\rangle} - |\psi_c(t)\rangle \Big) \mathrm{d}N_k 
 $$
 
 where ($\langle\cdot\rangle$) denotes the expectation with respect to the current state. The binary increment ($\mathrm{d}N_k\in{0,1}$) encodes **quantum jumps**.
@@ -26,7 +27,7 @@ where ($\langle\cdot\rangle$) denotes the expectation with respect to the curren
 **Jump probability in a small step** ($\mathrm{d}t$):
 
 $$
-\mathrm{d}p = \sum_{k=1}^K \frac{\langle \psi(t) | L_k^\dagger L_k | \psi(t) \rangle}{\langle \psi(t) | \psi(t) \rangle}, \mathrm{d}t .
+\mathrm{d}p = \sum_{k=1}^K \frac{\langle \psi(t) | L_k^\dagger L_k | \psi(t) \rangle}{\langle \psi(t) | \psi(t) \rangle} \mathrm{d}t 
 $$
 
 If a jump occurs with operator (L_i), update the (unnormalized) state
@@ -43,7 +44,7 @@ $$
 \rho(t) = \frac{1}{n} \sum_{j=1}^n |\psi_j(t)\rangle\langle\psi_j(t)|
 $$
 
-with accuracy improving as (n) (the number of trajectories) increases.
+with accuracy improving as $n$ (the number of trajectories) increases.
 
 
 ## Implementation Overview
@@ -156,7 +157,9 @@ avg = [a/num_trajectory for a in avg]
 # time in results[0].t
 ```
 
-![FMO\_SSE\_results](../images/Part_III/fmo_ssetraj.png)
+<figure markdown="span">
+![FMO\_SSE\_results](../images/Part_III/fmo_ssetraj.png){: width="800}
+</figure>
 
 *Observation:* With suitable ($\Delta t$), trajectory count, ansatz pool, and McLachlan threshold, SSE trajectories **closely track** QuTiP’s numerically exact curves.
 
@@ -176,7 +179,7 @@ This keeps the variational circuit compact while maintaining accuracy under nois
 
 ## Summary
 
-* **SSE** avoids qubit doubling and non‑local Liouvillians, ideal for **NISQ** implementations.
+* **SSE** avoids qubit doubling and non‑local Liouvillians which is ideal for **NISQ** implementations.
 * We decomposed an **effective Hamiltonian**, evolved **quantum trajectories** with deterministic and jump segments, and averaged to reconstruct (\rho(t)).
 * On the **FMO complex**, SSE trajectories reproduce **population dynamics** in strong agreement with QuTiP baselines.
 
@@ -185,7 +188,7 @@ This keeps the variational circuit compact while maintaining accuracy under nois
 
 ## References & Links
 
-* Y. Chen *et al.*, *Adaptive variational quantum dynamics for open systems* (2024).
+* Y. Chen *et al.*, *Adaptive Variational Quantum Dynamics for Open Systems* (2024).
 * Shivpuje et al., Designing Variational Ansatz for Quantum-Enabled Simulation of Non-Unitary Dynamical Evolution — An Excursion into Dicke Superradiance, Adv. Quantum Technol. (2024), https://doi.org/10.1002/qute.202400088
 
 * **Code:** QMAD repository: `qmad/solver.py`, `qmad/effh.py`, example notebooks: `examples/trajectory_FMO*.ipynb`.

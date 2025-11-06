@@ -1,15 +1,15 @@
-This section illustrates the simulation of an open quantum Spin-1/2 system using both classical and quantum backends, implemented within QFlux. Spin-1/2 models are chemically relevant, as they capture key features of charge and energy transfer between donor and acceptor sites, that is each spin state corresponds to an electronic state for the chemical interpretation. We examine two types of Lindblad equations for describing open system dyanmics. The Linblad equation is given as
+This section illustrates the simulation of an open quantum Spin-1/2 system using both classical and quantum backends, implemented within QFlux. Spin-1/2 models are chemically relevant, as they capture key features of charge and energy transfer between donor and acceptor sites, that is each spin state corresponds to an electronic state for the chemical interpretation. We examine two types of Lindblad equations for describing open system dynamics. The Lindblad equation is given as
 
 $$
 \frac{d\rho}{dt} = -\frac{i}{\hbar} [H, \rho] + \sum_j \gamma_j \left( L_j \rho L_j^\dagger - \frac{1}{2} \left[ L_j^\dagger L_j, \rho \right] \right)
 $$
 
- The first is taking the jump operators $L_j$ as just the sigle operator $\sigma_x$, the system is subject to a type of decoherence which damps both the system energy and coherences. Demonstrating the Lindblad formalism can incorporate both population relaxation and dephasing (loss of coherence), which is tyical of chemical reactions in the condensed phase. If instead we take the jump operators $L_j$ as just the single operator $\sigma^+$, the system is subject to amplitude damping, a type of decoherence that affects only the populations. Modeling the irreversible decay from the excited to the ground state, while leaving the coherences intact. Although , we focus here on amplitude damping as one representative dissipation pathway. Simulation results from both classical and quantum methods are compared to validate the implementation.
+ The first is taking the jump operators $L_j$ as just the sigle operator $\sigma_x$, the system is subject to a type of decoherence which damps both the system energy and coherences. Demonstrating the Lindblad formalism can incorporate both population relaxation and dephasing (loss of coherence), which is typical of chemical reactions in the condensed phase. If instead we take the jump operators $L_j$ as just the single operator $\sigma^+$, the system is subject to amplitude damping, a type of decoherence that affects only the populations. Modeling the irreversible decay from the excited to the ground state, while leaving the coherences intact. Although we focus here on amplitude damping as one representative dissipation pathway. Simulation results from both classical and quantum methods are compared to validate the implementation.
 
 
 ## Classical Simulation
 
-We begin by setting up the classical evolution of a Spin-1/2 system governed by a simple Hamiltonian and subject to dissipation via a collapse operator, defined as $\sqrt{\gamma_j}L_j$. The system's evolution is computed using both matrix exponentiation and QuTiP solvers for benchmarking. We begin by importing the necessary modukes from QFlux, Numpy, and Matplotlib libraries
+We begin by setting up the classical evolution of a Spin-1/2 system governed by a simple Hamiltonian and subject to dissipation via a collapse operator, defined as $\sqrt{\gamma_j}L_j$. The system's evolution is computed using both matrix exponentiation and QuTiP solvers for benchmarking. We begin by importing the necessary modules from QFlux, Numpy, and Matplotlib libraries
 
 
 
@@ -30,7 +30,7 @@ The table below outlines the required inputs to initialize a `DynamicsOS` instan
 
 ---
 
-### `DynamicsOS` Initialization Inputs
+`DynamicsOS` Initialization Inputs
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -65,11 +65,11 @@ $$
 \rho_0 = |\uparrow\rangle \langle\uparrow|
 $$
 
-Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propogation employing the `propagate_matrix_exp` method  then compare to results with QuTip, which is implemented using `propagate_qt`. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTip with our QFlux methods
+Simulation is carried out using matrix exponential propagation of the Lindbladian. Results are compared against reference dynamics obtained using QuTiP. We produce the matrix exponential propagation employing the `propagate_matrix_exp` method  then compare to results with QuTiP, which is implemented using `propagate_qt`. The following tables explain the input-output relationships to perform simulation with matrix exponential propagation and QuTiP with our QFlux methods
 
 ---
 
-## `DynamicsOS.propagate_matrix_exp` Input
+`DynamicsOS.propagate_matrix_exp` Input
 
 | Input | Type | Description |
 |-----------|------|-------------|
@@ -81,7 +81,7 @@ Simulation is carried out using matrix exponential propagation of the Lindbladia
 
 ---
 
-## `DynamicsOS.propagate_matrix_exp` Output
+`DynamicsOS.propagate_matrix_exp` Output
 
 | Return Object | Attribute | Type | Description |
 |---------------|-----------|------|-------------|
@@ -91,11 +91,11 @@ Simulation is carried out using matrix exponential propagation of the Lindbladia
 
 ---
 
-Now we provide the information for QuTip propogation
+Now we provide the information for QuTiP propagation
 
 ---
 
-## `DynamicsOS.propagate_qt` Parameters
+`DynamicsOS.propagate_qt` Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -105,7 +105,7 @@ Now we provide the information for QuTip propogation
 
 ---
 
-## `DynamicsOS.propagate_qt` Output
+`DynamicsOS.propagate_qt` Output
 
 | Return Object | Type | Description |
 |---------------|------|-------------|
@@ -113,7 +113,7 @@ Now we provide the information for QuTip propogation
 
 ---
 
-The following code begins by defining the Hamiltonian, dissipation parameter, Lindbladian collapse operators, initial state of the density matrix, and time points we evolve along. It continues to initialize the closed and open system dyanmics and solve the equations of motion with our QFlux methods
+The following code begins by defining the Hamiltonian, dissipation parameter, Lindbladian collapse operators, initial state of the density matrix, and time points we evolve along. It continues to initialize the closed and open system dynamics and solve the equations of motion with our QFlux methods
 
 
 ```python
@@ -145,7 +145,9 @@ plt.legend(loc = 'upper right')
 plt.show()
 ```
 
-![tls-classical](../images/Part_II/TLS_Classical_Dynamics.png)
+<figure markdown="span">
+![tls-classical](../images/Part_II/TLS_Classical_Dynamics.png){: width="800"}
+</figure>
 
 ## Quantum Simulation of the Spin-1/2 System: Amplitude-Channel Damping
 
@@ -191,11 +193,11 @@ time_sdam = np.arange(0, 1000, 1)
 
 In the following code, we instantiate the quantum simulation with `QubitDynamicsOS`, this class implements quantum dynamics simulation which can be non-unitary.
 
-The `QubitDynamicsOS` class extends `DynamicsOS` and provides support for simulating quantum dynamics using either a **density matrix** or a **Kraus operator** representation. One can specify performing either a Kraus operator or density matrix simulation when instantiating `QubitDynamicsOS`. Either can accept a propogator obtained from a quantum master equation of the users choice by specifying `Gprop` or by calculating it using the Lindblad equation through `DynamicsOS` shown above. The class `QubitDynamicsOS` also provides structure for circuit-based simulation with Qiskit backends.
+The `QubitDynamicsOS` class extends `DynamicsOS` and provides support for simulating quantum dynamics using either a **density matrix** or a **Kraus operator** representation. One can specify performing either a Kraus operator or density matrix simulation when instantiating `QubitDynamicsOS`. Either can accept a propagator obtained from a quantum master equation of the users choice by specifying `Gprop` or by calculating it using the Lindblad equation through `DynamicsOS` shown above. The class `QubitDynamicsOS` also provides structure for circuit-based simulation with Qiskit backends.
 
 ---
 
-### `QubitDynamicsOS` Initialization Parameters
+`QubitDynamicsOS` Initialization Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -204,7 +206,7 @@ The `QubitDynamicsOS` class extends `DynamicsOS` and provides support for simula
 
 ---
 
-### `QubitDynamicsOS` Attributes
+`QubitDynamicsOS` Attributes
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -225,7 +227,7 @@ spin1_sdam.set_dilation_method('SVD')
 
 The simulation is run using the quantum backend, and results are benchmarked against a classical matrix exponentiation method. There are two representations available for performing the quantum simulation, the first being quantum simulation using the vectorized density matrix which is done with the method `QubitDynamicsOS.qc_simulation_vecdens` and the second is with the Kraus operator representation, which we do not implement here but can be done so with `QubitDynamics.qc_simulation_kraus`. The inputs and outputs of `QubitDynamicsOS.qc_simulation_vecdens` are described by the tables below
 
-## `QubitDynamicsOS.qc_simulation_vecdens` Parameters
+`QubitDynamicsOS.qc_simulation_vecdens` Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -237,7 +239,7 @@ The simulation is run using the quantum backend, and results are benchmarked aga
 
 ---
 
-## `QubitDynamicsOS.qc_simulation_vecdens` Output
+`QubitDynamicsOS.qc_simulation_vecdens` Output
 
 | Return Object | Type | Description |
 |---------------|------|-------------|
@@ -272,7 +274,9 @@ plt.ylabel('$P(t)$',fontsize=15)
 plt.legend(loc = 'upper right')
 ```
 
-![tls-quantum](../images/Part_II/TLS_Quantum_Dynamics.png)
+<figure markdown="span">
+![tls-quantum](../images/Part_II/TLS_Quantum_Dynamics.png){: width="800"}
+</figure>
 
 ## Summary
 

@@ -27,10 +27,12 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+#  - stylesheets/collapse-sidebars.css
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#  - javascripts/collapse-sidebars.js
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -47,7 +49,10 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - toc:
+      title: On This Page
       toc_depth: 3
+  - attr_list
+  - md_in_html
 
 plugins:
   - search
@@ -78,18 +83,16 @@ nav: # Note: All paths must be relative to the docs dir
     - Double Well Demo: 'qflux/Open_Systems/DoubleWellOpen.md'
     - Source Code: 'qflux/Open_Systems/os_api.md' 
   - Variational Methods: 
-    - Variational Methods: 'qflux/Variational_Methods/variational_methods.md'
+    - 'qflux/Variational_Methods/index.md'
     - VarQTE Demo: 'qflux/Variational_Methods/varQTE.md'
     - UAVQD for Open Systems: 'qflux/Variational_Methods/Vectorized_Adaptive.md'
     - SSE for Open Systems: 'qflux/Variational_Methods/trajectory_FMO.md'
-    - Source Code: 'qflux/Variational_Methods/var_api.md' 
   - GQME: 
     - 'qflux/GQME/index.md'
     - Introduction to GQME: 'qflux/GQME/What_is_GQME.md'
     - Introduction to TT-TFD: 'qflux/GQME/What_is_TTTFD.md'
     - GQME for Spin-Boson model: 'qflux/GQME/spin_boson_GQME.md'
-    - Quantum Algorithms of GQME: 'qflux/GQME/quantum_GQME_dilation.md'
-    - Source Code: 'qflux/GQME/gqme_api.md'
+    - Quantum Algorithm for GQME: 'qflux/GQME/quantum_GQME_dilation.md'
 extra:
   analytics:
     provider: plausible

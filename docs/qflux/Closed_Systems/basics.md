@@ -2,14 +2,16 @@
 
 To run a dynamics simulation, we need to define some key quantities. This section will walk you through the process of defining these things within `qflux`.
 
-As a reminder, the task at hand is compute the time evolution of a wavefunction according to the Schrodinger equation: 
+As a reminder, the task at hand is to compute the time evolution of a wavefunction according to the Schrodinger equation: 
 
 $$ \left| \psi (t) \right\rangle = e^{- \frac{i}{\hbar} H t} \left| \psi_{0} \right\rangle $$ 
 
 To do this, we must: 
 
 - Define the initial state $\psi_{0}$. 
+
 - Define the Hamiltonian describing the system of interest.
+
 - Define a propagation time-step $t$ and the number of time steps $n$ for which we want to compute the evolved wavefunction. 
 
 We will now look at how each of these steps can be done with qflux. 
@@ -115,7 +117,7 @@ To use the built-in potential energy functions, all one must do is use the `.set
 - Arbitrary Quartic Potential
 
 
-The harmonic oscilator potential is implemented in the grid-basis as: 
+The harmonic oscillator potential is implemented in the grid-basis as: 
 
 $$ V(x) = \frac{1}{2} m \omega^{2} x^{2} $$ 
 

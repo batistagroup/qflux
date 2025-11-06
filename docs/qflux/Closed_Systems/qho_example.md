@@ -10,10 +10,6 @@ We begin by importing the necessary utilities from `qflux`:
 
 ```python
 import sys
-# Clone the qflux github repo to your local environment (laptop/Google Colab/etc.)
-# Then set the following line to your local copy of qflux:
-qflux_path = "{/path/to/downloaded/repo}/qflux/src/"
-sys.path.append(qflux_path)
 from qflux.closed_systems import DynamicsCS, QubitDynamicsCS
 ```
 
@@ -42,7 +38,7 @@ And we can define our harmonic oscillator hamiltonian (built-in to `qflux`):
 HO_dyn_obj.set_hamiltonian(potential_type='harmonic')
 ```
 
-Now that we have defined our system parameters and initial state, we should define a propagation time. In the following, we propagate for a total time of 20.0 a.u., divided evenly into 400 evenly spaced steps.
+Now that we have defined our system parameters and initial state, we should define a propagation time. In the following, we propagate for a total time of 20.0 a.u., divided into 400 evenly spaced steps.
 
 ```python
 total_time = 20.0
@@ -74,6 +70,8 @@ Note: the `propagate_qSOFT` method does the following things under the hood:
 
 The first thing we can do is to check the state initialization in the quantum circuit formalism. To do this, we can plot initial state in the qubit basis and compare to the state in the coordinate basis:
 
+**NOTE:** To obtain agreement between wavefunction/amplitude plots obtained in the grid-based and qubit formalisms, one must carefully account for the grid-spacing with qubit-based objects.For all qubit-formalism state objects, `qflux` adheres to the norm required by `qiskit`: $\psi^{*} \cdot \psi = 1$, while the grid-based states will follow a more familiar normalization $\int \psi^{*} \psi \, dx = 1$.
+
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
@@ -85,7 +83,7 @@ plt.plot(HO_dyn_obj.x_grid,
          color='k', label=r'$\left| \psi_{0} \right|^{2}$ (Grid)')
 plt.plot(HO_dyn_obj.x_grid,
          np.real(HO_dyn_obj.dynamics_results_qubit[0].conj() *
-                 HO_dyn_obj.dynamics_results_qubit[0].conj())/HO_dyn_obj.dx,
+                 HO_dyn_obj.dynamics_results_qubit[0])/HO_dyn_obj.dx,
          marker='x', lw=0, markevery=2, label=r'$\left| \psi_{0} \right|^{2}$ (Qubit)')
 plt.ylim(-.05, 1.0)
 plt.legend()
@@ -93,8 +91,9 @@ plt.xlim(-3.5, 3.5)
 plt.xlabel(r'$x$')
 plt.tight_layout()
 ```
-
-![Qubit-State-Comparison](../images/Part_I/Qubit-State-Initialization.png)
+<figure markdown="span">
+![Qubit-State-Comparison](../images/Part_I/Qubit-State-Initialization.png){: width="800" }
+</figure>
 
 To compare the dynamics, we can calculate and plot the expectation value over time for the qSOFT and SOFT results with the analytical expressions:
 
@@ -132,8 +131,9 @@ plt.ylabel('Expectation Value')
 plt.xlabel('Time')
 plt.tight_layout()
 ```
-
-![Qubit-Expectations-Comparison](../images/Part_I/HO_ExpectationValues_quantum.png)
+<figure markdown="span">
+![Qubit-Expectations-Comparison](../images/Part_I/HO_ExpectationValues_quantum.png){: width="800" }
+</figure>
 
 ## Propagation with a Real Backend
 
@@ -240,8 +240,9 @@ plt.ylim(-1.55, 1.55)
 plt.legend(ncols=2, loc='upper center')
 plt.hlines([-1, 0, 1], min(qho_dyn_obj.tlist), max(qho_dyn_obj.tlist), ls='--', lw=0.85, color='tab:grey', zorder=2)
 ```
-
-![expectation_vals_ho](../images/Part_I/QHO-Expectation-Values.png)
+<figure markdown="span">
+    ![expectation_vals_ho](../images/Part_I/QHO-Expectation-Values.png){: width="800" }
+</figure>
 
 Hopefully the agreement in this plot convinces you that we're doing something correct!
 
