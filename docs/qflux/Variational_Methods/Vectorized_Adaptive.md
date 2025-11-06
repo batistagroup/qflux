@@ -90,9 +90,9 @@ res = solve_avq_vect(H_vec, ansatz, [0, tf], dt)
 Extract ground and excited state populations from the diagonal elements of the resulting density matrices.
 
 ```python
-excited = [res.u[i][1, 1].real for i in range(len(res.u))]
-ground  = [res.u[i][0, 0].real for i in range(len(res.u))]
-times   = np.arange(0, tf + 1e-30, dt)
+excited = [res.u[i][1, 1].real for i in range(10)]
+ground  = [res.u[i][0, 0].real for i in range(10)]
+times   = np.arange(0, tf, dt)
 ```
 
 ---
