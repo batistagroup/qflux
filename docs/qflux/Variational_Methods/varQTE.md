@@ -26,6 +26,8 @@ VarQITE and VarQRTE both employ a **TwoLocal ansatz**, returning the optimal par
 
 ## Import Dependencies
 
+You should first install `qflux` via `pip`, if you haven't already.
+
 ```python
 !pip install qflux
 ```
@@ -70,7 +72,7 @@ $$
     C_i = - \Re\Bigg({\frac{\partial\left\langle\phi(\theta(\tau))\right|}{\partial\theta_i}}\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
 $$
 
-These \$A\_{ij}\$ and \$C\_i\$ values are measured on a quantum device and used to update ansatz parameters:
+These $A_{ij}$ and $C_i$ values are measured on a quantum device and used to update ansatz parameters:
 
 $$
 \theta(\tau + d\tau) = \theta(\tau) + \dot\theta\, d\tau.
@@ -109,7 +111,7 @@ Finally, we call VarQITE to run the time evolution and output the ansatz paramet
 H = SparsePauliOp.from_list([("Z", 1.0)])
 
 # Set up the initial state
-qc = QuantumCircuit(3)
+qc = QuantumCircuit(1)
 
 # Hyperparameters for VarQITE
 layers = 0
@@ -123,6 +125,11 @@ params = VarQITE(layers, H, total_time, timestep, init_circ=qc)
 Furthermore, we can use the parameters to measure observables with a quantum circuit:
 
 ```python
+from qiskit_aer.primitives import Estimator
+
+# Instantiate estimator object
+estimator = Estimator()
+
 # Measure energy at a given timestep
 my_energy, my_stdev = ansatz_energy(qc, params[i], H)
 
