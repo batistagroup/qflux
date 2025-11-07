@@ -112,8 +112,9 @@ Llist_f += [np.array([[np.sqrt(beta) if (i==0 and j==k) else 0 for j in range(5)
 L_tmp = np.zeros((5,5)); L_tmp[4,3] = np.sqrt(gamma); Llist_f.append(L_tmp)
 Llist_f_padded = [np.pad(M, ((0,3),(0,3)), mode='constant') for M in Llist_f]
 
-# Initial state |1> in the padded 8‑dim space
-u0 = np.zeros(8, dtype=np.complex_); u0_fmo = u0.copy(); u0_fmo[1] = 1
+# Initial state (excitation localized on site 2)
+u0_fmo = np.zeros(8, dtype=np.complex128)
+u0_fmo[1] = 1
 ```
 
 ### Run Trajectories
