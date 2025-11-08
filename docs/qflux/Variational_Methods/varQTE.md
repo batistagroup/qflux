@@ -92,7 +92,7 @@ $$
 
 Therefore, one can evaluate the expectation values introduced by the $A_{ij}, C_{i}$ by performing Hadamard tests on the corresponding generators of the ansatz.
 
-For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter i ($G_i^\dagger$) and the parameter of generator j ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\left|{0}\right\rangle$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
+For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter $i$ ($G_i^\dagger$) and the parameter of generator $j$ ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\left|{0}\right\rangle$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
 
 Reference implementations of this algorithm are used below, using QFlux to simulate the imaginary-time evolution spin-systems. The simulations apply the McLachlan variational principle through the `VarQRTE` function, demonstrating how variational techniques can efficiently capture quantum dynamics within shallow, noise-resilient circuits.
 
@@ -205,7 +205,7 @@ $$
     C_i = - \Im\Bigg({\frac{\partial \left\langle\phi(\theta(t))\right|}{\partial\theta_i}} \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
 $$
 
-Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta dt$.
+Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta \, dt$.
 
 Within QFlux, `VarQRTE` reuses the same modular components while invoking `Measure_C` with `evolution_type="real"`. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.
 
