@@ -26,6 +26,8 @@ VarQITE and VarQRTE both employ a **TwoLocal ansatz**, returning the optimal par
 
 ## Import Dependencies
 
+You should first install `qflux` via `pip`, if you haven't already.
+
 ```python
 !pip install qflux
 ```
@@ -70,7 +72,7 @@ $$
     C_i = - \Re\Bigg({\frac{\partial\left\langle\phi(\theta(\tau))\right|}{\partial\theta_i}}\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
 $$
 
-These \$A\_{ij}\$ and \$C\_i\$ values are measured on a quantum device and used to update ansatz parameters:
+These $A_{ij}$ and $C_i$ values are measured on a quantum device and used to update ansatz parameters:
 
 $$
 \theta(\tau + d\tau) = \theta(\tau) + \dot\theta\, d\tau.
@@ -90,13 +92,13 @@ $$
 
 Therefore, one can evaluate the expectation values introduced by the $A_{ij}, C_{i}$ by performing Hadamard tests on the corresponding generators of the ansatz.
 
-For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter i ($G_i^\dagger$) and the parameter of generator j ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\left|{0}\right\rangle$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
+For example, to determine the elements of the matrix $A_{ij}$, the dagger of the generator of parameter $i$ ($G_i^\dagger$) and the parameter of generator $j$ ($G_j$) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the $\left|{0}\right\rangle$ state, and performing a pair of not-gates on the ancilla qubits before and after measuring $G_i$ to measure $G_i^\dagger$, and subsequently measuring $G_i$ with a Hadamard test using the same ancilla.
 
 Reference implementations of this algorithm are used below, using QFlux to simulate the imaginary-time evolution spin-systems. The simulations apply the McLachlan variational principle through the `VarQRTE` function, demonstrating how variational techniques can efficiently capture quantum dynamics within shallow, noise-resilient circuits.
 
 ---
 
-### Demonstrations
+### Demonstration
 
 #### Example 1: Simple Hamiltonian
 
@@ -109,7 +111,7 @@ Finally, we call VarQITE to run the time evolution and output the ansatz paramet
 H = SparsePauliOp.from_list([("Z", 1.0)])
 
 # Set up the initial state
-qc = QuantumCircuit(3)
+qc = QuantumCircuit(1)
 
 # Hyperparameters for VarQITE
 layers = 0
@@ -123,6 +125,14 @@ params = VarQITE(layers, H, total_time, timestep, init_circ=qc)
 Furthermore, we can use the parameters to measure observables with a quantum circuit:
 
 ```python
+from qiskit_aer.primitives import Estimator
+
+# Instantiate estimator object
+estimator = Estimator()
+
+# Define a random timestep for demo purposes:
+i = 3
+
 # Measure energy at a given timestep
 my_energy, my_stdev = ansatz_energy(qc, params[i], H)
 
@@ -195,7 +205,7 @@ $$
     C_i = - \Im\Bigg({\frac{\partial \left\langle\phi(\theta(t))\right|}{\partial\theta_i}} \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
 $$
 
-Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta dt$.
+Building upon the same framework as VarQITE, one can measure the $A_{ij}$ and $C_i$ matrices on a quantum computer, and use them to change the parameters $\theta(t+dt) = \theta(t)+\dot\theta \, dt$.
 
 Within QFlux, `VarQRTE` reuses the same modular components while invoking `Measure_C` with `evolution_type="real"`. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.
 
@@ -220,7 +230,7 @@ params = VarQRTE(layers, H, total_time, timestep, init_circ=qc)
 We can measure observables over time using an Estimator object, supplied with the optimized circuit parameters and the observable circuit.
 
 ```python
-from qiskit_aer.primitives import EstimatorV2 as Estimator
+from qiskit_aer.primitives import Estimator
 
 estimator = Estimator()
 observable = SparsePauliOp.from_list([("Z", 1.0)])
@@ -229,7 +239,7 @@ spin_values = []
 for i in range(len(params)):
     ansatz = Construct_Ansatz(qc, params[i], H.num_qubits)
     result = estimator.run(ansatz, observables=observable).result() 
-    spin_values.append(result[0].data.evs())
+    spin_values.append(result.values)
 
 plt.title("Spin Expectation Value Over Time")
 plt.plot([i*timestep for i in range(int(total_time/timestep)+1)], spin_values)
