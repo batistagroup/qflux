@@ -230,7 +230,7 @@ params = VarQRTE(layers, H, total_time, timestep, init_circ=qc)
 We can measure observables over time using an Estimator object, supplied with the optimized circuit parameters and the observable circuit.
 
 ```python
-from qiskit_aer.primitives import Estimator
+from qiskit_aer.primitives import EstimatorV2 as Estimator
 
 estimator = Estimator()
 observable = SparsePauliOp.from_list([("Z", 1.0)])
@@ -238,8 +238,8 @@ spin_values = []
 
 for i in range(len(params)):
     ansatz = Construct_Ansatz(qc, params[i], H.num_qubits)
-    result = estimator.run(ansatz, observables=observable).result() 
-    spin_values.append(result.values)
+    result = estimator.run([(ansatz, observable)]).result() 
+    spin_values.append(result[0].data.evs)
 
 plt.title("Spin Expectation Value Over Time")
 plt.plot([i*timestep for i in range(int(total_time/timestep)+1)], spin_values)
