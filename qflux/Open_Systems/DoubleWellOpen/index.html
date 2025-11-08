@@ -733,7 +733,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -742,7 +744,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1147,7 +1149,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1156,7 +1160,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1256,7 +1260,7 @@
 <p>The double well system's Hamiltonian <span class="arithmatex">\(H\)</span> is given by:</p>
 <div class="arithmatex">\[ H = \frac{p^2}{2m} + V(x)   \]</div>
 <p>where <span class="arithmatex">\(p\)</span> is the proton's momentum, <span class="arithmatex">\(m=1836.15\)</span> a.u. is the mass of the proton, and the double well potential is defined by setting <span class="arithmatex">\(V(x)\)</span>.</p>
-<p>The effect of the environment is incorporated through the jump operators <span class="arithmatex">\(\hat{a}\)</span> and <span class="arithmatex">\(\hat{a}^\dagger\)</span>, correspond to <a href="https://doi.org/10.48550/arXiv.2211.04605">this paper</a>. Here, <span class="arithmatex">\(\hat{a}\)</span> and <span class="arithmatex">\(\hat{a}^\dagger\)</span> are the annihilation and creation operators, defined as:</p>
+<p>The effect of the environment is incorporated through the jump operators <span class="arithmatex">\(\hat{a}\)</span> and <span class="arithmatex">\(\hat{a}^\dagger\)</span>, as in <a href="https://doi.org/10.48550/arXiv.2211.04605">this paper</a>. Here, <span class="arithmatex">\(\hat{a}\)</span> and <span class="arithmatex">\(\hat{a}^\dagger\)</span> are the annihilation and creation operators, defined as:</p>
 <div class="arithmatex">\[
 \hat{a} = \sqrt{\frac{m\omega}{2\hbar}}\,\hat{x} + \frac{i}{\sqrt{2\hbar m \omega}}\,\hat{p}
 \]</div>
@@ -1286,7 +1290,9 @@
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">dw_grid</span><span class="o">.</span><span class="n">set_potential</span><span class="p">(</span><span class="n">pot_doublewell</span><span class="p">)</span>
 </span></code></pre></div>
 <p>The plot of the potential <span class="arithmatex">\(V(x)\)</span> is shown here:</p>
-<p><img alt="png" src="../../images/Part_II/Part2_doublewell_pot.png" /></p>
+<figure>
+<img alt="png" src="../../images/Part_II/Part2_doublewell_pot.png" width="800" />
+</figure>
 <p>The population of the proton in the left (L) and right (R) wells can be characterized by the following expectation values:</p>
 <div class="arithmatex">\[
 P_R = \langle \Theta(x - x^*) \rangle
@@ -1304,7 +1310,9 @@ P_L = \langle 1 - \Theta(x - x^*) \rangle
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">eneg_DW</span><span class="p">,</span><span class="n">psi_DW</span> <span class="o">=</span> <span class="n">dw_grid</span><span class="o">.</span><span class="n">get_eig_state</span><span class="p">(</span><span class="n">Neig</span><span class="p">)</span>
 </span></code></pre></div>
 <p>We can visualize the potential energy surface along with the energy levels and spatial distributions of the lowest 12 eigenstates.</p>
-<p><img alt="png" src="../../images/Part_II/Part2_doublewell_eigstate.png" /></p>
+<figure>
+<img alt="png" src="../../images/Part_II/Part2_doublewell_eigstate.png" width="800" />
+</figure>
 <h2 id="express-the-double-well-in-the-basis-of-eigenstates">Express the Double Well in the Basis of Eigenstates</h2>
 <p>Due to the large size of the density matrix in the DVR representation, we perform a basis transformation. Specifically, we use the previously computed eigenstates as a reduced basis set for subsequent calculations and express all operators and observables in this eigenstate basis.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">#==================Express the operators in terms of eigenstate basis===========</span>
@@ -1312,18 +1320,18 @@ P_L = \langle 1 - \Theta(x - x^*) \rangle
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Neig</span><span class="p">):</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">psik_DW</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dw_grid</span><span class="o">.</span><span class="n">x2k_wave</span><span class="p">(</span><span class="n">psi_DW</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1">#hamiltonian</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># hamiltonian</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">H_dw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">eneg_DW</span><span class="p">)</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1">#The operator in the eigenstate</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># The operator in the eigenstate</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">xmat_eig</span> <span class="o">=</span> <span class="n">tb</span><span class="o">.</span><span class="n">trans_basis_diag</span><span class="p">(</span><span class="n">dw_grid</span><span class="o">.</span><span class="n">xgrid</span><span class="p">,</span> <span class="n">Neig</span><span class="p">,</span> <span class="n">psi_DW</span><span class="p">)</span><span class="o">*</span><span class="n">dw_grid</span><span class="o">.</span><span class="n">dx</span>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">pmat_eig</span> <span class="o">=</span> <span class="n">tb</span><span class="o">.</span><span class="n">trans_basis_diag</span><span class="p">(</span><span class="n">dw_grid</span><span class="o">.</span><span class="n">kgrid</span><span class="p">,</span> <span class="n">Neig</span><span class="p">,</span> <span class="n">psik_DW</span><span class="p">)</span><span class="o">*</span><span class="n">dw_grid</span><span class="o">.</span><span class="n">dk</span>
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1">#creation/annihilation operator</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># creation/annihilation operator</span>
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">amat_eig</span> <span class="o">=</span> <span class="n">xmat_eig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mass0</span><span class="o">*</span><span class="n">omega</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">pmat_eig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mass0</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="n">adegmat_eig</span> <span class="o">=</span> <span class="n">xmat_eig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mass0</span><span class="o">*</span><span class="n">omega</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">pmat_eig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mass0</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1">#define the population on the left/right well and transform to eigen state basis</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1"># define the population on the left/right well and transform to eigen state basis</span>
 </span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="n">x_barrier</span> <span class="o">=</span> <span class="mf">0.37321768</span>
 </span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="n">P_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">xgrid</span><span class="o">-</span><span class="n">x_barrier</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="n">P_L</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">xgrid</span><span class="o">-</span><span class="n">x_barrier</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -1360,7 +1368,9 @@ P_L = \langle 1 - \Theta(x - x^*) \rangle
 </span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">result_dw_l</span> <span class="o">=</span> <span class="n">dw_eig</span><span class="o">.</span><span class="n">propagate_matrix_exp</span><span class="p">(</span><span class="n">time_long</span><span class="p">,</span> <span class="n">observable</span><span class="p">,</span> <span class="n">Is_store_state</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">Is_show_step</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Is_Gt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div>
 <p>We can visualize the population in the right well as a function of time:</p>
-<p><img alt="png" src="../../images/Part_II/Part2_doublewell_classicaldyn.png" /></p>
+<figure>
+<img alt="png" src="../../images/Part_II/Part2_doublewell_classicaldyn.png" width="800" />
+</figure>
 <p>We can also visualize the time evolution of the proton's probability distribution over the double-well potential:</p>
 <video controls src="../../images/Part_II/double_well_open_evolution.mp4"></video>
 
@@ -1429,7 +1439,9 @@ P_L = \langle 1 - \Theta(x - x^*) \rangle
 </span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="n">P_dw_qc</span> <span class="o">=</span> <span class="n">dw_quantum</span><span class="o">.</span><span class="n">qc_simulation_kraus</span><span class="p">(</span><span class="n">time_qdw</span><span class="p">,</span> <span class="n">Gprop</span> <span class="o">=</span> <span class="n">Gprop_dw</span><span class="p">,</span> <span class="n">tolk</span> <span class="o">=</span> <span class="mf">1E-2</span><span class="p">,</span> <span class="n">tolo</span> <span class="o">=</span> <span class="mf">5E-3</span><span class="p">)</span>
 </span></code></pre></div>
 <p>One can visualize <span class="arithmatex">\(P_R(t)\)</span> after the simulation is complete:</p>
-<p><img alt="png" src="../../images/Part_II/Part2_doublewell_Krausq.png" /></p>
+<figure>
+<img alt="png" src="../../images/Part_II/Part2_doublewell_Krausq.png" width="800" />
+</figure>
 
 
 
@@ -1582,8 +1594,6 @@ P_L = \langle 1 - \Theta(x - x^*) \rangle
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

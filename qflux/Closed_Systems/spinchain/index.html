@@ -525,7 +525,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -534,7 +536,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1129,7 +1131,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1138,7 +1142,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1199,13 +1203,17 @@
 
 <h1 id="simulation-of-a-spin-chain-system"><strong>Simulation of a Spin-Chain System</strong></h1>
 <h2 id="motivation">Motivation</h2>
-<p>This section demonstrates the practical considerations for perfoming dynamical evolution of an Hamiltonian written in the basis of Pauli matrices using a qubit-based quantum computer framework. The chosen Hamiltonian can be used to describe the chemical process of electron transfer across a chromophore chain, with the onsite parameters describing the strength of the electronic affinity at each chromophore and off-site couplings describing the barrier for transferring an electron between adjacent sites.</p>
-<p><img alt="electron-transfer" src="../../images/Part_I/spin_chain_cartoon.png" /></p>
+<p>This section demonstrates the practical considerations for performing dynamical evolution of a Hamiltonian written in the basis of Pauli matrices using a qubit-based quantum computer framework. The chosen Hamiltonian can be used to describe the chemical process of electron transfer across a chromophore chain, with the onsite parameters describing the strength of the electronic affinity at each chromophore and off-site couplings describing the barrier for transferring an electron between adjacent sites.</p>
+<figure>
+<img alt="electron-transfer" src="../../images/Part_I/spin_chain_cartoon.png" />
+</figure>
 <p>A problem of practical interest that could be modelled by this method would be a functionalized graphene nanoribbon, where alternating sites contain radical character (<a href="https://pubs.acs.org/doi/10.1021/acs.nanolett.1c03578">Nano Lett. 2022, 22, 1, 164–171</a>).</p>
-<p><img alt="radical-figure" src="../../images/Part_I/spin_chain_figure.png" /></p>
+<figure>
+<img alt="radical-figure" src="../../images/Part_I/spin_chain_figure.png" />
+</figure>
 <p>The stability of the radical character at each site can be described by the on-site parameter (<span class="arithmatex">\(\Omega _n\)</span>) and the coupling between sites (<span class="arithmatex">\(J _{n,n+1}\)</span>) governed by the properties of the linker regions containing the diketone groups. These parameters can be tuned by synthetic design of each component part of the nanoribbon.</p>
 <div class="arithmatex">\[\begin{align}
-H=  \sum_{n=0}^{N-1} \hbar \Omega _n \sigma_n ^z - \dfrac{1}{2} \sum_{n=0}^{N-2} \big(J_{n,n+1}^x \hat{\sigma}_{n}^x \hat{\sigma}_{n+1}^x + J_{n,n+1}^y \hat{\sigma}_{n}^y \hat{\sigma}_{n+1}^y + J_{n,n+1}^z \hat{\sigma}_{n}^z \hat{\sigma}_{n+1}^z \big)
+H =  \sum_{n=0}^{N-1} \hbar \Omega _n \sigma_n ^z - \dfrac{1}{2} \sum_{n=0}^{N-2} \big(J_{n,n+1}^x \hat{\sigma}_{n}^x \hat{\sigma}_{n+1}^x + J_{n,n+1}^y \hat{\sigma}_{n}^y \hat{\sigma}_{n+1}^y + J_{n,n+1}^z \hat{\sigma}_{n}^z \hat{\sigma}_{n+1}^z \big)
 \end{align}\]</div>
 <p>Protocol for Hamiltonian evolution in a quantum computer framework:</p>
 <ol>
@@ -1221,9 +1229,9 @@ H=  \sum_{n=0}^{N-1} \hbar \Omega _n \sigma_n ^z - \dfrac{1}{2} \sum_{n=0}^{N-2}
 <h2 id="model-hamiltonian-and-parameters">Model Hamiltonian and Parameters</h2>
 <p>Here we use as an example the Hamiltonian for the Heisenberg model, defined as follows:</p>
 <div class="arithmatex">\[\begin{align}
-H=  \sum_{n=0}^{N-1} \hbar \Omega _n \sigma_n ^z - \dfrac{1}{2} \sum_{n=0}^{N-2} \big(J_{n,n+1}^x \hat{\sigma}_{n}^x \hat{\sigma}_{n+1}^x + J_{n,n+1}^y \hat{\sigma}_{n}^y \hat{\sigma}_{n+1}^y + J_{n,n+1}^z \hat{\sigma}_{n}^z \hat{\sigma}_{n+1}^z \big)
+H =  \sum_{n=0}^{N-1} \hbar \Omega _n \sigma_n ^z - \dfrac{1}{2} \sum_{n=0}^{N-2} \big(J_{n,n+1}^x \hat{\sigma}_{n}^x \hat{\sigma}_{n+1}^x + J_{n,n+1}^y \hat{\sigma}_{n}^y \hat{\sigma}_{n+1}^y + J_{n,n+1}^z \hat{\sigma}_{n}^z \hat{\sigma}_{n+1}^z \big)
 \end{align}\]</div>
-<p>where the coupling elements are described in terms of the <span class="arithmatex">\(\sigma _x, \sigma _y, \sigma _z\)</span> (Pauli X, Y and Z) matrices with a coupling associated with each type of interaction term for each site/pair of sites. We consider the following parameters, as used in the publication <a href="https://arxiv.org/pdf/quant-ph/0511176v2.pdf">Non-Markovian decay beyond the Fermi Golden Rule: Survival Collapse of the polarization in spin chains.</a>(but with reduced number of spin sites):</p>
+<p>where the coupling elements are described in terms of the <span class="arithmatex">\(\sigma _x, \sigma _y, \sigma _z\)</span> (Pauli X, Y and Z) matrices with a coupling associated with each type of interaction term for each site/pair of sites. We consider the following parameters, as used in the publication <a href="https://arxiv.org/pdf/quant-ph/0511176v2.pdf">Non-Markovian decay beyond the Fermi Golden Rule: Survival Collapse of the polarization in spin chains</a> (but with reduced number of spin sites):</p>
 <div class="arithmatex">\[\begin{align}
     N &amp;= 3 \\
     \hbar \Omega _0 &amp;= 0.65 \\
@@ -1426,8 +1434,6 @@ Although the dynamics of this Hamiltonian can be simulated in a classical comput
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

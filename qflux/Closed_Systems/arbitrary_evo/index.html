@@ -548,7 +548,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -557,9 +559,36 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-ising-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Ising Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizing-measurement-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizing Measurement Probabilities
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#observables" class="md-nav__link">
@@ -1102,7 +1131,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1111,9 +1142,36 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-ising-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Ising Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizing-measurement-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizing Measurement Probabilities
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#observables" class="md-nav__link">
@@ -1144,13 +1202,15 @@
 
 
 <h1 id="evolution-for-an-arbitrary-hamiltonian">Evolution for an Arbitrary Hamiltonian</h1>
+<h2 id="background">Background</h2>
 <p>Let us now consider the task of running quantum dynamics for an arbitrary Hamiltonian describing a system of interest, <span class="arithmatex">\(\hat{H}\)</span>. To do this on a quantum device, we must first express the Hamiltonian in a way that can be easily understood by the quantum device, that is to say that we must express the Hamiltonian as a series of native quantum gates. We can do this by expressing the Hamiltonian as a weighted combination of Pauli strings: </p>
 <div class="arithmatex">\[ \hat{H}_{\text{Pauli}} = \sum_{i} \alpha_{i} P_{i} \]</div>
-<p>where <span class="arithmatex">\(P_{i}\)</span> is an <span class="arithmatex">\(n\)</span>-qubit Pauli string corresponding to Pauli gates acting acting on an <span class="arithmatex">\(n\)</span>-qubit quantum register. </p>
+<p>where <span class="arithmatex">\(P_{i}\)</span> is an <span class="arithmatex">\(n\)</span>-qubit Pauli string corresponding to Pauli gates acting on an <span class="arithmatex">\(n\)</span>-qubit quantum register. </p>
 <p>This task can be completed via the <code>decompose()</code> utility function in <code>qflux</code>. </p>
 <p>Once we've rewritten our Hamiltonian, we can implement real-time dynamics on the quantum device by representing the propagator as a quantum circuit: </p>
 <div class="arithmatex">\[ \hat{U} = e^{- \frac{i}{\hbar} \hat{H}_{\text{Pauli}} \tau} \]</div>
 <p>where <span class="arithmatex">\(\tau\)</span> is the time-step. By applying the propagator to a quantum register initialized to our initial state for dynamics calculation (<span class="arithmatex">\(\left| \psi_{0} \right\rangle\)</span>), we can obtain the time-evolved state <span class="arithmatex">\(\left| \psi ( t ) \right\rangle\)</span>. </p>
+<h2 id="example-ising-model">Example: Ising Model</h2>
 <p>In the following example, we follow <a href="https://qiskit-community.github.io/qiskit-algorithms/tutorials/13_trotterQRTE.html">this example</a> and look at the time evolution of an Ising Model on linear lattices of length <span class="arithmatex">\(L\)</span> consisting of an array of spins <span class="arithmatex">\(\sigma_{i}^{z}\)</span> with nearest-neighbor interactions. These spins can have two orientations: <span class="arithmatex">\(\uparrow\)</span> and <span class="arithmatex">\(\downarrow\)</span>, which corresopnd to a magnetization of +1 and -1. </p>
 <p>The Hamiltonian for this sort of system can be written as: </p>
 <div class="arithmatex">\[ H = - J \sum_{i=0}^{L-2} \sigma_{i} \sigma_{i+1} - h \sum_{i=0}^{L-1} \sigma_{i} \]</div>
@@ -1207,6 +1267,7 @@
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>                               <span class="n">hamiltonian_matrix</span><span class="o">=</span><span class="n">spin_H</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(),</span> 
 </span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>                               <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </span></code></pre></div>
+<h2 id="visualizing-measurement-probabilities">Visualizing Measurement Probabilities</h2>
 <p>Now we can use this workflow to look at measurement probabilities at a series of angles for the applied external field: </p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1250,7 +1311,9 @@
 </span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </span></code></pre></div>
 <p>Which gives us the following plot: </p>
-<p><img alt="linearchain-l2" src="../../images/Part_I/Spin_L2_Probabilities.png" /></p>
+<figure>
+<img alt="linearchain-l2" src="../../images/Part_I/Spin_L2_Probabilities.png" width="800" />
+</figure>
 <h2 id="observables">Observables</h2>
 <p>In this example, we will look at computing observables with the output of a dynamics calculation for a longer chain of spins. We begin with the calculation of the Hamiltonian: </p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">L</span> <span class="o">=</span> <span class="mi">6</span>
@@ -1345,7 +1408,9 @@
 </span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </span></code></pre></div>
 <p>which should look like the following: </p>
-<p><img alt="linearchain-observables" src="../../images/Part_I/Spin-Evolution.png" /></p>
+<figure>
+<img alt="linearchain-observables" src="../../images/Part_I/Spin-Evolution.png" width="800" />
+</figure>
 <p>We can also compute the site-specific magnetization: </p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">site_specific_magnetizations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>                                    <span class="p">[[</span><span class="n">Statevector</span><span class="p">(</span><span class="n">tmp_state</span><span class="p">)</span><span class="o">.</span><span class="n">expectation_value</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">magnetization_op</span><span class="p">]</span>
@@ -1365,7 +1430,9 @@
 </span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
 </span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">langle Z_i </span><span class="se">\\</span><span class="s2">rangle$&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.8</span><span class="p">)</span>
 </span></code></pre></div>
-<p><img alt="linear-chain-sitespecific-exact" src="../../images/Part_I/Site-Specific-Magnetization.png" /></p>
+<figure>
+<img alt="linear-chain-sitespecific-exact" src="../../images/Part_I/Site-Specific-Magnetization.png" width="800" />
+</figure>
 <p>Similarly, we can compute the site-specific magnetization with our dynamics results: </p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">site_specific_magnetizations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>                                    <span class="p">[[</span><span class="n">Statevector</span><span class="p">(</span><span class="n">tmp_state</span><span class="p">)</span><span class="o">.</span><span class="n">expectation_value</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">magnetization_op</span><span class="p">]</span> 
@@ -1385,7 +1452,9 @@
 </span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
 </span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">langle Z_i </span><span class="se">\\</span><span class="s2">rangle$&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.8</span><span class="p">)</span>
 </span></code></pre></div>
-<p><img alt="linear-chain-sitespecific-qflux" src="../../images/Part_I/Site-Specific-Magnetization-qflux.png" /></p>
+<figure>
+<img alt="linear-chain-sitespecific-qflux" src="../../images/Part_I/Site-Specific-Magnetization-qflux.png" width="800" />
+</figure>
 
 
 
@@ -1538,8 +1607,6 @@
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

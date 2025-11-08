@@ -845,7 +845,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -854,7 +856,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -887,9 +889,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#demonstrations" class="md-nav__link">
+  <a href="#demonstration" class="md-nav__link">
     <span class="md-ellipsis">
-      Demonstrations
+      Demonstration
     </span>
   </a>
   
@@ -911,7 +913,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#demonstration" class="md-nav__link">
+  <a href="#demonstration_1" class="md-nav__link">
     <span class="md-ellipsis">
       Demonstration
     </span>
@@ -1159,7 +1161,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1168,7 +1172,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1201,9 +1205,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#demonstrations" class="md-nav__link">
+  <a href="#demonstration" class="md-nav__link">
     <span class="md-ellipsis">
-      Demonstrations
+      Demonstration
     </span>
   </a>
   
@@ -1225,7 +1229,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#demonstration" class="md-nav__link">
+  <a href="#demonstration_1" class="md-nav__link">
     <span class="md-ellipsis">
       Demonstration
     </span>
@@ -1282,6 +1286,7 @@
 <p>VarQITE and VarQRTE both employ a <strong>TwoLocal ansatz</strong>, returning the optimal parameter values at each timestep, which can then be analyzed to study system properties.</p>
 <hr />
 <h2 id="import-dependencies">Import Dependencies</h2>
+<p>You should first install <code>qflux</code> via <code>pip</code>, if you haven't already.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">qflux</span>
 </span></code></pre></div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1311,7 +1316,7 @@
 <div class="arithmatex">\[
     C_i = - \Re\Bigg({\frac{\partial\left\langle\phi(\theta(\tau))\right|}{\partial\theta_i}}\mathcal{H}\left|{\phi(\theta(\tau))}\right\rangle\Bigg).
 \]</div>
-<p>These $A_{ij}$ and $C_i$ values are measured on a quantum device and used to update ansatz parameters:</p>
+<p>These <span class="arithmatex">\(A_{ij}\)</span> and <span class="arithmatex">\(C_i\)</span> values are measured on a quantum device and used to update ansatz parameters:</p>
 <div class="arithmatex">\[
 \theta(\tau + d\tau) = \theta(\tau) + \dot\theta\, d\tau.
 \]</div>
@@ -1324,18 +1329,18 @@
     \dfrac{\partial}{\partial\theta} e^{-i\theta\sigma_Z}\left|{\psi}\right\rangle = -i\sigma_Ze^{-i\theta\sigma_Z}\left|{\psi}\right\rangle
 \]</div>
 <p>Therefore, one can evaluate the expectation values introduced by the <span class="arithmatex">\(A_{ij}, C_{i}\)</span> by performing Hadamard tests on the corresponding generators of the ansatz.</p>
-<p>For example, to determine the elements of the matrix <span class="arithmatex">\(A_{ij}\)</span>, the dagger of the generator of parameter i (<span class="arithmatex">\(G_i^\dagger\)</span>) and the parameter of generator j (<span class="arithmatex">\(G_j\)</span>) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the <span class="arithmatex">\(\left|{0}\right\rangle\)</span> state, and performing a pair of not-gates on the ancilla qubits before and after measuring <span class="arithmatex">\(G_i\)</span> to measure <span class="arithmatex">\(G_i^\dagger\)</span>, and subsequently measuring <span class="arithmatex">\(G_i\)</span> with a Hadamard test using the same ancilla.</p>
+<p>For example, to determine the elements of the matrix <span class="arithmatex">\(A_{ij}\)</span>, the dagger of the generator of parameter <span class="arithmatex">\(i\)</span> (<span class="arithmatex">\(G_i^\dagger\)</span>) and the parameter of generator <span class="arithmatex">\(j\)</span> (<span class="arithmatex">\(G_j\)</span>) must be measured using the same ancilla qubit.  This can be done by initializing the ancilla qubit to the <span class="arithmatex">\(\left|{0}\right\rangle\)</span> state, and performing a pair of not-gates on the ancilla qubits before and after measuring <span class="arithmatex">\(G_i\)</span> to measure <span class="arithmatex">\(G_i^\dagger\)</span>, and subsequently measuring <span class="arithmatex">\(G_i\)</span> with a Hadamard test using the same ancilla.</p>
 <p>Reference implementations of this algorithm are used below, using QFlux to simulate the imaginary-time evolution spin-systems. The simulations apply the McLachlan variational principle through the <code>VarQRTE</code> function, demonstrating how variational techniques can efficiently capture quantum dynamics within shallow, noise-resilient circuits.</p>
 <hr />
-<h3 id="demonstrations">Demonstrations</h3>
+<h3 id="demonstration">Demonstration</h3>
 <h4 id="example-1-simple-hamiltonian">Example 1: Simple Hamiltonian</h4>
-<p>Focusing on a simple Hamiltonian, consisting of a spin chain defined by the Pauli-Z matrix, we setup the initial state using a qiskit QuantumCircuit and the hyperparameters for VarQITE, such as number of layers in the ansatz, the timestep and total simulation time.
+<p>Focusing on a simple Hamiltonian, consisting of a spin chain defined by the Pauli-Z matrix, we set up the initial state using a Qiskit <code>QuantumCircuit</code> and the hyperparameters for VarQITE, such as number of layers in the ansatz, the timestep and total simulation time.
 Finally, we call VarQITE to run the time evolution and output the ansatz parameter values.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Define the problem Hamiltonian</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">H</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="o">.</span><span class="n">from_list</span><span class="p">([(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Set up the initial state</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Hyperparameters for VarQITE</span>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">layers</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1345,14 +1350,22 @@ Finally, we call VarQITE to run the time evolution and output the ansatz paramet
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># Run VarQITE</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">params</span> <span class="o">=</span> <span class="n">VarQITE</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">total_time</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">init_circ</span><span class="o">=</span><span class="n">qc</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Furethermore, we can use the parameters to measure observables with a quantum circuit:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Measure energy at a given timestep</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">my_energy</span><span class="p">,</span> <span class="n">my_stdev</span> <span class="o">=</span> <span class="n">ansatz_energy</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="p">)</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Measure a custom observable</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="o">.</span><span class="n">from_list</span><span class="p">([(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">ansatz</span> <span class="o">=</span> <span class="n">Construct_Ansatz</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">result</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">observables</span><span class="o">=</span><span class="n">observable</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<p>Furthermore, we can use the parameters to measure observables with a quantum circuit:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">Estimator</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Instantiate estimator object</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">estimator</span> <span class="o">=</span> <span class="n">Estimator</span><span class="p">()</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Define a random timestep for demo purposes:</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># Measure energy at a given timestep</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">my_energy</span><span class="p">,</span> <span class="n">my_stdev</span> <span class="o">=</span> <span class="n">ansatz_energy</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># Measure a custom observable</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="o">.</span><span class="n">from_list</span><span class="p">([(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="n">ansatz</span> <span class="o">=</span> <span class="n">Construct_Ansatz</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">result</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">observables</span><span class="o">=</span><span class="n">observable</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </span></code></pre></div>
 <h4 id="example-2-hamiltonian-with-couplings">Example 2: Hamiltonian with couplings</h4>
 <p>Similarly, we can apply this protocol for a more sophisticated Hamiltonian, containing couplings between different sites:</p>
@@ -1385,7 +1398,7 @@ Finally, we call VarQITE to run the time evolution and output the ansatz paramet
 </span></code></pre></div>
 <p><img alt="VarQITE" src="../../images/Part_I/VarQITE.png" /></p>
 <p><strong>Interpretation:</strong>
-VarQITE drives the system toward the <strong>ground state</strong> as imaginary time increases, provided the ansatz is expressive enough. This enables estimation of the ground-state energy by sampling the long-time behavior.</p>
+VarQITE drives the system toward the <strong>ground state</strong> as imaginary-time increases, provided the ansatz is expressive enough. This enables estimation of the ground-state energy by sampling the long-time behavior.</p>
 <hr />
 <h2 id="variational-quantum-real-time-evolution-varqrte">Variational Quantum Real Time Evolution (VarQRTE)</h2>
 <p>Analogous to the problem of finding eigenstates of a Hamiltonian is the problem of dynamics, which can be also be approached with the Variational Quantum Real-Time Evolution (VarQRTE).</p>
@@ -1393,15 +1406,15 @@ VarQITE drives the system toward the <strong>ground state</strong> as imaginary 
 <div class="arithmatex">\[
     \delta \left\Vert\left(\frac{\partial}{\partial t} + i\mathcal{H}\right)\left|{\psi(\theta(t))}\right\rangle\right\Vert = 0.
 \]</div>
-<p>The starting state can be evolved through real time in a variational form vary similar to VarQITE, except with one change when calculating the elements of <span class="arithmatex">\(C_i\)</span>,</p>
+<p>The starting state can be evolved through real-time in a variational form vary similar to VarQITE, except with one change when calculating the elements of <span class="arithmatex">\(C_i\)</span>,</p>
 <div class="arithmatex">\[
     C_i = - \Im\Bigg({\frac{\partial \left\langle\phi(\theta(t))\right|}{\partial\theta_i}} \mathcal{H}\left|{\phi(\theta(t))}\right\rangle\Bigg).
 \]</div>
-<p>Building upon the same framework as VarQITE, one can measure the <span class="arithmatex">\(A_{ij}\)</span> and <span class="arithmatex">\(C_i\)</span> matrices on a quantum computer, and use them to change the parameters <span class="arithmatex">\(\theta(t+dt) = \theta(t)+\dot\theta dt\)</span>.</p>
-<p>Within QFlux, <code>VarQRTE</code> reuses the same modular components while invoking <code>Measure_C</code> with <code>evolution_type="imaginary"</code>. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.</p>
+<p>Building upon the same framework as VarQITE, one can measure the <span class="arithmatex">\(A_{ij}\)</span> and <span class="arithmatex">\(C_i\)</span> matrices on a quantum computer, and use them to change the parameters <span class="arithmatex">\(\theta(t+dt) = \theta(t)+\dot\theta \, dt\)</span>.</p>
+<p>Within QFlux, <code>VarQRTE</code> reuses the same modular components while invoking <code>Measure_C</code> with <code>evolution_type="real"</code>. This structural parallel highlights how both real- and imaginary-time algorithms are implemented through identical circuit primitives.</p>
 <hr />
-<h3 id="demonstration">Demonstration</h3>
-<p>We proceed by defining the Hamiltonian and initial state, along with instantiating the VarQRTE class with appropriate hyper-parameters.</p>
+<h3 id="demonstration_1">Demonstration</h3>
+<p>We proceed by defining the Hamiltonian and initial state, along with instantiating the VarQRTE class with appropriate hyperparameters.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">H</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="o">.</span><span class="n">from_list</span><span class="p">([(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Prepare |1&gt; state</span>
@@ -1413,7 +1426,7 @@ VarQITE drives the system toward the <strong>ground state</strong> as imaginary 
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">params</span> <span class="o">=</span> <span class="n">VarQRTE</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">total_time</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">init_circ</span><span class="o">=</span><span class="n">qc</span><span class="p">)</span>
 </span></code></pre></div>
 <p>We can measure observables over time using an Estimator object, supplied with the optimized circuit parameters and the observable circuit.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">EstimatorV2</span> <span class="k">as</span> <span class="n">Estimator</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">Estimator</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">estimator</span> <span class="o">=</span> <span class="n">Estimator</span><span class="p">()</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="o">.</span><span class="n">from_list</span><span class="p">([(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
@@ -1422,7 +1435,7 @@ VarQITE drives the system toward the <strong>ground state</strong> as imaginary 
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)):</span>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="n">ansatz</span> <span class="o">=</span> <span class="n">Construct_Ansatz</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span>
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">observables</span><span class="o">=</span><span class="n">observable</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> 
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">spin_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">evs</span><span class="p">())</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">spin_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
 </span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Spin Expectation Value Over Time&quot;</span><span class="p">)</span>
 </span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">*</span><span class="n">timestep</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">total_time</span><span class="o">/</span><span class="n">timestep</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">spin_values</span><span class="p">)</span>
@@ -1585,8 +1598,6 @@ VarQRTE captures the change in state of quantum systems in real-time. As seen in
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

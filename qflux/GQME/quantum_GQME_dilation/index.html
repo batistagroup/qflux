@@ -1049,7 +1049,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1058,7 +1060,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1118,7 +1120,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1127,7 +1131,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1252,11 +1256,15 @@
 </span></code></pre></div>
 <p>Here, we instantiate the <code>QubitDynamicsOS</code> class with the parameters of the spin-boson model, set the final measurement states, and specify the dilation method. The <code>qc_simulation_vecdens</code> method supports quantum simulation with the propagator as input.</p>
 <p>The population results are shown in the figure below.</p>
-<p><img alt="qGQME" src="../../images/Part_IV/Fig_qGQME.png" /></p>
+<figure>
+<img alt="qGQME" src="../../images/Part_IV/Fig_qGQME.png" width="800" />
+</figure>
 <p>One can also visualize an example quantum circuit from the result output of the <code>qc_simulation_vecdens</code> method:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">res_qc</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="mi">200</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
-</span></code></pre></div>
-<img alt="qcGQME200" src="../../images/Part_IV/Fig_GQME_qc200.png" /></p>
+</span></code></pre></div></p>
+<figure>
+<img alt="qcGQME200" src="../../images/Part_IV/Fig_GQME_qc200.png" />
+</figure>
 <p>Here, we use the circuit at the 200th time step as an example.</p>
 <p>Furthermore, the circuit complexity can be further illustrated by transpiling it into a specific basis gate set.:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">transpile</span>
@@ -1264,8 +1272,10 @@
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">basis_gates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cz&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="s1">&#39;rz&#39;</span><span class="p">,</span> <span class="s1">&#39;rzz&#39;</span><span class="p">,</span> <span class="s1">&#39;sx&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">]</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">compiled_circuit</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span><span class="n">res_qc</span><span class="p">[</span><span class="s1">&#39;circuits&#39;</span><span class="p">][</span><span class="mi">200</span><span class="p">],</span> <span class="n">basis_gates</span><span class="o">=</span><span class="n">basis_gates</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">compiled_circuit</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
-</span></code></pre></div>
-<img alt="qcGQME200_decompose" src="../../images/Part_IV/Fig_GQME_qc200_transpile.png" /></p>
+</span></code></pre></div></p>
+<figure>
+<img alt="qcGQME200_decompose" src="../../images/Part_IV/Fig_GQME_qc200_transpile.png" />
+</figure>
 <h1 id="summary">Summary</h1>
 <p>This example demonstrates a modular quantum simulation of the Generalized Quantum Master Equation (GQME) using the spin-boson model as an illustrative example:</p>
 <ul>
@@ -1415,8 +1425,6 @@
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

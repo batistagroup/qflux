@@ -891,7 +891,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -900,7 +902,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1213,7 +1215,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1222,7 +1226,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1369,19 +1373,21 @@
 <p>This documentation describes how to simulate and visualize the <strong>Fenna–Matthews–Olson (FMO)</strong> complex exciton transfer dynamics trajectory using an adaptive ansatz variational method framework (<code>QMAD</code>) within the <code>variational_methods</code> module of <code>qflux</code>. The goal is to analyze excitation energy transfer within the FMO system and demonstrate time-dependent propagation of the reduced density matrix.</p>
 <hr />
 <p>This example of open‑system dynamics is based on the <strong>stochastic Schrödinger equation (SSE)</strong>. This approach simulates <strong>quantum trajectories</strong> on the <strong>same number of qubits</strong> as the system state.</p>
-<p><strong>Features of SSE</strong>
-Same qubit count as the system state (no duplication)
-Natural for jump/no‑jump dynamics and trajectory parallelization</p>
+<p><strong>Features of SSE:</strong></p>
+<ul>
+<li>Same qubit count as the system state (no duplication)</li>
+<li>Natural for jump/no‑jump dynamics and trajectory parallelization</li>
+</ul>
 <hr />
 <h2 id="stochastic-schrodinger-equation">Stochastic Schrödinger Equation</h2>
 <p>In the SSE picture, a mixed state (<span class="arithmatex">\(\rho(t)\)</span>) (usually evolved by a Lindblad master equation) is represented by an <strong>ensemble of pure‑state trajectories</strong> (<span class="arithmatex">\(\{ |\psi_c(t)\rangle \}\)</span>). Each trajectory obeys the stochastic differential equation</p>
 <div class="arithmatex">\[
-\mathrm{d}|\psi_c(t)\rangle = \Big( -i H \tfrac{1}{2} \sum_k \big(L_k^\dagger L_k - \langle L_k^\dagger L_k\rangle\big) \Big) |\psi_c(t)\rangle,\mathrm{d}t - \sum_k \Big( \frac{L_k|\psi_c(t)\rangle}{\langle L_k^\dagger L_k\rangle} - |\psi_c(t)\rangle \Big), \mathrm{d}N_k ,
+\mathrm{d}|\psi_c(t)\rangle = \Big( -i H \tfrac{1}{2} \sum_k \big(L_k^\dagger L_k - \langle L_k^\dagger L_k\rangle\big) \Big) |\psi_c(t)\rangle,\mathrm{d}t - \sum_k \Big( \frac{L_k|\psi_c(t)\rangle}{\langle L_k^\dagger L_k\rangle} - |\psi_c(t)\rangle \Big) \mathrm{d}N_k 
 \]</div>
 <p>where (<span class="arithmatex">\(\langle\cdot\rangle\)</span>) denotes the expectation with respect to the current state. The binary increment (<span class="arithmatex">\(\mathrm{d}N_k\in{0,1}\)</span>) encodes <strong>quantum jumps</strong>.</p>
 <p><strong>Jump probability in a small step</strong> (<span class="arithmatex">\(\mathrm{d}t\)</span>):</p>
 <div class="arithmatex">\[
-\mathrm{d}p = \sum_{k=1}^K \frac{\langle \psi(t) | L_k^\dagger L_k | \psi(t) \rangle}{\langle \psi(t) | \psi(t) \rangle}, \mathrm{d}t .
+\mathrm{d}p = \sum_{k=1}^K \frac{\langle \psi(t) | L_k^\dagger L_k | \psi(t) \rangle}{\langle \psi(t) | \psi(t) \rangle} \mathrm{d}t 
 \]</div>
 <p>If a jump occurs with operator (L_i), update the (unnormalized) state</p>
 <div class="arithmatex">\[
@@ -1392,7 +1398,7 @@ Natural for jump/no‑jump dynamics and trajectory parallelization</p>
 <div class="arithmatex">\[
 \rho(t) = \frac{1}{n} \sum_{j=1}^n |\psi_j(t)\rangle\langle\psi_j(t)|
 \]</div>
-<p>with accuracy improving as (n) (the number of trajectories) increases.</p>
+<p>with accuracy improving as <span class="arithmatex">\(n\)</span> (the number of trajectories) increases.</p>
 <h2 id="implementation-overview">Implementation Overview</h2>
 <p>We implement a <strong>variational trajectory algorithm</strong> that alternates deterministic evolution with stochastic jumps. The effective Hamiltonian is split into <strong>Hermitian</strong> and <strong>anti‑Hermitian</strong> parts, the latter capturing dissipative effects from Lindblad operators.</p>
 <h3 id="effective-hamiltonian-preprocessing">Effective Hamiltonian Pre‑processing</h3>
@@ -1436,8 +1442,9 @@ Natural for jump/no‑jump dynamics and trajectory parallelization</p>
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">L_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span> <span class="n">L_tmp</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gamma</span><span class="p">);</span> <span class="n">Llist_f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L_tmp</span><span class="p">)</span>
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">Llist_f_padded</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="n">Llist_f</span><span class="p">]</span>
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="c1"># Initial state |1&gt; in the padded 8‑dim space</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">u0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">);</span> <span class="n">u0_fmo</span> <span class="o">=</span> <span class="n">u0</span><span class="o">.</span><span class="n">copy</span><span class="p">();</span> <span class="n">u0_fmo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="c1"># Initial state (excitation localized on site 2)</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">u0_fmo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="n">u0_fmo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </span></code></pre></div>
 <h3 id="run-trajectories">Run Trajectories</h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.variational_methods.qmad.solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_avq_trajectory</span>
@@ -1473,7 +1480,9 @@ Natural for jump/no‑jump dynamics and trajectory parallelization</p>
 </span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="n">avg</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">/</span><span class="n">num_trajectory</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">avg</span><span class="p">]</span>
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="c1"># time in results[0].t</span>
 </span></code></pre></div>
-<p><img alt="FMO_SSE_results" src="../../images/Part_III/fmo_ssetraj.png" /></p>
+<figure>
+<img alt="FMO_SSE_results" src="../../images/Part_III/fmo_ssetraj.png" width="&quot;800" />
+</figure>
 <p><em>Observation:</em> With suitable (<span class="arithmatex">\(\Delta t\)</span>), trajectory count, ansatz pool, and McLachlan threshold, SSE trajectories <strong>closely track</strong> QuTiP’s numerically exact curves.</p>
 <hr />
 <h2 id="adaptive-updates-after-jumps">Adaptive Updates After Jumps</h2>
@@ -1487,14 +1496,14 @@ Natural for jump/no‑jump dynamics and trajectory parallelization</p>
 <hr />
 <h2 id="summary">Summary</h2>
 <ul>
-<li><strong>SSE</strong> avoids qubit doubling and non‑local Liouvillians, ideal for <strong>NISQ</strong> implementations.</li>
+<li><strong>SSE</strong> avoids qubit doubling and non‑local Liouvillians which is ideal for <strong>NISQ</strong> implementations.</li>
 <li>We decomposed an <strong>effective Hamiltonian</strong>, evolved <strong>quantum trajectories</strong> with deterministic and jump segments, and averaged to reconstruct (\rho(t)).</li>
 <li>On the <strong>FMO complex</strong>, SSE trajectories reproduce <strong>population dynamics</strong> in strong agreement with QuTiP baselines.</li>
 </ul>
 <hr />
 <h2 id="references-links">References &amp; Links</h2>
 <ul>
-<li>Y. Chen <em>et al.</em>, <em>Adaptive variational quantum dynamics for open systems</em> (2024).</li>
+<li>Y. Chen <em>et al.</em>, <em>Adaptive Variational Quantum Dynamics for Open Systems</em> (2024).</li>
 <li>
 <p>Shivpuje et al., Designing Variational Ansatz for Quantum-Enabled Simulation of Non-Unitary Dynamical Evolution — An Excursion into Dicke Superradiance, Adv. Quantum Technol. (2024), https://doi.org/10.1002/qute.202400088</p>
 </li>
@@ -1654,8 +1663,6 @@ Natural for jump/no‑jump dynamics and trajectory parallelization</p>
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

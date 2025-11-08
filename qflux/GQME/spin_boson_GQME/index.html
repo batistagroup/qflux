@@ -1028,7 +1028,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1037,7 +1039,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1053,7 +1055,7 @@
         <li class="md-nav__item">
   <a href="#the-projected-liouvillian" class="md-nav__link">
     <span class="md-ellipsis">
-      The projected Liouvillian
+      The Projected Liouvillian
     </span>
   </a>
   
@@ -1120,7 +1122,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1129,7 +1133,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1145,7 +1149,7 @@
         <li class="md-nav__item">
   <a href="#the-projected-liouvillian" class="md-nav__link">
     <span class="md-ellipsis">
-      The projected Liouvillian
+      The Projected Liouvillian
     </span>
   </a>
   
@@ -1179,16 +1183,16 @@
   
 
 
-<h1 id="gqme-for-spin-boson-model">GQME for Spin-Boson model</h1>
-<p>This documentation describes how to simulate the dynamics of a spin-boson system using the generalized quantum master equation (GQME). This simulation also includes comparison plots to the numerically exact results obtained via tensor-train thermo-field dyanmics (TT-TFD).</p>
-<p>The following modules will be used throughout the documentation:
+<h1 id="gqme-for-spin-boson-model">GQME for Spin-Boson Model</h1>
+<p>This documentation describes how to simulate the dynamics of a spin-boson system using the generalized quantum master equation (GQME). This simulation also includes comparison plots to the numerically exact results obtained via tensor-train thermo-field dynamics (TT-TFD).</p>
+<p>The following modules will be used throughout the documentation:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qflux.GQME.params</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qflux.GQME.readwrite</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">wr</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
 <hr />
 <h2 id="spin-boson-model-hamiltonian">Spin Boson Model Hamiltonian</h2>
 <p>The total Hamiltonian for the spin-boson model can be written as:</p>
@@ -1214,7 +1218,7 @@
 \]</div>
 <p>Here, <span class="arithmatex">\(\hat{\sigma}(t)\)</span> denotes the reduced density operator, which only includes the system degrees of freedom and is a <span class="arithmatex">\(2×2\)</span> matrix. </p>
 <p>To propagate the GQME, two quantities are required: the projected Liouvillian <span class="arithmatex">\(\langle {\cal L} \rangle_n^0\)</span> and the memory kernel <span class="arithmatex">\(\mathcal{K}(t)\)</span>. Their computation is described below.</p>
-<h2 id="the-projected-liouvillian">The projected Liouvillian</h2>
+<h2 id="the-projected-liouvillian">The Projected Liouvillian</h2>
 <p>When the memory kernel is absent, the system dynamics are governed solely by the projected Liouvillian <span class="arithmatex">\(\langle {\cal L} \rangle_n^0\)</span>. Therefore, <span class="arithmatex">\(\langle {\cal L} \rangle_n^0\)</span> represents the unitary dynamics of the isolated system without environmental effects.</p>
 <p>The pure system Hamiltonian is given by <span class="arithmatex">\(H_S = \epsilon \hat{\sigma}_z + \Gamma \hat{\sigma}_x\)</span>, and <span class="arithmatex">\(\langle {\cal L} \rangle_n^0\)</span> is defined through its action on an arbitrary electronic operator <span class="arithmatex">\(\hat{A}\)</span>:</p>
 <div class="arithmatex">\[
@@ -1238,7 +1242,9 @@ Then the method <code>DynamicsGQME.prop_puresystem()</code> allows for time evol
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">sigma_liou</span> <span class="o">=</span> <span class="n">SBM</span><span class="o">.</span><span class="n">prop_puresystem</span><span class="p">()</span>
 </span></code></pre></div>
 <p>The results are shown in the figure below, along with the numerically exact TT-TFD results for comparison. As expected, the evolution of the isolated system exhibits no decay and no energy dissipation.</p>
-<p><img alt="Liouville-only" src="../../images/Part_IV/Fig_SpinBoson_sysEvolution.png" /></p>
+<figure>
+<img alt="Liouville-only" src="../../images/Part_IV/Fig_SpinBoson_sysEvolution.png" width="800" />
+</figure>
 <h2 id="the-memory-kernel">The Memory Kernel</h2>
 <p>According to <a href="../What_is_GQME/">Introduction to GQME</a>, the memory kernel can be obtained through the projection-free inputs (PFIs) <span class="arithmatex">\(\mathcal{F}(t)\)</span> and <span class="arithmatex">\(\dot{\mathcal{F}}(t)\)</span>: </p>
 <div class="arithmatex">\[
@@ -1269,14 +1275,16 @@ Then the method <code>DynamicsGQME.prop_puresystem()</code> allows for time evol
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">kernel</span> <span class="o">=</span> <span class="n">SBM</span><span class="o">.</span><span class="n">get_memory_kernel</span><span class="p">()</span>
 </span></code></pre></div>
 A representative result of the memory kernel is shown in the figure below. It captures the influence of the environment on the system dynamics, leading to non-Markovian behavior. The nonzero <span class="arithmatex">\(\mathcal{K}_{DA,DD}(t)\)</span> component in the figure indicates that the bath-induced population <span class="arithmatex">\(\sigma_{DD}\)</span> at an earlier time can influence the coherence dynamics of <span class="arithmatex">\(\sigma_{DA}\)</span> at a later time.</p>
-<p><img alt="Memory_Kernel" src="../../images/Part_IV/Fig_SpinBoson_kernel.png" /></p>
-<h1 id="propagating-system-dynamics-using-gqme">Propagating System Dynamics using GQME</h1>
+<figure>
+<img alt="Memory_Kernel" src="../../images/Part_IV/Fig_SpinBoson_kernel.png" width="800" />
+</figure>
+<h1 id="propagating-system-dynamics-using-gqme">Propagating System Dynamics Using GQME</h1>
 <p>With both the projected Liouvillian and the memory kernel available, Eq. (1) can be directly solved. The <code>solve_gqme</code> method in the <code>DynamicsGQME</code> class employs the fourth-order Runge-Kutta (RK4) method to solve the GQME. By providing the memory kernel and specifying a cutoff memory time, the <code>solve_gqme</code> method directly integrates the GQME and returns the reduced density operator <span class="arithmatex">\(\hat{\sigma}(t)\)</span>.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">#=========== Propagate system dynamics using the GQME</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">sigma</span> <span class="o">=</span> <span class="n">SBM</span><span class="o">.</span><span class="n">solve_gqme</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">MEM_TIME</span><span class="p">)</span>
 </span></code></pre></div>
 <p>We visualize the simulations by plotting the observable <span class="arithmatex">\(\sigma(t)\)</span>. The comparison between the GQME and exact results obtained via TT-TFD offers a benchmark for accuracy.</p>
-<p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">## Plotting Results</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">## Plotting Results</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">#=========== Plot the 0th state population from both methods</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timeVec</span><span class="p">,</span> <span class="n">sigma</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GQME&#39;</span><span class="p">)</span>
@@ -1285,7 +1293,9 @@ A representative result of the memory kernel is shown in the figure below. It ca
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\sigma_</span><span class="si">{00}</span><span class="s1">(t)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </span></code></pre></div>
-<img alt="GQME_evolution" src="../../images/Part_IV/Fig_SpinBoson_GQME.png" /></p>
+<figure>
+<img alt="GQME_evolution" src="../../images/Part_IV/Fig_SpinBoson_GQME.png" width="800" />
+</figure>
 <hr />
 <h1 id="summary">Summary</h1>
 <p>This example demonstrates a modular simulation of an open quantum system using the Generalized Quantum Master Equation (GQME) framework:</p>
@@ -1447,8 +1457,6 @@ A representative result of the memory kernel is shown in the figure below. It ca
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

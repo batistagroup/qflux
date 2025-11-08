@@ -687,7 +687,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -696,7 +698,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1156,7 +1158,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1165,7 +1169,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1255,10 +1259,12 @@
 <p>This documentation describes how to simulate the open quantum dynamics of a spin chain using the Lindbladian formalism. The simulation supports both classical and quantum computation backends and showcases comparison plots between different solver strategies.</p>
 <hr />
 <h2 id="system-setup">System Setup</h2>
-<p><img alt="Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  Omega is the energy required to flip the spin state at the particular polymer site n, and J is the offsite couplings between adjacent spins. The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate gamma" src="../../images/Part_II/Lindbladian_radicals.png" /></p>
+<figure>
+<img alt="Schematic representation of a spin chain model coupled to an environment, where a graphene nanoribbon acts as a spin chain. The free radical moieties in the polymer group (red or blue molecular groups in the figure) represent the spin sites, which may have spin up or down.  Omega is the energy required to flip the spin state at the particular polymer site n, and J is the offsite couplings between adjacent spins. The graphene nanoribbon is coupled to a bath, with the dissipation effect given by the damping rate gamma" src="../../images/Part_II/Lindbladian_radicals.png" width="800" />
+</figure>
 <p>We begin by specifying the system Hamiltonian and initial state for a chain of <span class="arithmatex">\(n = 3\)</span> spins, with the form</p>
 <div class="arithmatex">\[  H = \sum_{n=0}^{N-1} \Omega_{n} \sigma_{n}^{z} - \frac{1}{2} \sum_{n=0}^{N-2} ( J_{n,n+1}^{x} \sigma_{n}^{x} \sigma_{n+1}^{x} + J_{n,n+1}^{y} \sigma_{n}^{y} \sigma_{n+1}^{y} + J_{n,n+1}^{z} \sigma_{n}^{z} \sigma_{n+1}^{z} ) \]</div>
-<p>The Hamiltonian is defined using a Pauli string representation and includes local <span class="arithmatex">\(Z\)</span>-field terms and <span class="arithmatex">\(XX\)</span>, <span class="arithmatex">\(YY\)</span>, and <span class="arithmatex">\(ZZ\)</span> couplings, with cofficients given according to the table:</p>
+<p>The Hamiltonian is defined using a Pauli string representation and includes local <span class="arithmatex">\(Z\)</span>-field terms and <span class="arithmatex">\(XX\)</span>, <span class="arithmatex">\(YY\)</span>, and <span class="arithmatex">\(ZZ\)</span> couplings, with coefficients given according to the table:</p>
 <table>
 <thead>
 <tr>
@@ -1405,7 +1411,9 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 </span></code></pre></div>
 <p>The comparison between matrix exponential, QuTiP Lindblad, and pure unitary evolution offers a benchmark for accuracy and computational cost.</p>
-<p><img alt="Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation" src="../../images/Part_II/Spinchain_Classical_Dynamics.png" /></p>
+<figure>
+<img alt="Classical device simulation of open quantum dynamics of a three-site spin chain comparing the closed system, and the open system simulated with both Qutip and Matrix exponentiation" src="../../images/Part_II/Spinchain_Classical_Dynamics.png" width="800" />
+</figure>
 <hr />
 <h2 id="quantum-simulation">Quantum Simulation</h2>
 <p>A quantum simulation backend is invoked using the <code>QubitDynamicsOS</code> class. This assumes density matrix simulation via vectorization and allows control over measurement configuration and shot noise.</p>
@@ -1431,7 +1439,9 @@
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 </span></code></pre></div>
 <p>This plot illustrates convergence of quantum simulation with classical reference as the number of measurement shots increases.</p>
-<p><img alt="Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation" src="../../images/Part_II/Spinchain_Quantum_Dynamics.png" /></p>
+<figure>
+<img alt="Quantum device simulation of open quantum dynamics of a three-site spin chain comparing the quantum device simulation with the open system simulated with both Qutip and Matrix exponentiation" src="../../images/Part_II/Spinchain_Quantum_Dynamics.png" width="800" />
+</figure>
 <hr />
 <h2 id="summary">Summary</h2>
 <p>This example presents a flexible simulation pipeline for open quantum systems, written in a basis of Pauli strings:</p>
@@ -1593,8 +1603,6 @@
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

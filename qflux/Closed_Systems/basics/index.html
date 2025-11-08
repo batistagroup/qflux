@@ -456,7 +456,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -465,7 +467,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1120,7 +1122,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1129,7 +1133,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1181,7 +1185,7 @@
 
 <h1 id="anatomy-of-a-closed-system-quantum-dynamics-simulation">Anatomy of a Closed System Quantum Dynamics Simulation</h1>
 <p>To run a dynamics simulation, we need to define some key quantities. This section will walk you through the process of defining these things within <code>qflux</code>.</p>
-<p>As a reminder, the task at hand is compute the time evolution of a wavefunction according to the Schrodinger equation: </p>
+<p>As a reminder, the task at hand is to compute the time evolution of a wavefunction according to the Schrodinger equation: </p>
 <div class="arithmatex">\[ \left| \psi (t) \right\rangle = e^{- \frac{i}{\hbar} H t} \left| \psi_{0} \right\rangle \]</div>
 <p>To do this, we must: </p>
 <ul>
@@ -1259,7 +1263,7 @@
 <p>To use the built-in potential energy functions, all one must do is use the <code>.set_hamiltonian()</code> method. This method has the optional keyword argument <code>potential_type</code>, which can be used to choose one of the two currently implemented potentials:
 - Harmonic Oscillator Potential
 - Arbitrary Quartic Potential</p>
-<p>The harmonic oscilator potential is implemented in the grid-basis as: </p>
+<p>The harmonic oscillator potential is implemented in the grid-basis as: </p>
 <div class="arithmatex">\[ V(x) = \frac{1}{2} m \omega^{2} x^{2} \]</div>
 <p>and in the ladder basis as: </p>
 <div class="arithmatex">\[ H = \hbar \omega \left( \hat{a}^{\dagger} \hat{a} + \frac{1}{2} \right) \]</div>
@@ -1459,8 +1463,6 @@
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

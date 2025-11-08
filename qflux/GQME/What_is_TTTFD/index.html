@@ -1061,7 +1061,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1088,7 +1090,7 @@
 <p>In this section, we introduce the tensor-train thermo-field dynamics (TT-TFD) method. Using the spin-boson model as an example, we demonstrate how TT-TFD can be used to simulate its quantum dynamics and compute the corresponding memory kernel.</p>
 <p>The TT-TFD method has been fully integrated into the <code>qflux.GQME</code> module.</p>
 <h1 id="what-is-tt-tfd">What is TT-TFD?</h1>
-<p>The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transform solving the Liouville equation <span class="arithmatex">\(\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]\)</span> into solving</p>
+<p>The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transforms solving the Liouville equation <span class="arithmatex">\(\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]\)</span> into solving</p>
 <div class="arithmatex">\[
 \frac{d}{dt} |\psi(\beta, t)\rangle = -\frac{i}{\hbar} \bar{H} |\psi(\beta, t)\rangle
 \]</div>
@@ -1115,7 +1117,7 @@ This model comprises two electronic states, representing a diabatic donor state
 <div class="arithmatex">\[
 \hat \rho(0) = \hat \sigma(0) \otimes \hat \rho_{n}(0)
 \]</div>
-<p>with <span class="arithmatex">\(\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |\)</span> is the initial electronic density operator, where <span class="arithmatex">\(|\gamma\rangle\)</span> is one of the electronic basis states.
+<p>where <span class="arithmatex">\(\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |\)</span> is the initial electronic density operator, where <span class="arithmatex">\(|\gamma\rangle\)</span> is one of the electronic basis states.
 The initial nuclear density operator given by</p>
 <div class="arithmatex">\[ \hat{\rho}_{n} (0) = \frac{\exp\bigg[\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg]}{\text{Tr}_{n} \Bigg\{ \exp\bigg[\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg] \Bigg\}} \]</div>
 <p>We set the parameters as:</p>
@@ -1159,13 +1161,13 @@ The transformation is defined by <span class="arithmatex">\(e^{-i\hat{G}}\)</spa
 <div class="arithmatex">\[
 |\psi(\beta, 0)\rangle = |\gamma\rangle \otimes |0, \tilde{0}\rangle 
 \]</div>
-<p>In practice, the <span class="arithmatex">\(N_n\)</span> pairs of <span class="arithmatex">\(\{\omega_i , c_i\}\)</span> are sampled from an Ohmic spectral density, and the TFD equations are solved in the tensor-train (TT) representation (more details can refer to <a href="https://doi.org/10.1021/acs.jctc.2c00892">"Tensor-Train Thermo-Field Memory Kernels for Generalized Quantum Master Equations"</a>).</p>
+<p>In practice, the <span class="arithmatex">\(N_n\)</span> pairs of <span class="arithmatex">\(\{\omega_i , c_i\}\)</span> are sampled from an Ohmic spectral density, and the TFD equations are solved in the tensor-train (TT) representation (for more details, see <a href="https://doi.org/10.1021/acs.jctc.2c00892">"Tensor-Train Thermo-Field Memory Kernels for Generalized Quantum Master Equations"</a>).</p>
 <h2 id="tt-tfd-implementation-in-qflux">TT-TFD Implementation in qflux</h2>
 <p>The TT-TFD approach has been integrated into the <code>qflux</code> package.
 The <a href="https://doi.org/10.1137/140976546">time-dependent
 variational principle (TDVP) method</a> is employed to propagate the TT-TFD. With the
 help of the <code>mpsqd</code> package developed by <a href="https://doi.org/10.1063/5.0226214">Guan et al.</a>, tensor-train (TT) operations can be conveniently performed.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">mpsqd</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;qflux[gqme]&quot;</span>
 </span></code></pre></div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">qflux.GQME.tt_tfd</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfd</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
@@ -1181,7 +1183,9 @@ Where we plot the donor-state population <span class="arithmatex">\(|D\rangle\)<
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\sigma_</span><span class="si">{DD}</span><span class="s1">$(t)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </span></code></pre></div>
-<p><img alt="png" src="../../images/Part_IV/Fig_SpinBoson_TTTFD.png" /></p>
+<figure>
+<img alt="png" src="../../images/Part_IV/Fig_SpinBoson_TTTFD.png" width="800" />
+</figure>
 <h1 id="summary">Summary</h1>
 <p>In this documentation, we introduce the tensor-train thermo-field dynamics (TT-TFD) method, a numerically exact approach for solving open quantum system dynamics:</p>
 <ul>
@@ -1348,8 +1352,6 @@ Where we plot the donor-state population <span class="arithmatex">\(|D\rangle\)<
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

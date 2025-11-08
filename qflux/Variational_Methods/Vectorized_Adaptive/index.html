@@ -868,7 +868,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -877,7 +879,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1156,7 +1158,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1165,7 +1169,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1270,7 +1274,7 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.variational_methods.qmad.effh</span><span class="w"> </span><span class="kn">import</span> <span class="n">VectorizedEffectiveHamiltonian</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.variational_methods.qmad.ansatzVect</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ansatz</span>
 </span></code></pre></div>
-<p>Define Pauli matrices and ladder operators, which will form the building block for the representation for the amplitude damping process.</p>
+<p>Define Pauli matrices and ladder operators, which will form the building blocks for the representation for the amplitude damping process.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">sy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">sp</span> <span class="o">=</span> <span class="p">(</span><span class="n">sx</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">sy</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># raising operator</span>
@@ -1304,9 +1308,9 @@
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">res</span> <span class="o">=</span> <span class="n">solve_avq_vect</span><span class="p">(</span><span class="n">H_vec</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Extract ground and excited state populations from the diagonal elements of the resulting density matrices.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">excited</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">u</span><span class="p">))]</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">ground</span>  <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">u</span><span class="p">))]</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">times</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span> <span class="o">+</span> <span class="mf">1e-30</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">excited</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">ground</span>  <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">times</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
 <h2 id="operator-pool-definition">Operator Pool Definition</h2>
@@ -1354,7 +1358,9 @@ It consists of basic <strong>Pauli operators</strong> (<code>sx</code>, <code>sy
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
-<p><img alt="QuTiP_Populations" src="../../images/Part_III/qutip_ampdamp.png" /></p>
+<figure>
+<img alt="QuTiP_Populations" src="../../images/Part_III/qutip_ampdamp.png" width="800" />
+</figure>
 <hr />
 <h2 id="combined-comparison-plot">Combined Comparison Plot</h2>
 <p>Overlay UAVQD and QuTiP population curves for a unified view.</p>
@@ -1376,7 +1382,9 @@ It consists of basic <strong>Pauli operators</strong> (<code>sx</code>, <code>sy
 </span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
-<p><img alt="AmpDamp_Comparison" src="../../images/Part_III/ampdamp_comparison.png" /></p>
+<figure>
+<img alt="AmpDamp_Comparison" src="../../images/Part_III/ampdamp_comparison.png" width="800" />
+</figure>
 <hr />
 <h2 id="references">References</h2>
 <ul>
@@ -1535,8 +1543,6 @@ It consists of basic <strong>Pauli operators</strong> (<code>sx</code>, <code>sy
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>

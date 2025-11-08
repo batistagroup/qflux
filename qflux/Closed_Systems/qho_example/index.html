@@ -479,7 +479,9 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -488,7 +490,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1153,7 +1155,9 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On This Page">
   
   
   
@@ -1162,7 +1166,7 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      On This Page
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
@@ -1287,6 +1291,7 @@
 - Collection of the state at each time-step of the dynamics</p>
 <h3 id="analyzing-the-results">Analyzing the Results</h3>
 <p>The first thing we can do is to check the state initialization in the quantum circuit formalism. To do this, we can plot initial state in the qubit basis and compare to the state in the coordinate basis:</p>
+<p><strong>NOTE:</strong> To obtain agreement between wavefunction/amplitude plots obtained in the grid-based and qubit formalisms, one must carefully account for the grid-spacing with qubit-based objects.For all qubit-formalism state objects, <code>qflux</code> adheres to the norm required by <code>qiskit</code>: <span class="arithmatex">\(\psi^{*} \cdot \psi = 1\)</span>, while the grid-based states will follow a more familiar normalization <span class="arithmatex">\(\int \psi^{*} \psi \, dx = 1\)</span>.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
@@ -1297,7 +1302,7 @@
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\left| \psi_</span><span class="si">{0}</span><span class="s1"> \right|^</span><span class="si">{2}</span><span class="s1">$ (Grid)&#39;</span><span class="p">)</span>
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">HO_dyn_obj</span><span class="o">.</span><span class="n">x_grid</span><span class="p">,</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>         <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">HO_dyn_obj</span><span class="o">.</span><span class="n">dynamics_results_qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span> <span class="o">*</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>                 <span class="n">HO_dyn_obj</span><span class="o">.</span><span class="n">dynamics_results_qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span><span class="o">/</span><span class="n">HO_dyn_obj</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>                 <span class="n">HO_dyn_obj</span><span class="o">.</span><span class="n">dynamics_results_qubit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">HO_dyn_obj</span><span class="o">.</span><span class="n">dx</span><span class="p">,</span>
 </span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\left| \psi_</span><span class="si">{0}</span><span class="s1"> \right|^</span><span class="si">{2}</span><span class="s1">$ (Qubit)&#39;</span><span class="p">)</span>
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -1305,7 +1310,9 @@
 </span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
 </span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </span></code></pre></div>
-<p><img alt="Qubit-State-Comparison" src="../../images/Part_I/Qubit-State-Initialization.png" /></p>
+<figure>
+<img alt="Qubit-State-Comparison" src="../../images/Part_I/Qubit-State-Initialization.png" width="800" />
+</figure>
 <p>To compare the dynamics, we can calculate and plot the expectation value over time for the qSOFT and SOFT results with the analytical expressions:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qflux.closed_systems.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_expectation_values</span>
@@ -1340,7 +1347,9 @@
 </span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
 </span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </span></code></pre></div>
-<p><img alt="Qubit-Expectations-Comparison" src="../../images/Part_I/HO_ExpectationValues_quantum.png" /></p>
+<figure>
+<img alt="Qubit-Expectations-Comparison" src="../../images/Part_I/HO_ExpectationValues_quantum.png" width="800" />
+</figure>
 <h2 id="propagation-with-a-real-backend">Propagation with a Real Backend</h2>
 <p>You can repeat the previous section and run on a real quantum device by changing the specification of the backend! Recall that we instantiated a StatevectorSimulator backend before running the dynamics calculation above. To run on a real device, we must first instantiate a backend instance using a real device. This can be done with the following code:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># To use a real backend:</span>
@@ -1434,7 +1443,9 @@
 </span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">)</span>
 </span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">qho_dyn_obj</span><span class="o">.</span><span class="n">tlist</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:grey&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </span></code></pre></div>
-<p><img alt="expectation_vals_ho" src="../../images/Part_I/QHO-Expectation-Values.png" /></p>
+<figure>
+    <img alt="expectation_vals_ho" src="../../images/Part_I/QHO-Expectation-Values.png" width="800" />
+</figure>
 <p>Hopefully the agreement in this plot convinces you that we're doing something correct!</p>
 <h2 id="propagation-in-the-coordinate-basis">Propagation in the Coordinate Basis</h2>
 <p>We can also propagate a wavefunction in a coordinate-grid representation using the so-called Split-Operator Fourier Transform (SOFT) method.</p>
@@ -1639,8 +1650,6 @@
         <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-        <script src="../../../javascripts/collapse-sidebars.js"></script>
       
     
   </body>
