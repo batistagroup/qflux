@@ -247,7 +247,7 @@ One can verify that the quantum simulation results are consistent with the corre
 ```python
 import matplotlib.pyplot as plt
 plt.figure(figsize=(6,2))
-plt.plot(time_arr,Pop_qc[:,0]-Pop_qc[:,1],'r-',label="quantum")
+plt.plot(time_arr,Pop_qc['data'][:,0]-Pop_qc['data'][:,1],'r-',label="quantum")
 plt.plot(time_arr,result_matrix_exp.expect,'k--',label="classical")
 plt.xlabel('time (ps)',fontsize=15)
 plt.ylabel('$P(t)$',fontsize=15)
