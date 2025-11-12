@@ -33,22 +33,22 @@ from qflux.open_systems.quantum_simulation import QubitDynamicsOS
 import qflux.open_systems.trans_basis as tb
 
 
-#============set the Hamiltonian and initial state
-#the system Hamiltonian parameter
-nsite = 3 #this states how many spins in the simulation
-Nsys_sc = 2**nsite #this is the dimension of the Hilbert space
+# Set the Hamiltonian and Initial State
+# System Hamiltonian Parameters
+nsite = 3 # this sets how many spins in the simulation
+Nsys_sc = 2**nsite # this is the dimension of the Hilbert space
 Omegai_list = [0.65, 1.0, 1.0]
 Jix_list = [0.75, 1.0]
 Jiy_list = [0.75, 1.0]
 Jiz_list = [0.0, 0.0]
 
-#Hamiltonian in pauli string basis
+# Hamiltonian in pauli string basis
 H_pauli_str = {'ZII':Omegai_list[0], 'IZI':Omegai_list[1], 'IIZ':Omegai_list[2], \
                'XXI':-0.5*Jix_list[0], 'IXX':-0.5*Jix_list[1], \
                'YYI':-0.5*Jiy_list[0], 'IYY':-0.5*Jiy_list[1], \
                'ZZI':-0.5*Jiz_list[0], 'IZZ':-0.5*Jiz_list[1]   }
 
-#system hamiltonian
+# System Hamiltonian
 Hsys = tb.pauli_to_ham(H_pauli_str, 3)
 ```
 
@@ -56,16 +56,16 @@ The initial state is constructed as a product state $|\uparrow\downarrow\downarr
 
 
 ```python
-#set up the initial state at [up,down,down...]
+# Set up the initial state at [up,down,down...]
 init_state = pa.spin_up
 for i in range(nsite-1):
   init_state = np.kron(init_state,pa.spin_down)
 
-#set up the initial density matrix according to initial state
+# Set up the initial density matrix according to initial state
 rho0_sc = np.zeros((Nsys_sc,Nsys_sc),dtype=np.complex128)
 rho0_sc += np.outer(init_state,init_state.conj())
 
-#time array for simulation
+# Time array for simulation
 time_arr = np.linspace(0, (250 - 1) * 0.1, 250)
 ```
 
@@ -86,12 +86,12 @@ These are weighted by decay rates $\Gamma_1$ and $\Gamma_2$ per site.
 
 ```python
 L_sc = []
-#The lindblad damping rate
+# The lindblad damping rate
 Gamma1 = [0.016]*nsite
 Gamma2 = [0.0523]*nsite
 
 for isite in range(nsite):
-  #Lindbladian for type 1
+  # Lindbladian for type 1
   res = 1.0
   for j in range(nsite):
     if(j==isite):
@@ -100,7 +100,7 @@ for isite in range(nsite):
       res = np.kron(res,pa.I)
   L_sc.append(res)
 
-  #Lindbladian for type 2
+  # Lindbladian for type 2
   res = 1.0
   for j in range(nsite):
     if(j==isite):
@@ -124,15 +124,15 @@ We now instantiate the system using both pure and open dynamics objects:
   - `propagate_matrix_exp`: Uses matrix exponentials
 
 ```python
-#=============instantiation
+# Instantiation
 spin_chain_puresys =  DynamicsOS(Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc)
 spin_chain_opensys =  DynamicsOS(Nsys=Nsys_sc, Hsys=Hsys, rho0=rho0_sc, c_ops = L_sc)
 
-#=============propagation
+# Propagation
 # QuTiP Propagation for the pure system Liouville equation (for comparison)
 result_qutip_Liouv = spin_chain_puresys.propagate_qt(time_arr=time_arr, observable=rho0_sc)
 
-#matrix exponential propagation
+# Matrix exponential propagation
 result_matrix_exp = spin_chain_opensys.propagate_matrix_exp(time_arr=time_arr, observable=rho0_sc)
 
 # QuTiP Propagation for the Lindblad equation
@@ -180,8 +180,8 @@ qspin_chain.set_count_str(['0011011'])
 res_qc_1k = qspin_chain.qc_simulation_vecdens(time_arr,shots=1000)
 res_qc_1w = qspin_chain.qc_simulation_vecdens(time_arr,shots=10000)
 
-As_qc_1k = np.sqrt(res_qc_1k)
-As_qc_1w = np.sqrt(res_qc_1w)
+As_qc_1k = np.sqrt(res_qc_1k['data'])
+As_qc_1w = np.sqrt(res_qc_1w['data'])
 ```
 
 The `set_count_str` method defines which measurement outcomes to track, and `qc_simulation_vecdens` performs the evolution using a quantum processor or simulator.
@@ -194,8 +194,8 @@ We compare quantum results (with different shot counts) against the classical Qu
 
 ```python
 plt.figure(figsize=(6,2))
-plt.plot(time_arr,As_qc_1k[:],'r-',label=f"quantum,counts={1000}")
-plt.plot(time_arr,As_qc_1w[:],'b-',label=f"quantum,counts={10000}")
+plt.plot(time_arr,As_qc_1k,'r-',label=f"quantum,counts={1000}")
+plt.plot(time_arr,As_qc_1w,'b-',label=f"quantum,counts={10000}")
 plt.plot(time_arr,As_qutip,'ko',markersize=4,markevery=4,label="QuTiP benchmark")
 plt.xlabel('Time',fontsize=15)
 plt.ylabel('$A_s$(t)',fontsize=15)

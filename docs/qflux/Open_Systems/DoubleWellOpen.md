@@ -58,7 +58,7 @@ The following code defines the double-well potential function `pot_doublewell` f
 ```python
 from qflux.open_systems.numerical_methods import DVR_grid
 
-#=============set up the double well in the grid point representation
+# Set up the double well in the grid point representation
 def pot_doublewell(x, f=0.0367493, a0=0.0, a1=0.429, a2=-1.126, a3=-0.143, a4=0.563):
     # A-T pair double-well potential in Hartrees (x is in Bohr)
     xi = x/1.9592
@@ -139,6 +139,7 @@ adegmat_eig = xmat_eig.copy()*np.sqrt(mass0*omega/2)-1j*pmat_eig.copy()/np.sqrt(
 
 # define the population on the left/right well and transform to eigen state basis
 x_barrier = 0.37321768
+xgrid = dw_grid.xgrid
 P_R = np.heaviside(xgrid-x_barrier,1)
 P_L = 1 - np.heaviside(xgrid-x_barrier,1)
 
@@ -156,7 +157,7 @@ $$
 
 
 ```python
-#initial density matrix
+# initial density matrix
 ini_occu = np.zeros(Neig,dtype=np.complex128)
 ini_occu[5] = 1.0
 rho0 = np.outer(ini_occu,ini_occu.conj())
@@ -172,20 +173,31 @@ gamma1 = np.sqrt(kappa*(nth+1))
 gamma2 = np.sqrt(kappa*(nth))
 c_ops = [gamma1*amat_eig, gamma2*adegmat_eig]
 
-#instantiate the DynamicsOS class
+# instantiate the DynamicsOS class
 dw_eig = DynamicsOS(Nsys = Neig, Hsys = H_dw, rho0 = rho0, c_ops = c_ops)
 
-#the observable
+# the observable
 observable = P_R_eig
 
-#propagate to long time
+# propagate to long time
 time_long = np.linspace(0,20000/pa.au2fs,60)
 
-#propagate using matrix exponential propagation
+# propagate using matrix exponential propagation
 result_dw_l = dw_eig.propagate_matrix_exp(time_long, observable, Is_store_state = True, Is_show_step=True, Is_Gt=True)
 ```
 
 We can visualize the population in the right well as a function of time:
+
+```python
+# Plot the population of the right well over time
+
+plt.figure(figsize=(6, 4))
+plt.plot(time_long*pa.au2fs, result_dw_l.expect, 'o', color='k', label='Matrix Exponential')
+plt.ylabel('Population (Right Well)')
+plt.xlabel('t (fs)')
+```
+
+which will produce something like the following:
 
 <figure markdown="span">
 ![png](../images/Part_II/Part2_doublewell_classicaldyn.png){: width="800"}
@@ -254,9 +266,9 @@ This function first computes the propagator (unless it is provided as input), an
 Once the Kraus operators are obtained, `qc_simulation_kraus` performs the quantum simulation and evaluates the observable of interest — in this case,  $\hat{P}_R$:
 
 ```python
-#extract the propagator from result of classical simulation,
-#and expand to match the dimension of qubit space
-#For saving calculation, only choose some time points
+# extract the propagator from result of classical simulation,
+# and expand to match the dimension of qubit space
+# For saving calculation, only choose some time points
 ilarge = 5
 nsteps = int(len(time_long)/ilarge)
 time_qdw = np.zeros(nsteps)
@@ -269,15 +281,25 @@ for i0 in range(nsteps):
 
     time_qdw[i0] = time_long[i]
 
-#double well instance
+# double well instance
 dw_quantum = QubitDynamicsOS(rep='Kraus', Nsys=Neig, Hsys=H_dw, rho0=rho0, c_ops = c_ops)
 dw_quantum.set_observable(P_R_eig)
 
-#running the quantum simulation
+# running the quantum simulation
 P_dw_qc = dw_quantum.qc_simulation_kraus(time_qdw, Gprop = Gprop_dw, tolk = 1E-2, tolo = 5E-3)
 ```
 
 One can visualize $P_R(t)$ after the simulation is complete:
+
+```python
+# Plot the population of the right well over time
+plt.figure(figsize=(6, 4))
+plt.plot(time_long*pa.au2fs, result_dw_l.expect, color='k', label='Matrix Exponential')
+plt.plot(time_qdw*pa.au2fs, P_dw_qc['data'], 'o', color='tab:red', label='Quantum Simulation')
+plt.ylabel('Population (Right Well)')
+plt.xlabel('t (fs)')
+_ = plt.legend(loc='upper right')
+```
 
 <figure markdown="span">
 ![png](../images/Part_II/Part2_doublewell_Krausq.png){: width="800"}

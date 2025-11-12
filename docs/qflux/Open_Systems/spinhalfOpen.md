@@ -254,7 +254,7 @@ In the following code, the classical simulation of the same system is also compu
 Pop_qc = spin1_sdam.qc_simulation_vecdens(time_sdam)
 res_sdam_classical = spin1_sdam.propagate_matrix_exp(time_sdam, observable=pa.Z, Is_store_state = True)
 
-Pop_Mexp = np.zeros_like(Pop_qc)
+Pop_Mexp = np.zeros_like(Pop_qc['data'])
 for i in range(len(time_sdam)):
     Pop_Mexp[i,0] = res_sdam_classical.density_matrix[i][0,0].real
     Pop_Mexp[i,1] = res_sdam_classical.density_matrix[i][1,1].real
@@ -264,14 +264,14 @@ The population dynamics of both the excited and ground states are plotted, showi
 
 
 ```python
-plt.figure(figsize=(6,2))
-plt.plot(time_sdam,Pop_qc[:,0],'r-',label="quantum,|0>")
+plt.figure(figsize=(6,4.5))
+plt.plot(time_sdam,Pop_qc['data'][:,0],'r-',label="quantum,|0>")
 plt.plot(time_sdam,Pop_Mexp[:,0],'ko',markersize=5,markevery=40,label="benchmark,|0>")
-plt.plot(time_sdam,Pop_qc[:,1],'b-',label="quantum,|1>")
+plt.plot(time_sdam,Pop_qc['data'][:,1],'b-',label="quantum,|1>")
 plt.plot(time_sdam,Pop_Mexp[:,1],'yo',markersize=5,markevery=40,label="benchmark,|1>")
 plt.xlabel('time (ps)',fontsize=15)
 plt.ylabel('$P(t)$',fontsize=15)
-plt.legend(loc = 'upper right')
+plt.legend(loc = 'upper right', ncol=2)
 ```
 
 <figure markdown="span">
