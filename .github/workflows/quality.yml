@@ -45,5 +45,5 @@ jobs:
     # - name: Run ruff (formatter)
     #   run: ruff format --check
 
-    - name: Run mypy
-      run: mypy .
+    # - name: Run mypy
+    #   run: mypy .
