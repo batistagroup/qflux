@@ -158,7 +158,7 @@ class DynamicsOS:
         else:
             obs = Qobj(observable)
 
-        result = mesolve(Qobj(self.Hsys), Qobj(self.rho0), time_arr, c_ops, obs, **kwargs)
+        result = mesolve(Qobj(self.Hsys), Qobj(self.rho0), time_arr, c_ops=c_ops, e_ops=obs, **kwargs)
         return result.expect
 
 
