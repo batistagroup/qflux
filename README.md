@@ -50,19 +50,13 @@ https://qflux.batistalab.com/
 
 ### Notebooks For Tutorial Manuscript <a name="notebooks"></a>
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_I.ipynb) | Part I - Closed Quantum Dynamics and Simulation Protocols
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_I_qflux_snippets.ipynb) | Part I - Closed Quantum Dynamics and Simulation Protocols
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_I_appendixA.ipynb) | Part I - Appendix A: Variational Methods
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_II_qflux_snippets.ipynb) | Part II - Open Quantum Dynamics
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_I_appendixB.ipynb) | Part I - Appendix B: Bosonic Simulation
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_III_qflux_snippets.ipynb) | Part III - Variational Quantum Dynamics
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_II.ipynb) | Part II - Open Quantum Dynamics
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_III_B.ipynb) | Part III - Variational Quantum Trajectory Dynamics for FMO
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_III_A.ipynb) | Part III - Variational Quantum Dynamics for Amplitude Damping
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/tutorial/Part_IV.ipynb) | Part IV - Generalized Quantum Master Equation Dynamics
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_IV_qflux_snippets.ipynb) | Part IV - Generalized Quantum Master Equation Dynamics
 
 ### Contribution Guidelines <a name="contribute"></a>
 
@@ -81,12 +75,13 @@ This section includes additional repositories with functionality that has been i
 
 ## Citation <a name="citation"></a>
 
-Please cite the preprint of our work when using this code until the journal version becomes available.
+Please cite the preprints of our work when using this code until the journal version becomes available.
 
 
 ## Licensing <a name="license"></a>
 
 Each notebook or repository might have its own licensing. Please refer to the individual README files and notebooks within each directory for specific licensing information.
+
 
 ## Acknowledgement <a name="acknowledgement"></a>
 
