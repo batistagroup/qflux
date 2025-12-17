@@ -4,7 +4,7 @@ from mpsqd.utils import MPS, add_tensor, MPS2MPO, calc_overlap
 from .tt_tfd import (initial, construct_Hamil, tt_eye, tt_matrix, 
                      tt_kron, tt_ones, multiply_mps, compare_diff,
                      cal_property, tt_tfd)
-
+from typing import Any, Callable
                         
 pp = Params()
 
@@ -309,7 +309,7 @@ def tt_ksl_propagator(
     verbose: bool = True,
     show_steptime: bool = False,
     copy_state: bool = False,
-    pp=pp
+    pp=pp,
 ) -> tuple[np.ndarray, np.ndarray]:
     """
     Perform TT-TFD time propagation with a given initial state and Hamiltonian.

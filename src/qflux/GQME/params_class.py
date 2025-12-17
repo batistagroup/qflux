@@ -1,3 +1,10 @@
+"""
+Example Parameters class as illustrated in Part_I_JCE.ipynb.
+
+"""
+
+import numpy as np
+
 class Params:
     def __init__(self):
         # ==== Spin-Boson Model parameters ====
