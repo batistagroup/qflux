@@ -11,7 +11,7 @@ where = ["src"]
 
 [project]
 name = "qflux"
-version = "0.0.4"
+version = "0.0.5"
 description = "qflux is a package for running quantum dynamics calculations on quantum devices."
 readme = "README.md"
 requires-python = ">=3.10"
