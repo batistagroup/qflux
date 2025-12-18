@@ -11,7 +11,7 @@ where = ["src"]
 
 [project]
 name = "qflux"
-version = "0.0.4"
+version = "0.0.6"
 description = "qflux is a package for running quantum dynamics calculations on quantum devices."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -36,7 +36,7 @@ authors = [
            { name = "Delmar Cabral", email = "delmar.azevedocabral@yale.edu" },
            { name = "Alexander Soudackov", email = "alexander.soudackov@yale.edu"},
            { name = "Anton Morgunov", email = "anton@ischemist.com" }]
-license = { text = "MIT" }
+license = "MIT"
 keywords = ["Quantum Computing", "chemistry", "quantum dynamics"]
 
 [project.urls]

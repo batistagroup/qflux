@@ -334,9 +334,9 @@ class SpinDynamicsH:
         if os.path.exists(reference_filename):
             ref_sa = np.load(f'data/{self.num_qubits}_spin_chain_SA_obs.npy')
             ref_time = np.load(f'data/{self.num_qubits}_spin_chain_time.npy')
+            plt.plot(ref_time, ref_sa, '-', label='Statevector')
         else:
             print('No reference data file found!')
-        plt.plot(ref_time, ref_sa, '-', label='Statevector')
 
         plt.xlabel('Time')
         plt.ylabel(r"$\left|\langle \psi | \psi (t)  \rangle \right|$")
