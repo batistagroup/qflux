@@ -52,15 +52,30 @@ You can learn how to use `qflux` through the tutorial-format examples on this do
     - [Quantum Algorithms of GQME](qflux/GQME/quantum_GQME_dilation.md)
 
 
-You can also open interactive notebooks in Google Colab: 
+You can also open our interactive tutorial notebooks in Google Colab: 
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Closed Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_I_qflux.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Closed Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_I_qflux_snippets.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Open Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_II_qflux.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Open Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_II_qflux_snippets.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Variational Methods Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_III_qflux2.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Variational Methods Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_III_qflux_snippets.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) GQME Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Part_IV_qflux.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) GQME Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_IV_qflux_snippets.ipynb)
+
+
+We also have companion notebooks for the pre-print manuscripts available:
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Classical Foundations for Quantum Dynamics Simulations - Building Intuition and Computational Workflows](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_I_JCE.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - Closed Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_II_JCE.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - State Initialization and Unitary Decomposition](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_III_JCE.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Dilation Method for Open Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_IV_JCE.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) QMAD - A Module for Adaptive Variational Quantum Algorithms](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_V_JCE.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) The Generalized Quantum Master Equation](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_VI_JCE.ipynb)
 
 
 ## Questions, Issues, and Feature Requests

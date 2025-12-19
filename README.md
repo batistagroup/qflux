@@ -1,4 +1,4 @@
-[![License: GNU AGPL v3](https://img.shields.io/badge/License-GNU_AGPL_v3-lightgrey.svg)](LICENCE)
+[![License: GNU AGPL v3](https://img.shields.io/badge/License-GNU_AGPL_v3-lightgrey.svg)](LICENSE)
 [![Static Badge](https://img.shields.io/badge/CQDMQD-00268d?style=flat&logoColor=00268d&label=NSF&labelColor=00268d&color=00268d&link=https%3A%2F%2Fcqdmqd.yale.edu%2F)](https://cqdmqd.yale.edu/)
 
 
@@ -50,13 +50,17 @@ https://qflux.batistalab.com/
 
 ### Notebooks For Tutorial Manuscript <a name="notebooks"></a>
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_I_qflux_snippets.ipynb) | Part I - Closed Quantum Dynamics and Simulation Protocols
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Classical Foundations for Quantum Dynamics Simulations - Building Intuition and Computational Workflows](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_I_JCE.ipynb)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_II_qflux_snippets.ipynb) | Part II - Open Quantum Dynamics
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - Closed Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_II_JCE.ipynb)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_III_qflux_snippets.ipynb) | Part III - Variational Quantum Dynamics
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - State Initialization and Unitary Decomposition](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_III_JCE.ipynb)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_IV_qflux_snippets.ipynb) | Part IV - Generalized Quantum Master Equation Dynamics
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Dilation Method for Open Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_IV_JCE.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) QMAD - A Module for Adaptive Variational Quantum Algorithms](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_V_JCE.ipynb)
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) The Generalized Quantum Master Equation](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_VI_JCE.ipynb)
 
 ### Contribution Guidelines <a name="contribute"></a>
 
