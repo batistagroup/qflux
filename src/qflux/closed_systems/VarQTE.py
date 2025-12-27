@@ -110,7 +110,7 @@ def Measure_A(
             else:
                 estimator = Estimator(options={"run_options":{"shots": shots}})
             result = estimator.run([(qc, observable)]).result()
-            A[i][i + j] = result[0].data.evs
+            A[i][i + j] = 0.25 * result[0].data.evs
     return np.array(A)
 
 
