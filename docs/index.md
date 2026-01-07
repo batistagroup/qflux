@@ -54,13 +54,13 @@ You can learn how to use `qflux` through the tutorial-format examples on this do
 
 You can also open our interactive tutorial notebooks in Google Colab: 
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Closed Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_I_qflux_snippets.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Closed Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Extended-Version-Notebooks/Part_I_qflux_snippets.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Open Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_II_qflux_snippets.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Open Systems Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Extended-Version-Notebooks/Part_II_qflux_snippets.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Variational Methods Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_III_qflux_snippets.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Variational Methods Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Extended-Version-Notebooks/Part_III_qflux_snippets.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) GQME Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/Extended-Version-Notebooks/Part_IV_qflux_snippets.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) GQME Demonstration](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Extended-Version-Notebooks/Part_IV_qflux_snippets.ipynb)
 
 
 We also have companion notebooks for the pre-print manuscripts available:
