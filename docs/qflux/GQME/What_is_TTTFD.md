@@ -37,7 +37,7 @@ $$
 Here, operators with a "$\wedge$" act on the physical Hilbert space, while operators with a "$\sim$" act on the auxiliary (fictitious) Hilbert space.  
 It can be verified that, for both definitions, taking the time derivative of $\mathrm{Tr}_f \{ |\psi(\beta, t)\rangle \langle \psi(\beta, t)| \}$ recovers the original Liouville–von Neumann equation.
 
-Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian $\bar{H}$ and initial state |$\psi(\beta, 0)\rangle$ used in the thermo-field dynamics framework.
+Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian $\bar{H}$ and initial state $|\psi(\beta, 0)\rangle$ used in the thermo-field dynamics framework.
 
 
 # The spin-boson model
