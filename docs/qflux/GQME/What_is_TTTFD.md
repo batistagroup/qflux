@@ -4,17 +4,38 @@ The TT-TFD method has been fully integrated into the `qflux.GQME` module.
 
 # What is TT-TFD?
 
-The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transforms solving the Liouville equation $\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]$ into solving
+The **thermo-field dynamics (TFD)** method enables the simulation of thermal quantum systems by **doubling the Hilbert space** and purifying the thermal density matrix into a pure state.  
+In this framework, the Liouville–von Neumann equation
+
+$$
+\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]
+$$
+
+is mapped onto a Schrödinger-like equation for a thermal wave function:
 
 $$
 \frac{d}{dt} |\psi(\beta, t)\rangle = -\frac{i}{\hbar} \bar{H} |\psi(\beta, t)\rangle
 $$
 
-with $\bar{H} = \hat{H}\otimes \tilde{I}$. And $|\psi(\beta, t)\rangle$ is the thermal wave function from which the density operator $\hat{\rho}(t)$ can be obtained as follows:
+Here, $|\psi(\beta, t)\rangle$ is a vector in the doubled Hilbert space.  
+The physical density operator is recovered by tracing out the auxiliary (fictitious) degrees of freedom:
 
 $$
 \hat{\rho}(t) = {\rm Tr}_f \{ |\psi(\beta, t)\rangle\langle \psi(\beta, t)|\}
 $$
+
+Because the doubling of the Hilbert space introduces an auxiliary space, the definition of the effective Hamiltonian $\bar{H}$ is not unique. Any choice that yields dynamics equivalent to the original Liouville equation after tracing over the auxiliary space is valid. Common choices include:
+
+$$
+\bar{H} = \hat{H} \otimes \tilde{I} - \hat{I} \otimes \tilde{H},
+$$
+or the simpler form
+$$
+\bar{H} = \hat{H} \otimes \tilde{I}.
+$$
+
+Here, operators with a "$\wedge$" act on the physical Hilbert space, while operators with a "$\sim$" act on the auxiliary (fictitious) Hilbert space.  
+It can be verified that, for both definitions, taking the time derivative of $\mathrm{Tr}_f \{ |\psi(\beta, t)\rangle \langle \psi(\beta, t)| \}$ recovers the original Liouville–von Neumann equation.
 
 Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian $\bar{H}$ and initial state |$\psi(\beta, 0)\rangle$ used in the thermo-field dynamics framework.
 
