@@ -73,7 +73,7 @@ $$
 where $\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |$ is the initial electronic density operator, where $|\gamma\rangle$ is one of the electronic basis states.
 The initial nuclear density operator given by
 
-$$ \hat{\rho}_{n} (0) = \frac{\exp\left[\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\right]}{\text{Tr}_{n} \left\{\exp\left[\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\right] \right\}} $$
+$$ \hat{\rho}_{n} (0) = \frac{\exp\left[{\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}}\right]}{\text{Tr}_{n} \left\{ \exp\left[{\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}}\right] \right\}} $$
 
 We set the parameters as:
 
