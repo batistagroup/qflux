@@ -4,19 +4,40 @@ The TT-TFD method has been fully integrated into the `qflux.GQME` module.
 
 # What is TT-TFD?
 
-The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transforms solving the Liouville equation $\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]$ into solving
+The **thermo-field dynamics (TFD)** method enables the simulation of thermal quantum systems by **doubling the Hilbert space** and purifying the thermal density matrix into a pure state.  
+In this framework, the Liouville–von Neumann equation
+
+$$
+\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]
+$$
+
+is mapped onto a Schrödinger-like equation for a thermal wave function:
 
 $$
 \frac{d}{dt} |\psi(\beta, t)\rangle = -\frac{i}{\hbar} \bar{H} |\psi(\beta, t)\rangle
 $$
 
-with $\bar{H} = \hat{H}\otimes \tilde{I}$. And $|\psi(\beta, t)\rangle$ is the thermal wave function from which the density operator $\hat{\rho}(t)$ can be obtained as follows:
+Here, $|\psi(\beta, t)\rangle$ is a vector in the doubled Hilbert space.  
+The physical density operator is recovered by tracing out the auxiliary (fictitious) degrees of freedom:
 
 $$
 \hat{\rho}(t) = {\rm Tr}_f \{ |\psi(\beta, t)\rangle\langle \psi(\beta, t)|\}
 $$
 
-Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian $\bar{H}$ and initial state |$\psi(\beta, 0)\rangle$ used in the thermo-field dynamics framework.
+Because the doubling of the Hilbert space introduces an auxiliary space, the definition of the effective Hamiltonian $\bar{H}$ is not unique. Any choice that yields dynamics equivalent to the original Liouville equation after tracing over the auxiliary space is valid. Common choices include:
+
+$$
+\bar{H} = \hat{H} \otimes \tilde{I} - \hat{I} \otimes \tilde{H},
+$$
+or the simpler form
+$$
+\bar{H} = \hat{H} \otimes \tilde{I}.
+$$
+
+Here, operators with a "$\wedge$" act on the physical Hilbert space, while operators with a "$\sim$" act on the auxiliary (fictitious) Hilbert space.  
+It can be verified that, for both definitions, taking the time derivative of $\mathrm{Tr}_f \{ |\psi(\beta, t)\rangle \langle \psi(\beta, t)| \}$ recovers the original Liouville–von Neumann equation.
+
+Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian $\bar{H}$ and initial state $|\psi(\beta, 0)\rangle$ used in the thermo-field dynamics framework.
 
 
 # The spin-boson model
@@ -52,7 +73,7 @@ $$
 where $\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |$ is the initial electronic density operator, where $|\gamma\rangle$ is one of the electronic basis states.
 The initial nuclear density operator given by
 
-$$ \hat{\rho}_{n} (0) = \frac{\exp\bigg[\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg]}{\text{Tr}_{n} \Bigg\{ \exp\bigg[\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg] \Bigg\}} $$
+$$ \hat{\rho}_{n} (0) = \frac{\exp\left[{\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}}\right]}{\text{Tr}_{n} \left(\exp\left[{\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}}\right]\right)} $$
 
 We set the parameters as:
 
