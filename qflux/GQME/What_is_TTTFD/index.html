@@ -1090,15 +1090,31 @@
 <p>In this section, we introduce the tensor-train thermo-field dynamics (TT-TFD) method. Using the spin-boson model as an example, we demonstrate how TT-TFD can be used to simulate its quantum dynamics and compute the corresponding memory kernel.</p>
 <p>The TT-TFD method has been fully integrated into the <code>qflux.GQME</code> module.</p>
 <h1 id="what-is-tt-tfd">What is TT-TFD?</h1>
-<p>The thermo-field dynamics (TFD) method enables the simulation of thermal quantum systems by doubling the Hilbert space and purifying the thermal density matrix into a pure state. It transforms solving the Liouville equation <span class="arithmatex">\(\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]\)</span> into solving</p>
+<p>The <strong>thermo-field dynamics (TFD)</strong> method enables the simulation of thermal quantum systems by <strong>doubling the Hilbert space</strong> and purifying the thermal density matrix into a pure state.<br />
+In this framework, the Liouville–von Neumann equation</p>
+<div class="arithmatex">\[
+\frac{d}{dt} \hat{\rho}(t) = -\frac{i}{\hbar} [\hat{H}, \hat{\rho}(t)]
+\]</div>
+<p>is mapped onto a Schrödinger-like equation for a thermal wave function:</p>
 <div class="arithmatex">\[
 \frac{d}{dt} |\psi(\beta, t)\rangle = -\frac{i}{\hbar} \bar{H} |\psi(\beta, t)\rangle
 \]</div>
-<p>with <span class="arithmatex">\(\bar{H} = \hat{H}\otimes \tilde{I}\)</span>. And <span class="arithmatex">\(|\psi(\beta, t)\rangle\)</span> is the thermal wave function from which the density operator <span class="arithmatex">\(\hat{\rho}(t)\)</span> can be obtained as follows:</p>
+<p>Here, <span class="arithmatex">\(|\psi(\beta, t)\rangle\)</span> is a vector in the doubled Hilbert space.<br />
+The physical density operator is recovered by tracing out the auxiliary (fictitious) degrees of freedom:</p>
 <div class="arithmatex">\[
 \hat{\rho}(t) = {\rm Tr}_f \{ |\psi(\beta, t)\rangle\langle \psi(\beta, t)|\}
 \]</div>
-<p>Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian <span class="arithmatex">\(\bar{H}\)</span> and initial state |<span class="arithmatex">\(\psi(\beta, 0)\rangle\)</span> used in the thermo-field dynamics framework.</p>
+<p>Because the doubling of the Hilbert space introduces an auxiliary space, the definition of the effective Hamiltonian <span class="arithmatex">\(\bar{H}\)</span> is not unique. Any choice that yields dynamics equivalent to the original Liouville equation after tracing over the auxiliary space is valid. Common choices include:</p>
+<div class="arithmatex">\[
+\bar{H} = \hat{H} \otimes \tilde{I} - \hat{I} \otimes \tilde{H},
+$$
+or the simpler form
+$$
+\bar{H} = \hat{H} \otimes \tilde{I}.
+\]</div>
+<p>Here, operators with a "<span class="arithmatex">\(\wedge\)</span>" act on the physical Hilbert space, while operators with a "<span class="arithmatex">\(\sim\)</span>" act on the auxiliary (fictitious) Hilbert space.<br />
+It can be verified that, for both definitions, taking the time derivative of <span class="arithmatex">\(\mathrm{Tr}_f \{ |\psi(\beta, t)\rangle \langle \psi(\beta, t)| \}\)</span> recovers the original Liouville–von Neumann equation.</p>
+<p>Next, we consider the spin-boson model as an example and provide the explicit form of the effective Hamiltonian <span class="arithmatex">\(\bar{H}\)</span> and initial state <span class="arithmatex">\(|\psi(\beta, 0)\rangle\)</span> used in the thermo-field dynamics framework.</p>
 <h1 id="the-spin-boson-model">The spin-boson model</h1>
 <p>The spin-boson model is a convenient and widely used framework for simulating electronic energy and charge transfer dynamics in chemical systems.
 This model comprises two electronic states, representing a diabatic donor state
@@ -1119,7 +1135,7 @@ This model comprises two electronic states, representing a diabatic donor state
 \]</div>
 <p>where <span class="arithmatex">\(\hat{\sigma} (0) = |\gamma\rangle \langle \gamma |\)</span> is the initial electronic density operator, where <span class="arithmatex">\(|\gamma\rangle\)</span> is one of the electronic basis states.
 The initial nuclear density operator given by</p>
-<div class="arithmatex">\[ \hat{\rho}_{n} (0) = \frac{\exp\bigg[\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg]}{\text{Tr}_{n} \Bigg\{ \exp\bigg[\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}\bigg] \Bigg\}} \]</div>
+<div class="arithmatex">\[ \hat{\rho}_{n} (0) = \frac{\exp\left[{\displaystyle -\beta \sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}}\right]}{\text{Tr}_{n} \left(\exp\left[{\displaystyle -\beta\sum_{i = 1}^{N_{n}} \frac{\hat{P}_{i}^{2}}{2} + \frac{1}{2} \omega_{i}^{2} \hat{R}_{i}^{2}}\right]\right)} \]</div>
 <p>We set the parameters as:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">GAMMA_DA</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># diabatic coupling</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">EPSILON</span> <span class="o">=</span> <span class="mi">1</span>
