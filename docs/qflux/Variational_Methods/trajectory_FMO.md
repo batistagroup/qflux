@@ -127,7 +127,7 @@ from qflux.variational_methods.qmad.ansatz import Ansatz
 tf, dt = 450, 5
 num_trajectory = 400
 H = EffectiveHamiltonian([H_fmo], [Llist_f_padded])
-ansatz = Ansatz(u0_fmo, relrcut=1e-5)
+ansatz = Ansatz(u0_fmo, relrcut=1e-5, vectorized=False)
 results = run_trajectories(num_trajectory, H, ansatz, tf, dt)
 ```
 

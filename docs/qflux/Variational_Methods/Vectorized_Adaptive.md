@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 
 from qflux.variational_methods.qmad.solver import solve_avq_vect
 from qflux.variational_methods.qmad.effh import VectorizedEffectiveHamiltonian
-from qflux.variational_methods.qmad.ansatzVect import Ansatz
+from qflux.variational_methods.qmad.ansatz import Ansatz
 ```
 
 Define Pauli matrices and ladder operators, which will form the building blocks for the representation for the amplitude damping process.
@@ -72,7 +72,7 @@ We initialize the quantum state and define an **unrestricted adaptive ansatz**. 
 ```python
 u0 = np.array([1/2, np.sqrt(3)/2], dtype=np.complex128)
 u0 /= np.linalg.norm(u0)
-ansatz = Ansatz(u0, relrcut=1e-6)
+ansatz = Ansatz(u0, relrcut=1e-6, vectorized=True)
 ```
 
 The `relrcut` parameter determines the sensitivity of adaptive growth: smaller values increase precision but require deeper circuits.
