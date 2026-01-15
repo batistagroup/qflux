@@ -17,8 +17,5 @@ print(dir(effh))
 print("Methods from ansatz:")
 print(dir(ansatz))
 
-print("Methods from ansatzVect:")
-print(dir(ansatzVect))
-
 print("Methods from solver:")
 print(dir(solver))
