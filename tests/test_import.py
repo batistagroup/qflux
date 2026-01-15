@@ -10,7 +10,7 @@ print(dir(qmad))
 
 print("Checking qmad modules...")
 
-from qflux.variational_methods.qmad import effh, ansatz, ansatzVect, solver
+from qflux.variational_methods.qmad import effh, ansatz, solver
 print("Methods from effh:")
 print(dir(effh))
 
