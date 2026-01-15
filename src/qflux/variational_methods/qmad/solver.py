@@ -24,19 +24,18 @@ SOFTWARE.
 
 import numpy as np
 from itertools import combinations, product
-from scipy.linalg import expm, kron
+from scipy.linalg import expm
+from scipy.integrate import solve_ivp
+from numpy import kron
 from numpy.random import rand
 random_numbers = np.random.uniform(low=10000, high=99999)
 np.random.seed(int(random_numbers))
 from .ansatz import *
-from .ansatzVect import *
 
 # Helper Functions for evolution
-# def tag(A):
-#     return A.tag if A else None #!!!!!!!a.any or a.all??
+
 def tag(A):
     return getattr(A, 'tag', None) if A is not None else None
-
 
 def aexp(A, theta):
     return expm(-1j * theta * A.mat / 2)
@@ -45,76 +44,103 @@ def add_A(A, P):
     A.A.append(P)
     A.theta = np.append(A.theta, 0)
 
-def lmul(A, ψ):
-    # print("ehrerw:",A)
-    # print("amat:",np.shape(A.mat))
-    # print("her in lmul",A.mat @ ψ)
-    return A.mat @ ψ
+def lmul(A, psi):
+    return A.mat @ psi
 
 def update_theta(ansatz, dtheta, dt):
     ansatz.theta = ansatz.theta + dtheta * dt
 
+def update_theta_rk45(ansatz, dtheta, dt):
+    """
+    Update theta parameters using RK45 (Runge-Kutta 4/5) integration.
+    
+    Solves the ODE: dtheta/dt = dtheta from t=0 to t=dt using adaptive RK45 method.
+    This provides higher-order accuracy compared to simple Euler method.
+    
+    Parameters
+    ----------
+    ansatz : Ansatz_class
+        The ansatz object containing theta parameters to update
+    dtheta : ndarray
+        The gradient/velocity vector for theta parameters
+    dt : float
+        Time step for integration
+    """
+    def theta_ode(t, y):
+        # ODE: dtheta/dt = dtheta (constant gradient)
+        return dtheta
+    
+    # Initial condition: current theta values
+    theta_0 = ansatz.theta
+    
+    # Solve ODE using RK45 method
+    sol = solve_ivp(theta_ode, [0, dt], theta_0, method='RK45', dense_output=False)
+    
+    # Update ansatz theta with final integrated values
+    #print(f"Updated (RK45) theta: {sol.y[:, -1]}")
+    ansatz.theta = sol.y[:, -1]
+
 def partial_theta(A):
     len_A = len(A.A)
-    ψ = A.ref.copy()
+    psi = A.ref.copy()
     res = []
     for i in range(len_A):
-        ψ = aexp(A.A[i], A.theta[i]) @ ψ
-        ψt = -0.5j * lmul(A.A[i], ψ)
+        psi = aexp(A.A[i], A.theta[i]) @ psi
+        psit = -0.5j * lmul(A.A[i], psi)
         for j in range(i + 1, len_A):
-            ψt = aexp(A.A[j], A.theta[j]) @ ψt
-        res.append(ψt)
+            psit = aexp(A.A[j], A.theta[j]) @ psit
+        res.append(psit)
     return res
 
-def build_m(ψ, dψ):
-    l = len(dψ)
+def build_m(psi, dpsi):
+    l = len(dpsi)
     res = np.zeros((l, l))
-    ψ = ψ[:, np.newaxis] if len(ψ.shape) == 1 else ψ
+    psi = psi[:, np.newaxis] if len(psi.shape) == 1 else psi
 
-    for μ in range(l):
-        for ν in range(l):
-            res[μ, ν] = 2 * np.real(dψ[μ].T.conj() @ dψ[ν] + ψ.T.conj() @ dψ[μ] @ ψ.T.conj() @ dψ[ν])
+    for mu in range(l):
+        for nu in range(l):
+            res[mu, nu] = 2 * np.real(dpsi[mu].T.conj() @ dpsi[nu] + psi.T.conj() @ dpsi[mu] @ psi.T.conj() @ dpsi[nu])
     return res
 
-def update_m(m, dψa, ψ, dψ):
+def update_m(m, dpsia, psi, dpsi):
     l = m.shape[0]
     mp = np.zeros((l + 1, l + 1))
-    dψa = dψa[:, np.newaxis]
-    ψ = ψ[:, np.newaxis]
-    mp[l, l] = 2 * np.real((dψa.T.conj() @ dψa + ψ.T.conj() @ dψa @ ψ.T.conj() @ dψa).item())
+    dpsia = dpsia[:, np.newaxis]
+    psi = psi[:, np.newaxis]
+    mp[l, l] = 2 * np.real((dpsia.T.conj() @ dpsia + psi.T.conj() @ dpsia @ psi.T.conj() @ dpsia).item())
     mp[:l, :l] = m
-    for μ in range(l):
-        temp = 2 * np.real(dψ[μ].T.conj() @ dψa + ψ.T.conj() @ dψ[μ] @ ψ.T.conj() @ dψa)
-        mp[μ, l] = temp.item()
-        mp[l, μ] = temp.item()
+    for mu in range(l):
+        temp = 2 * np.real(dpsi[mu].T.conj() @ dpsia + psi.T.conj() @ dpsi[mu] @ psi.T.conj() @ dpsia)
+        mp[mu, l] = temp.item()
+        mp[l, mu] = temp.item()
     return mp
 
-def build_v(ψ, dψ, He, Ha):
+def build_v(psi, dpsi, He, Ha):
     L = -1j * (He - 1j * Ha)
-    l = len(dψ)
-    ψ = ψ[:, np.newaxis] if len(ψ.shape) == 1 else ψ
+    l = len(dpsi)
+    psi = psi[:, np.newaxis] if len(psi.shape) == 1 else psi
     res = np.zeros(l)
-    for μ in range(l):
-        res[μ] = 2 * np.real((dψ[μ].T.conj() @ L @ ψ + dψ[μ].T.conj() @ ψ @ ψ.T.conj() @ L.T.conj() @ ψ).item())
+    for mu in range(l):
+        res[mu] = 2 * np.real((dpsi[mu].T.conj() @ L @ psi + dpsi[mu].T.conj() @ psi @ psi.T.conj() @ L.T.conj() @ psi).item())
     return res
 
-def update_v(v, dψₐ, ψ, He, Ha):
+def update_v(v, dpsia, psi, He, Ha):
     L = -1j * (He - 1j * Ha)
     l = len(v)
-    dψₐ = dψₐ[:, np.newaxis]
-    ψ = ψ[:, np.newaxis]
+    dpsia = dpsia[:, np.newaxis]
+    psi = psi[:, np.newaxis]
     vp = np.zeros(l + 1)
     vp[:l] = v
-    vp[l] = 2 * np.real((dψₐ.T.conj() @ L @ ψ + dψₐ.T.conj() @ ψ @ ψ.T.conj() @ L.T.conj() @ ψ).item())
+    vp[l] = 2 * np.real((dpsia.T.conj() @ L @ psi + dpsia.T.conj() @ psi @ psi.T.conj() @ L.T.conj() @ psi).item())
     return vp
 
-def lin_solve(m, v, λ=1e-4):
+def lin_solve(m, v, lamb=1e-4):
     A = m.T @ m
     try:
-        xλ = np.linalg.solve(A + λ**2 * np.eye(A.shape[0]), m.T @ v)
+        xlamb = np.linalg.solve(A + lamb**2 * np.eye(A.shape[0]), m.T @ v)
     except np.linalg.LinAlgError:
-        xλ = np.linalg.lstsq(A + λ**2 * np.eye(A.shape[0]), m.T @ v, rcond=None)[0]
-    return xλ, 2 * v.T @ xλ - xλ.T @ m @ xλ
+        xlamb = np.linalg.lstsq(m, v, rcond=None)[0]
+    return xlamb, 2 * v.T @ xlamb - xlamb.T @ m @ xlamb
 
 def get_newest_A(A):
     return A.A[-1] if A.A else None
@@ -152,17 +178,17 @@ class Result:
         return f"Result(t={self.t}, psi={self.psi}, energy={self.energy}, pop={self.pop}, theta={self.theta}, A={self.A}, jump_t={self.jump_t}, jump_L={self.jump_L}, status={self.status})"
 
 class AVQDSol:
-    def __init__(self, t, u, θ, A, jump_L, jump_t, status=0, norm=[]):
+    def __init__(self, t, u, theta, A, jump_L, jump_t, status=0, norm=[]):
         self.t = t
         self.u = u
-        self.θ = θ
+        self.theta = theta
         self.A = A
         self.jump_L = jump_L
         self.jump_t = jump_t
         self.status = status
         self.norm = norm
 
-def one_step(A, He, Ha, dt):
+def one_step(A, He, Ha, dt, rk45=False):
 
     relrcut = A.relrcut
     psi_ = A.state
@@ -175,42 +201,39 @@ def one_step(A, He, Ha, dt):
     Vtmp = V
     dthetatmp = dtheta
     opTmp = None
-    dpsi_ₐTmp = None
+    dpsi_aTmp = None
     add_flag = True
 
     while add_flag:
+ 
         # print("here in onestep While")
         tagTmp = None
+ 
         # print("Ansatz pool:",A.pool)
         for op in A.pool:
-            # print("opertaro from pool:",(op.tag))
+            #print(f"Operator from pool: {op.tag}")
             if tag(get_newest_A(A)) == tag(op):
-                # print("here in get newest_A")
                 continue
-            # print("here in op for loop")
-            dpsi_ₐ = -0.5j * lmul(op, psi_)
+            dpsi_a = -0.5j * lmul(op, psi_)
 
-            Mop = update_m(M, dpsi_ₐ, psi_, dpsi_)
-            # print("Mop:",Mop)
-            Vop = update_v(V, dpsi_ₐ, psi_, He, Ha)
+            Mop = update_m(M, dpsi_a, psi_, dpsi_)
+            Vop = update_v(V, dpsi_a, psi_, He, Ha)
             dthetaop, vmvOp = lin_solve(Mop, Vop)
-            # print("berfore the if:","vmvOp:",vmvOp, "vmvMax:",vmvMax)
+            #print(f"before the if: vmvOp={vmvOp}, vmvMax={vmvMax}")
 
             if vmvOp > vmvMax:
-                # print("vmvOp:",vmvOp, "vmvMax:",vmvMax)
-
+                #print("vmvOp:",vmvOp, "vmvMax:",vmvMax)
                 Mtmp = Mop
                 Vtmp = Vop
                 vmvMax = vmvOp
                 dthetatmp = dthetaop
                 opTmp = op
                 tagTmp = tag(op)
-                # print("tagTmp:",tagTmp)
-                dpsi_ₐTmp = dpsi_ₐ
-        # print("vmvMax - vmv:",vmvMax-vmv)
-        add_flag = vmvMax - vmv >= relrcut
+                #print("tagTmp:",tagTmp)
+                dpsi_aTmp = dpsi_a
+                #print("vmvMax - vmv:",vmvMax-vmv)
 
-        
+        add_flag = vmvMax - vmv >= relrcut
 
         if tagTmp is not None and add_flag:
 
@@ -219,10 +242,13 @@ def one_step(A, He, Ha, dt):
             M = Mtmp
             V = Vtmp
             dtheta = dthetatmp
-            dpsi_.append(dpsi_ₐTmp)
+            dpsi_.append(dpsi_aTmp)
 
-    update_theta(A, dtheta, dt)
-    # print("Ansatz:",A.theta)
+    if rk45:
+        update_theta_rk45(A, dtheta, dt)
+    else:
+        update_theta(A, dtheta, dt)
+    # print("Ansatz:", A.theta)
     update_state(A)
 
 
@@ -278,6 +304,10 @@ def solve_avq_traj(H, A, tspan, dt, save_state=True, save_everystep=True):
                 t_list.append(t + dt)  # Save current time
                 theta_list.append(A.theta.copy())  # Save current ansatz parameters
                 A_list.append([tag(a) for a in A.A])  # Save current state of ansatz components
+            
+            # Update reference state to current state for next iteration
+            set_ref(A, psi_)
+            reset(A)
 
         else:  # Quantum jump occurs
             psi_ = A.state  # Get current state before jump
@@ -347,10 +377,12 @@ def solve_avq_trajectory(H, ansatz, tf, dt):
         energy.append(np.real(np.conj(psi.T) @ (H.He) @ psi))  # Energy
         pop.append([np.abs(psi[0])**2, np.abs(psi[1])**2])  # Population in ground/excited states for amplitude damping
 
-    return Result(tlist, psi_list, energy, pop, res.θ, res.A, res.jump_t, res.jump_L, res.status)
+    return Result(tlist, psi_list, energy, pop, res.theta, res.A, res.jump_t, res.jump_L, res.status)
     pass
 
-def solve_avq_vect(H, A, tspan, dt):
+# Driver for UAVQDS with vectorized ansatz
+def solve_avq_vect(H, A, tspan, dt, rk45=False):
+
     ref_init = A.ref.copy()
     nqbit = A.nqbit
     update_state(A)
@@ -360,21 +392,29 @@ def solve_avq_vect(H, A, tspan, dt):
     theta_list = [A.theta.copy()]
     A_list = [[tag(a) for a in A.A]]
     norm_list = [1.0]
+
     Gamma = 0
     while t + dt <= tspan[1]:
         He = H.He
         Ha = H.Ha
-        one_step(A, He, Ha, dt)
+        one_step(A, He, Ha, dt, rk45=rk45)
         psi_ = A.state
         Gamma += 2 * np.real(psi_.T.conj() @ Ha @ psi_) * dt
-        ρ = psi_.reshape(2**nqbit, 2**nqbit)
-        ρ /= np.trace(ρ)
+        rho = psi_.reshape(2**nqbit, 2**nqbit)
+        rho /= np.trace(rho)
         t += dt
         t_list.append(t)
-        u_list.append(ρ)
+        u_list.append(rho)
         theta_list.append(A.theta.copy())
         A_list.append([tag(a) for a in A.A])
         norm_list.append(np.exp(-Gamma))
+        
+        # Update reference state to current state for next iteration
+        # This ensures the ansatz gates are tailored to evolving from the current state
+        set_ref(A, psi_)
+        reset(A)
+
     set_ref(A, ref_init)
     reset(A)
+
     return AVQDSol(t_list, u_list, theta_list, A_list, [], [], norm=norm_list)

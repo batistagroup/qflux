@@ -23,7 +23,8 @@ SOFTWARE.
 '''
 
 import numpy as np
-from scipy.linalg import expm, kron
+from scipy.linalg import expm
+from numpy import kron
  
 
 def vectorize_comm(A):
