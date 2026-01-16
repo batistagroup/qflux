@@ -24,7 +24,8 @@ SOFTWARE.
 
 import numpy as np
 from itertools import combinations, product
-from scipy.linalg import expm, kron
+from scipy.linalg import expm
+from numpy import kron
 
 # Ansatz Class and Operators
 
@@ -70,7 +71,6 @@ sy = np.array([[0, -1j], [1j, 0]])
 sz = np.array([[1, 0], [0, -1]])
 # S = np.array([[1, 0], [0, 1j]])
 
-
 def build_pool(nqbit):
     pauliStr = ["sx", "sz", "sy"]
     res = []
@@ -80,9 +80,18 @@ def build_pool(nqbit):
                 res.append(PauliOperator(op, list(idx), 1, nqbit))
     return res
 
-def Ansatz(u0, relrcut, theta=[], ansatz=[]):
+def Ansatz(u0, relrcut, theta=None, ansatz=None, vectorized=False):
+
+    if theta is None: theta = []
+    if ansatz is None: ansatz = []
     nqbit = int(np.log2(len(u0)))
-    pool_qubit =  nqbit
-    # u0 = np.outer(u0, u0).flatten()
+
+    if vectorized:
+        pool_qubit =  2*nqbit
+        u0 = np.outer(u0, np.conjugate(u0)).flatten()
+    else:
+        pool_qubit = nqbit
+
+    # Build operator pool
     pool = build_pool(pool_qubit)
     return Ansatz_class(nqbit, u0, relrcut, pool, theta, ansatz)
