@@ -58,7 +58,7 @@ https://qflux.batistalab.com/
 
 - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Dilation Method for Open Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_IV_JCE.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) QMAD - A Module for Adaptive Variational Quantum Algorithms](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_V_JCE.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Adaptive Variational Quantum Algorithms](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_V_JCE.ipynb)
 
 - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) The Generalized Quantum Master Equation](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/Part_VI_JCE.ipynb)
 
