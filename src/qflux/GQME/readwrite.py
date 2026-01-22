@@ -55,7 +55,10 @@ def read_superoper_array(
 
             filename = f"{prefix}{a}{b}{c}{d}{pa.PARAM_STR}.txt"
             data = np.loadtxt(filename)
-            time_read, real_part, imag_part = np.hsplit(data, 3)
+            
+            time_read = data[:,0]
+            real_part = data[:,1]
+            imag_part = data[:,2]
 
             for i in range(Nlen):
                 time[i] = time_read[i]
@@ -110,7 +113,10 @@ def read_operator_array(
         a, b = divmod(j, pa.DOF_E)
         filename = f"{prefix}{a}{b}{pa.PARAM_STR}.txt"
         data = np.loadtxt(filename)
-        time_read, real_part, imag_part = np.hsplit(data, 3)
+        
+        time_read = data[:,0]
+        real_part = data[:,1]
+        imag_part = data[:,2]
 
         for i in range(Nlen):
             time[i] = time_read[i]
