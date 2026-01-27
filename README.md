@@ -50,17 +50,17 @@ https://qflux.batistalab.com/
 
 ### Notebooks For Tutorial Manuscript <a name="notebooks"></a>
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Classical Foundations for Quantum Dynamics Simulations - Building Intuition and Computational Workflows](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/JCTC_I.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Classical Foundations for Quantum Dynamics Simulations - Building Intuition and Computational Workflows](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/SI_I.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - Closed Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/JCTC_II.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - Closed Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/SI_II.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - State Initialization and Unitary Decomposition](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/JCTC_III.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Quantum Circuit Implementations of Molecular Dynamics - State Initialization and Unitary Decomposition](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/SI_III.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Dilation Method for Open Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/JCTC_IV.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Dilation Method for Open Quantum Systems](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/SI_IV.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Adaptive Variational Quantum Algorithms](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/JCTC_V.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) Adaptive Variational Quantum Algorithms](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/SI_V.ipynb)
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) The Generalized Quantum Master Equation](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/JCTC_VI.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg) The Generalized Quantum Master Equation](https://colab.research.google.com/github/batistagroup/qflux/blob/master/demos/manuscript/SI_VI.ipynb)
 
 ### Contribution Guidelines <a name="contribute"></a>
 
