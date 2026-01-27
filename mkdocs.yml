@@ -27,12 +27,10 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
-#  - stylesheets/collapse-sidebars.css
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-#  - javascripts/collapse-sidebars.js
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -53,6 +51,9 @@ markdown_extensions:
       toc_depth: 3
   - attr_list
   - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - search
@@ -66,6 +67,7 @@ plugins:
 nav: # Note: All paths must be relative to the docs dir
   - Home: 'index.md'
   - Contribution Guide: 'CONTRIBUTING.md'
+  - Additional Resources: 'additional_resources.md'
   - Closed Systems: # Directory Page
     - 'qflux/Closed_Systems/index.md' # Specifies landing page for directory
     # Subpages within the directory are indented, specified as key/value pairs
