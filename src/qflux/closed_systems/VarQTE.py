@@ -2,11 +2,20 @@ import numpy as np
 import numpy.typing as npt
 from typing import List, Optional, Tuple
 
+from tqdm import tqdm
+
 from qiskit import QuantumCircuit
 from qiskit_aer.primitives import EstimatorV2 as Estimator
 from qiskit.quantum_info import SparsePauliOp
 from qiskit_aer.noise import NoiseModel
 from qiskit_ibm_runtime.fake_provider import FakeSherbrooke
+
+
+# Custom Exception for Unsupported Ansatz Choice: 
+class UnsupportedAnsatz(Exception):
+    """Custom exception for unsupported ansatz."""
+    pass
+
 
 # Default construct ansatz to TwolocalAnsatz
 def Construct_Ansatz(init_circ: QuantumCircuit, params: npt.NDArray[np.float64], N: int) -> QuantumCircuit:
@@ -16,20 +25,25 @@ def Construct_Ansatz(init_circ: QuantumCircuit, params: npt.NDArray[np.float64],
     ansatz_builder = TwoLocalAnsatz(N, n_layers=n_layers)
     return ansatz_builder.Construct_Ansatz(init_circ, params, N) 
 
+
 class TwoLocalAnsatz:
-    """A class to construct a two-local variational ansatz with rx gates.
+
+    """
+    A class to construct a two-local variational ansatz with rx gates.
     """
 
     def __init__(self, n_qubits: int, n_layers: int) -> None:
-        """Initialize the TwoLocalAnsatz class.
 
+        """
+        Initialize the TwoLocalAnsatz class.
         Args:
             n_qubits (int): The number of qubits in the ansatz.
             n_layers (int): The number of layers in the ansatz.
         """
-        self.n_qubits = n_qubits
-        self.n_layers = n_layers
-        self.n_params = n_qubits * n_layers  # rx per qubit per layer
+        self.num_qubits = n_qubits
+        self.num_layers = n_layers
+        self.num_params = n_qubits * n_layers  # rx per qubit per layer
+    
     # To change the ansatz, apply_param and measure_der must both be modified.
     def apply_param(
         self, params: npt.NDArray[np.float64], i: int, qc: QuantumCircuit, N: int
@@ -259,9 +273,10 @@ class TwoLocalAnsatz:
         return qc
 
 class ExcitationPreservingAnsatz:
-    def __init__(self, num_qubits, num_layers):
-        self.num_qubits = num_qubits
-        self.num_layers = num_layers
+
+    def __init__(self, n_qubits, n_layers):
+        self.num_qubits = n_qubits
+        self.num_layers = n_layers
         
     #Excitation Preserving Ansatz
     def apply_param(self, params, parameter, qc, N):
@@ -556,6 +571,8 @@ def VarQRTE(
     """The Variational Quantum Real Time Evolution (VarQRTE) algorithm.  This uses quantum circuits to measure
         the elements of two objects, the A_ij matrix and the C_i vector.
 
+        Note: The only supported arguments for `ansatz_type` at this time are: "TwoLocal" or "ExcitationPreserving".
+
     Args:
         n_reps_ansatz (int): The number of repetitions of the variational ansatz used to simulate Real-Time evolution.
         hamiltonian (SparsePauliOp): The Hamiltonian of the system.
@@ -578,13 +595,16 @@ def VarQRTE(
     elif(ansatz_type == "ExcitationPreserving"):
         ansatz_builder = ExcitationPreservingAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
         initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz)
+    else:
+        raise UnsupportedAnsatz("Error: ansatz_type must be either 'TwoLocal' or 'ExcitationPreserving'.")
+    
     num_timesteps = int(total_time / timestep)
     all_params = [np.copy(initial_params)]
     my_params = np.copy(initial_params)  # Reset Initial Parameters after each run
 
+    for i in tqdm(range(num_timesteps), desc="Time evolution", colour="green"):
     
-    for i in range(num_timesteps):
-        print(f"Simulating Time={str(timestep*(i+1))}                      ", end="\r")
+        #print(f"Simulating Time={str(timestep*(i+1))}                      ", end="\r")
         theta_dot = np.array([0.0 for j in range(len(my_params))])
         A = ansatz_builder.Measure_A(
             init_circ, my_params, hamiltonian.num_qubits, shots=shots, noisy=noisy
@@ -608,9 +628,9 @@ def VarQRTE(
         A_inv = np.dot(v.transpose(), np.dot(t, u.transpose()))
 
         theta_dot = np.matmul(A_inv, C)
-
         my_params -= theta_dot * timestep
         all_params.append(np.copy(my_params))
+
     return all_params
 
 
@@ -649,13 +669,16 @@ def VarQITE(
     elif(ansatz_type == "ExcitationPreserving"):
         ansatz_builder = ExcitationPreservingAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
         initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz)
-    
+    else:
+        raise UnsupportedAnsatz("Error: ansatz_type must be either 'TwoLocal' or 'ExcitationPreserving'.")
+        
     num_timesteps = int(total_time / timestep)
     all_params = [np.copy(initial_params)]
     my_params = np.copy(initial_params)  # Reset Initial Parameters after each run
     
-    for i in range(num_timesteps):
-        print(f"Timestep: {str(i*timestep)}                      ", end="\r")
+    for i in tqdm(range(num_timesteps), desc="Time evolution", colour="green"):
+
+        #print(f"Timestep: {str(i*timestep)}                      ", end="\r")
         theta_dot = np.array([0.0 for j in range(len(my_params))])
         A = np.array(
             ansatz_builder.Measure_A(
