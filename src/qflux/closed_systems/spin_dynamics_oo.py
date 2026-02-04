@@ -5,7 +5,8 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit_aer import Aer
 from .spin_propagators import get_time_evolution_operator
 import numpy.typing as npt
-import os 
+import os
+from tqdm import tqdm
 
 
 class SpinDynamicsS:
@@ -114,8 +115,8 @@ class SpinDynamicsS:
         """
         self.psin0 = self.prepare_initial_state(state_string)
         self.psin_list = [self.psin0]
-        for k in range(nsteps):
-            print(f"Running dynamics step {k}")
+        for k in tqdm(range(nsteps), desc="Running dynamics", colour="green"):
+            #print(f"Running dynamics step {k}")
             if k > 0:
                 psin = self.qsolve_statevector(self.psin_list[-1])
                 self.psin_list.pop()
@@ -153,7 +154,7 @@ class SpinDynamicsS:
         )
         sa_observable = np.abs(self.correlation_list)
 
-        plt.plot(time, sa_observable, "-o")
+        plt.plot(time, sa_observable, "-o", markersize=5)
         plt.xlabel("Time")
         plt.ylabel(r"$\left|\langle \psi | \psi (t)  \rangle \right|$")
         plt.xlim((min(time), max(time)))
@@ -288,9 +289,9 @@ class SpinDynamicsH:
         self.time_range = np.arange(0, total_time + self.evolution_timestep,
                                     self.evolution_timestep)
 
-        for idx, _ in enumerate(self.time_range):
-            print(f'Running dynamics step {idx}')
-
+        pbar = tqdm(range(len(self.time_range)), desc="Running dynamics", colour="green")
+        for idx, _ in enumerate(pbar):
+            
             # Real component
             qc_real = self.get_hadamard_test(init_circuit, idx, imag_expectation=False)
             real_counts = self.execute_circuit(qc_real, num_shots)
@@ -303,7 +304,7 @@ class SpinDynamicsH:
             imag_amp = self.calculate_spin_correlation(imag_counts)
             self.imag_amp_list.append(imag_amp)
 
-            print(f'Finished step {idx}: Re = {real_amp:.3f}, Im = {imag_amp:.3f}')
+            pbar.set_postfix({"timestep": idx, "Re": f"{real_amp:.3f}", "Im": f"{imag_amp:.3f}"})
 
     def save_results(self, prefix):
         """
@@ -329,7 +330,7 @@ class SpinDynamicsH:
         """
         abs_corr = np.abs(np.array(self.real_amp_list) + 1j * np.array(self.imag_amp_list))
         
-        plt.plot(self.time_range, abs_corr, '.', label='Hadamard Test')
+        plt.plot(self.time_range, abs_corr, '.', label='Hadamard Test', markersize=5)
         reference_filename = f'data/{self.num_qubits}_spin_chain_SA_obs.npy'
         if os.path.exists(reference_filename):
             ref_sa = np.load(f'data/{self.num_qubits}_spin_chain_SA_obs.npy')
