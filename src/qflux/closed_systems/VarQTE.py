@@ -10,6 +10,13 @@ from qiskit.quantum_info import SparsePauliOp
 from qiskit_aer.noise import NoiseModel
 from qiskit_ibm_runtime.fake_provider import FakeSherbrooke
 
+
+# Custom Exception for Unsupported Ansatz Choice: 
+class UnsupportedAnsatz(Exception):
+    """Custom exception for unsupported ansatz."""
+    pass
+
+
 # Default construct ansatz to TwolocalAnsatz
 def Construct_Ansatz(init_circ: QuantumCircuit, params: npt.NDArray[np.float64], N: int) -> QuantumCircuit:
     # Find the number of layers from the length of params
@@ -17,6 +24,7 @@ def Construct_Ansatz(init_circ: QuantumCircuit, params: npt.NDArray[np.float64],
 
     ansatz_builder = TwoLocalAnsatz(N, n_layers=n_layers)
     return ansatz_builder.Construct_Ansatz(init_circ, params, N) 
+
 
 class TwoLocalAnsatz:
 
@@ -563,6 +571,8 @@ def VarQRTE(
     """The Variational Quantum Real Time Evolution (VarQRTE) algorithm.  This uses quantum circuits to measure
         the elements of two objects, the A_ij matrix and the C_i vector.
 
+        Note: The only supported arguments for `ansatz_type` at this time are: "TwoLocal" or "ExcitationPreserving".
+
     Args:
         n_reps_ansatz (int): The number of repetitions of the variational ansatz used to simulate Real-Time evolution.
         hamiltonian (SparsePauliOp): The Hamiltonian of the system.
@@ -585,6 +595,9 @@ def VarQRTE(
     elif(ansatz_type == "ExcitationPreserving"):
         ansatz_builder = ExcitationPreservingAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
         initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz)
+    else:
+        raise UnsupportedAnsatz("Error: ansatz_type must be either 'TwoLocal' or 'ExcitationPreserving'.")
+    
     num_timesteps = int(total_time / timestep)
     all_params = [np.copy(initial_params)]
     my_params = np.copy(initial_params)  # Reset Initial Parameters after each run
@@ -656,7 +669,9 @@ def VarQITE(
     elif(ansatz_type == "ExcitationPreserving"):
         ansatz_builder = ExcitationPreservingAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
         initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz)
-    
+    else:
+        raise UnsupportedAnsatz("Error: ansatz_type must be either 'TwoLocal' or 'ExcitationPreserving'.")
+        
     num_timesteps = int(total_time / timestep)
     all_params = [np.copy(initial_params)]
     my_params = np.copy(initial_params)  # Reset Initial Parameters after each run
