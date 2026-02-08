@@ -42,7 +42,7 @@ class TwoLocalAnsatz:
         """
         self.num_qubits = n_qubits
         self.num_layers = n_layers
-        self.num_params = n_qubits * n_layers  # rx per qubit per layer
+        self.num_params = n_qubits * (n_layers + 1)  # rx per qubit per layer
     
     # To change the ansatz, apply_param and measure_der must both be modified.
     def apply_param(
@@ -277,6 +277,7 @@ class ExcitationPreservingAnsatz:
     def __init__(self, n_qubits, n_layers):
         self.num_qubits = n_qubits
         self.num_layers = n_layers
+        self.num_params = self.num_qubits * (self.num_layers + 1) + (self.num_qubits-1) * self.num_layers
         
     #Excitation Preserving Ansatz
     def apply_param(self, params, parameter, qc, N):
