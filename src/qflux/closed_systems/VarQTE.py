@@ -259,8 +259,7 @@ class TwoLocalAnsatz:
         """
         if(params is None):
             num_params = self.num_qubits * (self.num_layers + 1)
-            #params = np.zeros(num_params)
-            params = np.full(num_params, param_init)
+            params = np.full(num_params, param_init)  # Allows uniform angle preparation 
         if(N is None):
             N = self.num_qubits
         qc = QuantumCircuit(N, 0)
@@ -487,8 +486,8 @@ class ExcitationPreservingAnsatz:
     def Construct_Ansatz(self, init_circ=None, params=None, param_init: float = 0.0, N=None):
         if(params is None):
             num_params = self.num_qubits * (self.num_layers + 1) + (self.num_qubits-1) * self.num_layers
-            #params = np.zeros(num_params)
-            params = np.full(num_params, param_init)
+            params = np.full(num_params, param_init)  # Allows uniform angle preparation 
+
         if(N is None):
             N = self.num_qubits
         qc = QuantumCircuit(N)
@@ -595,11 +594,9 @@ def VarQRTE(
 
     if(ansatz_type == "TwoLocal"):
         ansatz_builder = TwoLocalAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
-        #initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1))
         initial_params = np.full(hamiltonian.num_qubits * (n_reps_ansatz + 1), param_init)
     elif(ansatz_type == "ExcitationPreserving"):
         ansatz_builder = ExcitationPreservingAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
-        #initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz)
         initial_params = np.full(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz, param_init)
     else:
         raise UnsupportedAnsatz("Error: ansatz_type must be either 'TwoLocal' or 'ExcitationPreserving'.")
