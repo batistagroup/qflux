@@ -42,7 +42,7 @@ class TwoLocalAnsatz:
         """
         self.num_qubits = n_qubits
         self.num_layers = n_layers
-        self.num_params = n_qubits * n_layers  # rx per qubit per layer
+        self.num_params = n_qubits * (n_layers + 1)  # rx per qubit per layer
     
     # To change the ansatz, apply_param and measure_der must both be modified.
     def apply_param(
@@ -245,7 +245,7 @@ class TwoLocalAnsatz:
     
         
     def Construct_Ansatz(
-        self, init_circ: QuantumCircuit, params: npt.NDArray[np.float64] = None, N: int = None
+        self, init_circ: QuantumCircuit, params: npt.NDArray[np.float64] = None, param_init: float = 0.0, N: int = None
     ) -> QuantumCircuit:
         """Construct the full ansatz for use in measuring observables.
 
@@ -259,7 +259,7 @@ class TwoLocalAnsatz:
         """
         if(params is None):
             num_params = self.num_qubits * (self.num_layers + 1)
-            params = np.zeros(num_params)
+            params = np.full(num_params, param_init)  # Allows uniform angle preparation 
         if(N is None):
             N = self.num_qubits
         qc = QuantumCircuit(N, 0)
@@ -277,6 +277,7 @@ class ExcitationPreservingAnsatz:
     def __init__(self, n_qubits, n_layers):
         self.num_qubits = n_qubits
         self.num_layers = n_layers
+        self.num_params = self.num_qubits * (self.num_layers + 1) + (self.num_qubits-1) * self.num_layers
         
     #Excitation Preserving Ansatz
     def apply_param(self, params, parameter, qc, N):
@@ -482,10 +483,11 @@ class ExcitationPreservingAnsatz:
                         C[i] -= 1/2*H.coeffs[pauli_string].real*result[0].data.evs#*1/2
         return C
 
-    def Construct_Ansatz(self, init_circ=None, params=None, N=None):
+    def Construct_Ansatz(self, init_circ=None, params=None, param_init: float = 0.0, N=None):
         if(params is None):
             num_params = self.num_qubits * (self.num_layers + 1) + (self.num_qubits-1) * self.num_layers
-            params = np.zeros(num_params)
+            params = np.full(num_params, param_init)  # Allows uniform angle preparation 
+
         if(N is None):
             N = self.num_qubits
         qc = QuantumCircuit(N)
@@ -564,6 +566,7 @@ def VarQRTE(
     total_time: float = 1.0,
     timestep: float = 0.1,
     init_circ: Optional[QuantumCircuit] = None,
+    param_init: float = 0.0,
     shots: int = 2**10,
     noisy: bool = False,
     ansatz_type: str = "TwoLocal",
@@ -591,10 +594,10 @@ def VarQRTE(
 
     if(ansatz_type == "TwoLocal"):
         ansatz_builder = TwoLocalAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
-        initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1))
+        initial_params = np.full(hamiltonian.num_qubits * (n_reps_ansatz + 1), param_init)
     elif(ansatz_type == "ExcitationPreserving"):
         ansatz_builder = ExcitationPreservingAnsatz(hamiltonian.num_qubits, n_reps_ansatz)
-        initial_params = np.zeros(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz)
+        initial_params = np.full(hamiltonian.num_qubits * (n_reps_ansatz + 1) + (hamiltonian.num_qubits-1) * n_reps_ansatz, param_init)
     else:
         raise UnsupportedAnsatz("Error: ansatz_type must be either 'TwoLocal' or 'ExcitationPreserving'.")
     

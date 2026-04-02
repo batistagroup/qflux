@@ -27,24 +27,24 @@ from scipy.linalg import expm
 from numpy import kron
  
 
-def vectorize_comm(A):
+def matricize_comm(A):
     # Create an identity matrix with the same dimension as A
     iden = np.eye(A.shape[0])
-    # Compute the vectorized commutator [A, .] as the Kronecker product 
+    # Compute the matricized commutator [A, .] as the Kronecker product 
     return kron(iden, A) - kron(A.T, iden)
 
-class VectorizedEffectiveHamiltonian_class:
+class MatricizedEffectiveHamiltonian_class:
     def __init__(self, He, Ha):
         self.He = He
         self.Ha = Ha
 
-def VectorizedEffectiveHamiltonian(H, gamma, lind):
+def MatricizedEffectiveHamiltonian(H, gamma, lind):
     # Create an identity matrix with the same dimension as H
     iden = np.eye(H.shape[0])
     # Get the dimension of H
     d = H.shape[0]
-    # Compute the vectorized commutator for the Hamiltonian H
-    vec_H = vectorize_comm(H)
+    # Compute the matricized commutator for the Hamiltonian H
+    vec_H = matricize_comm(H)
     # Initialize the result matrix with zeros (complex type)
     res = np.zeros((d**2, d**2), dtype=np.complex128)
     
@@ -54,15 +54,15 @@ def VectorizedEffectiveHamiltonian(H, gamma, lind):
     # Compute the Lindblad contribution to the effective Hamiltonian
     res -= gamma * (kron(L_conj, lind) - (kron(iden, L_dagger_L) + kron(L_dagger_L.T, iden)) / 2)
 
-    # Return an instance of the VectorizedEffectiveHamiltonian_class with vec_H and res
-    return VectorizedEffectiveHamiltonian_class(vec_H, res)
+    # Return an instance of the MatricizedEffectiveHamiltonian_class with vec_H and res
+    return MatricizedEffectiveHamiltonian_class(vec_H, res)
 
 class EffectiveHamiltonian_class:
     def __init__(self, He, Ha, Llist, LdL):
-        self.He = He  # Hermitian part
-        self.Ha = Ha  # Anti-Hermitian part
+        self.He = He        # Hermitian part
+        self.Ha = Ha        # Anti-Hermitian part
         self.Llist = Llist  # List of Lindblad operators
-        self.LdL = LdL  # List of L†L
+        self.LdL = LdL      # List of L†L
 
 def EffectiveHamiltonian( mats, Llist):
     """
@@ -79,7 +79,7 @@ def EffectiveHamiltonian( mats, Llist):
     for  LL in Llist:
         for L in LL:
             L_dagger_L = (L.conj().T @ L) 
-            
+
             LdL.append(L_dagger_L)  # Append to LdL list
             Ha += L_dagger_L  # Sum for the anti-Hermitian part
 
