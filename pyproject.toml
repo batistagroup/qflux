@@ -11,7 +11,7 @@ where = ["src"]
 
 [project]
 name = "qflux"
-version = "0.1.0"
+version = "0.1.3"
 description = "qflux is a package for running quantum dynamics calculations on quantum devices."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -37,7 +37,7 @@ authors = [
            { name = "Delmar Cabral", email = "delmar.azevedocabral@yale.edu" },
            { name = "Alexander Soudackov", email = "alexander.soudackov@yale.edu"},
            { name = "Xiaohan Dan", email="xiaohan.dan@yale.edu"},
-           { name = "Saurabh Shivpuje"},
+           { name = "Saurabh Shivpuje", email="saurabhshivpuje@gmail.com"},
            { name = "Cameron Cianci", email="cameron.cianci@gmail.com"},
            { name = "Anton Morgunov", email = "anton@ischemist.com" }]
 maintainers = [
