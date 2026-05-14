@@ -114,7 +114,7 @@ Please cite the ChemRxiv preprints of our work when using this code until the jo
   doi     = {10.26434/chemrxiv.10001768/v1}
 }
 
-@article{qfluc.2026_5, 
+@article{qflux.2026_5, 
   year    = {2026}, 
   title   = {{QFlux}: An Open-Source Toolkit for Quantum Dynamics Simulations on Quantum Computers. Part V - Adaptive Variational Quantum Algorithms for Open Quantum Systems}, 
   author  = {Shivpuje, Saurabh and Soudackov, Alexander V and Dan, Xiaohan and Wang, Yuchen and Allen, Brandon C and Cabral, Delmar G A and Hu, Zixuan and Lyu, Ningyi and Geva, Eitan and Batista, Victor S and Kais, Sabre}, 
