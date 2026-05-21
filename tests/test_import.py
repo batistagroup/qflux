@@ -19,3 +19,6 @@ print(dir(ansatz))
 
 print("Methods from solver:")
 print(dir(solver))
+
+print("Testing citation output...")
+qflux.cite()

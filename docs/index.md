@@ -177,6 +177,55 @@ This project follows a structured approach to documentation. Each module should 
 
 Please cite the preprint of our work when using this code until the journal version becomes available. (We will add pre-formatted citation here once the pre-print goes live.)
 
+```bibtex
+                @article{qflux.2026_1, 
+                         year    = {2026}, 
+                         title   = {{QFlux}: Classical Foundations for Quantum Dynamics Simulation. Part I - Building Intuition and Computational Workflows}, 
+                         author  = {Allen, Brandon C and Dan, Xiaohan and Cabral, Delmar G A and Vu, Nam P and Cianci, Cameron and Soudackov, Alexander V and Dutta, Rishab and Kais, Sabre and Geva, Eitan and Batista, Victor S}, 
+                         journal = {{ChemRxiv}}, 
+                         doi     = {10.26434/chemrxiv.10001765/v1}
+                        }       
+
+                @article{qflux.2026_2, 
+                         year    = {2026}, 
+                         title   = {{QFlux}: Quantum Circuit Implementations of Molecular Dynamics. Part {II} - Closed Quantum Systems}, 
+                         author  = {Cabral, Delmar G A and Allen, Brandon C and Cianci, Cameron and Soudackov, Alexander V and Dan, Xiaohan and Vu, Nam P and Dutta, Rishab and Kais, Sabre and Geva, Eitan and Batista, Victor S}, 
+                         journal = {{ChemRxiv}}, 
+                         doi     = {10.26434/chemrxiv.10001766/v1}
+                        }
+
+                @article{qflux.2026_3, 
+                         year    = {2026}, 
+                         title   = {{QFlux}: Quantum Circuit Implementations of Molecular Dynamics. Part {III} - State Initialization and Unitary Decomposition}, 
+                         author  = {Soudackov, Alexander V and Cabral, Delmar G A and Allen, Brandon C and Dan, Xiaohan and Vu, Nam P and Cianci, Cameron and Dutta, Rishab and Kais, Sabre and Geva, Eitan and Batista, Victor S}, 
+                         journal = {{ChemRxiv}}, 
+                         doi     = {10.26434/chemrxiv.10001767/v1}
+                        }
+
+                @article{qflux.2026_4, 
+                         year    = {2026}, 
+                         title   = {{QFlux}: An Open-Source Toolkit for Quantum Dynamics Simulations on Quantum Computers. Part {IV} - Dilation Method for Open Quantum Systems}, 
+                         author  = {Dan, Xiaohan and Shivpuje, Saurabh and Wang, Yuchen and Cabral, Delmar G A and Allen, Brandon C and Khazaei, Pouya and Soudackov, Alexander V and Hu, Zixuan and Lyu, Ningyi and Geva, Eitan and Kais, Sabre and Batista, Victor S}, 
+                         journal = {{ChemRxiv}}, 
+                         doi     = {10.26434/chemrxiv.10001768/v1}
+                        }
+
+                @article{qflux.2026_5, 
+                         year    = {2026}, 
+                         title   = {{QFlux}: An Open-Source Toolkit for Quantum Dynamics Simulations on Quantum Computers. Part V - Adaptive Variational Quantum Algorithms for Open Quantum Systems}, 
+                         author  = {Shivpuje, Saurabh and Soudackov, Alexander V and Dan, Xiaohan and Wang, Yuchen and Allen, Brandon C and Cabral, Delmar G A and Hu, Zixuan and Lyu, Ningyi and Geva, Eitan and Batista, Victor S and Kais, Sabre}, 
+                         journal = {{ChemRxiv}}, 
+                         doi     = {10.26434/chemrxiv.10001769/v2}
+                        }
+
+                @article{qflux.2026_6, 
+                         year    = {2026}, 
+                         title   = {{QFlux}: An Open-Source Toolkit for Quantum Dynamics Simulations on Quantum Computers. Part {VI} - The Generalized Quantum Master Equation}, 
+                         author  = {Dan, Xiaohan and Khazaei, Pouya and Allen, Brandon C and Lyu, Ningyi and Wilson, Callie and Mulvihill, Ellen and Wang, Yuchen and Shivpuje, Saurabh and Kais, Sabre and Batista, Victor S and Geva, Eitan}, 
+                         journal = {{ChemRxiv}}, 
+                         doi     = {10.26434/chemrxiv.10001770/v1}
+                        }
+```
 ## Acknowledgement of Funding
 
 We acknowledge the financial support of the National Science Foundation under award number 2124511, CCI Phase I: NSF Center for Quantum Dynamics on Modular Quantum Devices (CQD-MQD).
