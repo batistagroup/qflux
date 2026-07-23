@@ -56,7 +56,7 @@ def update_theta_rk45(ansatz, dtheta, dt):
     
     Solves the ODE: dtheta/dt = dtheta from t=0 to t=dt using adaptive RK45 method.
     This provides higher-order accuracy compared to simple Euler method.
-    
+
     Parameters
     ----------
     ansatz : Ansatz_class
@@ -69,13 +69,13 @@ def update_theta_rk45(ansatz, dtheta, dt):
     def theta_ode(t, y):
         # ODE: dtheta/dt = dtheta (constant gradient)
         return dtheta
-    
+
     # Initial condition: current theta values
     theta_0 = ansatz.theta
-    
+
     # Solve ODE using RK45 method
     sol = solve_ivp(theta_ode, [0, dt], theta_0, method='RK45', dense_output=False)
-    
+
     # Update ansatz theta with final integrated values
     #print(f"Updated (RK45) theta: {sol.y[:, -1]}")
     ansatz.theta = sol.y[:, -1]
@@ -205,12 +205,12 @@ def one_step(A, He, Ha, dt, rk45=False):
     add_flag = True
 
     while add_flag:
- 
-        # print("here in onestep While")
+
         tagTmp = None
- 
-        # print("Ansatz pool:",A.pool)
+
+        #print("Ansatz pool:", A.pool)
         for op in A.pool:
+
             #print(f"Operator from pool: {op.tag}")
             if tag(get_newest_A(A)) == tag(op):
                 continue
@@ -238,6 +238,7 @@ def one_step(A, He, Ha, dt, rk45=False):
         if tagTmp is not None and add_flag:
 
             add_A(A, opTmp)
+
             vmv = vmvMax
             M = Mtmp
             V = Vtmp
@@ -248,15 +249,17 @@ def one_step(A, He, Ha, dt, rk45=False):
         update_theta_rk45(A, dtheta, dt)
     else:
         update_theta(A, dtheta, dt)
+
     # print("Ansatz:", A.theta)
     update_state(A)
 
 
 def solve_avq_traj(H, A, tspan, dt, save_state=True, save_everystep=True):
+
     # Store initial reference state for reinitialization
     ref_init = A.ref.copy()
     update_state(A)
-    
+
     # Initialize time and recorder lists
     t = tspan[0]
     t_list = []
@@ -304,10 +307,11 @@ def solve_avq_traj(H, A, tspan, dt, save_state=True, save_everystep=True):
                 t_list.append(t + dt)  # Save current time
                 theta_list.append(A.theta.copy())  # Save current ansatz parameters
                 A_list.append([tag(a) for a in A.A])  # Save current state of ansatz components
-            
+
             # Update reference state to current state for next iteration
-            set_ref(A, psi_)
-            reset(A)
+            # The following two lines should be commented out for the standard UAVQD.
+            #set_ref(A, psi_)
+            #reset(A)
 
         else:  # Quantum jump occurs
             psi_ = A.state  # Get current state before jump
@@ -365,13 +369,13 @@ def solve_avq_traj(H, A, tspan, dt, save_state=True, save_everystep=True):
 def solve_avq_trajectory(H, ansatz, tf, dt):
     # Solve for a single trajectory using solve_avq
     res = solve_avq_traj(H, ansatz, [0, tf], dt, save_state=True, save_everystep=True)
-    
+
     # Post-process the results to extract energy and populations
     tlist = res.t
     psi_list = res.u
     energy = []
     pop = []
-    
+
     for i in range(len(tlist)):
         psi = psi_list[i]
         energy.append(np.real(np.conj(psi.T) @ (H.He) @ psi))  # Energy
@@ -408,11 +412,18 @@ def solve_avq_vect(H, A, tspan, dt, rk45=False):
         theta_list.append(A.theta.copy())
         A_list.append([tag(a) for a in A.A])
         norm_list.append(np.exp(-Gamma))
-        
+
         # Update reference state to current state for next iteration
-        # This ensures the ansatz gates are tailored to evolving from the current state
-        set_ref(A, psi_)
-        reset(A)
+        # Resetting the reference state to the current state alters the algorithm
+        # by rebuilding the ansatz from scratch at each time step,
+        # which requires quantum tomography (measuring the entire density matrix
+        # at each time step).
+        # In the standard UAVQD algorithm, the ansatz is updated each time step
+        # by appending additional operators (gates) to the existing ansatz.
+        # The ansatz is not built from scratch each time step.
+        # Thus the following two lines should be commented out for the standard UAVQD.
+        #set_ref(A, psi_)
+        #reset(A)
 
     set_ref(A, ref_init)
     reset(A)
