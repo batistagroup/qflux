@@ -31,6 +31,9 @@ dependencies = [
     "tqdm",
     "graycode>=1.0.5",
     "ipywidgets>=8.1.8",
+    "jax>=0.6.2",
+    "flax>=0.10.7",
+    "pennylane>=0.42.3",
 ]
 authors = [
            { name = "Brandon Allen", email = "brandon.allen@yale.edu" },
