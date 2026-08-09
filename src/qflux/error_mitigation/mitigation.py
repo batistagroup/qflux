@@ -2,7 +2,6 @@
 
 import numpy as np
 import math
-import matplotlib.pyplot as plt
 
 from qiskit import QuantumCircuit, transpile
 from qiskit.circuit import ClassicalRegister
