@@ -105,16 +105,16 @@ W = 1j * np.pi / 4
 spins = np.array([+1, -1])
 configs = [(s1, s2) for s1 in spins for s2 in spins]
 
-def psi(s1, s2):
+def bell_psi(s1, s2):
     """RBM wavefunction amplitude psi(sigma 1, sigma 2)."""
     return 2.0 * np.cosh(b + W * (s1 - s2))
 
 
-def model_probs():
+def bell_model_probs():
     """Compute RBM probabilities in ZZ, XX, YY bases."""
 
     # Z tensor Z
-    amp_zz = np.array([psi(s1, s2) for (s1, s2) in configs])
+    amp_zz = np.array([bell_psi(s1, s2) for (s1, s2) in configs])
     pzz = np.abs(amp_zz)**2
     pzz /= pzz.sum()
 
@@ -123,7 +123,7 @@ def model_probs():
     for s1, s2 in configs:
         amp = 0.0
         for sp1, sp2 in configs:
-            amp += (1 + s1 * sp1) * (1 + s2 * sp2) * psi(sp1, sp2)
+            amp += (1 + s1 * sp1) * (1 + s2 * sp2) * bell_psi(sp1, sp2)
         amp_xx.append(amp / 2.0)
 
     amp_xx = np.array(amp_xx)
@@ -135,7 +135,7 @@ def model_probs():
     for s1, s2 in configs:
         amp = 0.0
         for sp1, sp2 in configs:
-            amp += (1 + 1j * s1 * sp1) * (1 + 1j * s2 * sp2) * psi(sp1, sp2)
+            amp += (1 + 1j * s1 * sp1) * (1 + 1j * s2 * sp2) * bell_psi(sp1, sp2)
         amp_yy.append(amp / 2.0)
 
     amp_yy = np.array(amp_yy)
