@@ -20,5 +20,13 @@ print(dir(ansatz))
 print("Methods from solver:")
 print(dir(solver))
 
+from qflux.error_mitigation.rbm import RBM
+print("Checking RBM ...")
+print(dir(RBM))
+
+from qflux.error_mitigation import mitigation
+print("Checking Second Module in Error Mitigation...")
+print(dir(mitigation))
+
 print("Testing citation output...")
 qflux.cite()
